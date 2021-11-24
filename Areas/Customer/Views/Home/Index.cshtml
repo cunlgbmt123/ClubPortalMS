@@ -1,0 +1,171 @@
+﻿
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Areas/Customer/Views/Shared/_Layout.cshtml";
+    var slides = (List<ClubPortalMS.Models.Poster>)ViewBag.Slides;
+    var ListNews = (List<ClubPortalMS.Models.TinTuc>)ViewBag.ListNews;
+    var ListAlbums = (List<ClubPortalMS.Models.Album>)ViewBag.ListAlbums;
+    var ListHD = (List<ClubPortalMS.Models.HoatDong>)ViewBag.ListHD;
+}
+   
+<div class="page-banner home-banner mb-5">
+      <div class="slider-wrapper">
+          <div class="owl-carousel hero-carousel">
+              @foreach (var item in slides)
+              {
+                  <div class="hero-carousel-item">
+                      <img src=@item.HinhAnh alt="abc">
+                      <div class="img-caption">
+                          <div class="subhead">@item.TenPoster</div>
+                          <h1 class="mb-4">UEF</h1>
+                          <a href="#services" class="btn btn-outline-light">Tìm Hiểu Thêm</a>
+                      </div>
+                  </div>
+               }
+              </div>
+        </div>  <!-- .slider-wrapper -->
+    </div>
+   
+
+<main>
+    <div class="page-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 py-3">
+                    <div class="subhead">VỀ CHÚNG TÔI</div>
+                    <h2 class="title-section">Chúng tôi <span class="fg-primary">Câu lạc bộ UEF</span> là tổ chức phi lợi nhuận, tập hợp các tổ chức, cá nhân tại UEF</h2>
+
+                    <p>CLB là một tổ chức tự nguyện với mục đích liên kết các hội viên, tạo điều kiện giao lưu, học hỏi kinh nghiệm, diễn đàn trao đổi ý kiến của các tổ chức, cá nhân vì sự phát triển vững mạnh, nâng cao tính chuyên nghiệp trong lĩnh vực quản lý vận hành các câu lạc bộ của UEF</p>
+
+                    <a href="@Url.Action("Index","GioiThieu")" class="btn btn-primary mt-4">Đọc thêm</a>
+                </div>
+                <div class="col-lg-6 py-3">
+                    <div class="about-img">
+                        <img src="~/Content/img/Poster/SlideShow1.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- .page-section -->
+    
+        <div class="page-section">
+            <div class="container">
+                <div class="text-center">
+                    <div class="subhead">HOẠT ĐỘNG</div>
+                    <h2 class="title-section">HOẠT ĐỘNG VỀ CLB</h2>
+                </div>
+                
+                <div class="owl-carousel team-carousel mt-5">
+                    @foreach (var item in ListHD)
+                    {
+                        <div class="team-wrap">
+                            <div class="team-profile">
+                                <a href="@Url.Action("BaiViet","HoatDongs", new {id = item.ID})">
+                                    <img src="@item.HinhAnhBaiViet" alt="">
+                                    </a>
+                            </div>
+                            <div class="team-content">
+                                <a href="@Url.Action("BaiViet","HoatDongs", new {id = item.ID})">
+                                    <h5>@item.Ten</h5></a>
+                                    <div class="text-sm fg-grey">@item.MoTa</div>
+
+                                    <div class="social-button">
+                                        <a href="#"><span class="mai-logo-facebook-messenger"></span></a>
+                                        <a href="#"><span class="mai-call"></span></a>
+                                        <a href="#"><span class="mai-mail"></span></a>
+                                    </div>
+                            </div>
+                        </div>}
+                    </div>
+                 
+                </div> <!-- .container -->
+        </div> <!-- .page-section -->
+
+        <div class="page-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6 py-3">
+                        <div class="subhead">ALBUM</div>
+                        <h2 class="title-section">HÌNH ẢNH VỀ CLB</h2>
+                    </div>
+                    <div class="col-md-6 py-3 text-md-right">
+                        <a href="@Url.Action("Index","Albums")" class="btn btn-outline-primary">XEM THÊM <span class="mai-arrow-forward ml-2"></span></a>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    @foreach (var item in ListAlbums)
+                    {
+                        <div class="col-lg-4 py-3">
+                            <div class="portfolio">
+                                <a href="~/Areas/Customer/Resource/img/portfolio/work-1.jpg" data-fancybox="portfolio">
+
+                                    <img src="@item.HinhAnh" alt="">
+                                   
+                                </a>
+                            </div>
+                        </div>
+                    }
+                    </div>
+            </div> <!-- .container -->
+        </div> <!-- .page-section -->
+     
+        <div class="page-section">
+            <div class="container">
+                <div class="text-center">
+                    <div class="subhead">TIN TỨC</div>
+                    <h2 class="title-section">TIN TỨC VỀ CÂU LẠC BỘ</h2>
+                </div>
+                <div class="owl-carousel testimonial-carousel">
+                    @foreach (var item in ListNews) {
+                        <div class="card-testimonial">
+                            <div class="content">
+                                @item.MoTa
+                            </div>
+                            <div class="author">
+
+                                <div class="d-inline-block ml-2">
+                                    <a href="@Url.Action("BaiViet","TinTuc", new {id = item.ID})">
+                                        <div class="author-name">@item.TieuDe</div>
+                                    </a>
+                                        <div class="author-info">@item.NgayDang</div>
+                                </div>
+                            </div>
+                        </div>                    
+                    }
+                </div>  
+            </div>  
+        </div>  
+
+   
+
+        <div class="page-section">
+            <div class="container-fluid">
+                <div class="row row-cols-md-3 row-cols-lg-5 justify-content-center text-center">
+                    <div class="py-3 px-5">
+                        <img src="~/Areas/Customer/Resource/img/clients/airbnb.png" alt="">
+                    </div>
+                    <div class="py-3 px-5">
+                        <img src="~/Areas/Customer/Resource/img/clients/google.png" alt="">
+                    </div>
+                    <div class="py-3 px-5">
+                        <img src="~/Areas/Customer/Resource/img/clients/mailchimp.png" alt="">
+                    </div>
+                    <div class="py-3 px-5">
+                        <img src="~/Areas/Customer/Resource/img/clients/paypal.png" alt="">
+                    </div>
+                    <div class="py-3 px-5">
+                        <img src="~/Areas/Customer/Resource/img/clients/stripe.png" alt="">
+                    </div>
+                </div>
+            </div> <!-- .container-fluid -->
+        </div> <!-- .page-section -->
+
+    </main>
+    <script src="~/Areas/Customer/Resource/js/jquery-3.5.1.min.js"></script>
+    <script src="~/Areas/Customer/Resource/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Areas/Customer/Resource/vendor/owl-carousel/js/owl.carousel.min.js"></script>
+    <script src="~/Areas/Customer/Resource/vendor/wow/wow.min.js"></script>
+    <script src="~/Areas/Customer/Resource/vendor/fancybox/js/jquery.fancybox.min.js"></script>
+    <script src="~/Areas/Customer/Resource/vendor/isotope/isotope.pkgd.min.js"></script>
+    <script src="~/Areas/Customer/Resource/js/google-maps.js"></script>
+    <script src="~/Areas/Customer/Resource/js/theme.js"></script>
