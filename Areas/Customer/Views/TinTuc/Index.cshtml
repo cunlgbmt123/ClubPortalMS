@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Tin Tức";
+    Layout = "~/Areas/Customer/Views/Shared/_Layout.cshtml";
+    var ListAllNews = (List<ClubPortalMS.Models.TinTuc>)ViewBag.ListAllNews;
+
+}
+<div class="page-banner bg-img bg-img-parallax overlay-dark" style="height:150px">
+    <div class="container h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-lg-8">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Trang Chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Tin Tức</li>
+                    </ol>
+                </nav>
+                <h1 class="fg-white text-center">TIN TỨC</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-section">
+    <div class="rows tm-catalog-item-list">
+        @foreach (var item in ListAllNews)
+        {
+            <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
+                <div class="position-relative tm-thumbnail-container">
+
+                    <a href="@Url.Action("BaiViet","Tintuc", new {id = item.ID})">
+                        <img src="@item.HinhAnhBaiViet" alt="Image" class="img-fluid tm-catalog-item-img">
+                    </a>
+                </div>
+                <div class="p-4 tm-bg-gray tm-catalog-item-description">
+                    <h4 class="tm-text-primary mb-3 tm-catalog-item-title">@item.TieuDe</h4>
+                    <p class="tm-catalog-item-text">
+                        @item.MoTa
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@*<div>
+        <ul class="nav tm-paging-links">
+            <li class="nav-item active"><a href="#" class="nav-link tm-paging-link">1</a></li>
+            <li class="nav-item"><a href="#" class="nav-link tm-paging-link">2</a></li>
+            <li class="nav-item"><a href="#" class="nav-link tm-paging-link">3</a></li>
+            <li class="nav-item"><a href="#" class="nav-link tm-paging-link">4</a></li>
+            <li class="nav-item"><a href="#" class="nav-link tm-paging-link">></a></li>
+        </ul>
+    </div>*@

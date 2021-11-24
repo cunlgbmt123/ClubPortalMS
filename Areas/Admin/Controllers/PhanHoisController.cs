@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
-using WebApplication1.Models;
+
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {

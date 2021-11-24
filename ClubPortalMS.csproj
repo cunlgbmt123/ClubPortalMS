@@ -51,6 +51,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -157,9 +160,6 @@
     <Reference Include="Microsoft.Owin.Security.OAuth">
       <HintPath>packages\Microsoft.Owin.Security.OAuth.4.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -190,6 +190,16 @@
     <Compile Include="Areas\Admin\Controllers\TTNhatKiesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserRolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Customer\Controllers\AlbumsController.cs" />
+    <Compile Include="Areas\Customer\Controllers\GioiThieuController.cs" />
+    <Compile Include="Areas\Customer\Controllers\HoatDongsController.cs" />
+    <Compile Include="Areas\Customer\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Customer\Controllers\LienHeController.cs" />
+    <Compile Include="Areas\Customer\Controllers\TestController.cs" />
+    <Compile Include="Areas\Customer\Controllers\TinTucController.cs" />
+    <Compile Include="Areas\Customer\CustomerAreaRegistration.cs" />
+    <Compile Include="Areas\Customer\DAO\ListDAO.cs" />
+    <Compile Include="Areas\Customer\DAO\SlideDao.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -2125,10 +2135,68 @@
     <Content Include="Areas\Admin\Resource\plugins\uplot\uPlot.iife.js" />
     <Content Include="Areas\Admin\Resource\plugins\uplot\uPlot.iife.min.js" />
     <Content Include="Areas\Admin\Resource\plugins\uplot\uPlot.min.css" />
+    <Content Include="Areas\Customer\Resource\css\bootstrap.css" />
+    <Content Include="Areas\Customer\Resource\css\maicons.css" />
+    <Content Include="Areas\Customer\Resource\css\style.css" />
+    <Content Include="Areas\Customer\Resource\css\theme.css" />
+    <Content Include="Areas\Customer\Resource\fonts\maicons.svg" />
+    <Content Include="Areas\Customer\Resource\js\bootstrap.bundle.min.js" />
+    <Content Include="Areas\Customer\Resource\js\bootstrap.min.js" />
+    <Content Include="Areas\Customer\Resource\js\google-maps.js" />
+    <Content Include="Areas\Customer\Resource\js\jquery-3.4.1.min.js" />
+    <Content Include="Areas\Customer\Resource\js\jquery-3.5.1.min.js" />
+    <Content Include="Areas\Customer\Resource\js\theme.js" />
+    <Content Include="Areas\Customer\Resource\vendor\animate\animate.css" />
+    <Content Include="Areas\Customer\Resource\vendor\fancybox\css\jquery.fancybox.css" />
+    <Content Include="Areas\Customer\Resource\vendor\fancybox\css\jquery.fancybox.min.css" />
+    <Content Include="Areas\Customer\Resource\vendor\fancybox\js\jquery.fancybox.js" />
+    <Content Include="Areas\Customer\Resource\vendor\fancybox\js\jquery.fancybox.min.js" />
+    <Content Include="Areas\Customer\Resource\vendor\isotope\isotope.pkgd.js" />
+    <Content Include="Areas\Customer\Resource\vendor\isotope\isotope.pkgd.min.js" />
+    <Content Include="Areas\Customer\Resource\vendor\owl-carousel\css\owl.carousel.css" />
+    <Content Include="Areas\Customer\Resource\vendor\owl-carousel\css\owl.carousel.min.css" />
+    <Content Include="Areas\Customer\Resource\vendor\owl-carousel\css\owl.theme.default.css" />
+    <Content Include="Areas\Customer\Resource\vendor\owl-carousel\css\owl.theme.default.min.css" />
+    <Content Include="Areas\Customer\Resource\vendor\owl-carousel\js\owl.carousel.js" />
+    <Content Include="Areas\Customer\Resource\vendor\owl-carousel\js\owl.carousel.min.js" />
+    <Content Include="Areas\Customer\Resource\vendor\wow\wow.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\about.jpg" />
+    <Content Include="Content\img\clients\airbnb.png" />
+    <Content Include="Content\img\clients\google.png" />
+    <Content Include="Content\img\clients\mailchimp.png" />
+    <Content Include="Content\img\clients\paypal.png" />
+    <Content Include="Content\img\clients\stripe.png" />
+    <Content Include="Content\img\icons\app_development.svg" />
+    <Content Include="Content\img\icons\customer_services.svg" />
+    <Content Include="Content\img\icons\data_analyst.svg" />
+    <Content Include="Content\img\icons\graphics_design.svg" />
+    <Content Include="Content\img\icons\product_design.svg" />
+    <Content Include="Content\img\icons\seo_and_marketing.svg" />
+    <Content Include="Content\img\icons\ui_ux_design.svg" />
+    <Content Include="Content\img\icons\web_development.svg" />
+    <Content Include="Content\img\intro\intro1.jpg" />
+    <Content Include="Content\img\intro\intro2.jpg" />
+    <Content Include="Content\img\intro\intro3.jpg" />
+    <Content Include="Content\img\News\news1.jpg" />
+    <Content Include="Content\img\portfolio\work-1.jpg" />
+    <Content Include="Content\img\portfolio\work-2.jpg" />
+    <Content Include="Content\img\portfolio\work-3.jpg" />
+    <Content Include="Content\img\portfolio\work-4.jpg" />
+    <Content Include="Content\img\portfolio\work-5.jpg" />
+    <Content Include="Content\img\portfolio\work-6.jpg" />
+    <Content Include="Content\img\portfolio\work-7.jpg" />
+    <Content Include="Content\img\portfolio\work-8.jpg" />
+    <Content Include="Content\img\portfolio\work-9.jpg" />
+    <Content Include="Content\img\Poster\SlideShow1.jpg" />
+    <Content Include="Content\img\Poster\SlideShow2.jpg" />
+    <Content Include="Content\img\Poster\SlideShow3.jpg" />
+    <Content Include="Content\img\teams\team_1.jpg" />
+    <Content Include="Content\img\teams\team_2.jpg" />
+    <Content Include="Content\img\teams\team_3.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -2324,6 +2392,34 @@
     <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Customer\Resource\css\theme.css.map" />
+    <Content Include="Areas\Customer\Resource\fonts\maicons.eot" />
+    <Content Include="Areas\Customer\Resource\fonts\maicons.ttf" />
+    <Content Include="Areas\Customer\Resource\fonts\maicons.woff" />
+    <Content Include="Areas\Customer\Resource\sass\theme.scss" />
+    <Content Include="Areas\Customer\Resource\sass\_breadcrumb.scss" />
+    <Content Include="Areas\Customer\Resource\sass\_buttons.scss" />
+    <Content Include="Areas\Customer\Resource\sass\_color-systems.scss" />
+    <Content Include="Areas\Customer\Resource\sass\_functions.scss" />
+    <Content Include="Areas\Customer\Resource\sass\_images.scss" />
+    <Content Include="Areas\Customer\Resource\sass\_input.scss" />
+    <Content Include="Areas\Customer\Resource\sass\_mixins.scss" />
+    <Content Include="Areas\Customer\Resource\sass\_navbar.scss" />
+    <Content Include="Areas\Customer\Resource\sass\_pagination.scss" />
+    <Content Include="Areas\Customer\Resource\sass\_plugins.scss" />
+    <Content Include="Areas\Customer\Resource\sass\_variables.scss" />
+    <Content Include="Areas\Customer\Views\Albums\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\GioiThieu\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\HoatDongs\BaiViet.cshtml" />
+    <Content Include="Areas\Customer\Views\HoatDongs\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\LienHe\Create.cshtml" />
+    <Content Include="Areas\Customer\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Customer\Views\Test\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\TinTuc\BaiViet.cshtml" />
+    <Content Include="Areas\Customer\Views\TinTuc\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\web.config" />
+    <Content Include="Areas\Customer\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2373,6 +2469,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Customer\Resource\sass\mixins\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
