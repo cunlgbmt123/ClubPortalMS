@@ -1,0 +1,91 @@
+﻿@model WebApplication1.Models.SuKien
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SuKien</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TieuDeSK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TieuDeSK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayBatDau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayBatDau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayKetThuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayKetThuc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoiDung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KetQua)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KetQua)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaDiem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaDiem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HinhThuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HinhThuc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdLoaiSK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdLoaiSK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdCLB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdCLB)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
