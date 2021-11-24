@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApplication1.Models
+namespace ClubPortalMS.Models
 {
     using System;
     using System.Collections.Generic;
