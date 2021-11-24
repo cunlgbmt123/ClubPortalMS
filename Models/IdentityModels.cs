@@ -42,6 +42,7 @@ namespace ClubPortalMS.Models
         public DbSet<ThongBao> ThongBao { get; set; }
         public DbSet<UserRoles> UserRole { get; set; }
         public DbSet<Users> User { get; set; }
+        public DbSet<TinTuc> TinTucs { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
