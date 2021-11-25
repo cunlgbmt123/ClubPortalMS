@@ -58,11 +58,11 @@ namespace ClubPortalMS
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "139009448268-7il7c8pvqgu88e37fljh67aj3utivga1.apps.googleusercontent.com",
+                ClientSecret = "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"
+            });
         }
     }
 }
