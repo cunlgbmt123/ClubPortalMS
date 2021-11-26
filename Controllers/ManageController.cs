@@ -7,14 +7,15 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ClubPortalMS.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace ClubPortalMS.Controllers
 {
     [Authorize]
     public class ManageController : Controller
     {
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+        private  ApplicationSignInManager _signInManager;
+        private  ApplicationUserManager _userManager;
 
         public ManageController()
         {
@@ -25,6 +26,8 @@ namespace ClubPortalMS.Controllers
             UserManager = userManager;
             SignInManager = signInManager;
         }
+        
+
 
         public ApplicationSignInManager SignInManager
         {

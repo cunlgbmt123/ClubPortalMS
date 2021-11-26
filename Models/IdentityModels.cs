@@ -21,6 +21,7 @@ namespace ClubPortalMS.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+
         public DbSet<Album> Album { get; set; }
         public DbSet<CLB> CLB { get; set; }
         public DbSet<ChoXetDuyet> ChoXetDuyet { get; set; }
@@ -35,13 +36,13 @@ namespace ClubPortalMS.Models
         public DbSet<Poster> Poster { get; set; }
         public DbSet<PhanHoi> PhanHoi { get; set; }
         public DbSet<QLDSHoatDong> QLDSHoatDong { get; set; }
-        public DbSet<Roles> Role { get; set; }
+
         public DbSet<SuKien> SuKien { get; set; }
         public DbSet<TTNhatKy> TTNhatKy { get; set; }
         public DbSet<ThanhVien> ThanhVien { get; set; }
         public DbSet<ThongBao> ThongBao { get; set; }
-        public DbSet<UserRoles> UserRole { get; set; }
-        public DbSet<Users> User { get; set; }
+
+
         public DbSet<TinTuc> TinTucs { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

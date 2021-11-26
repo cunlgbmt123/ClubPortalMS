@@ -183,13 +183,10 @@
     <Compile Include="Areas\Admin\Controllers\PhanHoisController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostersController.cs" />
     <Compile Include="Areas\Admin\Controllers\QLDSHoatDongsController.cs" />
-    <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\SuKiensController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThanhViensController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongBaosController.cs" />
     <Compile Include="Areas\Admin\Controllers\TTNhatKiesController.cs" />
-    <Compile Include="Areas\Admin\Controllers\UserRolesController.cs" />
-    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Customer\Controllers\AlbumsController.cs" />
     <Compile Include="Areas\Customer\Controllers\GioiThieuController.cs" />
     <Compile Include="Areas\Customer\Controllers\HoatDongsController.cs" />
@@ -206,13 +203,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111240638497_AddTable.cs" />
-    <Compile Include="Migrations\202111240638497_AddTable.Designer.cs">
-      <DependentUpon>202111240638497_AddTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202111241428082_AddTableTinTucandReUpdata.cs" />
-    <Compile Include="Migrations\202111241428082_AddTableTinTucandReUpdata.Designer.cs">
-      <DependentUpon>202111241428082_AddTableTinTucandReUpdata.cs</DependentUpon>
+    <Compile Include="Migrations\202111260558567_applyTable.cs" />
+    <Compile Include="Migrations\202111260558567_applyTable.Designer.cs">
+      <DependentUpon>202111260558567_applyTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -232,14 +225,11 @@
     <Compile Include="Models\PhanHoi.cs" />
     <Compile Include="Models\Poster.cs" />
     <Compile Include="Models\QLDSHoatDong.cs" />
-    <Compile Include="Models\Roles.cs" />
     <Compile Include="Models\SuKien.cs" />
     <Compile Include="Models\ThanhVien.cs" />
     <Compile Include="Models\ThongBao.cs" />
     <Compile Include="Models\TinTuc.cs" />
     <Compile Include="Models\TTNhatKy.cs" />
-    <Compile Include="Models\UserRoles.cs" />
-    <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -2357,11 +2347,6 @@
     <Content Include="Areas\Admin\Views\QLDSHoatDongs\Details.cshtml" />
     <Content Include="Areas\Admin\Views\QLDSHoatDongs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\QLDSHoatDongs\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Roles\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Roles\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Roles\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Roles\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Roles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SuKiens\Create.cshtml" />
     <Content Include="Areas\Admin\Views\SuKiens\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\SuKiens\Details.cshtml" />
@@ -2382,16 +2367,6 @@
     <Content Include="Areas\Admin\Views\ThongBaos\Details.cshtml" />
     <Content Include="Areas\Admin\Views\ThongBaos\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ThongBaos\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\UserRoles\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\UserRoles\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\UserRoles\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\UserRoles\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\UserRoles\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Users\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
     <Content Include="Areas\Customer\Resource\css\theme.css.map" />
     <Content Include="Areas\Customer\Resource\fonts\maicons.eot" />
     <Content Include="Areas\Customer\Resource\fonts\maicons.ttf" />
@@ -2484,11 +2459,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111240638497_AddTable.resx">
-      <DependentUpon>202111240638497_AddTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202111241428082_AddTableTinTucandReUpdata.resx">
-      <DependentUpon>202111241428082_AddTableTinTucandReUpdata.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111260558567_applyTable.resx">
+      <DependentUpon>202111260558567_applyTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

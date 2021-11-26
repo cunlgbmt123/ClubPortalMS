@@ -29,13 +29,13 @@ namespace ClubPortalMS.Models
         public string Lop { get; set; }
         public string SDT { get; set; }
         public string Mail { get; set; }
-        public Nullable<int> IDUser { get; set; }
+        public string IDUser { get; set; }
     
         public virtual CLB CLB { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NhiemVu> NhiemVu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TTNhatKy> TTNhatKy { get; set; }
-        public virtual Users Users { get; set; }
+      
     }
 }

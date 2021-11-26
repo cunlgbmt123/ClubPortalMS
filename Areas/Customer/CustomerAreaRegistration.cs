@@ -17,7 +17,7 @@ namespace ClubPortalMS.Areas.Customer
             context.MapRoute(
                 "Customer_default",
                 "Customer/{controller}/{action}/{id}",
-                new { Controller = "Home", action = "Index", id = UrlParameter.Optional }
+                new { Controller = "TrangChu", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
