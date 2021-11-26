@@ -6,7 +6,7 @@ using ClubPortalMS.Models;
 
 namespace ClubPortalMS.Areas.Customer.Controllers
 {
-    public class HomeController : Controller
+    public class TrangChuController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
         // GET: Customer/Home

@@ -193,7 +193,7 @@
     <Compile Include="Areas\Customer\Controllers\AlbumsController.cs" />
     <Compile Include="Areas\Customer\Controllers\GioiThieuController.cs" />
     <Compile Include="Areas\Customer\Controllers\HoatDongsController.cs" />
-    <Compile Include="Areas\Customer\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Customer\Controllers\TrangChuController.cs" />
     <Compile Include="Areas\Customer\Controllers\LienHeController.cs" />
     <Compile Include="Areas\Customer\Controllers\TestController.cs" />
     <Compile Include="Areas\Customer\Controllers\TinTucController.cs" />
@@ -2412,7 +2412,7 @@
     <Content Include="Areas\Customer\Views\GioiThieu\Index.cshtml" />
     <Content Include="Areas\Customer\Views\HoatDongs\BaiViet.cshtml" />
     <Content Include="Areas\Customer\Views\HoatDongs\Index.cshtml" />
-    <Content Include="Areas\Customer\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\TrangChu\Index.cshtml" />
     <Content Include="Areas\Customer\Views\LienHe\Create.cshtml" />
     <Content Include="Areas\Customer\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Customer\Views\Test\Index.cshtml" />
