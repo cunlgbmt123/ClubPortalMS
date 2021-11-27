@@ -46,10 +46,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -186,6 +186,7 @@
     <Compile Include="Areas\Admin\Controllers\SuKiensController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThanhViensController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongBaosController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ThongTinController.cs" />
     <Compile Include="Areas\Admin\Controllers\TTNhatKiesController.cs" />
     <Compile Include="Areas\Customer\Controllers\AlbumsController.cs" />
     <Compile Include="Areas\Customer\Controllers\GioiThieuController.cs" />
@@ -2395,6 +2396,7 @@
     <Content Include="Areas\Customer\Views\TinTuc\Index.cshtml" />
     <Content Include="Areas\Customer\Views\web.config" />
     <Content Include="Areas\Customer\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongTin\ThongTin.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
