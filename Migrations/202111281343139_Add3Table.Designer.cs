@@ -7,13 +7,13 @@ namespace ClubPortalMS.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Initial : IMigrationMetadata
+    public sealed partial class Add3Table : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Add3Table));
         
         string IMigrationMetadata.Id
         {
-            get { return "202111280237125_Initial"; }
+            get { return "202111281343139_Add3Table"; }
         }
         
         string IMigrationMetadata.Source
