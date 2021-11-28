@@ -186,7 +186,6 @@
     <Compile Include="Areas\Admin\Controllers\SuKiensController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThanhViensController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongBaosController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ThongTinController.cs" />
     <Compile Include="Areas\Admin\Controllers\TTNhatKiesController.cs" />
     <Compile Include="Areas\Customer\Controllers\AlbumsController.cs" />
     <Compile Include="Areas\Customer\Controllers\GioiThieuController.cs" />
@@ -204,9 +203,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111260558567_applyTable.cs" />
-    <Compile Include="Migrations\202111260558567_applyTable.Designer.cs">
-      <DependentUpon>202111260558567_applyTable.cs</DependentUpon>
+    <Compile Include="Migrations\202111280237125_Initial.cs" />
+    <Compile Include="Migrations\202111280237125_Initial.Designer.cs">
+      <DependentUpon>202111280237125_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -2396,7 +2395,7 @@
     <Content Include="Areas\Customer\Views\TinTuc\Index.cshtml" />
     <Content Include="Areas\Customer\Views\web.config" />
     <Content Include="Areas\Customer\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\ThongTin\ThongTin.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LoginPartial.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2446,6 +2445,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Data\" />
+    <Folder Include="Views\Member\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -2461,8 +2462,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111260558567_applyTable.resx">
-      <DependentUpon>202111260558567_applyTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111280237125_Initial.resx">
+      <DependentUpon>202111280237125_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

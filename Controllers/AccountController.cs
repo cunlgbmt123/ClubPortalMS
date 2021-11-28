@@ -17,7 +17,7 @@ namespace ClubPortalMS.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private ApplicationDbContext db = null;
         public AccountController()
         {
         }
@@ -155,6 +155,11 @@ namespace ClubPortalMS.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    db = new ApplicationDbContext();
+                    var profile = new ThanhVien();
+                    profile.IDUser = user.Id;
+                    db.ThanhVien.Add(profile);
+                    db.SaveChanges();
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

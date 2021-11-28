@@ -22,7 +22,7 @@ namespace ClubPortalMS.Models
         }
     
         public int ID { get; set; }
-        public Nullable<int> IdCLB { get; set; }
+       
         public string Ten { get; set; }
         public Nullable<System.DateTime> NgaySinh { get; set; }
         public string MSSV { get; set; }
@@ -30,7 +30,8 @@ namespace ClubPortalMS.Models
         public string SDT { get; set; }
         public string Mail { get; set; }
         public string IDUser { get; set; }
-    
+        public int CLB_ID { get; set; }
+
         public virtual CLB CLB { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NhiemVu> NhiemVu { get; set; }
