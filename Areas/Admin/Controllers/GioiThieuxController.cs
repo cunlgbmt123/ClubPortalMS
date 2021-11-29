@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
 
-
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
     public class GioiThieuxController : Controller
@@ -18,7 +17,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/GioiThieux
         public ActionResult Index()
         {
-            return View(db.GioiThieu.ToList());
+            var gioiThieu = db.GioiThieu.Include(g => g.CLB);
+            return View(gioiThieu.ToList());
         }
 
         // GET: Admin/GioiThieux/Details/5
@@ -39,6 +39,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/GioiThieux/Create
         public ActionResult Create()
         {
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB");
             return View();
         }
 
@@ -56,6 +57,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", gioiThieu.IdCLB);
             return View(gioiThieu);
         }
 
@@ -71,6 +73,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", gioiThieu.IdCLB);
             return View(gioiThieu);
         }
 
@@ -87,6 +90,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", gioiThieu.IdCLB);
             return View(gioiThieu);
         }
 

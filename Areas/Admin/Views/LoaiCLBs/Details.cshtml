@@ -4,24 +4,44 @@
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper my-2">
+    <!-- Main content -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>
+                            @Html.ActionLink("Edit", "Edit", new { id = Model.IDLoaiCLB }) |
+                            @Html.ActionLink("Back to List", "Index")
+                        </p>
+                        <strong class="text-danger text-uppercase">Thông Tin</strong>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a href="#" class="btn btn-sm btn-success">Content</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TenLoaiCLB)
+                    </dt>
 
-<h2>Details</h2>
+                    <dd>
+                        @Html.DisplayFor(model => model.TenLoaiCLB)
+                    </dd>
 
-<div>
-    <h4>LoaiCLB</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TenLoaiCLB)
-        </dt>
+                </dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.TenLoaiCLB)
-        </dd>
-
-    </dl>
+                <!-- /.card-body -->
+            </div>
+        <!-- /.card -->
+    </section>
+    <!-- /.content -->
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IDLoaiCLB }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<!-- /.content-wrapper -->
+
+

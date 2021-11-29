@@ -5,78 +5,105 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper my-2">
+    <!-- Main content -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>
+                            @Html.ActionLink("Create New", "Create")
+                        </p>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TieuDeSK)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayBatDau)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayKetThuc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NoiDung)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.KetQua)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DiaDiem)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HinhThuc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdLoaiSK)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdCLB)
-        </th>
-        <th></th>
-    </tr>
+                        <strong class="text-danger text-uppercase">Trang Chủ</strong>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a href="#" class="btn btn-sm btn-success">Content</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CLB.TenCLB)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LoaiSuKien.TenLoaiSK)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TieuDeSK)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NgayBatDau)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NgayKetThuc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NoiDung)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.KetQua)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DiaDiem)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.HinhThuc)
+                        </th>
+                        <th></th>
+                    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TieuDeSK)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayBatDau)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayKetThuc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NoiDung)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.KetQua)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DiaDiem)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HinhThuc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdLoaiSK)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdCLB)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CLB.TenCLB)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LoaiSuKien.TenLoaiSK)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TieuDeSK)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NgayBatDau)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NgayKetThuc)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NoiDung)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.KetQua)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DiaDiem)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HinhThuc)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                            </td>
+                        </tr>
+                    }
 
-</table>
+                </table>
+
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+

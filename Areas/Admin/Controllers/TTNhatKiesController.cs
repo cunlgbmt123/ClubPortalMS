@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
 
-
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
     public class TTNhatKiesController : Controller
@@ -18,7 +17,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/TTNhatKies
         public ActionResult Index()
         {
-            return View(db.TTNhatKy.ToList());
+            var tTNhatKy = db.TTNhatKy.Include(t => t.ThanhVien);
+            return View(tTNhatKy.ToList());
         }
 
         // GET: Admin/TTNhatKies/Details/5
@@ -39,6 +39,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/TTNhatKies/Create
         public ActionResult Create()
         {
+            ViewBag.IdThanhVien = new SelectList(db.ThanhVien, "ID", "Ten");
             return View();
         }
 
@@ -56,6 +57,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.IdThanhVien = new SelectList(db.ThanhVien, "ID", "Ten", tTNhatKy.IdThanhVien);
             return View(tTNhatKy);
         }
 
@@ -71,6 +73,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.IdThanhVien = new SelectList(db.ThanhVien, "ID", "Ten", tTNhatKy.IdThanhVien);
             return View(tTNhatKy);
         }
 
@@ -87,6 +90,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.IdThanhVien = new SelectList(db.ThanhVien, "ID", "Ten", tTNhatKy.IdThanhVien);
             return View(tTNhatKy);
         }
 

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
-    [Authorize]
+
     public class DashboardController : Controller
     {
         // GET: Admin/Dashboard

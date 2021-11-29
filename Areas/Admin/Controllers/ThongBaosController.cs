@@ -17,7 +17,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/ThongBaos
         public ActionResult Index()
         {
-            return View(db.ThongBao.ToList());
+            var thongBao = db.ThongBao.Include(t => t.CLB);
+            return View(thongBao.ToList());
         }
 
         // GET: Admin/ThongBaos/Details/5
@@ -38,6 +39,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/ThongBaos/Create
         public ActionResult Create()
         {
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB");
             return View();
         }
 
@@ -55,6 +57,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", thongBao.IdCLB);
             return View(thongBao);
         }
 
@@ -70,6 +73,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", thongBao.IdCLB);
             return View(thongBao);
         }
 
@@ -86,6 +90,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", thongBao.IdCLB);
             return View(thongBao);
         }
 

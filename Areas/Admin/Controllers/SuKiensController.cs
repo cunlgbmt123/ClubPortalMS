@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
 
-
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
     public class SuKiensController : Controller
@@ -18,7 +17,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/SuKiens
         public ActionResult Index()
         {
-            return View(db.SuKien.ToList());
+            var suKien = db.SuKien.Include(s => s.CLB).Include(s => s.LoaiSuKien);
+            return View(suKien.ToList());
         }
 
         // GET: Admin/SuKiens/Details/5
@@ -39,6 +39,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/SuKiens/Create
         public ActionResult Create()
         {
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB");
+            ViewBag.IdLoaiSK = new SelectList(db.LoaiSuKien, "ID", "TenLoaiSK");
             return View();
         }
 
@@ -56,6 +58,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", suKien.IdCLB);
+            ViewBag.IdLoaiSK = new SelectList(db.LoaiSuKien, "ID", "TenLoaiSK", suKien.IdLoaiSK);
             return View(suKien);
         }
 
@@ -71,6 +75,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", suKien.IdCLB);
+            ViewBag.IdLoaiSK = new SelectList(db.LoaiSuKien, "ID", "TenLoaiSK", suKien.IdLoaiSK);
             return View(suKien);
         }
 
@@ -87,6 +93,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", suKien.IdCLB);
+            ViewBag.IdLoaiSK = new SelectList(db.LoaiSuKien, "ID", "TenLoaiSK", suKien.IdLoaiSK);
             return View(suKien);
         }
 

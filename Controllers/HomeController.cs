@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using ClubPortalMS.Models;
+using ClubPortalMS.Models.Models;
 
 namespace ClubPortalMS.Controllers
 {
+
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -26,5 +31,8 @@ namespace ClubPortalMS.Controllers
 
             return View();
         }
+
+
+        
     }
 }
