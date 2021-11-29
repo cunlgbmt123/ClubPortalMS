@@ -11,7 +11,8 @@ namespace ClubPortalMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class DangKy
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,10 +26,10 @@ namespace ClubPortalMS.Models
         public string MSSV { get; set; }
         public string Email { get; set; }
         public string SDT { get; set; }
-        public Nullable<System.DateTime> NgayDangKy { get; set; }
+        public DateTime NgayDangKy { get; set; }
         public string TrangThai { get; set; }
-        public Nullable<int> IdCLB { get; set; }
-    
+        public int IdCLB { get; set; }
+        [ForeignKey("IdCLB")]
         public virtual CLB CLB { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChoXetDuyet> ChoXetDuyet { get; set; }

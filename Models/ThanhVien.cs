@@ -11,7 +11,8 @@ namespace ClubPortalMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class ThanhVien
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -31,7 +32,7 @@ namespace ClubPortalMS.Models
         public string Mail { get; set; }
         public string IDUser { get; set; }
         public int CLB_ID { get; set; }
-
+        [ForeignKey("CLB_ID")]
         public virtual CLB CLB { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NhiemVu> NhiemVu { get; set; }

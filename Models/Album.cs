@@ -16,7 +16,7 @@ namespace ClubPortalMS.Models
     {
         public int ID { get; set; }
         public string TieuDe { get; set; }
-        public string[] HinhAnh { get; set; }
+        public string HinhAnh { get; set; }
         public string Video { get; set; }
         public string MoTa { get; set; }
     }

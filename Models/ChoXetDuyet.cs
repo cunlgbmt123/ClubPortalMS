@@ -11,13 +11,14 @@ namespace ClubPortalMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class ChoXetDuyet
     {
         public int ID { get; set; }
         public Nullable<int> IDNguoiDK { get; set; }
         public string TrangThai { get; set; }
-    
+        [ForeignKey("IDNguoiDK")]
         public virtual DangKy DangKy { get; set; }
     }
 }

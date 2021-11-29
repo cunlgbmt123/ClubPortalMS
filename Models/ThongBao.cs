@@ -11,7 +11,8 @@ namespace ClubPortalMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class ThongBao
     {
         public int ID { get; set; }
@@ -21,7 +22,7 @@ namespace ClubPortalMS.Models
         public Nullable<System.DateTime> NgayThongBao { get; set; }
         public string NoiDung { get; set; }
         public byte[] File { get; set; }
-    
+        [ForeignKey("IdCLB")]
         public virtual CLB CLB { get; set; }
     }
 }

@@ -15,6 +15,7 @@ namespace ClubPortalMS.Models.Models
         public int ID { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
+        public Nullable<bool> EmailConfirmation { get; set; }
         public string HashedPassword { get; set; }
         public string Salt { get; set; }
         public Nullable<bool> IsLocked { get; set; }

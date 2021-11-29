@@ -11,15 +11,16 @@ namespace ClubPortalMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class GioiThieu
     {
         public int ID { get; set; }
         public Nullable<int> IdCLB { get; set; }
         public string MoTa { get; set; }
-        public byte[] HinhAnh { get; set; }
+        public string HinhAnh { get; set; }
         public string LichSuHinhThanh { get; set; }
-    
+        [ForeignKey("IdCLB")]
         public virtual CLB CLB { get; set; }
     }
 }
