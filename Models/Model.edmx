@@ -1,0 +1,1439 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ClubPortalMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TieuDe" Type="nvarchar(max)" />
+          <Property Name="HinhAnh" Type="nvarchar(max)" />
+          <Property Name="Video" Type="nvarchar(max)" />
+          <Property Name="MoTa" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ChoXetDuyets">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDNguoiDK" Type="int" />
+          <Property Name="TrangThai" Type="nvarchar(max)" />
+          <Property Name="DangKy_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="CLB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdLoaiCLB" Type="int" />
+          <Property Name="TenCLB" Type="nvarchar(max)" />
+          <Property Name="TrangThai" Type="nvarchar(max)" />
+          <Property Name="NgayThanhLap" Type="datetime" />
+          <Property Name="LienHe" Type="nvarchar(max)" />
+          <Property Name="FanPage" Type="nvarchar(max)" />
+          <Property Name="SDT" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DangKy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar(max)" />
+          <Property Name="MSSV" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="SDT" Type="nvarchar(max)" />
+          <Property Name="NgayDangKy" Type="datetime" />
+          <Property Name="TrangThai" Type="nvarchar(max)" />
+          <Property Name="CLB_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="GioiThieu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MoTa" Type="nvarchar(max)" />
+          <Property Name="HinhAnh" Type="varbinary(max)" />
+          <Property Name="LichSuHinhThanh" Type="nvarchar(max)" />
+          <Property Name="CLB_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="HoatDong">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar(max)" />
+          <Property Name="MoTa" Type="nvarchar(max)" />
+          <Property Name="KeyWord" Type="nvarchar(max)" />
+          <Property Name="URL" Type="nvarchar(max)" />
+          <Property Name="HinhAnhChiTiet" Type="nvarchar(max)" />
+          <Property Name="HinhAnhBaiViet" Type="nvarchar(max)" />
+          <Property Name="NgayDang" Type="datetime" Nullable="false" />
+          <Property Name="TenNguoiDang" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LienHe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TieuDe" Type="nvarchar(max)" />
+          <Property Name="DiaChi" Type="nvarchar(max)" />
+          <Property Name="HotLine" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Ten" Type="nvarchar(max)" />
+          <Property Name="NoiDung" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LoaiCLB">
+          <Key>
+            <PropertyRef Name="IDLoaiCLB" />
+          </Key>
+          <Property Name="IDLoaiCLB" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenLoaiCLB" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LoaiHD">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenLoaiHD" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LoaiSuKien">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenLoaiSK" Type="nvarchar(max)" />
+          <Property Name="TrangThai" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="NhiemVu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TieuDe" Type="nvarchar(max)" />
+          <Property Name="MoTa" Type="nvarchar(max)" />
+          <Property Name="IdCLB" Type="int" />
+          <Property Name="IdThanhVien" Type="int" />
+          <Property Name="ThanhVien_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhanHoi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar(max)" />
+          <Property Name="NoiDung" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="SDT" Type="nvarchar(max)" />
+          <Property Name="DiaChi" Type="nvarchar(max)" />
+          <Property Name="CLB_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Poster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenPoster" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="HinhAnh" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="QLDSHoatDong">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChuDe" Type="nvarchar(max)" />
+          <Property Name="NgayBatDau" Type="datetime" />
+          <Property Name="NgayKetThuc" Type="datetime" />
+          <Property Name="TrangThai" Type="nvarchar(max)" />
+          <Property Name="IdLoaiHD" Type="int" />
+          <Property Name="CLB_ID" Type="int" />
+          <Property Name="LoaiHD_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" />
+          <Property Name="MoTa" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="NgayXoa" Type="datetime" />
+          <Property Name="UserDeleted" Type="int" />
+        </EntityType>
+        <EntityType Name="SuKien">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TieuDeSK" Type="nvarchar(max)" />
+          <Property Name="NgayBatDau" Type="datetime" />
+          <Property Name="NgayKetThuc" Type="datetime" />
+          <Property Name="NoiDung" Type="nvarchar(max)" />
+          <Property Name="KetQua" Type="nvarchar(max)" />
+          <Property Name="DiaDiem" Type="nvarchar(max)" />
+          <Property Name="HinhThuc" Type="nvarchar(max)" />
+          <Property Name="IdLoaiSK" Type="int" />
+          <Property Name="CLB_ID" Type="int" />
+          <Property Name="LoaiSuKien_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="ThanhVien">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar(max)" />
+          <Property Name="NgaySinh" Type="datetime" />
+          <Property Name="MSSV" Type="nvarchar(max)" />
+          <Property Name="Lop" Type="nvarchar(max)" />
+          <Property Name="SDT" Type="nvarchar(max)" />
+          <Property Name="Mail" Type="nvarchar(max)" />
+          <Property Name="IDUser" Type="int" Nullable="false" />
+          <Property Name="CLB_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="ThongBao">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TieuDe" Type="nvarchar(max)" />
+          <Property Name="MoTa" Type="nvarchar(max)" />
+          <Property Name="NgayThongBao" Type="datetime" />
+          <Property Name="NoiDung" Type="nvarchar(max)" />
+          <Property Name="File" Type="varbinary(max)" />
+          <Property Name="CLB_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="TinTuc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TieuDe" Type="nvarchar(max)" />
+          <Property Name="MoTa" Type="nvarchar(max)" />
+          <Property Name="KeyWord" Type="nvarchar(max)" />
+          <Property Name="URL" Type="nvarchar(max)" />
+          <Property Name="HinhAnhBaiViet" Type="nvarchar(max)" />
+          <Property Name="HinhAnhChiTiet" Type="nvarchar(max)" />
+          <Property Name="NgayDang" Type="datetime" Nullable="false" />
+          <Property Name="TenNguoiDang" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TTNhatKy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdThanhVien" Type="int" />
+          <Property Name="TGThamGia" Type="datetime" />
+          <Property Name="SKDaThamGia" Type="int" />
+          <Property Name="ThanhVien_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="UserRoles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="RoleID" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="EmailConfirmed" Type="bit" />
+          <Property Name="HashedPassword" Type="varchar" MaxLength="100" />
+          <Property Name="Salt" Type="varchar" MaxLength="100" />
+          <Property Name="IsLocked" Type="bit" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="NgayXoa" Type="datetime" />
+          <Property Name="UserDeleted" Type="int" />
+        </EntityType>
+        <Association Name="FK_dbo_ChoXetDuyets_dbo_DangKies_DangKy_ID">
+          <End Role="DangKy" Type="Self.DangKy" Multiplicity="0..1" />
+          <End Role="ChoXetDuyets" Type="Self.ChoXetDuyets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DangKy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ChoXetDuyets">
+              <PropertyRef Name="DangKy_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CLBs_dbo_LoaiCLBs_IdLoaiCLB">
+          <End Role="LoaiCLB" Type="Self.LoaiCLB" Multiplicity="0..1" />
+          <End Role="CLB" Type="Self.CLB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiCLB">
+              <PropertyRef Name="IDLoaiCLB" />
+            </Principal>
+            <Dependent Role="CLB">
+              <PropertyRef Name="IdLoaiCLB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DangKies_dbo_CLBs_CLB_ID">
+          <End Role="CLB" Type="Self.CLB" Multiplicity="0..1" />
+          <End Role="DangKy" Type="Self.DangKy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DangKy">
+              <PropertyRef Name="CLB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GioiThieux_dbo_CLBs_CLB_ID">
+          <End Role="CLB" Type="Self.CLB" Multiplicity="0..1" />
+          <End Role="GioiThieu" Type="Self.GioiThieu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GioiThieu">
+              <PropertyRef Name="CLB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_NhiemVus_dbo_ThanhViens_ThanhVien_ID">
+          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="1" />
+          <End Role="NhiemVu" Type="Self.NhiemVu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThanhVien">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NhiemVu">
+              <PropertyRef Name="ThanhVien_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PhanHois_dbo_CLBs_CLB_ID">
+          <End Role="CLB" Type="Self.CLB" Multiplicity="0..1" />
+          <End Role="PhanHoi" Type="Self.PhanHoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PhanHoi">
+              <PropertyRef Name="CLB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_QLDSHoatDongs_dbo_CLBs_CLB_ID">
+          <End Role="CLB" Type="Self.CLB" Multiplicity="0..1" />
+          <End Role="QLDSHoatDong" Type="Self.QLDSHoatDong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QLDSHoatDong">
+              <PropertyRef Name="CLB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_QLDSHoatDongs_dbo_LoaiHDs_LoaiHD_ID">
+          <End Role="LoaiHD" Type="Self.LoaiHD" Multiplicity="0..1" />
+          <End Role="QLDSHoatDong" Type="Self.QLDSHoatDong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiHD">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QLDSHoatDong">
+              <PropertyRef Name="LoaiHD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SuKiens_dbo_CLBs_CLB_ID">
+          <End Role="CLB" Type="Self.CLB" Multiplicity="0..1" />
+          <End Role="SuKien" Type="Self.SuKien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SuKien">
+              <PropertyRef Name="CLB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SuKiens_dbo_LoaiSuKiens_LoaiSuKien_ID">
+          <End Role="LoaiSuKien" Type="Self.LoaiSuKien" Multiplicity="0..1" />
+          <End Role="SuKien" Type="Self.SuKien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiSuKien">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SuKien">
+              <PropertyRef Name="LoaiSuKien_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ThanhViens_dbo_CLBs_CLB_ID">
+          <End Role="CLB" Type="Self.CLB" Multiplicity="0..1" />
+          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThanhVien">
+              <PropertyRef Name="CLB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ThongBaos_dbo_CLBs_CLB_ID">
+          <End Role="CLB" Type="Self.CLB" Multiplicity="0..1" />
+          <End Role="ThongBao" Type="Self.ThongBao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThongBao">
+              <PropertyRef Name="CLB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TTNhatKies_dbo_ThanhViens_ThanhVien_ID">
+          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="0..1" />
+          <End Role="TTNhatKy" Type="Self.TTNhatKy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThanhVien">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TTNhatKy">
+              <PropertyRef Name="ThanhVien_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThanhViens_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThanhVien">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRoles_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRoles_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClubPortalMSModelStoreContainer">
+          <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChoXetDuyets" EntityType="Self.ChoXetDuyets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLB" EntityType="Self.CLB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DangKy" EntityType="Self.DangKy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GioiThieu" EntityType="Self.GioiThieu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HoatDong" EntityType="Self.HoatDong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LienHe" EntityType="Self.LienHe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoaiCLB" EntityType="Self.LoaiCLB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoaiHD" EntityType="Self.LoaiHD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoaiSuKien" EntityType="Self.LoaiSuKien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhiemVu" EntityType="Self.NhiemVu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhanHoi" EntityType="Self.PhanHoi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Poster" EntityType="Self.Poster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QLDSHoatDong" EntityType="Self.QLDSHoatDong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuKien" EntityType="Self.SuKien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThanhVien" EntityType="Self.ThanhVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThongBao" EntityType="Self.ThongBao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TinTuc" EntityType="Self.TinTuc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TTNhatKy" EntityType="Self.TTNhatKy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_ChoXetDuyets_dbo_DangKies_DangKy_ID" Association="Self.FK_dbo_ChoXetDuyets_dbo_DangKies_DangKy_ID">
+            <End Role="DangKy" EntitySet="DangKy" />
+            <End Role="ChoXetDuyets" EntitySet="ChoXetDuyets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CLBs_dbo_LoaiCLBs_IdLoaiCLB" Association="Self.FK_dbo_CLBs_dbo_LoaiCLBs_IdLoaiCLB">
+            <End Role="LoaiCLB" EntitySet="LoaiCLB" />
+            <End Role="CLB" EntitySet="CLB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DangKies_dbo_CLBs_CLB_ID" Association="Self.FK_dbo_DangKies_dbo_CLBs_CLB_ID">
+            <End Role="CLB" EntitySet="CLB" />
+            <End Role="DangKy" EntitySet="DangKy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GioiThieux_dbo_CLBs_CLB_ID" Association="Self.FK_dbo_GioiThieux_dbo_CLBs_CLB_ID">
+            <End Role="CLB" EntitySet="CLB" />
+            <End Role="GioiThieu" EntitySet="GioiThieu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_NhiemVus_dbo_ThanhViens_ThanhVien_ID" Association="Self.FK_dbo_NhiemVus_dbo_ThanhViens_ThanhVien_ID">
+            <End Role="ThanhVien" EntitySet="ThanhVien" />
+            <End Role="NhiemVu" EntitySet="NhiemVu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PhanHois_dbo_CLBs_CLB_ID" Association="Self.FK_dbo_PhanHois_dbo_CLBs_CLB_ID">
+            <End Role="CLB" EntitySet="CLB" />
+            <End Role="PhanHoi" EntitySet="PhanHoi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_QLDSHoatDongs_dbo_CLBs_CLB_ID" Association="Self.FK_dbo_QLDSHoatDongs_dbo_CLBs_CLB_ID">
+            <End Role="CLB" EntitySet="CLB" />
+            <End Role="QLDSHoatDong" EntitySet="QLDSHoatDong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_QLDSHoatDongs_dbo_LoaiHDs_LoaiHD_ID" Association="Self.FK_dbo_QLDSHoatDongs_dbo_LoaiHDs_LoaiHD_ID">
+            <End Role="LoaiHD" EntitySet="LoaiHD" />
+            <End Role="QLDSHoatDong" EntitySet="QLDSHoatDong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SuKiens_dbo_CLBs_CLB_ID" Association="Self.FK_dbo_SuKiens_dbo_CLBs_CLB_ID">
+            <End Role="CLB" EntitySet="CLB" />
+            <End Role="SuKien" EntitySet="SuKien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SuKiens_dbo_LoaiSuKiens_LoaiSuKien_ID" Association="Self.FK_dbo_SuKiens_dbo_LoaiSuKiens_LoaiSuKien_ID">
+            <End Role="LoaiSuKien" EntitySet="LoaiSuKien" />
+            <End Role="SuKien" EntitySet="SuKien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ThanhViens_dbo_CLBs_CLB_ID" Association="Self.FK_dbo_ThanhViens_dbo_CLBs_CLB_ID">
+            <End Role="CLB" EntitySet="CLB" />
+            <End Role="ThanhVien" EntitySet="ThanhVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ThongBaos_dbo_CLBs_CLB_ID" Association="Self.FK_dbo_ThongBaos_dbo_CLBs_CLB_ID">
+            <End Role="CLB" EntitySet="CLB" />
+            <End Role="ThongBao" EntitySet="ThongBao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TTNhatKies_dbo_ThanhViens_ThanhVien_ID" Association="Self.FK_dbo_TTNhatKies_dbo_ThanhViens_ThanhVien_ID">
+            <End Role="ThanhVien" EntitySet="ThanhVien" />
+            <End Role="TTNhatKy" EntitySet="TTNhatKy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThanhViens_Users" Association="Self.FK_ThanhViens_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ThanhVien" EntitySet="ThanhVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRoles_Roles" Association="Self.FK_UserRoles_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRoles_Users" Association="Self.FK_UserRoles_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClubPortalMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TieuDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Video" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ChoXetDuyet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDNguoiDK" Type="Int32" />
+          <Property Name="TrangThai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DangKy_ID" Type="Int32" />
+          <NavigationProperty Name="DangKy" Relationship="Self.FK_dbo_ChoXetDuyets_dbo_DangKies_DangKy_ID" FromRole="ChoXetDuyets" ToRole="DangKy" />
+        </EntityType>
+        <EntityType Name="CLB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdLoaiCLB" Type="Int32" />
+          <Property Name="TenCLB" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayThanhLap" Type="DateTime" Precision="3" />
+          <Property Name="LienHe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FanPage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LoaiCLB" Relationship="Self.FK_dbo_CLBs_dbo_LoaiCLBs_IdLoaiCLB" FromRole="CLB" ToRole="LoaiCLB" />
+          <NavigationProperty Name="DangKies" Relationship="Self.FK_dbo_DangKies_dbo_CLBs_CLB_ID" FromRole="CLB" ToRole="DangKy" />
+          <NavigationProperty Name="GioiThieux" Relationship="Self.FK_dbo_GioiThieux_dbo_CLBs_CLB_ID" FromRole="CLB" ToRole="GioiThieu" />
+          <NavigationProperty Name="PhanHois" Relationship="Self.FK_dbo_PhanHois_dbo_CLBs_CLB_ID" FromRole="CLB" ToRole="PhanHoi" />
+          <NavigationProperty Name="QLDSHoatDongs" Relationship="Self.FK_dbo_QLDSHoatDongs_dbo_CLBs_CLB_ID" FromRole="CLB" ToRole="QLDSHoatDong" />
+          <NavigationProperty Name="SuKiens" Relationship="Self.FK_dbo_SuKiens_dbo_CLBs_CLB_ID" FromRole="CLB" ToRole="SuKien" />
+          <NavigationProperty Name="ThanhViens" Relationship="Self.FK_dbo_ThanhViens_dbo_CLBs_CLB_ID" FromRole="CLB" ToRole="ThanhVien" />
+          <NavigationProperty Name="ThongBaos" Relationship="Self.FK_dbo_ThongBaos_dbo_CLBs_CLB_ID" FromRole="CLB" ToRole="ThongBao" />
+        </EntityType>
+        <EntityType Name="DangKy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MSSV" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayDangKy" Type="DateTime" Precision="3" />
+          <Property Name="TrangThai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CLB_ID" Type="Int32" />
+          <NavigationProperty Name="ChoXetDuyets" Relationship="Self.FK_dbo_ChoXetDuyets_dbo_DangKies_DangKy_ID" FromRole="DangKy" ToRole="ChoXetDuyets" />
+          <NavigationProperty Name="CLB" Relationship="Self.FK_dbo_DangKies_dbo_CLBs_CLB_ID" FromRole="DangKy" ToRole="CLB" />
+        </EntityType>
+        <EntityType Name="GioiThieu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HinhAnh" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="LichSuHinhThanh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CLB_ID" Type="Int32" />
+          <NavigationProperty Name="CLB" Relationship="Self.FK_dbo_GioiThieux_dbo_CLBs_CLB_ID" FromRole="GioiThieu" ToRole="CLB" />
+        </EntityType>
+        <EntityType Name="HoatDong">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KeyWord" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HinhAnhChiTiet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HinhAnhBaiViet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayDang" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TenNguoiDang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LienHe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TieuDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HotLine" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LoaiCLB">
+          <Key>
+            <PropertyRef Name="IDLoaiCLB" />
+          </Key>
+          <Property Name="IDLoaiCLB" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenLoaiCLB" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CLBs" Relationship="Self.FK_dbo_CLBs_dbo_LoaiCLBs_IdLoaiCLB" FromRole="LoaiCLB" ToRole="CLB" />
+        </EntityType>
+        <EntityType Name="LoaiHD">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenLoaiHD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="QLDSHoatDongs" Relationship="Self.FK_dbo_QLDSHoatDongs_dbo_LoaiHDs_LoaiHD_ID" FromRole="LoaiHD" ToRole="QLDSHoatDong" />
+        </EntityType>
+        <EntityType Name="LoaiSuKien">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenLoaiSK" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SuKiens" Relationship="Self.FK_dbo_SuKiens_dbo_LoaiSuKiens_LoaiSuKien_ID" FromRole="LoaiSuKien" ToRole="SuKien" />
+        </EntityType>
+        <EntityType Name="NhiemVu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TieuDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdCLB" Type="Int32" />
+          <Property Name="IdThanhVien" Type="Int32" />
+          <Property Name="ThanhVien_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ThanhVien" Relationship="Self.FK_dbo_NhiemVus_dbo_ThanhViens_ThanhVien_ID" FromRole="NhiemVu" ToRole="ThanhVien" />
+        </EntityType>
+        <EntityType Name="PhanHoi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CLB_ID" Type="Int32" />
+          <NavigationProperty Name="CLB" Relationship="Self.FK_dbo_PhanHois_dbo_CLBs_CLB_ID" FromRole="PhanHoi" ToRole="CLB" />
+        </EntityType>
+        <EntityType Name="Poster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenPoster" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="QLDSHoatDong">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChuDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayBatDau" Type="DateTime" Precision="3" />
+          <Property Name="NgayKetThuc" Type="DateTime" Precision="3" />
+          <Property Name="TrangThai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdLoaiHD" Type="Int32" />
+          <Property Name="CLB_ID" Type="Int32" />
+          <Property Name="LoaiHD_ID" Type="Int32" />
+          <NavigationProperty Name="CLB" Relationship="Self.FK_dbo_QLDSHoatDongs_dbo_CLBs_CLB_ID" FromRole="QLDSHoatDong" ToRole="CLB" />
+          <NavigationProperty Name="LoaiHD" Relationship="Self.FK_dbo_QLDSHoatDongs_dbo_LoaiHDs_LoaiHD_ID" FromRole="QLDSHoatDong" ToRole="LoaiHD" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MoTa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="NgayXoa" Type="DateTime" Precision="3" />
+          <Property Name="UserDeleted" Type="Int32" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRoles_Roles" FromRole="Roles" ToRole="UserRoles" />
+        </EntityType>
+        <EntityType Name="SuKien">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TieuDeSK" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayBatDau" Type="DateTime" Precision="3" />
+          <Property Name="NgayKetThuc" Type="DateTime" Precision="3" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KetQua" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DiaDiem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HinhThuc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdLoaiSK" Type="Int32" />
+          <Property Name="CLB_ID" Type="Int32" />
+          <Property Name="LoaiSuKien_ID" Type="Int32" />
+          <NavigationProperty Name="CLB" Relationship="Self.FK_dbo_SuKiens_dbo_CLBs_CLB_ID" FromRole="SuKien" ToRole="CLB" />
+          <NavigationProperty Name="LoaiSuKien" Relationship="Self.FK_dbo_SuKiens_dbo_LoaiSuKiens_LoaiSuKien_ID" FromRole="SuKien" ToRole="LoaiSuKien" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ThanhVien">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="3" />
+          <Property Name="MSSV" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Lop" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Mail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IDUser" Type="Int32" Nullable="false" />
+          <Property Name="CLB_ID" Type="Int32" />
+          <NavigationProperty Name="CLB" Relationship="Self.FK_dbo_ThanhViens_dbo_CLBs_CLB_ID" FromRole="ThanhVien" ToRole="CLB" />
+          <NavigationProperty Name="NhiemVus" Relationship="Self.FK_dbo_NhiemVus_dbo_ThanhViens_ThanhVien_ID" FromRole="ThanhVien" ToRole="NhiemVu" />
+          <NavigationProperty Name="TTNhatKies" Relationship="Self.FK_dbo_TTNhatKies_dbo_ThanhViens_ThanhVien_ID" FromRole="ThanhVien" ToRole="TTNhatKy" />
+          <NavigationProperty Name="User" Relationship="Self.FK_ThanhViens_Users" FromRole="ThanhVien" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="ThongBao">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TieuDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayThongBao" Type="DateTime" Precision="3" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="File" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CLB_ID" Type="Int32" />
+          <NavigationProperty Name="CLB" Relationship="Self.FK_dbo_ThongBaos_dbo_CLBs_CLB_ID" FromRole="ThongBao" ToRole="CLB" />
+        </EntityType>
+        <EntityType Name="TinTuc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TieuDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KeyWord" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HinhAnhBaiViet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HinhAnhChiTiet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayDang" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TenNguoiDang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TTNhatKy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdThanhVien" Type="Int32" />
+          <Property Name="TGThamGia" Type="DateTime" Precision="3" />
+          <Property Name="SKDaThamGia" Type="Int32" />
+          <Property Name="ThanhVien_ID" Type="Int32" />
+          <NavigationProperty Name="ThanhVien" Relationship="Self.FK_dbo_TTNhatKies_dbo_ThanhViens_ThanhVien_ID" FromRole="TTNhatKy" ToRole="ThanhVien" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="RoleID" Type="Int32" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_UserRoles_Roles" FromRole="UserRoles" ToRole="Roles" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserRoles_Users" FromRole="UserRoles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmailConfirmed" Type="Boolean" />
+          <Property Name="HashedPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Salt" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsLocked" Type="Boolean" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="NgayXoa" Type="DateTime" Precision="3" />
+          <Property Name="UserDeleted" Type="Int32" />
+          <NavigationProperty Name="ThanhViens" Relationship="Self.FK_ThanhViens_Users" FromRole="Users" ToRole="ThanhVien" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRoles_Users" FromRole="Users" ToRole="UserRoles" />
+        </EntityType>
+        <Association Name="FK_dbo_ChoXetDuyets_dbo_DangKies_DangKy_ID">
+          <End Role="DangKy" Type="Self.DangKy" Multiplicity="0..1" />
+          <End Role="ChoXetDuyets" Type="Self.ChoXetDuyet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DangKy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ChoXetDuyets">
+              <PropertyRef Name="DangKy_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CLBs_dbo_LoaiCLBs_IdLoaiCLB">
+          <End Role="LoaiCLB" Type="Self.LoaiCLB" Multiplicity="0..1" />
+          <End Role="CLB" Type="Self.CLB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiCLB">
+              <PropertyRef Name="IDLoaiCLB" />
+            </Principal>
+            <Dependent Role="CLB">
+              <PropertyRef Name="IdLoaiCLB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DangKies_dbo_CLBs_CLB_ID">
+          <End Role="CLB" Type="Self.CLB" Multiplicity="0..1" />
+          <End Role="DangKy" Type="Self.DangKy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DangKy">
+              <PropertyRef Name="CLB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GioiThieux_dbo_CLBs_CLB_ID">
+          <End Role="CLB" Type="Self.CLB" Multiplicity="0..1" />
+          <End Role="GioiThieu" Type="Self.GioiThieu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GioiThieu">
+              <PropertyRef Name="CLB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PhanHois_dbo_CLBs_CLB_ID">
+          <End Role="CLB" Type="Self.CLB" Multiplicity="0..1" />
+          <End Role="PhanHoi" Type="Self.PhanHoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PhanHoi">
+              <PropertyRef Name="CLB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_QLDSHoatDongs_dbo_CLBs_CLB_ID">
+          <End Role="CLB" Type="Self.CLB" Multiplicity="0..1" />
+          <End Role="QLDSHoatDong" Type="Self.QLDSHoatDong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QLDSHoatDong">
+              <PropertyRef Name="CLB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SuKiens_dbo_CLBs_CLB_ID">
+          <End Role="CLB" Type="Self.CLB" Multiplicity="0..1" />
+          <End Role="SuKien" Type="Self.SuKien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SuKien">
+              <PropertyRef Name="CLB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ThanhViens_dbo_CLBs_CLB_ID">
+          <End Role="CLB" Type="Self.CLB" Multiplicity="0..1" />
+          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThanhVien">
+              <PropertyRef Name="CLB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ThongBaos_dbo_CLBs_CLB_ID">
+          <End Role="CLB" Type="Self.CLB" Multiplicity="0..1" />
+          <End Role="ThongBao" Type="Self.ThongBao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThongBao">
+              <PropertyRef Name="CLB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_QLDSHoatDongs_dbo_LoaiHDs_LoaiHD_ID">
+          <End Role="LoaiHD" Type="Self.LoaiHD" Multiplicity="0..1" />
+          <End Role="QLDSHoatDong" Type="Self.QLDSHoatDong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiHD">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QLDSHoatDong">
+              <PropertyRef Name="LoaiHD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SuKiens_dbo_LoaiSuKiens_LoaiSuKien_ID">
+          <End Role="LoaiSuKien" Type="Self.LoaiSuKien" Multiplicity="0..1" />
+          <End Role="SuKien" Type="Self.SuKien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiSuKien">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SuKien">
+              <PropertyRef Name="LoaiSuKien_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_NhiemVus_dbo_ThanhViens_ThanhVien_ID">
+          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="1" />
+          <End Role="NhiemVu" Type="Self.NhiemVu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThanhVien">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NhiemVu">
+              <PropertyRef Name="ThanhVien_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRoles_Roles">
+          <End Role="Roles" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TTNhatKies_dbo_ThanhViens_ThanhVien_ID">
+          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="0..1" />
+          <End Role="TTNhatKy" Type="Self.TTNhatKy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThanhVien">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TTNhatKy">
+              <PropertyRef Name="ThanhVien_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThanhViens_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThanhVien">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRoles_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClubPortalMSEntitiess" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Albums" EntityType="Self.Album" />
+          <EntitySet Name="ChoXetDuyets" EntityType="Self.ChoXetDuyet" />
+          <EntitySet Name="CLBs" EntityType="Self.CLB" />
+          <EntitySet Name="DangKies" EntityType="Self.DangKy" />
+          <EntitySet Name="GioiThieux" EntityType="Self.GioiThieu" />
+          <EntitySet Name="HoatDongs" EntityType="Self.HoatDong" />
+          <EntitySet Name="LienHes" EntityType="Self.LienHe" />
+          <EntitySet Name="LoaiCLBs" EntityType="Self.LoaiCLB" />
+          <EntitySet Name="LoaiHDs" EntityType="Self.LoaiHD" />
+          <EntitySet Name="LoaiSuKiens" EntityType="Self.LoaiSuKien" />
+          <EntitySet Name="NhiemVus" EntityType="Self.NhiemVu" />
+          <EntitySet Name="PhanHois" EntityType="Self.PhanHoi" />
+          <EntitySet Name="Posters" EntityType="Self.Poster" />
+          <EntitySet Name="QLDSHoatDongs" EntityType="Self.QLDSHoatDong" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="SuKiens" EntityType="Self.SuKien" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="ThanhViens" EntityType="Self.ThanhVien" />
+          <EntitySet Name="ThongBaos" EntityType="Self.ThongBao" />
+          <EntitySet Name="TinTucs" EntityType="Self.TinTuc" />
+          <EntitySet Name="TTNhatKies" EntityType="Self.TTNhatKy" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_dbo_ChoXetDuyets_dbo_DangKies_DangKy_ID" Association="Self.FK_dbo_ChoXetDuyets_dbo_DangKies_DangKy_ID">
+            <End Role="DangKy" EntitySet="DangKies" />
+            <End Role="ChoXetDuyets" EntitySet="ChoXetDuyets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CLBs_dbo_LoaiCLBs_IdLoaiCLB" Association="Self.FK_dbo_CLBs_dbo_LoaiCLBs_IdLoaiCLB">
+            <End Role="LoaiCLB" EntitySet="LoaiCLBs" />
+            <End Role="CLB" EntitySet="CLBs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DangKies_dbo_CLBs_CLB_ID" Association="Self.FK_dbo_DangKies_dbo_CLBs_CLB_ID">
+            <End Role="CLB" EntitySet="CLBs" />
+            <End Role="DangKy" EntitySet="DangKies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GioiThieux_dbo_CLBs_CLB_ID" Association="Self.FK_dbo_GioiThieux_dbo_CLBs_CLB_ID">
+            <End Role="CLB" EntitySet="CLBs" />
+            <End Role="GioiThieu" EntitySet="GioiThieux" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PhanHois_dbo_CLBs_CLB_ID" Association="Self.FK_dbo_PhanHois_dbo_CLBs_CLB_ID">
+            <End Role="CLB" EntitySet="CLBs" />
+            <End Role="PhanHoi" EntitySet="PhanHois" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_QLDSHoatDongs_dbo_CLBs_CLB_ID" Association="Self.FK_dbo_QLDSHoatDongs_dbo_CLBs_CLB_ID">
+            <End Role="CLB" EntitySet="CLBs" />
+            <End Role="QLDSHoatDong" EntitySet="QLDSHoatDongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SuKiens_dbo_CLBs_CLB_ID" Association="Self.FK_dbo_SuKiens_dbo_CLBs_CLB_ID">
+            <End Role="CLB" EntitySet="CLBs" />
+            <End Role="SuKien" EntitySet="SuKiens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ThanhViens_dbo_CLBs_CLB_ID" Association="Self.FK_dbo_ThanhViens_dbo_CLBs_CLB_ID">
+            <End Role="CLB" EntitySet="CLBs" />
+            <End Role="ThanhVien" EntitySet="ThanhViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ThongBaos_dbo_CLBs_CLB_ID" Association="Self.FK_dbo_ThongBaos_dbo_CLBs_CLB_ID">
+            <End Role="CLB" EntitySet="CLBs" />
+            <End Role="ThongBao" EntitySet="ThongBaos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_QLDSHoatDongs_dbo_LoaiHDs_LoaiHD_ID" Association="Self.FK_dbo_QLDSHoatDongs_dbo_LoaiHDs_LoaiHD_ID">
+            <End Role="LoaiHD" EntitySet="LoaiHDs" />
+            <End Role="QLDSHoatDong" EntitySet="QLDSHoatDongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SuKiens_dbo_LoaiSuKiens_LoaiSuKien_ID" Association="Self.FK_dbo_SuKiens_dbo_LoaiSuKiens_LoaiSuKien_ID">
+            <End Role="LoaiSuKien" EntitySet="LoaiSuKiens" />
+            <End Role="SuKien" EntitySet="SuKiens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_NhiemVus_dbo_ThanhViens_ThanhVien_ID" Association="Self.FK_dbo_NhiemVus_dbo_ThanhViens_ThanhVien_ID">
+            <End Role="ThanhVien" EntitySet="ThanhViens" />
+            <End Role="NhiemVu" EntitySet="NhiemVus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRoles_Roles" Association="Self.FK_UserRoles_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TTNhatKies_dbo_ThanhViens_ThanhVien_ID" Association="Self.FK_dbo_TTNhatKies_dbo_ThanhViens_ThanhVien_ID">
+            <End Role="ThanhVien" EntitySet="ThanhViens" />
+            <End Role="TTNhatKy" EntitySet="TTNhatKies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThanhViens_Users" Association="Self.FK_ThanhViens_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ThanhVien" EntitySet="ThanhViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRoles_Users" Association="Self.FK_UserRoles_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ClubPortalMSModelStoreContainer" CdmEntityContainer="ClubPortalMSEntitiess">
+          <EntitySetMapping Name="Albums">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.Album">
+              <MappingFragment StoreEntitySet="Album">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
+                <ScalarProperty Name="Video" ColumnName="Video" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChoXetDuyets">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.ChoXetDuyet">
+              <MappingFragment StoreEntitySet="ChoXetDuyets">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDNguoiDK" ColumnName="IDNguoiDK" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="DangKy_ID" ColumnName="DangKy_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLBs">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.CLB">
+              <MappingFragment StoreEntitySet="CLB">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdLoaiCLB" ColumnName="IdLoaiCLB" />
+                <ScalarProperty Name="TenCLB" ColumnName="TenCLB" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="NgayThanhLap" ColumnName="NgayThanhLap" />
+                <ScalarProperty Name="LienHe" ColumnName="LienHe" />
+                <ScalarProperty Name="FanPage" ColumnName="FanPage" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DangKies">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.DangKy">
+              <MappingFragment StoreEntitySet="DangKy">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="MSSV" ColumnName="MSSV" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="NgayDangKy" ColumnName="NgayDangKy" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="CLB_ID" ColumnName="CLB_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GioiThieux">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.GioiThieu">
+              <MappingFragment StoreEntitySet="GioiThieu">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
+                <ScalarProperty Name="LichSuHinhThanh" ColumnName="LichSuHinhThanh" />
+                <ScalarProperty Name="CLB_ID" ColumnName="CLB_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HoatDongs">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.HoatDong">
+              <MappingFragment StoreEntitySet="HoatDong">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="KeyWord" ColumnName="KeyWord" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="HinhAnhChiTiet" ColumnName="HinhAnhChiTiet" />
+                <ScalarProperty Name="HinhAnhBaiViet" ColumnName="HinhAnhBaiViet" />
+                <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="TenNguoiDang" ColumnName="TenNguoiDang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LienHes">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.LienHe">
+              <MappingFragment StoreEntitySet="LienHe">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="HotLine" ColumnName="HotLine" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiCLBs">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.LoaiCLB">
+              <MappingFragment StoreEntitySet="LoaiCLB">
+                <ScalarProperty Name="IDLoaiCLB" ColumnName="IDLoaiCLB" />
+                <ScalarProperty Name="TenLoaiCLB" ColumnName="TenLoaiCLB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiHDs">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.LoaiHD">
+              <MappingFragment StoreEntitySet="LoaiHD">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TenLoaiHD" ColumnName="TenLoaiHD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiSuKiens">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.LoaiSuKien">
+              <MappingFragment StoreEntitySet="LoaiSuKien">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TenLoaiSK" ColumnName="TenLoaiSK" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhiemVus">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.NhiemVu">
+              <MappingFragment StoreEntitySet="NhiemVu">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="IdCLB" ColumnName="IdCLB" />
+                <ScalarProperty Name="IdThanhVien" ColumnName="IdThanhVien" />
+                <ScalarProperty Name="ThanhVien_ID" ColumnName="ThanhVien_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhanHois">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.PhanHoi">
+              <MappingFragment StoreEntitySet="PhanHoi">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="CLB_ID" ColumnName="CLB_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posters">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.Poster">
+              <MappingFragment StoreEntitySet="Poster">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TenPoster" ColumnName="TenPoster" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QLDSHoatDongs">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.QLDSHoatDong">
+              <MappingFragment StoreEntitySet="QLDSHoatDong">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ChuDe" ColumnName="ChuDe" />
+                <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
+                <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="IdLoaiHD" ColumnName="IdLoaiHD" />
+                <ScalarProperty Name="CLB_ID" ColumnName="CLB_ID" />
+                <ScalarProperty Name="LoaiHD_ID" ColumnName="LoaiHD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="NgayXoa" ColumnName="NgayXoa" />
+                <ScalarProperty Name="UserDeleted" ColumnName="UserDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuKiens">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.SuKien">
+              <MappingFragment StoreEntitySet="SuKien">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TieuDeSK" ColumnName="TieuDeSK" />
+                <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
+                <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="KetQua" ColumnName="KetQua" />
+                <ScalarProperty Name="DiaDiem" ColumnName="DiaDiem" />
+                <ScalarProperty Name="HinhThuc" ColumnName="HinhThuc" />
+                <ScalarProperty Name="IdLoaiSK" ColumnName="IdLoaiSK" />
+                <ScalarProperty Name="CLB_ID" ColumnName="CLB_ID" />
+                <ScalarProperty Name="LoaiSuKien_ID" ColumnName="LoaiSuKien_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThanhViens">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.ThanhVien">
+              <MappingFragment StoreEntitySet="ThanhVien">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="MSSV" ColumnName="MSSV" />
+                <ScalarProperty Name="Lop" ColumnName="Lop" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="CLB_ID" ColumnName="CLB_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThongBaos">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.ThongBao">
+              <MappingFragment StoreEntitySet="ThongBao">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="NgayThongBao" ColumnName="NgayThongBao" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="File" ColumnName="File" />
+                <ScalarProperty Name="CLB_ID" ColumnName="CLB_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TinTucs">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.TinTuc">
+              <MappingFragment StoreEntitySet="TinTuc">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="KeyWord" ColumnName="KeyWord" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="HinhAnhBaiViet" ColumnName="HinhAnhBaiViet" />
+                <ScalarProperty Name="HinhAnhChiTiet" ColumnName="HinhAnhChiTiet" />
+                <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="TenNguoiDang" ColumnName="TenNguoiDang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TTNhatKies">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.TTNhatKy">
+              <MappingFragment StoreEntitySet="TTNhatKy">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdThanhVien" ColumnName="IdThanhVien" />
+                <ScalarProperty Name="TGThamGia" ColumnName="TGThamGia" />
+                <ScalarProperty Name="SKDaThamGia" ColumnName="SKDaThamGia" />
+                <ScalarProperty Name="ThanhVien_ID" ColumnName="ThanhVien_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRoles">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ClubPortalMSModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="HashedPassword" ColumnName="HashedPassword" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="NgayXoa" ColumnName="NgayXoa" />
+                <ScalarProperty Name="UserDeleted" ColumnName="UserDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

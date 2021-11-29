@@ -12,30 +12,22 @@ namespace ClubPortalMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Users
+    public partial class Role
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Users()
+        public Role()
         {
-            this.ThanhVien = new HashSet<ThanhVien>();
-            this.UserRoles = new HashSet<UserRoles>();
+            this.UserRoles = new HashSet<UserRole>();
         }
     
         public int ID { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public Nullable<bool> EmailConfirmation { get; set; }
-        public string HashedPassword { get; set; }
-        public string Salt { get; set; }
-        public Nullable<bool> IsLocked { get; set; }
-        public Nullable<System.DateTime> DateCreated { get; set; }
+        public string Name { get; set; }
+        public string MoTa { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> NgayXoa { get; set; }
         public Nullable<int> UserDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThanhVien> ThanhVien { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserRoles> UserRoles { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

@@ -206,15 +206,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111240638497_AddTable.cs" />
-    <Compile Include="Migrations\202111240638497_AddTable.Designer.cs">
-      <DependentUpon>202111240638497_AddTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202111241428082_AddTableTinTucandReUpdata.cs" />
-    <Compile Include="Migrations\202111241428082_AddTableTinTucandReUpdata.Designer.cs">
-      <DependentUpon>202111241428082_AddTableTinTucandReUpdata.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\ChoXetDuyet.cs" />
@@ -2482,14 +2473,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111240638497_AddTable.resx">
-      <DependentUpon>202111240638497_AddTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202111241428082_AddTableTinTucandReUpdata.resx">
-      <DependentUpon>202111241428082_AddTableTinTucandReUpdata.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

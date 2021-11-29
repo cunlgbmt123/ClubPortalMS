@@ -17,7 +17,7 @@ namespace ClubPortalMS.Models
         public int ID { get; set; }
         public Nullable<int> IdCLB { get; set; }
         public string MoTa { get; set; }
-        public byte[] HinhAnh { get; set; }
+        public string HinhAnh { get; set; }
         public string LichSuHinhThanh { get; set; }
     
         public virtual CLB CLB { get; set; }

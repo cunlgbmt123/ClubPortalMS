@@ -19,8 +19,8 @@ namespace ClubPortalMS.Models
         public string MoTa { get; set; }
         public string KeyWord { get; set; }
         public string URL { get; set; }
-        public string[] HinhAnhChiTiet { get; set; }
-        public string[] HinhAnhBaiViet { get; set; }
+        public string HinhAnhChiTiet { get; set; }
+        public string HinhAnhBaiViet { get; set; }
         public DateTime NgayDang { get; set; }
         public string TenNguoiDang { get; set; }
     }

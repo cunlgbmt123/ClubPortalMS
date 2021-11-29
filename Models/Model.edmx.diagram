@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="232fea30fcd74b5a8fdae10adc14f1a8" Name="Diagram1">
+        <EntityTypeShape EntityType="ClubPortalMSModel.Album" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.ChoXetDuyet" Width="1.5" PointX="7.5" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.CLB" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.DangKy" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.GioiThieu" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.HoatDong" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.LienHe" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.LoaiCLB" Width="1.5" PointX="0.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.LoaiHD" Width="1.5" PointX="6" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.LoaiSuKien" Width="1.5" PointX="6" PointY="22.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.NhiemVu" Width="1.5" PointX="12.5" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.PhanHoi" Width="1.5" PointX="5.25" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.Poster" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.QLDSHoatDong" Width="1.5" PointX="8.25" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.Role" Width="1.5" PointX="8" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.SuKien" Width="1.5" PointX="8.25" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.sysdiagram" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.ThanhVien" Width="1.5" PointX="10.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.ThongBao" Width="1.5" PointX="5.25" PointY="33.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.TinTuc" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.TTNhatKy" Width="1.5" PointX="12.5" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.UserRole" Width="1.5" PointX="10.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubPortalMSModel.User" Width="1.5" PointX="8" PointY="4.625" IsExpanded="true" />
+        <AssociationConnector Association="ClubPortalMSModel.FK_dbo_ChoXetDuyets_dbo_DangKies_DangKy_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="ClubPortalMSModel.FK_dbo_CLBs_dbo_LoaiCLBs_IdLoaiCLB" ManuallyRouted="false" />
+        <AssociationConnector Association="ClubPortalMSModel.FK_dbo_DangKies_dbo_CLBs_CLB_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="ClubPortalMSModel.FK_dbo_GioiThieux_dbo_CLBs_CLB_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="ClubPortalMSModel.FK_dbo_PhanHois_dbo_CLBs_CLB_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="ClubPortalMSModel.FK_dbo_QLDSHoatDongs_dbo_CLBs_CLB_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="ClubPortalMSModel.FK_dbo_SuKiens_dbo_CLBs_CLB_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="ClubPortalMSModel.FK_dbo_ThanhViens_dbo_CLBs_CLB_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="ClubPortalMSModel.FK_dbo_ThongBaos_dbo_CLBs_CLB_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="ClubPortalMSModel.FK_dbo_QLDSHoatDongs_dbo_LoaiHDs_LoaiHD_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="ClubPortalMSModel.FK_dbo_SuKiens_dbo_LoaiSuKiens_LoaiSuKien_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="ClubPortalMSModel.FK_dbo_NhiemVus_dbo_ThanhViens_ThanhVien_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="ClubPortalMSModel.FK_UserRoles_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="ClubPortalMSModel.FK_dbo_TTNhatKies_dbo_ThanhViens_ThanhVien_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="ClubPortalMSModel.FK_ThanhViens_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ClubPortalMSModel.FK_UserRoles_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -12,12 +12,13 @@ namespace ClubPortalMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Album
+    public partial class UserRole
     {
         public int ID { get; set; }
-        public string TieuDe { get; set; }
-        public string HinhAnh { get; set; }
-        public string Video { get; set; }
-        public string MoTa { get; set; }
+        public Nullable<int> UserID { get; set; }
+        public Nullable<int> RoleID { get; set; }
+    
+        public virtual Role Role { get; set; }
+        public virtual User User { get; set; }
     }
 }
