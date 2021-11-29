@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
 
-
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
     public class QLDSHoatDongsController : Controller
@@ -18,7 +17,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/QLDSHoatDongs
         public ActionResult Index()
         {
-            return View(db.QLDSHoatDong.ToList());
+            var qLDSHoatDong = db.QLDSHoatDong.Include(q => q.CLB).Include(q => q.LoaiHD);
+            return View(qLDSHoatDong.ToList());
         }
 
         // GET: Admin/QLDSHoatDongs/Details/5
@@ -39,6 +39,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/QLDSHoatDongs/Create
         public ActionResult Create()
         {
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB");
+            ViewBag.IdLoaiHD = new SelectList(db.LoaiHD, "ID", "TenLoaiHD");
             return View();
         }
 
@@ -56,6 +58,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", qLDSHoatDong.IdCLB);
+            ViewBag.IdLoaiHD = new SelectList(db.LoaiHD, "ID", "TenLoaiHD", qLDSHoatDong.IdLoaiHD);
             return View(qLDSHoatDong);
         }
 
@@ -71,6 +75,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", qLDSHoatDong.IdCLB);
+            ViewBag.IdLoaiHD = new SelectList(db.LoaiHD, "ID", "TenLoaiHD", qLDSHoatDong.IdLoaiHD);
             return View(qLDSHoatDong);
         }
 
@@ -87,6 +93,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", qLDSHoatDong.IdCLB);
+            ViewBag.IdLoaiHD = new SelectList(db.LoaiHD, "ID", "TenLoaiHD", qLDSHoatDong.IdLoaiHD);
             return View(qLDSHoatDong);
         }
 

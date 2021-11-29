@@ -4,64 +4,86 @@
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper my-2">
+    <!-- Main content -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>
+                            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+                            @Html.ActionLink("Back to List", "Index")
+                        </p>
 
-<h2>Details</h2>
+                        <strong class="text-danger text-uppercase">Thông Tin</strong>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a href="#" class="btn btn-sm btn-success">Content</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CLB.TenCLB)
+                    </dt>
 
-<div>
-    <h4>ThongBao</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TieuDe)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CLB.TenCLB)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.TieuDe)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TieuDe)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MoTa)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TieuDe)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.MoTa)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MoTa)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IdCLB)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.MoTa)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.IdCLB)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NgayThongBao)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayThongBao)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NgayThongBao)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.NgayThongBao)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NoiDung)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NoiDung)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NoiDung)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.NoiDung)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.File)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.File)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.File)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.File)
-        </dd>
+                </dl>
 
-    </dl>
+
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </section>
+    <!-- /.content -->
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<!-- /.content-wrapper -->
+

@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
 
-
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
     public class PhanHoisController : Controller
@@ -18,7 +17,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/PhanHois
         public ActionResult Index()
         {
-            return View(db.PhanHoi.ToList());
+            var phanHoi = db.PhanHoi.Include(p => p.CLB);
+            return View(phanHoi.ToList());
         }
 
         // GET: Admin/PhanHois/Details/5
@@ -39,6 +39,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/PhanHois/Create
         public ActionResult Create()
         {
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB");
             return View();
         }
 
@@ -56,6 +57,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", phanHoi.IdCLB);
             return View(phanHoi);
         }
 
@@ -71,6 +73,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", phanHoi.IdCLB);
             return View(phanHoi);
         }
 
@@ -87,6 +90,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", phanHoi.IdCLB);
             return View(phanHoi);
         }
 

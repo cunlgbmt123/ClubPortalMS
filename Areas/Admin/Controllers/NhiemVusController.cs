@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
 
-
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
     public class NhiemVusController : Controller
@@ -18,7 +17,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/NhiemVus
         public ActionResult Index()
         {
-            return View(db.NhiemVu.ToList());
+            var nhiemVu = db.NhiemVu.Include(n => n.ThanhVien);
+            return View(nhiemVu.ToList());
         }
 
         // GET: Admin/NhiemVus/Details/5
@@ -39,6 +39,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/NhiemVus/Create
         public ActionResult Create()
         {
+            ViewBag.IdThanhVien = new SelectList(db.ThanhVien, "ID", "Ten");
             return View();
         }
 
@@ -56,6 +57,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.IdThanhVien = new SelectList(db.ThanhVien, "ID", "Ten", nhiemVu.IdThanhVien);
             return View(nhiemVu);
         }
 
@@ -71,6 +73,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.IdThanhVien = new SelectList(db.ThanhVien, "ID", "Ten", nhiemVu.IdThanhVien);
             return View(nhiemVu);
         }
 
@@ -87,6 +90,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.IdThanhVien = new SelectList(db.ThanhVien, "ID", "Ten", nhiemVu.IdThanhVien);
             return View(nhiemVu);
         }
 

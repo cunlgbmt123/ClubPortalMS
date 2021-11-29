@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
 
-
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
     public class AlbumsController : Controller
@@ -47,7 +46,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TieuDe,Video,MoTa")] Album album)
+        public ActionResult Create([Bind(Include = "ID,TieuDe,HinhAnh,Video,MoTa")] Album album)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +78,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TieuDe,Video,MoTa")] Album album)
+        public ActionResult Edit([Bind(Include = "ID,TieuDe,HinhAnh,Video,MoTa")] Album album)
         {
             if (ModelState.IsValid)
             {

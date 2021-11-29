@@ -22,12 +22,37 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper my-2">
+            <!-- Main content -->
+            <section class="content">
+                <!-- Default box -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="submit" value="Delete" class="btn btn-default" /> |
+                                @Html.ActionLink("Back to List", "Index")
+                                <strong class="text-danger text-uppercase">Xóa</strong>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <a href="#" class="btn btn-sm btn-success">Content</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        Start creating your amazing application!
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </section>
+            <!-- /.content -->
         </div>
+        <!-- /.content-wrapper -->
+
     }
-</div>
+

@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
 
-
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
     public class ChoXetDuyetsController : Controller
@@ -18,7 +17,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/ChoXetDuyets
         public ActionResult Index()
         {
-            return View(db.ChoXetDuyet.ToList());
+            var choXetDuyet = db.ChoXetDuyet.Include(c => c.DangKy);
+            return View(choXetDuyet.ToList());
         }
 
         // GET: Admin/ChoXetDuyets/Details/5
@@ -39,6 +39,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/ChoXetDuyets/Create
         public ActionResult Create()
         {
+            ViewBag.IDNguoiDK = new SelectList(db.DangKy, "ID", "Ten");
             return View();
         }
 
@@ -56,6 +57,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.IDNguoiDK = new SelectList(db.DangKy, "ID", "Ten", choXetDuyet.IDNguoiDK);
             return View(choXetDuyet);
         }
 
@@ -71,6 +73,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.IDNguoiDK = new SelectList(db.DangKy, "ID", "Ten", choXetDuyet.IDNguoiDK);
             return View(choXetDuyet);
         }
 
@@ -87,6 +90,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.IDNguoiDK = new SelectList(db.DangKy, "ID", "Ten", choXetDuyet.IDNguoiDK);
             return View(choXetDuyet);
         }
 
