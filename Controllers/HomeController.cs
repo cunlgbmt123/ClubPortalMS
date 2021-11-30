@@ -6,7 +6,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
-using ClubPortalMS.Models.Models;
+
 
 namespace ClubPortalMS.Controllers
 {

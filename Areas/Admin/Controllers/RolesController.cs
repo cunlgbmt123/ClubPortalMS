@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
-using ClubPortalMS.Models.Models;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
@@ -18,7 +17,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/Roles
         public ActionResult Index()
         {
-            return View(db.Role.ToList());
+            return View(db.DBRoles.ToList());
         }
 
         // GET: Admin/Roles/Details/5
@@ -28,7 +27,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Roles roles = db.Role.Find(id);
+            DBRoles roles = db.DBRoles.Find(id);
             if (roles == null)
             {
                 return HttpNotFound();
@@ -47,11 +46,11 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,MoTa,IsDeleted,NgayXoa,UserDeleted")] Roles roles)
+        public ActionResult Create([Bind(Include = "ID,Name,MoTa,IsDeleted,NgayXoa,UserDeleted")] DBRoles roles)
         {
             if (ModelState.IsValid)
             {
-                db.Role.Add(roles);
+                db.DBRoles.Add(roles);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,7 +65,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Roles roles = db.Role.Find(id);
+            DBRoles roles = db.DBRoles.Find(id);
             if (roles == null)
             {
                 return HttpNotFound();
@@ -79,7 +78,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,MoTa,IsDeleted,NgayXoa,UserDeleted")] Roles roles)
+        public ActionResult Edit([Bind(Include = "ID,Name,MoTa,IsDeleted,NgayXoa,UserDeleted")] DBRoles roles)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +96,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Roles roles = db.Role.Find(id);
+            DBRoles roles = db.DBRoles.Find(id);
             if (roles == null)
             {
                 return HttpNotFound();
@@ -110,8 +109,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Roles roles = db.Role.Find(id);
-            db.Role.Remove(roles);
+            DBRoles roles = db.DBRoles.Find(id);
+            db.DBRoles.Remove(roles);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

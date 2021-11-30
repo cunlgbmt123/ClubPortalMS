@@ -17,6 +17,6 @@ namespace ClubPortalMS.Models
         public int ID { get; set; }
         public string TenPoster { get; set; }
         public string HinhAnh { get; set; }
-        public Nullable<bool> Status { get; set; }
+        public bool Status { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
-using ClubPortalMS.Models.Models;
+
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
@@ -18,7 +18,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/UserRoles
         public ActionResult Index()
         {
-            var userRole = db.UserRole.Include(u => u.Roles).Include(u => u.Users);
+            var userRole = db.DBUserRoles.Include(u => u.DBRoles).Include(u => u.DBUser);
             return View(userRole.ToList());
         }
 
@@ -29,7 +29,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserRoles userRoles = db.UserRole.Find(id);
+            DBUserRoles userRoles = db.DBUserRoles.Find(id);
             if (userRoles == null)
             {
                 return HttpNotFound();
@@ -40,8 +40,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/UserRoles/Create
         public ActionResult Create()
         {
-            ViewBag.RoleID = new SelectList(db.Role, "ID", "Name");
-            ViewBag.UserID = new SelectList(db.User, "ID", "Username");
+            ViewBag.RoleID = new SelectList(db.DBRoles, "ID", "Name");
+            ViewBag.UserID = new SelectList(db.DBUser, "ID", "Username");
             return View();
         }
 
@@ -50,17 +50,17 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,UserID,RoleID")] UserRoles userRoles)
+        public ActionResult Create([Bind(Include = "ID,UserID,RoleID")] DBUserRoles userRoles)
         {
             if (ModelState.IsValid)
             {
-                db.UserRole.Add(userRoles);
+                db.DBUserRoles.Add(userRoles);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RoleID = new SelectList(db.Role, "ID", "Name", userRoles.RoleID);
-            ViewBag.UserID = new SelectList(db.User, "ID", "Username", userRoles.UserID);
+            ViewBag.RoleID = new SelectList(db.DBRoles, "ID", "Name", userRoles.RoleID);
+            ViewBag.UserID = new SelectList(db.DBUser, "ID", "Username", userRoles.UserID);
             return View(userRoles);
         }
 
@@ -71,13 +71,13 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserRoles userRoles = db.UserRole.Find(id);
+            DBUserRoles userRoles = db.DBUserRoles.Find(id);
             if (userRoles == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RoleID = new SelectList(db.Role, "ID", "Name", userRoles.RoleID);
-            ViewBag.UserID = new SelectList(db.User, "ID", "Username", userRoles.UserID);
+            ViewBag.RoleID = new SelectList(db.DBRoles, "ID", "Name", userRoles.RoleID);
+            ViewBag.UserID = new SelectList(db.DBUser, "ID", "Username", userRoles.UserID);
             return View(userRoles);
         }
 
@@ -86,7 +86,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,UserID,RoleID")] UserRoles userRoles)
+        public ActionResult Edit([Bind(Include = "ID,UserID,RoleID")] DBUserRoles userRoles)
         {
             if (ModelState.IsValid)
             {
@@ -94,8 +94,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.RoleID = new SelectList(db.Role, "ID", "Name", userRoles.RoleID);
-            ViewBag.UserID = new SelectList(db.User, "ID", "Username", userRoles.UserID);
+            ViewBag.RoleID = new SelectList(db.DBRoles, "ID", "Name", userRoles.RoleID);
+            ViewBag.UserID = new SelectList(db.DBUser, "ID", "Username", userRoles.UserID);
             return View(userRoles);
         }
 
@@ -106,7 +106,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserRoles userRoles = db.UserRole.Find(id);
+            DBUserRoles userRoles = db.DBUserRoles.Find(id);
             if (userRoles == null)
             {
                 return HttpNotFound();
@@ -119,8 +119,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            UserRoles userRoles = db.UserRole.Find(id);
-            db.UserRole.Remove(userRoles);
+            DBUserRoles userRoles = db.DBUserRoles.Find(id);
+            db.DBUserRoles.Remove(userRoles);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

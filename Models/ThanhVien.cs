@@ -15,28 +15,21 @@ namespace ClubPortalMS.Models
 
     public partial class ThanhVien
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ThanhVien()
-        {
-            this.NhiemVu = new HashSet<NhiemVu>();
-            this.TTNhatKy = new HashSet<TTNhatKy>();
-        }
-    
         public int ID { get; set; }
-       
         public string Ten { get; set; }
-        public Nullable<System.DateTime> NgaySinh { get; set; }
+        public DateTime NgaySinh { get; set; }
         public string MSSV { get; set; }
         public string Lop { get; set; }
         public string SDT { get; set; }
         public string Mail { get; set; }
-        public string IDUser { get; set; }
+        public int IDUser { get; set; }
         public int CLB_ID { get; set; }
+
+        [ForeignKey("IDUser")]
+        public virtual DBUser DBUser { get; set; }
         [ForeignKey("CLB_ID")]
         public virtual CLB CLB { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NhiemVu> NhiemVu { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TTNhatKy> TTNhatKy { get; set; }
       
     }

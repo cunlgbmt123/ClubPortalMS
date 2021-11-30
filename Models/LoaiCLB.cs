@@ -20,7 +20,7 @@ namespace ClubPortalMS.Models
         {
             this.CLB = new HashSet<CLB>();
         }
-    [Key]
+        [Key]
         public int IDLoaiCLB { get; set; }
         public string TenLoaiCLB { get; set; }
     

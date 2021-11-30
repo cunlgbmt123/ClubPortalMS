@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
-using ClubPortalMS.Models.Models;
+
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
@@ -18,7 +18,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/Users
         public ActionResult Index()
         {
-            return View(db.User.ToList());
+            return View(db.DBUser.ToList());
         }
 
         // GET: Admin/Users/Details/5
@@ -28,7 +28,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Users users = db.User.Find(id);
+            DBUser users = db.DBUser.Find(id);
             if (users == null)
             {
                 return HttpNotFound();
@@ -47,11 +47,11 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Username,Email,EmailConfirmation,HashedPassword,Salt,IsLocked,DateCreated,IsDeleted,NgayXoa,UserDeleted")] Users users)
+        public ActionResult Create([Bind(Include = "ID,Username,Email,EmailConfirmation,HashedPassword,Salt,IsLocked,DateCreated,IsDeleted,NgayXoa,UserDeleted")] DBUser users)
         {
             if (ModelState.IsValid)
             {
-                db.User.Add(users);
+                db.DBUser.Add(users);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,7 +66,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Users users = db.User.Find(id);
+            DBUser users = db.DBUser.Find(id);
             if (users == null)
             {
                 return HttpNotFound();
@@ -79,7 +79,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Username,Email,EmailConfirmation,HashedPassword,Salt,IsLocked,DateCreated,IsDeleted,NgayXoa,UserDeleted")] Users users)
+        public ActionResult Edit([Bind(Include = "ID,Username,Email,EmailConfirmation,HashedPassword,Salt,IsLocked,DateCreated,IsDeleted,NgayXoa,UserDeleted")] DBUser users)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Users users = db.User.Find(id);
+           DBUser users = db.DBUser.Find(id);
             if (users == null)
             {
                 return HttpNotFound();
@@ -110,8 +110,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Users users = db.User.Find(id);
-            db.User.Remove(users);
+            DBUser users = db.DBUser.Find(id);
+            db.DBUser.Remove(users);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -18,8 +18,8 @@ namespace ClubPortalMS.Models
         public int ID { get; set; }
         public string TieuDe { get; set; }
         public string MoTa { get; set; }
-        public Nullable<int> IdCLB { get; set; }
-        public Nullable<int> IdThanhVien { get; set; }
+        public int IdCLB { get; set; }
+        public int IdThanhVien { get; set; }
 
         [ForeignKey("IdThanhVien")]
         public virtual ThanhVien ThanhVien { get; set; }

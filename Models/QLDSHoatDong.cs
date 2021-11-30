@@ -17,11 +17,11 @@ namespace ClubPortalMS.Models
     {
         public int ID { get; set; }
         public string ChuDe { get; set; }
-        public Nullable<System.DateTime> NgayBatDau { get; set; }
-        public Nullable<System.DateTime> NgayKetThuc { get; set; }
+        public DateTime NgayBatDau { get; set; }
+        public DateTime NgayKetThuc { get; set; }
         public string TrangThai { get; set; }
-        public Nullable<int> IdCLB { get; set; }
-        public Nullable<int> IdLoaiHD { get; set; }
+        public int IdCLB { get; set; }
+        public int IdLoaiHD { get; set; }
         [ForeignKey("IdCLB")]
         public virtual CLB CLB { get; set; }
         [ForeignKey("IdLoaiHD")]

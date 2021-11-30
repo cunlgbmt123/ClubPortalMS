@@ -16,9 +16,9 @@ namespace ClubPortalMS.Models
     public partial class TTNhatKy
     {
         public int ID { get; set; }
-        public Nullable<int> IdThanhVien { get; set; }
-        public Nullable<System.DateTime> TGThamGia { get; set; }
-        public Nullable<int> SKDaThamGia { get; set; }
+        public int IdThanhVien { get; set; }
+        public DateTime TGThamGia { get; set; }
+        public int SKDaThamGia { get; set; }
         [ForeignKey("IdThanhVien")]
         public virtual ThanhVien ThanhVien { get; set; }
     }

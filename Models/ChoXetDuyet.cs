@@ -16,7 +16,7 @@ namespace ClubPortalMS.Models
     public partial class ChoXetDuyet
     {
         public int ID { get; set; }
-        public Nullable<int> IDNguoiDK { get; set; }
+        public int IDNguoiDK { get; set; }
         public string TrangThai { get; set; }
         [ForeignKey("IDNguoiDK")]
         public virtual DangKy DangKy { get; set; }

@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using ClubPortalMS.Models.Models;
+using ClubPortalMS.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -37,13 +37,13 @@ namespace ClubPortalMS.Models
         public DbSet<Poster> Poster { get; set; }
         public DbSet<PhanHoi> PhanHoi { get; set; }
         public DbSet<QLDSHoatDong> QLDSHoatDong { get; set; }
-        public DbSet<Roles> Role { get; set; }
+        public DbSet<DBRoles> DBRoles { get; set; }
         public DbSet<SuKien> SuKien { get; set; }
         public DbSet<TTNhatKy> TTNhatKy { get; set; }
         public DbSet<ThanhVien> ThanhVien { get; set; }
         public DbSet<ThongBao> ThongBao { get; set; }
-        public DbSet<Users> User { get; set; }
-        public DbSet<UserRoles> UserRole { get; set; }
+        public DbSet<DBUser> DBUser { get; set; }
+        public DbSet<DBUserRoles> DBUserRoles { get; set; }
         public DbSet<TinTuc> TinTucs { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
