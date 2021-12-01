@@ -11,21 +11,24 @@ namespace ClubPortalMS.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class ThanhVien
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         public string Ten { get; set; }
-        public DateTime NgaySinh { get; set; }
+        public string Ho { get; set; }
+        public DateTime? NgaySinh { get; set; }
         public string MSSV { get; set; }
         public string Lop { get; set; }
         public string SDT { get; set; }
         public string Mail { get; set; }
-        public int IDUser { get; set; }
-        public int CLB_ID { get; set; }
-
-        [ForeignKey("IDUser")]
+        public int? CLB_ID { get; set; }
+        public int? User_ID { get; set; }
+        [ForeignKey("User_ID")]
         public virtual DBUser DBUser { get; set; }
         [ForeignKey("CLB_ID")]
         public virtual CLB CLB { get; set; }

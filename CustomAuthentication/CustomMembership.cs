@@ -26,16 +26,16 @@ namespace ClubPortalMS.CustomAuthentication
             //password = password + "A48BF46E-1V4F-58B4-2208-CQH7-U19JC5K2K3NV";
             //string pw = Processing.EncodePasswordToBase64(password);
             //string salt = pw.Substring(1, 10);
-            //string h_password = pw.Replace(salt + "");
+            //string H_assword = pw.Replace(salt ,"");
             using (ApplicationDbContext dbContext = new ApplicationDbContext())
             {
                 var user = (from us in dbContext.DBUser
                             where string.Compare(username, us.Username, StringComparison.OrdinalIgnoreCase) == 0
                             && string.Compare(password, us.HashedPassword, StringComparison.OrdinalIgnoreCase) == 0
-                           // && string.Compare(salt, us.Salt, StringComparison.OrdinalIgnoreCase)== 0
+                            //&& string.Compare(salt, us.Salt, StringComparison.OrdinalIgnoreCase)== 0
                             && us.IsLocked == false
                             select us).FirstOrDefault();
-
+               
                 return (user != null) ? true : false;
             }
         }
@@ -63,7 +63,7 @@ namespace ClubPortalMS.CustomAuthentication
         /// <param name="username"></param>
         /// <param name="userIsOnline"></param>
         /// <returns></returns>
-        public override MembershipUser GetUser(string username, bool userIsOnline)
+        public override MembershipUser GetUser( string username, bool userIsOnline)
         {
             using (ApplicationDbContext dbContext = new ApplicationDbContext())
             {
@@ -80,6 +80,7 @@ namespace ClubPortalMS.CustomAuthentication
                 return selectedUser;
             }
         }
+ 
 
         public override string GetUserNameByEmail(string email)
         {

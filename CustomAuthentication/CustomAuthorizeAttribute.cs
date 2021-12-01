@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClubPortalMS.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,6 +16,8 @@ namespace ClubPortalMS.CustomAuthentication
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
+         
+        
             return ((CurrentUser != null && !CurrentUser.IsInRole(Roles)) || CurrentUser == null) ? false : true;
         }
 

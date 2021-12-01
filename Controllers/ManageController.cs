@@ -14,8 +14,8 @@
 //    [Authorize]
 //    public class ManageController : Controller
 //    {
-//        private  ApplicationSignInManager _signInManager;
-//        private  ApplicationUserManager _userManager;
+//        private ApplicationSignInManager _signInManager;
+//        private ApplicationUserManager _userManager;
 
 //        public ManageController()
 //        {
@@ -26,7 +26,7 @@
 //            UserManager = userManager;
 //            SignInManager = signInManager;
 //        }
-        
+
 
 
 //        public ApplicationSignInManager SignInManager
@@ -35,9 +35,9 @@
 //            {
 //                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
 //            }
-//            private set 
-//            { 
-//                _signInManager = value; 
+//            private set
+//            {
+//                _signInManager = value;
 //            }
 //        }
 
@@ -309,7 +309,7 @@
 //        public ActionResult LinkLogin(string provider)
 //        {
 //            // Request a redirect to the external login provider to link a login for the current user
-//            return new AccountsController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
+//            return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
 //        }
 
 //        //
@@ -336,7 +336,7 @@
 //            base.Dispose(disposing);
 //        }
 
-//#region Helpers
+//        #region Helpers
 //        // Used for XSRF protection when adding external logins
 //        private const string XsrfKey = "XsrfId";
 
@@ -387,6 +387,6 @@
 //            Error
 //        }
 
-//#endregion
+//        #endregion
 //    }
 //}

@@ -187,10 +187,12 @@
     <Compile Include="Areas\Admin\Controllers\SuKiensController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThanhViensController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongBaosController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ThongTinTVController.cs" />
     <Compile Include="Areas\Admin\Controllers\TinTucsController.cs" />
     <Compile Include="Areas\Admin\Controllers\TTNhatKiesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserRolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Content Include="Areas\Admin\Resource\css\admincss.css" />
     <Compile Include="Areas\Customer\Controllers\AlbumsController.cs" />
     <Compile Include="Areas\Customer\Controllers\GioiThieuController.cs" />
     <Compile Include="Areas\Customer\Controllers\HoatDongsController.cs" />
@@ -244,6 +246,7 @@
     <Compile Include="Models\TTNhatKy.cs" />
     <Compile Include="Models\UserLoginView.cs" />
     <Compile Include="Models\UserRegisterView.cs" />
+    <Compile Include="App_Start\Processing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -2409,7 +2412,6 @@
     <Content Include="Areas\Customer\Views\TinTuc\Index.cshtml" />
     <Content Include="Areas\Customer\Views\web.config" />
     <Content Include="Areas\Customer\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
@@ -2430,6 +2432,10 @@
     <Content Include="Areas\Admin\Views\UserRoles\Details.cshtml" />
     <Content Include="Areas\Admin\Views\UserRoles\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\UserRoles\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LoginBarTitle.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_SuaHoSo.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongTinTV\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongTinTV\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2479,12 +2485,13 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\ThongTinTV\Details.cshtml" />
+    <Content Include="Views\ThongTinTV\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Data\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

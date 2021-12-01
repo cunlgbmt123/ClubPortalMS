@@ -18,11 +18,10 @@ namespace ClubPortalMS.CustomAuthentication
         
         #endregion
         public CustomMembershipUser(DBUser user) : base("CustomMembership", user.Username, user.ID, user.Email, string.Empty, string.Empty, true, false, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now)
-        {
-            //ID = user.AccountSystems.FirstOrDefault(s=>s.ID == user.ID).ID;
-            ID = user.ID;
-            FirstName = user.FirstName;
-            LastName = user.LastName;
+        { 
+            ID = user.ThanhVien.FirstOrDefault(s => s.ID == user.ID).ID; 
+            FirstName = user.ThanhVien.FirstOrDefault(s => s.ID == user.ID).Ten;
+            LastName =user.ThanhVien.FirstOrDefault(s => s.ID == user.ID).Ho; 
             DBUserRoles = user.DBUserRoles;
         }
     }

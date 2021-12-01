@@ -40,6 +40,8 @@ namespace ClubPortalMS.Controllers
                     var user = (CustomMembershipUser)Membership.GetUser(loginView.UserName, false);
                     if (user != null)
                     {
+                        Session["UserName"] = user.UserName;
+                        Session["UserId"] = user.ID;
                         CustomSerializeModel userModel = new CustomSerializeModel()
                         {
                             ID = user.ID,
@@ -52,7 +54,10 @@ namespace ClubPortalMS.Controllers
                             userModel.RoleName = (from u in db.DBRoles 
                                                   where userModel.RoleName.Contains(u.ID.ToString()) 
                                                   select u.Name).ToList();
+
                         }
+                     
+
                         string userData = JsonConvert.SerializeObject(userModel);
                         FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket
                             (
@@ -62,6 +67,7 @@ namespace ClubPortalMS.Controllers
                         string enTicket = FormsAuthentication.Encrypt(authTicket);
                         HttpCookie faCookie = new HttpCookie("Cookie1", enTicket);
                         Response.Cookies.Add(faCookie);
+                        
                     }
 
                     if (Url.IsLocalUrl(ReturnUrl))
@@ -70,11 +76,11 @@ namespace ClubPortalMS.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index","Dashboard", new { area = "Admin" });
                     }
                 }
             }
-            ModelState.AddModelError("", "Something Wrong : Username or Password invalid ^_^ ");
+            ModelState.AddModelError("", "Something Wrong : Username or Password invalid");
             return View(loginView);
         }
 
@@ -103,6 +109,10 @@ namespace ClubPortalMS.Controllers
                 //Save User Data
                 using (ApplicationDbContext dbContext = new ApplicationDbContext())
                 {
+                    //string passWord = registrationView.Password + "A48BF46E-1V4F-58B4-2208-CQH7-U19JC5K2K3NV";
+                    //string pw = Processing.EncodePasswordToBase64(passWord);
+                    //string salt = pw.Substring(1, 10);
+                    //string H_Password = pw.Replace(salt, "");
                     var user = new DBUser()
                     {
                         Username = registrationView.UserName,
@@ -112,14 +122,21 @@ namespace ClubPortalMS.Controllers
                         HashedPassword = registrationView.Password,
                         IsLocked = false,
                         EmailConfirmation = false,
-                };
-
+                    };
                     dbContext.DBUser.Add(user);
+                    dbContext.SaveChanges();
+                    var getIDUser = new ThanhVien()
+                    {
+                        User_ID = user.ID,
+                        Ten = registrationView.FirstName,
+                        Ho = registrationView.LastName,
+                    };
+                    dbContext.ThanhVien.Add(getIDUser);
                     dbContext.SaveChanges();
                 }
 
                 //Verification Email
-               // VerificationEmail(registrationView.Email, registrationView.ActivationCode.ToString());
+                // VerificationEmail(registrationView.Email, registrationView.ActivationCode.ToString());
                 messageRegistration = "Your account has been created successfully. ^_^";
                 statusRegistration = true;
             }
@@ -202,5 +219,6 @@ namespace ClubPortalMS.Controllers
         //        smtp.Send(message);
 
         //}
+       
     }
 }

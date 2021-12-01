@@ -26,9 +26,9 @@ namespace ClubPortalMS.Models
         public string MSSV { get; set; }
         public string Email { get; set; }
         public string SDT { get; set; }
-        public DateTime NgayDangKy { get; set; }
+        public DateTime? NgayDangKy { get; set; }
         public string TrangThai { get; set; }
-        public int IdCLB { get; set; }
+        public int? IdCLB { get; set; }
         [ForeignKey("IdCLB")]
         public virtual CLB CLB { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
