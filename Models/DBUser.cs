@@ -19,6 +19,7 @@ namespace ClubPortalMS.Models
         public bool? IsLocked { get; set; }
         public DateTime? DateCreated { get; set; }
         public bool? IsDeleted { get; set; }
+        public Guid ActivationCode { get; set; }
         public DateTime? NgayXoa { get; set; }
         public int? UserDeleted { get; set; }
         public virtual ICollection<ThanhVien> ThanhVien { get; set; }
