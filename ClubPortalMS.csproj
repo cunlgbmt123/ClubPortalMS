@@ -219,6 +219,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MailHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\ChoXetDuyet.cs" />
@@ -2454,7 +2455,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Accounts\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Accounts\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Accounts\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Accounts\ForgotPassword.cshtml" />
@@ -2487,6 +2488,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\ThongTinTV\Details.cshtml" />
     <Content Include="Views\ThongTinTV\Edit.cshtml" />
+    <Content Include="Views\Account\ActivationAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
