@@ -103,7 +103,8 @@ namespace ClubPortalMS.Controllers
                 // Email Verification
                 string userName = Membership.GetUserNameByEmail(registrationView.Email);
                 if (!string.IsNullOrEmpty(userName))
-                {
+                {   
+                    
                     ModelState.AddModelError("Warning Email", "Sorry: Email already Exists");
                     return View(registrationView);
                 }
@@ -158,7 +159,7 @@ namespace ClubPortalMS.Controllers
         public ActionResult ActivationAccount(string id)
         {
             bool statusAccount = false;
-            using (ApplicationDbContext dbContext = new Models.ApplicationDbContext())
+            using (ApplicationDbContext dbContext = new ApplicationDbContext())
             {
                 var userAccount = dbContext.DBUser.Where(u => u.ActivationCode.ToString().Equals(id)).FirstOrDefault();
 
@@ -202,6 +203,122 @@ namespace ClubPortalMS.Controllers
             string subject = "Activation Account !";
 
             string body = "<br/> Please click on the following link in order to activate your account" + "<br/><a href='" + link + "'> Activation Account ! </a>";
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+            };
+
+            using (var message = new MailMessage(fromEmail, toEmail)
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+
+            })
+
+                smtp.Send(message);
+
+        }
+
+        [HttpGet]
+        public ActionResult ForgotPassWord()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ForgotPassWord(ForgotPasswordView forgotPasswordViewModel)
+        {
+            bool statusRegistration = false;
+            string messageRegistration = string.Empty;
+            if (ModelState.IsValid)
+            {
+                // Email Verification
+              
+                    var userName = Membership.GetUserNameByEmail(forgotPasswordViewModel.Email);
+                    if (!string.IsNullOrEmpty(userName))
+                    {
+                    using (ApplicationDbContext dbContext = new ApplicationDbContext())
+                    {
+                        var userAccount = dbContext.DBUser.Where(u => u.Email.ToString().Equals(forgotPasswordViewModel.Email)).FirstOrDefault();
+                        if (userAccount != null)
+                        {
+                            
+                            ResetPasswordEmail(userAccount.Email, userAccount.ActivationCode.ToString());
+                            RedirectToAction("ForgotPasswordEmail");
+                            statusRegistration = true;
+                        }
+                    }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Warning Email", "Xin lỗi Email bạn nhập không tồn tại");
+                        return View(forgotPasswordViewModel);
+                     }
+            }
+            else
+            {
+                messageRegistration = "Something Wrong!";
+            }
+            ViewBag.Message = messageRegistration;
+            ViewBag.Status = statusRegistration;
+
+            return View(forgotPasswordViewModel);
+        }
+        [HttpGet]
+        public ActionResult ResetPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ResetPassword(string id,ResetPasswordView resetPasswordView)
+        {
+            //bool statusAccount = false;
+            if (ModelState.IsValid)
+            {
+                using (ApplicationDbContext dbContext = new ApplicationDbContext())
+                {
+                    var userAccount = dbContext.DBUser.Where(u => u.ActivationCode.ToString().Equals(id)).FirstOrDefault();
+
+                    if (userAccount != null)
+                    {
+                        //statusAccount = true;
+                        userAccount.HashedPassword = resetPasswordView.Password;
+                        dbContext.SaveChanges();
+                        RedirectToAction("ForgotPasswordConfirmation");
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Something Wrong !!";
+                    }
+
+                }
+            }
+            else
+            {
+                ViewBag.Message = "Bị lỗi!!";
+            }
+            //ViewBag.Status = statusAccount;
+            return View(resetPasswordView);
+        }
+        public void ResetPasswordEmail(string email, string activationCode)
+        {
+
+            var url = string.Format("/Account/ResetPassword/{0}", activationCode);
+            var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, url);
+
+            var fromEmail = new MailAddress("tuanbui2091@gmail.com", "Đặt lại mật khẩu");
+            var toEmail = new MailAddress(email);
+
+            var fromEmailPassword = "25251325Cc";
+            string subject = "Đặt lại mật khẩu!";
+
+            string body = "<br/> Please click on the following link in order to reset password for your account" + "<br/><a href='" + link + "'> Activation Account ! </a>";
 
             var smtp = new SmtpClient
             {

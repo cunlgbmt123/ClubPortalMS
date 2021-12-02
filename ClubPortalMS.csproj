@@ -228,6 +228,7 @@
     <Compile Include="Models\DBRoles.cs" />
     <Compile Include="Models\DBUser.cs" />
     <Compile Include="Models\DBUserRoles.cs" />
+    <Compile Include="Models\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\GioiThieu.cs" />
     <Compile Include="Models\HoatDong.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -2455,11 +2456,10 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Accounts\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Accounts\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Accounts\ForgotPassword.cshtml" />
-    <Content Include="Views\Accounts\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Accounts\ForgotPasswordEmail.cshtml" />
     <Content Include="Views\Accounts\Login.cshtml" />
     <Content Include="Views\Accounts\Register.cshtml" />
     <Content Include="Views\Accounts\ResetPassword.cshtml" />
@@ -2489,6 +2489,10 @@
     <Content Include="Views\ThongTinTV\Details.cshtml" />
     <Content Include="Views\ThongTinTV\Edit.cshtml" />
     <Content Include="Views\Account\ActivationAccount.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\ForgotPassWord.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

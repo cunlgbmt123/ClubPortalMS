@@ -80,7 +80,7 @@ namespace ClubPortalMS.CustomAuthentication
                 return selectedUser;
             }
         }
- 
+   
 
         public override string GetUserNameByEmail(string email)
         {
@@ -93,6 +93,7 @@ namespace ClubPortalMS.CustomAuthentication
                 return !string.IsNullOrEmpty(username) ? username : string.Empty;
             }
         }
+
 
         #region Overrides of Membership Provider
 
