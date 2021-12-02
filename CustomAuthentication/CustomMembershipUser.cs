@@ -14,6 +14,7 @@ namespace ClubPortalMS.CustomAuthentication
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public Guid ActivationCode { get; set; }
         public ICollection<DBUserRoles> DBUserRoles { get; set; }
         
         #endregion
@@ -21,7 +22,8 @@ namespace ClubPortalMS.CustomAuthentication
         { 
             ID = user.ThanhVien.FirstOrDefault(s => s.ID == user.ID).ID; 
             FirstName = user.ThanhVien.FirstOrDefault(s => s.ID == user.ID).Ten;
-            LastName =user.ThanhVien.FirstOrDefault(s => s.ID == user.ID).Ho; 
+            LastName =user.ThanhVien.FirstOrDefault(s => s.ID == user.ID).Ho;
+            ActivationCode = user.ActivationCode;
             DBUserRoles = user.DBUserRoles;
         }
     }
