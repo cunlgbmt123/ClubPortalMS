@@ -1,0 +1,40 @@
+﻿@model ClubPortalMS.Models.DBUser
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+}
+
+<h2>Index</h2>
+
+<div>
+    <h4>DBUser</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        @if (Model.EmailConfirmation == true && Convert.ToBoolean(Model.EmailConfirmation))
+        {
+            <p>Tài khoản của bạn đã được xác thực email</p>
+        }
+        else
+        {
+            @Html.ActionLink("Xác Thực Email", "ConfirmButton", new { id =Model.ID})
+        }
+
+        @Html.ActionLink("Chỉnh Sửa", "ChangeEmail", new { id = Model.ID })
+        <dt>
+            @Html.DisplayNameFor(model => model.HashedPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HashedPassword)
+        </dd>
+        @Html.ActionLink("Chỉnh Sửa", "ChangePassword", new { id = Model.ID })
+    </dl>
+</div>
