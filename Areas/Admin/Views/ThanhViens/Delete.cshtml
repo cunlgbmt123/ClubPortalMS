@@ -6,101 +6,103 @@
 }
 
 
+
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper my-2">
-            <!-- Main content -->
-            <section class="content">
-                <!-- Default box -->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="submit" value="Delete" class="btn btn-default" /> |
-                                @Html.ActionLink("Back to List", "Index")
-                                <strong class="text-danger text-uppercase">Xóa</strong>
-                            </div>
-                            <div class="col-md-6 text-right">
-                                <a href="#" class="btn btn-sm btn-success">Content</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <dl class="dl-horizontal">
-                            <dt>
-                                @Html.DisplayNameFor(model => model.CLB.TenCLB)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.CLB.TenCLB)
-                            </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.Ten)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.Ten)
-                            </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.NgaySinh)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.NgaySinh)
-                            </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.MSSV)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.MSSV)
-                            </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.Lop)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.Lop)
-                            </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.SDT)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.SDT)
-                            </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.Mail)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.Mail)
-                            </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.IDUser)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.IDUser)
-                            </dd>
-
-                        </dl>
-
-                    </div>
-                    <!-- /.card-body -->
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.ActionLink("Back to List", "Index")
+                    <strong class="text-danger text-uppercase">Tiêu Đề</strong>
                 </div>
-                <!-- /.card -->
-            </section>
-            <!-- /.content -->
+                <div class="col-md-6 text-right">
+                    <a href="#" class="btn btn-sm btn-success">Content</a>
+                </div>
+            </div>
         </div>
-        <!-- /.content-wrapper -->
+        <div class="card-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.CLB.TenCLB)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CLB.TenCLB)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DBUser.FirstName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DBUser.FirstName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Ten)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Ten)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Ho)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Ho)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.NgaySinh)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.NgaySinh)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.MSSV)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MSSV)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Lop)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Lop)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SDT)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SDT)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Mail)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Mail)
+                </dd>
+
+            </dl>
+
+        </div>
+        <!-- /.card-body -->
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+           
+        </div>
     }
+

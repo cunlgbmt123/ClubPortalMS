@@ -8,110 +8,118 @@ using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
 
-
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
-    public class UsersController : Controller
+    public class DBUserRolesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Admin/Users
+        // GET: Admin/DBUserRoles
         public ActionResult Index()
         {
-            return View(db.DBUser.ToList());
+            var dBUserRoles = db.DBUserRoles.Include(d => d.DBRoles).Include(d => d.DBUser);
+            return View(dBUserRoles.ToList());
         }
 
-        // GET: Admin/Users/Details/5
+        // GET: Admin/DBUserRoles/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DBUser users = db.DBUser.Find(id);
-            if (users == null)
+            DBUserRoles dBUserRoles = db.DBUserRoles.Find(id);
+            if (dBUserRoles == null)
             {
                 return HttpNotFound();
             }
-            return View(users);
+            return View(dBUserRoles);
         }
 
-        // GET: Admin/Users/Create
+        // GET: Admin/DBUserRoles/Create
         public ActionResult Create()
         {
+            ViewBag.RoleID = new SelectList(db.DBRoles, "ID", "Name");
+            ViewBag.UserID = new SelectList(db.DBUser, "ID", "FirstName");
             return View();
         }
 
-        // POST: Admin/Users/Create
+        // POST: Admin/DBUserRoles/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Username,Email,EmailConfirmation,HashedPassword,Salt,IsLocked,DateCreated,IsDeleted,NgayXoa,UserDeleted")] DBUser users)
+        public ActionResult Create([Bind(Include = "ID,UserID,RoleID")] DBUserRoles dBUserRoles)
         {
             if (ModelState.IsValid)
             {
-                db.DBUser.Add(users);
+                db.DBUserRoles.Add(dBUserRoles);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(users);
+            ViewBag.RoleID = new SelectList(db.DBRoles, "ID", "Name", dBUserRoles.RoleID);
+            ViewBag.UserID = new SelectList(db.DBUser, "ID", "FirstName", dBUserRoles.UserID);
+            return View(dBUserRoles);
         }
 
-        // GET: Admin/Users/Edit/5
+        // GET: Admin/DBUserRoles/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DBUser users = db.DBUser.Find(id);
-            if (users == null)
+            DBUserRoles dBUserRoles = db.DBUserRoles.Find(id);
+            if (dBUserRoles == null)
             {
                 return HttpNotFound();
             }
-            return View(users);
+            ViewBag.RoleID = new SelectList(db.DBRoles, "ID", "Name", dBUserRoles.RoleID);
+            ViewBag.UserID = new SelectList(db.DBUser, "ID", "FirstName", dBUserRoles.UserID);
+            return View(dBUserRoles);
         }
 
-        // POST: Admin/Users/Edit/5
+        // POST: Admin/DBUserRoles/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Username,Email,EmailConfirmation,HashedPassword,Salt,IsLocked,DateCreated,IsDeleted,NgayXoa,UserDeleted")] DBUser users)
+        public ActionResult Edit([Bind(Include = "ID,UserID,RoleID")] DBUserRoles dBUserRoles)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(users).State = EntityState.Modified;
+                db.Entry(dBUserRoles).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(users);
+            ViewBag.RoleID = new SelectList(db.DBRoles, "ID", "Name", dBUserRoles.RoleID);
+            ViewBag.UserID = new SelectList(db.DBUser, "ID", "FirstName", dBUserRoles.UserID);
+            return View(dBUserRoles);
         }
 
-        // GET: Admin/Users/Delete/5
+        // GET: Admin/DBUserRoles/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-           DBUser users = db.DBUser.Find(id);
-            if (users == null)
+            DBUserRoles dBUserRoles = db.DBUserRoles.Find(id);
+            if (dBUserRoles == null)
             {
                 return HttpNotFound();
             }
-            return View(users);
+            return View(dBUserRoles);
         }
 
-        // POST: Admin/Users/Delete/5
+        // POST: Admin/DBUserRoles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            DBUser users = db.DBUser.Find(id);
-            db.DBUser.Remove(users);
+            DBUserRoles dBUserRoles = db.DBUserRoles.Find(id);
+            db.DBUserRoles.Remove(dBUserRoles);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
