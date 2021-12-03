@@ -3,23 +3,20 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
+        <div class="nav nav-link">
+            @*@Html.ActionLink("Chào " + User.Identity.GetUserName(), null)*@
+            <a href="#">Welcome : @Session["UserName"]</a>
 
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-            @Html.ActionLink("Hello " + User.Identity.GetUserId() + "!", null)
-        </li>
-        <li><a href="@Url.Action("Logout","Account")" class="btn btn-warning">Logout</a></li>
-    </ul>
+            <span><a href="@Url.Action("Logout","Account")" class="btn btn-warning">Đăng Xuất</a></span>
+        </div>
     }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Registration", "Registration", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Registration", "Registration", "Account", new { area = "" }, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", new { area = "" }, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }
-w
