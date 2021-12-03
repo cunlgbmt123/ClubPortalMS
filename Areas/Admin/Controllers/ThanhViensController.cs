@@ -17,7 +17,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/ThanhViens
         public ActionResult Index()
         {
-            var thanhVien = db.ThanhVien.Include(t => t.CLB);
+            var thanhVien = db.ThanhVien.Include(t => t.CLB).Include(t => t.DBUser);
             return View(thanhVien.ToList());
         }
 
@@ -40,6 +40,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         public ActionResult Create()
         {
             ViewBag.CLB_ID = new SelectList(db.CLB, "ID", "TenCLB");
+            ViewBag.User_ID = new SelectList(db.DBUser, "ID", "FirstName");
             return View();
         }
 
@@ -48,7 +49,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Ten,NgaySinh,MSSV,Lop,SDT,Mail,IDUser,CLB_ID")] ThanhVien thanhVien)
+        public ActionResult Create([Bind(Include = "ID,Ten,Ho,NgaySinh,MSSV,Lop,SDT,Mail,CLB_ID,User_ID")] ThanhVien thanhVien)
         {
             if (ModelState.IsValid)
             {
@@ -58,6 +59,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             }
 
             ViewBag.CLB_ID = new SelectList(db.CLB, "ID", "TenCLB", thanhVien.CLB_ID);
+            ViewBag.User_ID = new SelectList(db.DBUser, "ID", "FirstName", thanhVien.User_ID);
             return View(thanhVien);
         }
 
@@ -74,6 +76,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 return HttpNotFound();
             }
             ViewBag.CLB_ID = new SelectList(db.CLB, "ID", "TenCLB", thanhVien.CLB_ID);
+            ViewBag.User_ID = new SelectList(db.DBUser, "ID", "FirstName", thanhVien.User_ID);
             return View(thanhVien);
         }
 
@@ -82,7 +85,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Ten,NgaySinh,MSSV,Lop,SDT,Mail,IDUser,CLB_ID")] ThanhVien thanhVien)
+        public ActionResult Edit([Bind(Include = "ID,Ten,Ho,NgaySinh,MSSV,Lop,SDT,Mail,CLB_ID,User_ID")] ThanhVien thanhVien)
         {
             if (ModelState.IsValid)
             {
@@ -91,6 +94,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.CLB_ID = new SelectList(db.CLB, "ID", "TenCLB", thanhVien.CLB_ID);
+            ViewBag.User_ID = new SelectList(db.DBUser, "ID", "FirstName", thanhVien.User_ID);
             return View(thanhVien);
         }
 

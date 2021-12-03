@@ -10,107 +10,107 @@ using ClubPortalMS.Models;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
-    public class RolesController : Controller
+    public class DBUsersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Admin/Roles
+        // GET: Admin/DBUsers
         public ActionResult Index()
         {
-            return View(db.DBRoles.ToList());
+            return View(db.DBUser.ToList());
         }
 
-        // GET: Admin/Roles/Details/5
+        // GET: Admin/DBUsers/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DBRoles roles = db.DBRoles.Find(id);
-            if (roles == null)
+            DBUser dBUser = db.DBUser.Find(id);
+            if (dBUser == null)
             {
                 return HttpNotFound();
             }
-            return View(roles);
+            return View(dBUser);
         }
 
-        // GET: Admin/Roles/Create
+        // GET: Admin/DBUsers/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Roles/Create
+        // POST: Admin/DBUsers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,MoTa,IsDeleted,NgayXoa,UserDeleted")] DBRoles roles)
+        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,Username,Email,EmailConfirmation,HashedPassword,Salt,IsLocked,DateCreated,IsDeleted,ActivationCode,NgayXoa,UserDeleted")] DBUser dBUser)
         {
             if (ModelState.IsValid)
             {
-                db.DBRoles.Add(roles);
+                db.DBUser.Add(dBUser);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(roles);
+            return View(dBUser);
         }
 
-        // GET: Admin/Roles/Edit/5
+        // GET: Admin/DBUsers/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DBRoles roles = db.DBRoles.Find(id);
-            if (roles == null)
+            DBUser dBUser = db.DBUser.Find(id);
+            if (dBUser == null)
             {
                 return HttpNotFound();
             }
-            return View(roles);
+            return View(dBUser);
         }
 
-        // POST: Admin/Roles/Edit/5
+        // POST: Admin/DBUsers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,MoTa,IsDeleted,NgayXoa,UserDeleted")] DBRoles roles)
+        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Username,Email,EmailConfirmation,HashedPassword,Salt,IsLocked,DateCreated,IsDeleted,ActivationCode,NgayXoa,UserDeleted")] DBUser dBUser)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(roles).State = EntityState.Modified;
+                db.Entry(dBUser).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(roles);
+            return View(dBUser);
         }
 
-        // GET: Admin/Roles/Delete/5
+        // GET: Admin/DBUsers/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DBRoles roles = db.DBRoles.Find(id);
-            if (roles == null)
+            DBUser dBUser = db.DBUser.Find(id);
+            if (dBUser == null)
             {
                 return HttpNotFound();
             }
-            return View(roles);
+            return View(dBUser);
         }
 
-        // POST: Admin/Roles/Delete/5
+        // POST: Admin/DBUsers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            DBRoles roles = db.DBRoles.Find(id);
-            db.DBRoles.Remove(roles);
+            DBUser dBUser = db.DBUser.Find(id);
+            db.DBUser.Remove(dBUser);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
