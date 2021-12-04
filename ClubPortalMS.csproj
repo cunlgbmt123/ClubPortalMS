@@ -2124,6 +2124,7 @@
     <Compile Include="Models\DBUserRoles.cs" />
     <Compile Include="Models\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\GioiThieu.cs" />
+    <Compile Include="Models\GoogleLoginViewModel.cs" />
     <Compile Include="Models\HoatDong.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LienHe.cs" />

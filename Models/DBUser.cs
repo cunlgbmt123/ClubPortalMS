@@ -13,6 +13,7 @@ namespace ClubPortalMS.Models
         public string LastName { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
+        public string Identifier { get; set; }
         public bool? EmailConfirmation { get; set; }
         public string HashedPassword { get; set; }
         public string Salt { get; set; }
