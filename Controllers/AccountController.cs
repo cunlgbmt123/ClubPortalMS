@@ -3,17 +3,19 @@ using ClubPortalMS.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Cookies;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using static ClubPortalMS.Models.ExternalLoginModel;
+
 
 namespace ClubPortalMS.Controllers
 {
@@ -111,43 +113,51 @@ namespace ClubPortalMS.Controllers
                 // Email Verification
                 string userName = Membership.GetUserNameByEmail(registrationView.Email);
                 if (!string.IsNullOrEmpty(userName))
-                {   
-                    
+                {
+
                     ModelState.AddModelError("Warning Email", "Sorry: Email already Exists");
                     return View(registrationView);
                 }
 
-                //Save User Data
-                using (ApplicationDbContext dbContext = new ApplicationDbContext())
+                var Vuser = (CustomMembershipUser)Membership.GetUser(registrationView.UserName, false);
+                if (Vuser != null)
                 {
-                    //string passWord = registrationView.Password + "A48BF46E-1V4F-58B4-2208-CQH7-U19JC5K2K3NV";
-                    //string pw = Processing.EncodePasswordToBase64(passWord);
-                    //string salt = pw.Substring(1, 10);
-                    //string H_Password = pw.Replace(salt, "");
-                    registrationView.ActivationCode = Guid.NewGuid();
-                    var user = new DBUser()
-                    {
-                        Username = registrationView.UserName,
-                        FirstName = registrationView.FirstName,
-                        LastName = registrationView.LastName,
-                        Email = registrationView.Email,
-                        HashedPassword = registrationView.Password,
-                        IsLocked = false,
-                        EmailConfirmation = false,
-                        ActivationCode = registrationView.ActivationCode,
-                    };
-                    dbContext.DBUser.Add(user);
-                    dbContext.SaveChanges();
-                    var getIDUser = new ThanhVien()
-                    {
-                        User_ID = user.ID,
-                        Ten = registrationView.FirstName,
-                        Ho = registrationView.LastName,
-                    };
-                    dbContext.ThanhVien.Add(getIDUser);
-                    dbContext.SaveChanges();
+                    ModelState.AddModelError("Warning UserName", "Sorry: Username already Exists");
+                    return View(registrationView);
                 }
-
+                else
+                {
+                    //Save User Data
+                    using (ApplicationDbContext dbContext = new ApplicationDbContext())
+                    {
+                        //string passWord = registrationView.Password + "A48BF46E-1V4F-58B4-2208-CQH7-U19JC5K2K3NV";
+                        //string pw = Processing.EncodePasswordToBase64(passWord);
+                        //string salt = pw.Substring(1, 10);
+                        //string H_Password = pw.Replace(salt, "");
+                        registrationView.ActivationCode = Guid.NewGuid();
+                        var user = new DBUser()
+                        {
+                            Username = registrationView.UserName,
+                            FirstName = registrationView.FirstName,
+                            LastName = registrationView.LastName,
+                            Email = registrationView.Email,
+                            HashedPassword = registrationView.Password,
+                            IsLocked = false,
+                            EmailConfirmation = false,
+                            ActivationCode = registrationView.ActivationCode,
+                        };
+                        dbContext.DBUser.Add(user);
+                        dbContext.SaveChanges();
+                        var getIDUser = new ThanhVien()
+                        {
+                            User_ID = user.ID,
+                            Ten = registrationView.FirstName,
+                            Ho = registrationView.LastName,
+                        };
+                        dbContext.ThanhVien.Add(getIDUser);
+                        dbContext.SaveChanges();
+                    }
+                } 
                 //Verification Email
                 VerificationEmail(registrationView.Email, registrationView.ActivationCode.ToString());
                 messageRegistration = "Your account has been created successfully. ^_^";
@@ -347,6 +357,71 @@ namespace ClubPortalMS.Controllers
             })
 
                 smtp.Send(message);
+
+        }
+
+        public void SignIn(string ReturnUrl = "/", string type = "")
+        {
+            if (!Request.IsAuthenticated)
+            {
+                if (type == "Google")
+                {
+                    HttpContext.GetOwinContext().Authentication.Challenge(new AuthenticationProperties { RedirectUri = "Account/GoogleLoginCallback" }, "Google");
+                }
+            }
+        }
+        [AllowAnonymous]
+        public ActionResult GoogleLoginCallback()
+        {
+            var claimsPrincipal = HttpContext.User.Identity as ClaimsIdentity;
+
+            var loginInfo = GoogleLoginViewModel.GetLoginInfo(claimsPrincipal);
+            if (loginInfo == null)
+            {
+                return RedirectToAction("Index");
+            }
+            ApplicationDbContext db = new ApplicationDbContext(); //DbContext
+            var user = db.DBUser.FirstOrDefault(x => x.Email == loginInfo.emailaddress);
+            if (user == null)
+            {
+                user = new DBUser
+                {
+                    Email = loginInfo.emailaddress,
+                    FirstName = loginInfo.givenname,
+                    Identifier = loginInfo.nameidentifier,
+                    Username = loginInfo.name,
+                    LastName = loginInfo.surname,
+                    IsLocked = false,
+                    EmailConfirmation = true,
+                };
+                db.DBUser.Add(user);
+                db.SaveChanges();
+                var getIDUser = new ThanhVien()
+                {
+                    User_ID = user.ID,
+                    Ten = loginInfo.givenname,
+                    Ho = loginInfo.surname,
+                };
+                db.ThanhVien.Add(getIDUser);
+                db.SaveChanges();
+            }
+
+            var ident = new ClaimsIdentity(
+                    new[] { 
+						// adding following 2 claim just for supporting default antiforgery provider
+						new Claim(ClaimTypes.NameIdentifier, user.Email),
+                        new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider", "ASP.NET Identity", "http://www.w3.org/2001/XMLSchema#string"),
+                        new Claim(ClaimTypes.Name, user.Username),
+                        new Claim(ClaimTypes.Email, user.Email),						
+						//new Claim(ClaimTypes.Role, "User")
+                    },
+                    CookieAuthenticationDefaults.AuthenticationType);
+
+            Session["UserName"] = user.Username;
+            Session["UserId"] = user.ID;
+            HttpContext.GetOwinContext().Authentication.SignIn(
+                        new AuthenticationProperties { IsPersistent = false }, ident);
+            return Redirect("~/");
 
         }
     }
