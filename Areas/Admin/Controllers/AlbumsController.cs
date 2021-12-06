@@ -6,21 +6,25 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ClubPortalMS.CustomAuthentication;
 using ClubPortalMS.Models;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
+    [CustomAuthorize(Roles = "ADMIN, MOD")]
     public class AlbumsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin/Albums
+        [CustomAuthorize(Roles = "ADMIN, MOD")]
         public ActionResult Index()
         {
             return View(db.Album.ToList());
         }
 
         // GET: Admin/Albums/Details/5
+        [CustomAuthorize(Roles = "ADMIN, MOD")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +40,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         }
 
         // GET: Admin/Albums/Create
+        [CustomAuthorize(Roles = "ADMIN, MOD")]
         public ActionResult Create()
         {
             return View();
@@ -59,6 +64,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         }
 
         // GET: Admin/Albums/Edit/5
+        [CustomAuthorize(Roles = "ADMIN, MOD")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,6 +96,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         }
 
         // GET: Admin/Albums/Delete/5
+        [CustomAuthorize(Roles = "ADMIN, MOD")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
