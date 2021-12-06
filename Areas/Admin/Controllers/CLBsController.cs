@@ -6,10 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ClubPortalMS.CustomAuthentication;
 using ClubPortalMS.Models;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
+    [CustomAuthorize(Roles = "ADMIN, MOD")]
     public class CLBsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
