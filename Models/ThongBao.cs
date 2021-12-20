@@ -21,6 +21,9 @@ namespace ClubPortalMS.Models
         public int IdCLB { get; set; }
         public DateTime NgayThongBao { get; set; }
         public string NoiDung { get; set; }
+        public string TenFile { get; set; }
+        public string ContentType { get; set; }
+
         public byte[] File { get; set; }
         [ForeignKey("IdCLB")]
         public virtual CLB CLB { get; set; }

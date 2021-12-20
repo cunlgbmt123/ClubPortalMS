@@ -1,0 +1,81 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@{
+    var DsTvDangKy = (IPagedList<ClubPortalMS.Models.ViewModel1>)ViewBag.DsTvDangKy;
+    ViewBag.Title = "Xét duyệt thành viên";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+    string[] TableHeaders = new string[] {"STT"
+                        ,"Họ và tên"
+                        ,"MSSV"
+                        ,"Email"
+                        ,"Số điện thoại"
+                        ,"Ngày đăng ký"
+                        ,"Lý do đăng ký"
+                        ,"Tác vụ"
+                        };
+}
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản lý câu lạc bộ</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="callout callout-info">
+                    <h5><i class="fas fa-list"></i> Danh sách Thông báo:</h5>
+                    Đây là trang quản lý các thông báo của câu lạc bộ của bạn
+                </div>
+                <div class="invoice p-3 mb-3">
+                    <div class="row">
+                        <div class="col-12 table table-responsive">
+                            <table id="myTable" class="table table-striped table table-bordered table-hover table-sm">
+                                <thead>
+                                    <tr>
+                                        @foreach (var head in TableHeaders)
+                                        {
+                                            <th>
+                                                @head
+                                            </th>
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.DsTvDangKy)
+                                    {
+                                    <tr>
+                                        <td>@item.DangKy.ID</td>
+                                        <td>@item.DangKy.Ten</td>
+                                        <td>@item.DangKy.MSSV</td>
+                                        <td>@item.DangKy.Email</td>
+                                        <td>@item.DangKy.SDT</td>
+                                        <td>@item.DangKy.NgayDangKy</td>
+                                        <td>@item.DangKy.LyDoDkyCLB</td>
+                                        <td>
+                                            @*@Html.ActionLink("Xem", "XemChiTiet", new { id = item.SuKien.ID }) |*@
+                                            @Html.ActionLink("Xét duyệt", "ThemTV", new { id = item.DangKy.ID })
+                                            @Html.ActionLink("Từ chối", "TuChoiTV", new { id = item.DangKy.ID })
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                            @Html.PagedListPager(DsTvDangKy, page => Url.Action("QLXetDuyetTV", new { page, id = ViewBag.idCLB }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

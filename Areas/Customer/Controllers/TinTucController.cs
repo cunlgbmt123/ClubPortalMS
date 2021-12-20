@@ -11,10 +11,10 @@ namespace ClubPortalMS.Areas.Customer.Controllers
     {
         // GET: Customer/TinTuc
         ApplicationDbContext db = new ApplicationDbContext();
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var ListDAO = new ListDAO();
-            ViewBag.ListAllNews = ListDAO.ListAllNews();
+            ViewBag.ListAllNews = ListDAO.ListAllNews(page);
             return View(db.TinTucs.ToList());
         }
         public ActionResult BaiViet(int? id)

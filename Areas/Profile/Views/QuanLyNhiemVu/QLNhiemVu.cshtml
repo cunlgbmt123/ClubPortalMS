@@ -1,0 +1,86 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@{
+    var DsNhiemVu = (IPagedList<ClubPortalMS.Models.ViewModel1>)ViewBag.DsNhiemVu;
+    ViewBag.Title = "Quản lý hoạt động";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+    string[] TableHeaders = new string[] {"STT","Tiêu đề"
+                        ,"Mô tả"
+                        ,"Ngày kết thúc"   
+                        ,"File đính kèm"
+                        ,"Tác vụ"
+                        };
+}
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản lý câu lạc bộ</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="callout callout-info">
+                    <h5><i class="fas fa-list"></i> Danh sách Nhiệm vụ:</h5>
+                    Đây là trang quản lý các nhiệm vụ của câu lạc bộ của bạn
+                </div>
+                <div class="invoice p-3 mb-3">
+                    <div class="row">
+                        <div class="col-12 table table-responsive">
+                            <table id="myTable" class="table table-striped table table-bordered table-hover table-sm">
+                                <thead>
+                                    <tr>
+                                        @foreach (var head in TableHeaders)
+                                        {
+                                            <th>
+                                                @head
+                                            </th>
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.DsNhiemVu)
+                                    {
+                                    <tr>
+                                        <td>@item.NhiemVu.ID</td>
+                                        <td>@item.NhiemVu.TieuDe</td>
+                                        <td>@item.NhiemVu.MoTa</td>
+                                        <td>@item.NhiemVu.ThoiGianKetThuc</td>
+                                        @if (item.NhiemVu.File == null)
+                                        {
+                                            <td>Không có file đính kèm</td>
+}
+                                        else
+                                        {
+                                            <td>
+                                                <a href="@Url.Action("DocumentDownload","QuanLyNhiemVu", new { id = item.NhiemVu.ID})" class="link-black text-sm"><i class="fas fa-link mr-1"></i>>@item.NhiemVu.TenFile</a>
+                                            </td>
+                                        }
+                                        <td>
+                                            @Html.ActionLink("Xem", "XemNV", new { id = item.NhiemVu.ID }) |
+                                            @Html.ActionLink("Sửa", "SuaNV", new { id = item.NhiemVu.ID }) |
+                                            @Html.ActionLink("Xóa", "XoaNV", new { id = item.NhiemVu.ID }) |
+                                            @Html.ActionLink("Xem Chi tiết", "XemBaiNop", new { id = item.NhiemVu.ID, id2 = item.ThanhVien_CLB.IDCLB })
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                            @Html.PagedListPager(DsNhiemVu, page => Url.Action("QLNhiemVu", new { page, id = ViewBag.idCLB }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

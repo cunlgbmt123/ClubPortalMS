@@ -20,7 +20,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             return View();
         }
 
-        // GET: Admin/ThongTinTV/Details/5
+        #region Task xem Hồ sơ
         public ActionResult Details(int? id)
         {
             int UserID = Convert.ToInt32(Session["UserId"]);
@@ -39,6 +39,8 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             }
             return View(thanhVien);
         }
+        #endregion
+        #region task chỉnh sửa  hồ sơ
 
         // GET: Admin/ThongTinTV/Edit/5
         public ActionResult Edit(int? id)
@@ -57,7 +59,6 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CLB_ID = new SelectList(db.CLB, "ID", "TenCLB", thanhVien.CLB_ID);
             ViewBag.User_ID = new SelectList(db.DBUser, "ID", "FirstName", thanhVien.User_ID);
             return View(thanhVien);
         }
@@ -75,9 +76,10 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CLB_ID = new SelectList(db.CLB, "ID", "TenCLB", thanhVien.CLB_ID);
+            
             ViewBag.User_ID = new SelectList(db.DBUser, "ID", "FirstName", thanhVien.User_ID);
             return View(thanhVien);
         }
+        #endregion
     }
 }

@@ -1,0 +1,50 @@
+﻿
+@{
+    var ListNhatKy = (List<ClubPortalMS.Models.TTNhatKy>)ViewBag.ListNhatKy;
+    ViewBag.Title = "NhatKyCLB";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+}
+
+<h2>NhatKyCLB</h2>
+
+<table class="table">
+    <tr>
+        <th>
+          Tên Sự Kiện/Hoạt Động
+        </th>
+        <th>
+           Thời gian tham gia
+        </th>
+        <th>
+           Điểm danh
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in ListNhatKy) {
+    <tr>
+        <td>
+            @item.SKDaThamGia
+        </td>
+        <td>
+            @item.TGThamGia
+        </td>
+        @if(@item.DiemDanh == true)
+        {
+          <td>
+              Đã tham gia
+          </td>
+        }
+        else
+        {
+        <td>
+            Chưa tham gia
+        </td>
+        }
+        <td>           
+            @Html.ActionLink("Xóa", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

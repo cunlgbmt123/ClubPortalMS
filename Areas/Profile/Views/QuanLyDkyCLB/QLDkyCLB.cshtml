@@ -1,0 +1,78 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@{
+    var DsDangKyCLB = (IPagedList<ClubPortalMS.Models.ViewModel1>)ViewBag.DsDangKyCLB;
+    ViewBag.Title = "Xét duyệt thành viên";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+    string[] TableHeaders = new string[] {"STT"
+                        ,"Họ và tên"
+                        ,"Tên Câu lạc bộ"
+                        ,"Loại Câu lạc bộ"
+                        ,"Lý do thành lập"
+                        ,"Tác vụ"
+                        };
+}
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản lý câu lạc bộ</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="callout callout-info">
+                    <h5><i class="fas fa-list"></i> Danh sách Đăng ký CLB:</h5>
+                    Đây là trang quản lý Đăng ký CLB
+                </div>
+                <div class="invoice p-3 mb-3">
+                    <div class="row">
+                        <div class="col-12 table table-responsive">
+                            <table id="myTable" class="table table-striped table table-bordered table-hover table-sm">
+                                <thead>
+                                    <tr>
+                                        @foreach (var head in TableHeaders)
+                                        {
+                                            <th>
+                                                @head
+                                            </th>
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.DsDangKyCLB)
+                                    {
+                                        <tr>
+                                            <td>@item.DkyCLB.ID</td>
+                                            <td>@item.DkyCLB.ThanhVien.Ho @item.DkyCLB.ThanhVien.Ten</td>
+                                            <td>@item.DkyCLB.TenCLB</td>
+                                            <td>@item.LoaiCLB.TenLoaiCLB</td>
+                                            <td>@item.DkyCLB.LyDoThanhLap</td>
+                        
+                                            <td>
+                                                @*@Html.ActionLink("Xem", "XemChiTiet", new { id = item.SuKien.ID }) |*@
+                                                @Html.ActionLink("Xét duyệt", "ThemCLB", new { id = item.DkyCLB.ID }) |
+                                                @Html.ActionLink("Từ chối", "TuChoiCLB", new { id = item.DkyCLB.ID })
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                            @Html.PagedListPager(DsDangKyCLB, page => Url.Action("QLDkyCLB", new { page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "listCLB";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Nhiệm vụ mới nhất</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    @foreach (var item in ViewBag.DsNVGanDay)
+                    {
+                        <strong><i class="fas fa-question-circle"></i> @item.ThanhVien_CLB.CLB.TenCLB</strong>
+                        <p class="text-muted">
+                            <a href=@Url.Action("Details","NhiemVu" , new { id = item.NhiemVu_ThanhVien.ID } )>@item.NhiemVu_ThanhVien.NhiemVu.TieuDe</a>
+                        </p>
+                        <p class="text-muted">
+                            @item.NhiemVu_ThanhVien.NhiemVu.MoTa
+                        </p>
+                        <hr>
+                        }
+                    </div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header p-2">
+                    <div class="nav-item"><a class="nav-link">Nhiệm vụ theo Câu lạc bộ</a></div>
+                </div>
+                <div class="card-body">
+
+                    @foreach (var item in ViewBag.DsCLB)
+                    {
+                    <div class="label-CLB">
+                        <h4>@item.TenCLB</h4>
+                        <a href=@Url.Action("Index","NhiemVu", new { id = item.IdCLB}) class="span-a">Xem nhiệm vụ</a>
+                    </div>
+                      <hr />
+                       
+                    }
+                    @*<div class="form-group">
+            @Html.LabelFor(model => model.Ten, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

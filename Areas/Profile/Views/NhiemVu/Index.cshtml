@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ClubPortalMS.Models.NhiemVu_ThanhVien>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+           Tiêu đề
+        </th>
+        <th>
+           Mô tả
+        </th>
+        <th>
+            Thời gian kết thúc
+        </th>
+        <th>
+            Trạng thái
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.NhiemVu.TieuDe)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NhiemVu.MoTa)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NhiemVu.ThoiGianKetThuc)
+    </td>
+
+
+    @if (item.FileNop == null)
+    {
+        <td>
+            Chưa nộp
+        </td>
+        <td>
+            @Html.ActionLink("Nộp", "Details", new { id = item.ID }) 
+        </td>
+    }
+    else
+    {
+        <td>
+            Đã nộp
+        </td>
+        <td>
+            @Html.ActionLink("Chỉnh sửa", "Details", new { id = item.ID }) 
+        </td>
+    }
+   
+</tr>
+}
+
+</table>

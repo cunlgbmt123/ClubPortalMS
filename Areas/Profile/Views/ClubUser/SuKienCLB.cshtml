@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ClubPortalMS.Models.SukienViewModel>
+@{
+    ViewBag.Title = "SuKienCLB";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+}
+
+<h2>SuKienCLB</h2>
+<table class="table">
+    <tr>
+        <th>
+            Tên CLB
+        </th>
+        <th>
+            Tiêu Đề
+        </th>
+        <th>
+            Ngày bắt đầu
+        </th>
+        <th>
+            Ngày kết thúc
+        </th>
+        <th>
+            Nội dung
+        </th>
+        <th>
+            Kết quả
+        </th>
+        <th>
+            Địa điểm
+        </th>
+        <th>
+            Hình thức
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.CLB.TenCLB
+            </td>
+            <td>
+                @item.SuKien.TieuDeSK
+            </td>
+            <td>
+                @item.SuKien.NgayBatDau
+            </td>
+            <td>
+                @item.SuKien.NgayKetThuc
+            </td>
+            <td>
+                @item.SuKien.NoiDung
+            </td>
+            <td>
+                @item.SuKien.KetQua
+            </td>
+            <td>
+                @item.SuKien.DiaDiem
+            </td>
+             <td>
+                @item.SuKien.HinhThuc
+            </td>
+             <td>
+                 @Html.ActionLink("Xem chi tiết", "BaiVietSKCLB", new { id = item.SuKien.ID})
+                 @Html.ActionLink("Tham Gia", "ThamGiaSK", new { id = item.SuKien.ID })
+             </td>
+        </tr>
+    }
+
+</table>
+

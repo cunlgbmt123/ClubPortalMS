@@ -67,13 +67,8 @@
                             <div class="team-content">
                                 <a href="@Url.Action("BaiViet","HoatDongs", new {id = item.ID})">
                                     <h5>@item.Ten</h5></a>
-                                    <div class="text-sm fg-grey">@item.MoTa</div>
+                                    <div class="text-sm fg-grey gioi-han">@item.MoTa</div>
 
-                                    <div class="social-button">
-                                        <a href="#"><span class="mai-logo-facebook-messenger"></span></a>
-                                        <a href="#"><span class="mai-call"></span></a>
-                                        <a href="#"><span class="mai-mail"></span></a>
-                                    </div>
                             </div>
                         </div>}
                     </div>
@@ -118,7 +113,7 @@
                 <div class="owl-carousel testimonial-carousel">
                     @foreach (var item in ListNews) {
                         <div class="card-testimonial">
-                            <div class="content">
+                            <div class="content gioi-han">
                                 @item.MoTa
                             </div>
                             <div class="author">

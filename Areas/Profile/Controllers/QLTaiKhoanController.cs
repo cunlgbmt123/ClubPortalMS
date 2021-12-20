@@ -13,8 +13,8 @@ namespace ClubPortalMS.Areas.Profile.Controllers
     public class QLTaiKhoanController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        #region trang xem tài khoản của user
         //Trang chỉnh sửa profile của user
-    
         public ActionResult Index(int? id)
         {
             int UserID = Convert.ToInt32(Session["UserId"]);
@@ -33,6 +33,8 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             }
             return View(dBUser);
         }
+        #endregion
+        #region đổi password
         //Chỉnh sửa password
         [HttpGet]
         public ActionResult ChangePassword()
@@ -69,7 +71,8 @@ namespace ClubPortalMS.Areas.Profile.Controllers
            
             return View(changePasswordModel);
         }
-
+        #endregion
+        #region Sửa Email
         //chỉnh sửa Email
         [HttpGet]
         public ActionResult ChangeEmail()
@@ -173,7 +176,8 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                 smtp.Send(message);
 
         }
-        //chỉnh sửa Email
+        #endregion
+        #region Xác thực email
         [HttpGet]
         public ActionResult ConfirmButton()
         {
@@ -206,5 +210,6 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             }
             return View();
         }
+        #endregion
     }
 }

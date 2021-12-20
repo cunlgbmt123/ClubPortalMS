@@ -56,7 +56,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.SDT, "Email:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.SDT, "SDT:", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
@@ -70,15 +70,6 @@
                         @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.CLB_ID, "Câu Lạc Bộ:", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("CLB_ID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.CLB.TenCLB, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Lưu lại" class="btn btn-default" />

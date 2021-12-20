@@ -1,0 +1,62 @@
+﻿@model ClubPortalMS.Models.ThongBao
+
+@{
+    ViewBag.Title = "XemChiTietTB";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+}
+
+<h2>XemChiTietTB</h2>
+
+<div>
+    <h4>ThongBao</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CLB.TenCLB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CLB.TenCLB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TieuDe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TieuDe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayThongBao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayThongBao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoiDung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenFile)
+        </dt>
+
+        <dd>
+            <a href=@Url.Action("DocumentDownload","QuanLyThongBao", new { id = Model.ID})>@Model.TenFile</a>
+        </dd>
+    </dl>
+</div>

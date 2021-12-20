@@ -1,0 +1,41 @@
+﻿@model ClubPortalMS.Models.SuKien
+@{
+    ViewBag.Title = "BaiVietSKCLB";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+}
+
+<div class="card-header">
+    <div class="row">
+        <div class="col-md-6">
+            <strong class="text-danger text-uppercase">Chi tiết hoạt động</strong>
+        </div>
+        <div class="col-md-6 text-right">
+            <a href="#" class="btn btn-sm btn-success">@Html.DisplayFor(model => model.CLB.TenCLB)</a>
+        </div>
+    </div>
+</div>
+
+<div class="card-body">
+    <h4>  @Html.DisplayNameFor(model => model.TieuDeSK) </h4>
+    <div class="post">
+        <div class="user-block">
+            <div class="description" style="margin: 0% 5% 0% 0%">@Html.DisplayFor(model => model.NgayBatDau) -  @Html.DisplayFor(model => model.NgayKetThuc)</div>
+        </div>
+        <!-- /.user-block -->
+        <p>
+            @Html.DisplayFor(model => model.NoiDung)
+        </p>
+        <p>
+            Địa điểm: @Html.DisplayFor(model => model.DiaDiem)
+        </p>
+        <p>
+            <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v2</a>
+        </p>
+    </div>
+    <p>
+
+        @Html.ActionLink("Quay lại", "SuKienCLB")
+    </p>
+</div>
+
+

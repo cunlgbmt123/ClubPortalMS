@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@Page.Title</title>
-    
+    <link rel="stylesheet" href="~/Content/PagedList.css" />
     <link rel="stylesheet" href="~/Areas/Customer/Resource/css/bootstrap.css">
     <link rel="stylesheet" href="~/Areas/Customer/Resource/css/maicons.css">
     <link rel="stylesheet" href="~/Areas/Customer/Resource/vendor/animate/animate.css">
@@ -21,19 +21,11 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <div class="d-inline-block">
-                        <span class="mai-mail fg-primary"></span> <a href="mailto:contact@mail.com">contact@uef.edu.vn</a>
-                    </div>
-                    <div class="d-inline-block ml-2">
-                        <span class="mai-call fg-primary"></span> <a href="tel:+abc">+12345678</a>
-                    </div>
+
                 </div>
                 <div class="col-md-4 text-right d-none d-md-block">
                     <div class="social-mini-button">
-                        <a href="#"><span class="mai-logo-facebook-f"></span></a>
-                        <a href="#"><span class="mai-logo-twitter"></span></a>
-                        <a href="#"><span class="mai-logo-youtube"></span></a>
-                        <a href="#"><span class="mai-logo-linkedin"></span></a>
+                        @Html.Partial("_LoginPartialC")
                     </div>
                 </div>
             </div>

@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Quản lý sự kiện";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản lý câu lạc bộ</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-12">
+                <div class="callout callout-info">
+                    <h5><i class="fas fa-list"></i> Danh sách sự kiện:</h5>
+                    Đây là trang quản lý các sự kiện của câu lạc bộ của bạn
+                </div>
+                <div class="col-12">
+                    <a href="@Url.Action("TaoSK")">
+                        <h6>Tạo sự kiện mới</h6>
+                    </a>
+                </div>
+                <!-- Main content -->
+                <div class="invoice p-3 mb-3">
+                    <div class="row">
+                        <div class="col-12 table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Tên câu lạc bộ</th>
+
+                                        <th>Tác vụ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.DsCLB)
+                                    {
+                                        <tr>
+                                            <td>@item.TenCLB</td>
+
+                                            <td>
+                                                @Html.ActionLink("Xem Chi tiết", "QLSuKien", new { id = item.IDCLB })
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

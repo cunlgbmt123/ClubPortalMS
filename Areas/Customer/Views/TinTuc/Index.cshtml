@@ -1,8 +1,10 @@
-﻿
+﻿@using PagedList.Mvc;
+@using PagedList;
+
 @{
     ViewBag.Title = "Tin Tức";
     Layout = "~/Areas/Customer/Views/Shared/_Layout.cshtml";
-    var ListAllNews = (List<ClubPortalMS.Models.TinTuc>)ViewBag.ListAllNews;
+    var ListAllNews = (IPagedList<ClubPortalMS.Models.TinTuc>)ViewBag.ListAllNews;
 
 }
 <div class="page-banner bg-img bg-img-parallax overlay-dark" style="height:150px">
@@ -32,14 +34,16 @@
                     </a>
                 </div>
                 <div class="p-4 tm-bg-gray tm-catalog-item-description">
-                    <h4 class="tm-text-primary mb-3 tm-catalog-item-title">@item.TieuDe</h4>
-                    <p class="tm-catalog-item-text">
+                    <h5 class="tm-text-primary mb-3 tm-catalog-item-title">@item.TieuDe</h5>
+                    <p class="tm-catalog-item-text gioi-han">
                         @item.MoTa
                     </p>
                 </div>
             </div>
         }
     </div>
+    @Html.PagedListPager(ListAllNews, page => Url.Action("Index", new { page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+
 </div>
 @*<div>
         <ul class="nav tm-paging-links">

@@ -21,6 +21,8 @@ namespace ClubPortalMS.Models
         public string Email { get; set; }
         public string SDT { get; set; }
         public string DiaChi { get; set; }
+        public int Idtv { get; set; }
+        public DateTime TGphanhoi { get; set; }
         public int IdCLB { get; set; }
         [ForeignKey("IdCLB")]
         public virtual CLB CLB { get; set; }

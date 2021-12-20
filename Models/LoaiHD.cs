@@ -14,7 +14,7 @@ namespace ClubPortalMS.Models
     
     public partial class LoaiHD
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+      
         public LoaiHD()
         {
             this.QLDSHoatDong = new HashSet<QLDSHoatDong>();
@@ -23,7 +23,7 @@ namespace ClubPortalMS.Models
         public int ID { get; set; }
         public string TenLoaiHD { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
         public virtual ICollection<QLDSHoatDong> QLDSHoatDong { get; set; }
     }
 }

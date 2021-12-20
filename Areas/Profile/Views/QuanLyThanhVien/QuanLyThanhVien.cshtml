@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "QuanLyThanhVien";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Câu lạc bộ</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="callout callout-info">
+                    <h5><i class="fas fa-list"></i> Danh sách Thành viên:</h5>
+                     Đây là trang quản lý các thông báo của câu lạc bộ của bạn
+                </div>
+                <!-- Main content -->
+                <div class="invoice p-3 mb-3">
+                    <div class="row">
+                        <div class="col-12 table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Họ và tên</th>
+                                        <th>Ngày sinh</th>
+                                        <th>Mã số sinh viên</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.DsThanhVien)
+                                    {
+                                    <tr>
+                                        <td>@item.ThanhVien.Ho @item.ThanhVien.Ten</td>
+                                        <td>@item.ThanhVien.NgaySinh</td>
+                                        <td>@item.ThanhVien.MSSV</td>
+                                        <td>@item.ThanhVien.SDT</td>
+                                        <td>@item.ThanhVien.Mail</td>
+                                        <td>
+                                            @Html.ActionLink("Xem thành viên", "XemChiTietTV", new { id = item.ThanhVien_CLB.IDtvien })
+                                            @Html.ActionLink("Loại trừ", "Delete", new {id = item.ThanhVien_CLB.ID ,id2= item.ThanhVien_CLB.IDCLB })
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

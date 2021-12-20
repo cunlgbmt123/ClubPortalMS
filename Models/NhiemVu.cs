@@ -18,10 +18,11 @@ namespace ClubPortalMS.Models
         public int ID { get; set; }
         public string TieuDe { get; set; }
         public string MoTa { get; set; }
+        public string TenFile { get; set; }
+        public string ContentType { get; set; }
+        public byte[] File { get; set; }
+        public DateTime ThoiGianKetThuc { get; set; }
         public int IdCLB { get; set; }
-        public int IdThanhVien { get; set; }
-
-        [ForeignKey("IdThanhVien")]
-        public virtual ThanhVien ThanhVien { get; set; }
+        public virtual ICollection<NhiemVu_ThanhVien> NhiemVu_ThanhVien { get; set; }
     }
 }

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ClubPortalMS.Models.HoatDongViewModel>
+@{
+    ViewBag.Title = "HoatDongCLB";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+}
+
+<h2>HoatDongCLB</h2>
+<table class="table">
+    <tr>
+        <th>
+            Tên CLB
+        </th>
+        <th>
+            Tiêu Đề
+        </th>
+        <th>
+            Ngày bắt đầu
+        </th>
+        <th>
+            Ngày kết thúc
+        </th>
+        <th>
+            Mô tả
+        </th>
+        <th>
+            Nội dung
+        </th>
+        <th>
+            Trang thái
+        </th>
+        <th>
+            Địa điểm
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.CLB.TenCLB
+            </td>
+            <td>
+                @item.QLDSHoatDong.ChuDe
+            </td>
+            <td>
+                @item.QLDSHoatDong.NgayBatDau
+            </td>
+            <td>
+                @item.QLDSHoatDong.NgayKetThuc
+            </td>
+            <td>
+                @item.QLDSHoatDong.Mota
+            </td>
+            <td>
+                @item.QLDSHoatDong.NoiDung
+            </td>
+            <td>
+                @item.QLDSHoatDong.TrangThai
+            </td>
+            <td>
+                @item.QLDSHoatDong.DiaDiem
+            </td>
+            <td>
+                @Html.ActionLink("Xem chi tiết", "BaiVietHDCLB", new { id = item.QLDSHoatDong.ID })
+                @Html.ActionLink("Tham Gia", "ThamGiaHD", new { id = item.QLDSHoatDong.ID })
+            </td>
+        </tr>
+    }
+
+</table>
+

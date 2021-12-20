@@ -22,15 +22,11 @@ namespace ClubPortalMS.Controllers
     
     public class AccountController : Controller
     {
-
-        
-
-        // GET: Account
         public ActionResult Index()
         {
             return View();
         }
-
+        #region Đăng nhập
         [HttpGet]
         public ActionResult Login(string ReturnUrl = "")
         {
@@ -52,7 +48,8 @@ namespace ClubPortalMS.Controllers
                     var user = (CustomMembershipUser)Membership.GetUser(loginView.UserName, false);
                     if (user != null)
                     {
-                        Session["UserName"] = user.UserName;
+                        Session["Ten"] = user.FirstName;
+                        Session["Ho"] = user.LastName;
                         Session["UserId"] = user.ID;
                         CustomSerializeModel userModel = new CustomSerializeModel()
                         {
@@ -88,14 +85,15 @@ namespace ClubPortalMS.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index","Dashboard", new { area = "Admin" });
+                        return RedirectToAction("Index","Dashboard", new { area = "Profile" });
                     }
                 }
             }
-            ModelState.AddModelError("", "Something Wrong : Username or Password invalid");
+            ModelState.AddModelError("", "Có lỗi xảy ra: Tài khoản hoặc mật khẩu không đúng");
             return View(loginView);
         }
-
+        #endregion
+        #region Đăng ký
         [HttpGet]
         public ActionResult Registration()
         {
@@ -115,14 +113,14 @@ namespace ClubPortalMS.Controllers
                 if (!string.IsNullOrEmpty(userName))
                 {
 
-                    ModelState.AddModelError("Warning Email", "Sorry: Email already Exists");
+                    ModelState.AddModelError("Warning Email", "Email bạn nhập đã tồn tại");
                     return View(registrationView);
                 }
 
                 var Vuser = (CustomMembershipUser)Membership.GetUser(registrationView.UserName, false);
                 if (Vuser != null)
                 {
-                    ModelState.AddModelError("Warning UserName", "Sorry: Username already Exists");
+                    ModelState.AddModelError("Warning UserName", "Tên tài khoản bạn nhập đã tồn tại");
                     return View(registrationView);
                 }
                 else
@@ -160,19 +158,20 @@ namespace ClubPortalMS.Controllers
                 } 
                 //Verification Email
                 VerificationEmail(registrationView.Email, registrationView.ActivationCode.ToString());
-                messageRegistration = "Your account has been created successfully. ^_^";
+                messageRegistration = "Tài khoản của bạn được tạo thành công. Vui lòng kiểm tra email của bạn để xác thực email";
                 statusRegistration = true;
             }
             else
             {
-                messageRegistration = "Something Wrong!";
+                messageRegistration = "Có lỗi đang xảy ra!";
             }
             ViewBag.Message = messageRegistration;
             ViewBag.Status = statusRegistration;
 
             return View(registrationView);
         }
-
+        #endregion
+        #region Gửi xác thực email sau khi đăng ký
         [HttpGet]
         public ActionResult ActivationAccount(string id)
         {
@@ -189,7 +188,7 @@ namespace ClubPortalMS.Controllers
                 }
                 else
                 {
-                    ViewBag.Message = "Something Wrong !!";
+                    ViewBag.Message = "Có lỗi gì đó !!";
                 }
 
             }
@@ -197,30 +196,20 @@ namespace ClubPortalMS.Controllers
             return View();
         }
 
-        public ActionResult LogOut()
-        {
-            HttpCookie cookie = new HttpCookie("Cookie1", "");
-            cookie.Expires = DateTime.Now.AddYears(-1);
-            Response.Cookies.Add(cookie);
-
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Login", "Account", null);
-        }
 
         [NonAction]
         public void VerificationEmail(string email, string activationCode)
         {
-
             var url = string.Format("/Account/ActivationAccount/{0}", activationCode);
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, url);
 
-            var fromEmail = new MailAddress("tuanbui2091@gmail.com", "Activation Account - AKKA");
+            var fromEmail = new MailAddress("tuanbui2091@gmail.com", "Xác thực Email");
             var toEmail = new MailAddress(email);
 
             var fromEmailPassword = "25251325Cc";
             string subject = "Activation Account !";
 
-            string body = "<br/> Please click on the following link in order to activate your account" + "<br/><a href='" + link + "'> Activation Account ! </a>";
+            string body = "<br/> Truy cập link này để xác thực tài khoản của bạn" + "<br/><a href='" + link + "'> Xác thực tài khoản! </a>";
 
             var smtp = new SmtpClient
             {
@@ -243,7 +232,19 @@ namespace ClubPortalMS.Controllers
                 smtp.Send(message);
 
         }
+        #endregion
+        #region đăng xuất
+        public ActionResult LogOut()
+        {
+            HttpCookie cookie = new HttpCookie("Cookie1", "");
+            cookie.Expires = DateTime.Now.AddYears(-1);
+            Response.Cookies.Add(cookie);
 
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Account", null);
+        }
+        #endregion
+        #region quên mật khẩu
         [HttpGet]
         public ActionResult ForgotPassWord()
         {
@@ -256,36 +257,31 @@ namespace ClubPortalMS.Controllers
             string messageRegistration = string.Empty;
             if (ModelState.IsValid)
             {
-                // Email Verification
-              
-                    var userName = Membership.GetUserNameByEmail(forgotPasswordViewModel.Email);
-                    if (!string.IsNullOrEmpty(userName))
-                    {
+                var userName = Membership.GetUserNameByEmail(forgotPasswordViewModel.Email);
+                if (!string.IsNullOrEmpty(userName))
+                {
                     using (ApplicationDbContext dbContext = new ApplicationDbContext())
                     {
                         var userAccount = dbContext.DBUser.Where(u => u.Email.ToString().Equals(forgotPasswordViewModel.Email)).FirstOrDefault();
                         if (userAccount != null)
                         {
-                            
                             ResetPasswordEmail(userAccount.Email, userAccount.ActivationCode.ToString());
-                            RedirectToAction("ForgotPasswordEmail");
+                            ViewBag.Message = "Thành công !! Vui lòng kiểm tra Email để đặt lại mật khẩu!";
                             statusRegistration = true;
-                        }
+                        } 
                     }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("Warning Email", "Xin lỗi Email bạn nhập không tồn tại");
-                        return View(forgotPasswordViewModel);
-                     }
+                }
+                else
+                {
+                    ViewBag.Message = "Email bạn nhập không tồn tại !! Vui lòng kiểm tra Email của bạn!";
+                    return View(forgotPasswordViewModel);
+                 }
             }
             else
             {
-                messageRegistration = "Something Wrong!";
+                ModelState.AddModelError("", "Lỗi");
             }
-            ViewBag.Message = messageRegistration;
             ViewBag.Status = statusRegistration;
-
             return View(forgotPasswordViewModel);
         }
         [HttpGet]
@@ -296,7 +292,7 @@ namespace ClubPortalMS.Controllers
         [HttpPost]
         public ActionResult ResetPassword(string id,ResetPasswordView resetPasswordView)
         {
-            //bool statusAccount = false;
+          
             if (ModelState.IsValid)
             {
                 using (ApplicationDbContext dbContext = new ApplicationDbContext())
@@ -305,23 +301,19 @@ namespace ClubPortalMS.Controllers
 
                     if (userAccount != null)
                     {
-                        //statusAccount = true;
                         userAccount.HashedPassword = resetPasswordView.Password;
                         dbContext.SaveChanges();
+                        ViewBag.Message = "Mật khẩu của bạn đã được lưu lại";
                         RedirectToAction("ForgotPasswordConfirmation");
                     }
                     else
                     {
-                        ViewBag.Message = "Something Wrong !!";
+                        ViewBag.Message = "Xảy ra lỗi !!";
                     }
 
                 }
             }
-            else
-            {
-                ViewBag.Message = "Bị lỗi!!";
-            }
-            //ViewBag.Status = statusAccount;
+         
             return View(resetPasswordView);
         }
         public void ResetPasswordEmail(string email, string activationCode)
@@ -336,7 +328,7 @@ namespace ClubPortalMS.Controllers
             var fromEmailPassword = "25251325Cc";
             string subject = "Đặt lại mật khẩu!";
 
-            string body = "<br/> Please click on the following link in order to reset password for your account" + "<br/><a href='" + link + "'> Activation Account ! </a>";
+            string body = "<br/> Truy cập liên kết để đặt lại mật khẩu của bạn" + "<br/><a href='" + link + "'> Đặt lại mật khẩu ! </a>";
 
             var smtp = new SmtpClient
             {
@@ -359,7 +351,8 @@ namespace ClubPortalMS.Controllers
                 smtp.Send(message);
 
         }
-
+        #endregion
+        #region đăng nhập bằng google
         public void SignIn(string ReturnUrl = "/", string type = "")
         {
             if (!Request.IsAuthenticated)
@@ -417,12 +410,14 @@ namespace ClubPortalMS.Controllers
                     },
                     CookieAuthenticationDefaults.AuthenticationType);
 
-            Session["UserName"] = user.Username;
+            Session["Ten"] = user.FirstName;
+            Session["Ho"] = user.LastName;
             Session["UserId"] = user.ID;
             HttpContext.GetOwinContext().Authentication.SignIn(
                         new AuthenticationProperties { IsPersistent = false }, ident);
             return Redirect("~/");
 
         }
+        #endregion
     }
 }

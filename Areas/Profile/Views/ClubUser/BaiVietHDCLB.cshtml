@@ -1,0 +1,47 @@
+﻿@model ClubPortalMS.Models.QLDSHoatDong
+
+@{
+    ViewBag.Title = "BaiVietHDCLB";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+}
+
+<div class="card-header">
+    <div class="row">
+        <div class="col-md-6">
+            <strong class="text-danger text-uppercase">Chi tiết hoạt động</strong>
+        </div>
+        <div class="col-md-6 text-right">
+            <a href="#" class="btn btn-sm btn-success">@Html.DisplayFor(model => model.CLB.TenCLB)</a>
+        </div>
+    </div>
+</div>
+
+<div class="card-body">
+    <h4>  @Html.DisplayNameFor(model => model.ChuDe) </h4>
+    <div class="post">
+        <div class="user-block">
+            <div class="description" style="margin: 0% 5% 0% 0%">@Html.DisplayFor(model => model.NgayBatDau) -  @Html.DisplayFor(model => model.NgayKetThuc)</div>
+        </div>
+        <!-- /.user-block -->
+        <p>
+            @Html.DisplayFor(model => model.NoiDung)
+        </p>
+        <p>Loại Hoạt động  @Html.DisplayFor(model => model.LoaiHD.TenLoaiHD)</p>
+        <p>
+            Địa điểm: @Html.DisplayFor(model => model.DiaDiem)
+        </p>
+        @if (Model.File == null)
+        {<p>Không có file đính kèm</p>}
+        else{
+        <p>
+            File Đính kèm:<a href="@Url.Action("DocumentDownloadHD","ClubUser", new { id = Model.ID})" class="link-black text-sm"><i class="fas fa-link mr-1"></i>>@Model.TenFile</a>
+        </p>
+        }
+    </div>
+    <p>
+
+        @Html.ActionLink("Quay lại", "HoatDongCLB")
+    </p>
+</div>
+
+

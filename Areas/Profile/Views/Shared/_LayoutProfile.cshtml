@@ -5,10 +5,12 @@
 <head>
     <title>@Page.Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <link href="~/Areas/Profile/Resource/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
-    <link href="~/Areas/Profile/Resource/dist/css/adminlte.min.css" rel="stylesheet" />
-    <link href="~/Areas/Profile/Resource/css/admincss.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/PagedList.css" />
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/dist/css/adminlte.min.css">
     @RenderSection("header", required: false)
 </head>
 <body class="hold-transition sidebar-mini">
@@ -23,11 +25,11 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 @*<li class="nav-item d-none d-sm-inline-block">
-                    <a href="@Url.Action("Index","Dashboard")">Home</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
-                </li>*@
+                        <a href="@Url.Action("Index","Dashboard")">Home</a>
+                    </li>
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href="#" class="nav-link">Contact</a>
+                    </li>*@
             </ul>
 
             <!-- Right navbar links -->
@@ -68,7 +70,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="~/Profile/assetsindex3.html" class="brand-link">
+            <a href="#" class="brand-link">
                 @*<img src="~/Profile/assetsdist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">*@
                 <span class="brand-text font-weight-light">UEF Club Management</span>
             </a>
@@ -92,118 +94,197 @@
                 <!-- Sidebar Menu -->
                 @if (Request.IsAuthenticated)
                 {
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-                    with font-awesome or any other icon font library -->
-                        <li class="nav-item">
-                            <a href="@Url.Action("Details", "ThongTinTV", new { id = @Session["UserId"] })" class="nav-link">
-                                <i class="nav-icon fas fa-id-card"></i>
-                                <p>
-                                    HỒ SƠ
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="@Url.Action("Index", "QLTaiKhoan", new { id = @Session["UserId"] })" class="nav-link">
-                                <i class="nav-icon fas fa-id-card"></i>
-                                <p>
-                                    Tài Khoản
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-calendar-alt"></i>
-                                <p>
-                                    Nhật Ký
-                                </p>
-                            </a>
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                            <!-- Add icons to the links using the .nav-icon class
+                            with font-awesome or any other icon font library -->
+                            <li class="nav-item">
+                                <a href="@Url.Action("Details", "ThongTinTV", new { id = @Session["UserId"] })" class="nav-link">
+                                    <i class="nav-icon fas fa-id-card"></i>
+                                    <p>
+                                        Hồ sơ
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "QLTaiKhoan", new { id = @Session["UserId"] })" class="nav-link">
+                                    <i class="nav-icon fas fa-id-card"></i>
+                                    <p>
+                                        Tài Khoản
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Câu lạc bộ
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("DangKyTLCLB", "ClubUser", new { id = @Session["UserId"] })" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Đăng ký thành lập CLB</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("DangKyCLB", "ClubUser", new { id = @Session["UserId"] })" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Đăng ký tham gia CLB</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("LichTap_CLB", "ClubUser", new { id = @Session["UserId"] })" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p> Lịch tập</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("NhatKyCLB", "ClubUser", new { id = @Session["UserId"] })" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p> Nhật Ký</p>
+                                        </a>
+                                    </li>
 
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-flag"></i>
-                                <p>
-                                    Nhiệm Vụ
-                                </p>
-                            </a>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("listCLB", "NhiemVU", new { id = @Session["UserId"] })" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p> Nhiệm vụ</p>
+                                        </a>
+                                    </li>
 
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Câu lạc bộ
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Đăng ký tham gia CLB</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Thông báo</p>
-                                    </a>
-                                </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ThongBaoCLB", "ClubUser", new { id = @Session["UserId"] })" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Thông báo</p>
+                                        </a>
+                                    </li>
 
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Hoạt động</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Sự kiện</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Phản hồi</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>               
-                    </ul>
-                </nav>}
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("HoatDongCLB", "ClubUser", new { id = @Session["UserId"] })" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Hoạt động</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("SuKienCLB", "ClubUser", new { id = @Session["UserId"] })" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Sự kiện</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("PhanHoiCLB", "ClubUser", new { id = @Session["UserId"] })" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Phản hồi</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Quản lý Câu lạc bộ
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("CLBQL", "QuanLyThanhVien", new { id = @Session["UserId"] })" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Quản lý thành viên CLB</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("QLTBCLB", "QuanLyThongBao", new { id = @Session["UserId"] })" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Quản lý thông báo</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("QLHoatDong_CLB", "QuanLyHoatDong", new { id = @Session["UserId"] })" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Quản lý hoạt động</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("QLSuKien_CLB", "QuanLySuKien", new { id = @Session["UserId"] })" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Quản lý sự kiện</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("QLLichTap_CLB", "QuanLyLichTap", new { id = @Session["UserId"] })" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Quản lý lịch tập</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("QLNhiemVu_CLB", "QuanLyNhiemVu", new { id = @Session["UserId"] })" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Quản lý nhiệm vụ</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("QLPhanHoi_CLB", "QuanLyPhanHoi", new { id = @Session["UserId"] })" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Quản lý phản hồi</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("QLXetDuyetTV_CLB", "QuanLyXetDuyetDKTV", new { id = @Session["UserId"] })" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Xét duyệt đăng ký thành viên</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("QLDkyCLB", "QuanLyDkyCLB", new { id = @Session["UserId"] })" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Xét duyệt đăng ký CLB</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("#", "QuanLy", new { id = @Session["UserId"] })" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Quản lý huấn luyện viên</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>}
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
         </aside>
 
-                <div class="content-wrapper my-2">
-                    <section class="content">
-                        <div class="card">
-                            @RenderBody()
-                            </div>
-                     </section>
-                    </div>
-                    <footer class="main-footer">
-                        <div class="float-right d-none d-sm-block">
-                            <b>Version</b> 3.2.0-rc
-                        </div>
-                    </footer>
-
-                    <!-- Control Sidebar -->
-                    <aside class="control-sidebar control-sidebar-dark">
-                        <!-- Control sidebar content goes here -->
-                    </aside>
-                    <!-- /.control-sidebar -->
+        <div class="content-wrapper my-2">
+            <section class="content">
+                <div class="card">
+                    @RenderBody()
                 </div>
-                <!-- ./wrapper -->
+            </section>
+        </div>
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b>Version</b> 3.2.0-rc
+            </div>
+        </footer>
 
-                <script src="~/Areas/Profile/Resource/plugins/jquery/jquery.min.js"></script>
-                <script src="~/Areas/Profile/Resource/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-                <script src="~/Areas/Profile/Resource/dist/js/adminlte.min.js"></script>
-                <script src="~/Areas/Profile/Resource/dist/js/demo.js"></script>
-                @RenderSection("footer", required: false)
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/Areas/Profile/Resource/dist/js/demo.js"></script>
+    <script src="~/Areas/Profile/Resource/plugins/jquery/jquery.min.js"></script>
+    <script src="~/Areas/Profile/Resource/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Areas/Profile/Resource/dist/js/adminlte.min.js"></script>
+    <script src="~/Areas/Profile/Resource/dist/js/demo.js"></script>
+    @RenderSection("footer", required: false)
 </body>
     </html>

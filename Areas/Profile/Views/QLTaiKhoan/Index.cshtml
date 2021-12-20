@@ -24,17 +24,25 @@
         }
         else
         {
-            @Html.ActionLink("Xác Thực Email", "ConfirmButton", new { id =Model.ID})
+            @Html.ActionLink("Xác Thực Email", "ConfirmButton", new { id = Model.ID })
         }
 
         @Html.ActionLink("Chỉnh Sửa", "ChangeEmail", new { id = Model.ID })
         <dt>
             @Html.DisplayNameFor(model => model.HashedPassword)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HashedPassword)
-        </dd>
+        @if (Model.HashedPassword == null)
+        {
+            <dd>
+                <p>Mật khẩu của bạn chưa được đặt</p>
+            </dd>
+        }
+        else
+        {
+            <dd>
+                @Html.DisplayFor(model => model.HashedPassword)
+            </dd>
+        }
         @Html.ActionLink("Chỉnh Sửa", "ChangePassword", new { id = Model.ID })
     </dl>
 </div>

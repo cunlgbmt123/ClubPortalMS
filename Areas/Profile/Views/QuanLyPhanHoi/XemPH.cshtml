@@ -1,0 +1,82 @@
+﻿@model ClubPortalMS.Models.PhanHoi
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PhanHoi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CLB.TenCLB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CLB.TenCLB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ten)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoiDung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SDT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SDT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Idtv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Idtv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TGphanhoi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TGphanhoi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Quay Lại", "QLPhanHoi", new { id = Model.ID })
+</p>

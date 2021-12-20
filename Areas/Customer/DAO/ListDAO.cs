@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ClubPortalMS.Models;
+using PagedList;
 
 namespace ClubPortalMS.Areas.Customer.DAO
 {
@@ -13,17 +14,17 @@ namespace ClubPortalMS.Areas.Customer.DAO
         {
             db = new ApplicationDbContext();
         }
-        public List<HoatDong> ListAllHD()
+        public IPagedList<HoatDong> ListAllHD(int? page)
         {
-            return db.HoatDong.OrderByDescending(x => x.ID).ToList();
+            return db.HoatDong.OrderByDescending(x => x.ID).ToList().ToPagedList(page ?? 1, 3);
         }
         public List<HoatDong> listHD(int top)
         {
             return db.HoatDong.OrderByDescending(x => x.ID).Take(top).ToList();
         }
-        public List<TinTuc> ListAllNews()
+        public IPagedList<TinTuc> ListAllNews(int? page)
         {
-            return db.TinTucs.OrderByDescending(x => x.ID).ToList();
+            return db.TinTucs.OrderByDescending(x => x.ID).ToList().ToPagedList(page ?? 1, 3);
         }
         public List<TinTuc> ListNews(int top)
         {

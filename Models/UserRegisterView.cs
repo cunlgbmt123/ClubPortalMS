@@ -9,10 +9,13 @@ namespace ClubPortalMS.Models
     public class UserRegisterView
     {
         [Required]
+        [Display(Name = "Tên tài khoản")]
         public string UserName { get; set; }
         [Required]
+        [Display(Name = "Tên")]
         public string FirstName { get; set; }
         [Required]
+        [Display(Name = "Họ")]
         public string LastName { get; set; }
         [Required]
         [EmailAddress]

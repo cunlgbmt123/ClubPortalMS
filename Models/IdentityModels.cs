@@ -37,14 +37,19 @@ namespace ClubPortalMS.Models
         public DbSet<Poster> Poster { get; set; }
         public DbSet<PhanHoi> PhanHoi { get; set; }
         public DbSet<QLDSHoatDong> QLDSHoatDong { get; set; }
+        public DbSet<LichTap> LichTap { get; set; }
+        public DbSet<LichTap_ThanhVien> LichTap_ThanhVien { get; set; }
         public DbSet<DBRoles> DBRoles { get; set; }
         public DbSet<SuKien> SuKien { get; set; }
         public DbSet<TTNhatKy> TTNhatKy { get; set; }
         public DbSet<ThanhVien> ThanhVien { get; set; }
         public DbSet<ThongBao> ThongBao { get; set; }
+        public DbSet<ThanhVien_CLB> ThanhVien_CLB { get; set; }
+        public DbSet<NhiemVu_ThanhVien> NhiemVu_ThanhVien { get; set; }
         public DbSet<DBUser> DBUser { get; set; }
         public DbSet<DBUserRoles> DBUserRoles { get; set; }
         public DbSet<TinTuc> TinTucs { get; set; }
+        public DbSet<DkyCLB> DkyCLB { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

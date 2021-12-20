@@ -12,10 +12,10 @@ namespace ClubPortalMS.Areas.Customer.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Customer/HoatDongs
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var ListDAO = new ListDAO();
-            ViewBag.ListAllHD = ListDAO.ListAllHD();
+            ViewBag.ListAllHD = ListDAO.ListAllHD(page);
             return View(db.HoatDong.ToList());
         }
         public ActionResult BaiViet(int? id)

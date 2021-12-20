@@ -40,8 +40,8 @@
                     </div>
                     <div class="post-content">
                         <p>@Html.DisplayFor(model => model.MoTa)</p>
-                        <p>@Html.DisplayFor(model => model.MoTa)</p>
-                        <p>@Html.DisplayFor(model => model.MoTa)</p>
+                        <p>@Html.DisplayFor(model => model.NoiDung)</p>
+                        
                     </div>
                 </div> <!-- .blog-single-wrap -->
 
@@ -84,7 +84,7 @@
                         <div class="blog-item">
                             <div class="content">
                                 <h5 class="recent-title">@item.TieuDe</h5>
-                                <h6 class="post-content"><a href="@Url.Action("BaiViet","TinTuc", new {id = item.ID})">@item.MoTa</a></h6>
+                                <h6 class="post-content"><a href="@Url.Action("BaiViet","TinTuc", new {id = item.ID})"class="gioi-han">@item.MoTa</a></h6>
                                 <div class="meta">
                                     <a href="#"><span class="mai-calendar"></span> @item.NgayDang</a>
                                     <a href="#"><span class="mai-person"></span> @item.TenNguoiDang</a>
@@ -101,7 +101,7 @@
                         <div class="blog-item">
                             <div class="content">
                                 <h5 class="recent-title">@item.Ten</h5>
-                                <h6 class="post-content"><a href="@Url.Action("BaiViet","HoatDongs", new {id = item.ID})">@item.MoTa</a></h6>
+                                <h6 class="post-content"><a href="@Url.Action("BaiViet","HoatDongs", new {id = item.ID})" class="gioi-han">@item.MoTa</a></h6>
                                 <div class="meta">
                                     <a href="#"><span class="mai-calendar"></span> @item.NgayDang</a>
                                     <a href="#"><span class="mai-person"></span> @item.TenNguoiDang</a>
