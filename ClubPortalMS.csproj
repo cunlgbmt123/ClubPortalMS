@@ -198,6 +198,7 @@
     <Compile Include="Areas\Admin\Controllers\ThongBaosController.cs" />
     <Compile Include="Areas\Admin\Controllers\TinTucsController.cs" />
     <Compile Include="Areas\Admin\Controllers\TTNhatKiesController.cs" />
+    <Content Include="Areas\Admin\Resource\AdminScript.js" />
     <Content Include="Areas\Admin\Resource\css\admincss.css" />
     <Content Include="Areas\Admin\Resource\dist\css\adminlte.css" />
     <Content Include="Areas\Admin\Resource\dist\css\adminlte.min.css" />
@@ -252,6 +253,7 @@
     <Content Include="Areas\Admin\Resource\dist\js\pages\dashboard.js" />
     <Content Include="Areas\Admin\Resource\dist\js\pages\dashboard2.js" />
     <Content Include="Areas\Admin\Resource\dist\js\pages\dashboard3.js" />
+    <Content Include="Areas\Admin\Resource\HinhAnh\addImg.jpg" />
     <Content Include="Areas\Admin\Resource\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="Areas\Admin\Resource\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css" />
     <Content Include="Areas\Admin\Resource\plugins\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />
@@ -2171,6 +2173,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Resource\Video\addImg.jpg" />
     <Content Include="Areas\Customer\Resource\css\bootstrap.css" />
     <Content Include="Areas\Customer\Resource\css\maicons.css" />
     <Content Include="Areas\Customer\Resource\css\style.css" />
@@ -4512,6 +4515,7 @@
     <Content Include="Areas\Profile\Views\ThongTinTV\Edit.cshtml" />
     <Content Include="Areas\Profile\Views\web.config" />
     <Content Include="Areas\Profile\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Albums\View.cshtml" />
     <None Include="packages.config" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -4559,8 +4563,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Resource\HinhAnh\" />
-    <Folder Include="Areas\Admin\Resource\Video\" />
     <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>

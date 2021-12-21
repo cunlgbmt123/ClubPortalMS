@@ -18,6 +18,10 @@ namespace ClubPortalMS.Models
 
     public partial class Album
     {
+        public Album(){
+            HinhAnh = "~/Areas/Admin/Resource/HinhAnh/addImg.jpg";
+            Video = "~/Areas/Admin/Resource/Video/addImg.jpg";
+        }
         public int ID { get; set; }
         public string TieuDe { get; set; }
         [DisplayName("Tải hình ảnh lên")]

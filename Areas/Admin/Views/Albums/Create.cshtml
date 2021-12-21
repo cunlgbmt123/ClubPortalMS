@@ -41,7 +41,8 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            <input type="file" name="ImageFile" />
+                            <img src="@Url.Content(Model.HinhAnh)" style="width: 100px; height: 100px; margin: 10px;" id="preView" />
+                            <input type="file" name="ImageFile" onchange="ShowImg(this, document.getElementById('preView'))"/>
                             
                         </div>
                         
@@ -50,8 +51,9 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Video, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            <input type="file" name="VideoFile"  />
-                            
+                            <img src="@Url.Content(Model.Video)" style="width: 100px; height: 100px; margin: 10px;" id="preViewvideo" />
+                            <input type="file" name="VideoFile" onchange="Showvideo(this, document.getElementById('preViewvideo'))" />
+
                         </div>
                         
                     </div>
