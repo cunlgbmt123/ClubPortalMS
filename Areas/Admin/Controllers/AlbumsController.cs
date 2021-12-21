@@ -39,7 +39,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/Albums/Create
         public ActionResult Create()
         {
-            return View();
+            Album album = new Album();
+            return View(album);
         }
 
         // POST: Admin/Albums/Create
@@ -97,9 +98,9 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TieuDe,HinhAnh,Video,MoTa")] Album album)
+        public ActionResult Edit(Album album)
         {
-            /*string hinhanh = Path.GetFileNameWithoutExtension(album.ImageFile.FileName);
+            string hinhanh = Path.GetFileNameWithoutExtension(album.ImageFile.FileName);
             string video = Path.GetFileNameWithoutExtension(album.VideoFile.FileName);
 
             string imgExtension = Path.GetExtension(album.ImageFile.FileName);
@@ -114,9 +115,10 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanh);
             video = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/Video/"), video);
             album.ImageFile.SaveAs(hinhanh);
-            album.ImageFile.SaveAs(video);*/
+            album.ImageFile.SaveAs(video);
             if (ModelState.IsValid)
             {
+
                 db.Entry(album).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
