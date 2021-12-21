@@ -4,7 +4,6 @@
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper my-2">
     <!-- Main content -->
@@ -14,9 +13,12 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-                        @Html.ActionLink("Back to List", "Index")
-                        <strong class="text-danger text-uppercase">Thông tin</strong>
+                        <p>
+                            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+                            @Html.ActionLink("Back to List", "Index")
+                        </p>
+
+                        <strong class="text-danger text-uppercase">Thông Tin</strong>
                     </div>
                     <div class="col-md-6 text-right">
                         <a href="#" class="btn btn-sm btn-success">Content</a>
@@ -26,11 +28,11 @@
             <div class="card-body">
                 <dl class="dl-horizontal">
                     <dt>
-                        @Html.DisplayNameFor(model => model.CLB.TenCLB)
+                        @Html.DisplayNameFor(model => model.ThanhVien.Ten)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.CLB.TenCLB)
+                        @Html.DisplayFor(model => model.ThanhVien.Ten)
                     </dd>
 
                     <dt>
@@ -74,11 +76,19 @@
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.TrangThai)
+                        @Html.DisplayNameFor(model => model.LyDoDkyCLB)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.TrangThai)
+                        @Html.DisplayFor(model => model.LyDoDkyCLB)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IDCLB)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.IDCLB)
                     </dd>
 
                 </dl>
@@ -91,3 +101,5 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+

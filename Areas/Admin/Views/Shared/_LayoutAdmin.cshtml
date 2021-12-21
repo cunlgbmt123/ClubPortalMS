@@ -92,172 +92,172 @@
                 <!-- Sidebar Menu -->
                 @if (Request.IsAuthenticated)
                 {
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-table"></i>
-                                <p>
-                                    Danh Sách Quản Lý
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Albums")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Album</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "CLBs")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Câu Lạc Bộ</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "ChoxetDuyets")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Danh Sách Chờ</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "DangKies")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Dăng Ký</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "GioiThieux")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Giới Thiệu</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "HoatDongs")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Hoạt Động</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "LienHes")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Liên Hệ</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "LoaiCLBs")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Loại Câu Lạc Bộ</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "LoaiHDs")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Loại Hoạt Động</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "LoaiSuKiens")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Loại Sự Kiện</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "NhiemVus")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Nhiệm vụ</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Posters")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Poster</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "PhanHois")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Phản Hồi</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "QLDSHoatDongs")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Danh Sách HĐ</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "DBRoles")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Phân Quyền</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "SuKiens")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Sự Kiện</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "TTNhatKies")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Nhật Ký</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "ThanhViens")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Thành Viên</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "ThongBaos")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Thông Báo</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "DBUserRoles")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Phân Quyền Người Dùng</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "DBUsers")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>QL Tài Khoản Người Dùng</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>}
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-table"></i>
+                                    <p>
+                                        Danh Sách Quản Lý
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Albums")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>QL Album</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "CLBs")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>QL Câu Lạc Bộ</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "ChoxetDuyets")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>QL Danh Sách Chờ</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "DangKies")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>QL Dăng Ký</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "GioiThieux")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>QL Giới Thiệu</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "HoatDongs")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>QL Hoạt Động</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "LienHes")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>QL Liên Hệ</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "LoaiCLBs")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>QL Loại Câu Lạc Bộ</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "LoaiHDs")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>QL Loại Hoạt Động</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "LoaiSuKiens")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>QL Loại Sự Kiện</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "NhiemVus")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>QL Nhiệm vụ</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Posters")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>QL Poster</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "PhanHois")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>QL Phản Hồi</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "QLDSHoatDongs")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>QL Danh Sách HĐ</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "DBRoles")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Quyền Sử Dụng</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "SuKiens")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>QL Sự Kiện</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "TTNhatKies")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>QL Nhật Ký</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "ThanhViens")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>QL Thành Viên</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "ThongBaos")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>QL Thông Báo</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "DBUserRoles")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>QL Phân Quyền Chức Năng</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "DBUsers")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>QL Tài Khoản Người Dùng</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>}
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
         </aside>
+        @RenderBody()
+       @* <div class="content-wrapper my-2">
+            <section class="content">
+                <div class="card">
 
-                <div class="content-wrapper my-2">
-                    <section class="content">
-                        <div class="card">
-                            @RenderBody()
-                            </div>
-                     </section>
-                    </div>
-                    <footer class="main-footer">
-                        <div class="float-right d-none d-sm-block">
-                            <b>Version</b> 3.2.0-rc
-                        </div>
-                        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-                    </footer>
-
-                    <!-- Control Sidebar -->
-                    <aside class="control-sidebar control-sidebar-dark">
-                        <!-- Control sidebar content goes here -->
-                    </aside>
-                    <!-- /.control-sidebar -->
                 </div>
+            </section>
+        </div>*@
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b>Version</b> 3.2.0-rc
+            </div>
+            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
                 <!-- ./wrapper -->
 
                 <script src="~/Areas/Admin/Resource/plugins/jquery/jquery.min.js"></script>

@@ -5,13 +5,10 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Create</h2>
-
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper my-2">
         <!-- Main content -->
@@ -22,7 +19,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             @Html.ActionLink("Back to List", "Index")
-                            <strong class="text-danger text-uppercase">Tạo mới</strong>
+                            <strong class="text-danger text-uppercase">Tạo Mới</strong>
                         </div>
                         <div class="col-md-6 text-right">
                             <a href="#" class="btn btn-sm btn-success">Content</a>
@@ -36,6 +33,14 @@
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.TieuDeSK, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.TieuDeSK, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MoTa, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
@@ -88,6 +93,30 @@
                     </div>
 
                     <div class="form-group">
+                        @Html.LabelFor(model => model.TenFile, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.TenFile, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TenFile, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ContentType, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ContentType, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ContentType, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.File, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.File, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         @Html.LabelFor(model => model.IdLoaiSK, "IdLoaiSK", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
                             @Html.DropDownList("IdLoaiSK", null, htmlAttributes: new { @class = "form-control" })
@@ -109,6 +138,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -116,4 +146,6 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+
+
 }

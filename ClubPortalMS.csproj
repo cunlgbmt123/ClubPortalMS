@@ -4559,6 +4559,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Resource\HinhAnh\" />
+    <Folder Include="Areas\Admin\Resource\Video\" />
     <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>

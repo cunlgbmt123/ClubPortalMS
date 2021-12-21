@@ -4,7 +4,6 @@
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper my-2">
     <!-- Main content -->
@@ -50,6 +49,14 @@
 
                     <dd>
                         @Html.DisplayFor(model => model.TieuDeSK)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MoTa)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.MoTa)
                     </dd>
 
                     <dt>
@@ -100,6 +107,30 @@
                         @Html.DisplayFor(model => model.HinhThuc)
                     </dd>
 
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TenFile)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.TenFile)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ContentType)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ContentType)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.File)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.File)
+                    </dd>
+
                 </dl>
 
             </div>
@@ -110,4 +141,6 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+
 
