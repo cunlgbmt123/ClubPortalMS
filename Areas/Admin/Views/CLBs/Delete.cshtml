@@ -4,10 +4,14 @@
     ViewBag.Title = "Delete";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+
+<h2>Delete</h2>
+
+
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper my-2">
         <!-- Main content -->
         <section class="content">
@@ -16,7 +20,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6">
-                            <input type="submit" value="Delete" class="btn btn-default" /> |
+                            <input type="submit" value="Delete" class="btn btn-default" />|
                             @Html.ActionLink("Back to List", "Index")
                             <strong class="text-danger text-uppercase">Xóa</strong>
                         </div>
@@ -68,19 +72,19 @@
                         </dd>
 
                         <dt>
+                            @Html.DisplayNameFor(model => model.Mota)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Mota)
+                        </dd>
+
+                        <dt>
                             @Html.DisplayNameFor(model => model.FanPage)
                         </dt>
 
                         <dd>
                             @Html.DisplayFor(model => model.FanPage)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.SDT)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.SDT)
                         </dd>
 
                         <dt>
@@ -100,7 +104,6 @@
         </section>
         <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
-
+   
 }
 

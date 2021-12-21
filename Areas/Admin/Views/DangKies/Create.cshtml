@@ -11,6 +11,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper my-2">
         <!-- Main content -->
@@ -71,18 +72,26 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.TrangThai, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.LyDoDkyCLB, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.TrangThai, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.LyDoDkyCLB, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.LyDoDkyCLB, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.IdCLB, "IdCLB", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.IdTv, "IdTv", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.DropDownList("IdCLB", null, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.IdCLB, "", new { @class = "text-danger" })
+                            @Html.DropDownList("IdTv", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.IdTv, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IDCLB, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.IDCLB, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.IDCLB, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
@@ -99,5 +108,4 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
 }

@@ -46,7 +46,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,Username,Email,EmailConfirmation,HashedPassword,Salt,IsLocked,DateCreated,IsDeleted,ActivationCode,NgayXoa,UserDeleted")] DBUser dBUser)
+        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,Username,Email,Identifier,EmailConfirmation,HashedPassword,Salt,IsLocked,DateCreated,IsDeleted,ActivationCode,NgayXoa,UserDeleted")] DBUser dBUser)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Username,Email,EmailConfirmation,HashedPassword,Salt,IsLocked,DateCreated,IsDeleted,ActivationCode,NgayXoa,UserDeleted")] DBUser dBUser)
+        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Username,Email,Identifier,EmailConfirmation,HashedPassword,Salt,IsLocked,DateCreated,IsDeleted,ActivationCode,NgayXoa,UserDeleted")] DBUser dBUser)
         {
             if (ModelState.IsValid)
             {
