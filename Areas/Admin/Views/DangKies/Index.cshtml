@@ -4,7 +4,6 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper my-2">
     <!-- Main content -->
@@ -14,8 +13,11 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                        @Html.ActionLink("Create New", "Create")
-                        <strong class="text-danger text-uppercase">Trang Chủ</strong>
+                        <p>
+                            @Html.ActionLink("Create New", "Create")
+                        </p>
+
+                        <strong class="text-danger text-uppercase">Tạo Mới</strong>
                     </div>
                     <div class="col-md-6 text-right">
                         <a href="#" class="btn btn-sm btn-success">Content</a>
@@ -26,7 +28,7 @@
                 <table class="table">
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.CLB.TenCLB)
+                            @Html.DisplayNameFor(model => model.ThanhVien.Ten)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Ten)
@@ -44,7 +46,10 @@
                             @Html.DisplayNameFor(model => model.NgayDangKy)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.TrangThai)
+                            @Html.DisplayNameFor(model => model.LyDoDkyCLB)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IDCLB)
                         </th>
                         <th></th>
                     </tr>
@@ -53,7 +58,7 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.CLB.TenCLB)
+                                @Html.DisplayFor(modelItem => item.ThanhVien.Ten)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Ten)
@@ -71,7 +76,10 @@
                                 @Html.DisplayFor(modelItem => item.NgayDangKy)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.TrangThai)
+                                @Html.DisplayFor(modelItem => item.LyDoDkyCLB)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IDCLB)
                             </td>
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
@@ -91,3 +99,4 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+

@@ -49,7 +49,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TieuDeSK,NgayBatDau,NgayKetThuc,NoiDung,KetQua,DiaDiem,HinhThuc,IdLoaiSK,IdCLB")] SuKien suKien)
+        public ActionResult Create([Bind(Include = "ID,TieuDeSK,MoTa,NgayBatDau,NgayKetThuc,NoiDung,KetQua,DiaDiem,HinhThuc,TenFile,ContentType,File,IdLoaiSK,IdCLB")] SuKien suKien)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TieuDeSK,NgayBatDau,NgayKetThuc,NoiDung,KetQua,DiaDiem,HinhThuc,IdLoaiSK,IdCLB")] SuKien suKien)
+        public ActionResult Edit([Bind(Include = "ID,TieuDeSK,MoTa,NgayBatDau,NgayKetThuc,NoiDung,KetQua,DiaDiem,HinhThuc,TenFile,ContentType,File,IdLoaiSK,IdCLB")] SuKien suKien)
         {
             if (ModelState.IsValid)
             {

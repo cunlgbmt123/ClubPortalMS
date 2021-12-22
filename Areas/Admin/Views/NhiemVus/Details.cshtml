@@ -4,7 +4,6 @@
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper my-2">
     <!-- Main content -->
@@ -29,14 +28,6 @@
             <div class="card-body">
                 <dl class="dl-horizontal">
                     <dt>
-                        @Html.DisplayNameFor(model => model.ThanhVien.Ten)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.ThanhVien.Ten)
-                    </dd>
-
-                    <dt>
                         @Html.DisplayNameFor(model => model.TieuDe)
                     </dt>
 
@@ -50,6 +41,38 @@
 
                     <dd>
                         @Html.DisplayFor(model => model.MoTa)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TenFile)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.TenFile)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ContentType)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ContentType)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.File)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.File)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ThoiGianKetThuc)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ThoiGianKetThuc)
                     </dd>
 
                     <dt>

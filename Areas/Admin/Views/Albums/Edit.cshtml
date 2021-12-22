@@ -1,14 +1,14 @@
 ﻿@model ClubPortalMS.Models.Album
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Chỉnh Sửa";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+
+@using (Html.BeginForm("Edit","Albums", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <!-- Content Wrapper. Contains page content -->
@@ -43,17 +43,21 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.HinhAnh, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
+                            <img src="@Url.Content(Model.HinhAnh)" style="width: 100px; height: 100px; margin: 10px;" id="preView" />
+                            <input type="file" name="ImageFile" onchange="ShowImg(this, document.getElementById('preView'))" />
+
                         </div>
+
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.Video, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.Video, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Video, "", new { @class = "text-danger" })
+                            <img src="@Url.Content(Model.Video)" style="width: 100px; height: 100px; margin: 10px;" id="preViewvideo" />
+                            <input type="file" name="VideoFile" onchange="Showvideo(this, document.getElementById('preViewvideo'))" />
+
                         </div>
+
                     </div>
 
                     <div class="form-group">
@@ -70,14 +74,12 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.card-body -->
-            </div>
+                    <!-- /.card-body -->
+                </div>
             <!-- /.card -->
         </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
-        
 
 }

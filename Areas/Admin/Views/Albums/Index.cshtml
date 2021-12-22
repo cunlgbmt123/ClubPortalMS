@@ -14,8 +14,11 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                        @Html.ActionLink("Create New", "Create")
-                        <strong class="text-danger text-uppercase">Trang Chủ</strong>
+                        <p>
+                            @Html.ActionLink("Create New", "Create")
+                        </p>
+
+                        <strong class="text-danger text-uppercase">Danh Sách</strong>
                     </div>
                     <div class="col-md-6 text-right">
                         <a href="#" class="btn btn-sm btn-success">Content</a>
@@ -47,10 +50,10 @@
                                 @Html.DisplayFor(modelItem => item.TieuDe)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.HinhAnh)
+                                <img src="@Html.DisplayFor(modelItem => item.HinhAnh)" style="width: 100px; height: 100px; margin: 10px;" />                     
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Video)
+                               <img src="@Html.DisplayFor(modelItem => item.Video)" style="width: 100px; height: 100px; margin: 10px;"/>
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.MoTa)

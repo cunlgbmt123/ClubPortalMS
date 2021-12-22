@@ -6,7 +6,6 @@
 }
 
 
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -21,7 +20,6 @@
                         <div class="col-md-6">
                             <input type="submit" value="Delete" class="btn btn-default" /> |
                             @Html.ActionLink("Back to List", "Index")
-                        </div>
                             <strong class="text-danger text-uppercase">Xóa</strong>
                         </div>
                         <div class="col-md-6 text-right">
@@ -53,6 +51,14 @@
 
                         <dd>
                             @Html.DisplayFor(model => model.TieuDeSK)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.MoTa)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.MoTa)
                         </dd>
 
                         <dt>
@@ -103,6 +109,30 @@
                             @Html.DisplayFor(model => model.HinhThuc)
                         </dd>
 
+                        <dt>
+                            @Html.DisplayNameFor(model => model.TenFile)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.TenFile)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ContentType)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ContentType)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.File)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.File)
+                        </dd>
+
                     </dl>
 
                 </div>
@@ -113,4 +143,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+
+
 }
+

@@ -4,7 +4,6 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper my-2">
     <!-- Main content -->
@@ -18,7 +17,7 @@
                             @Html.ActionLink("Create New", "Create")
                         </p>
 
-                        <strong class="text-danger text-uppercase">Trang Chủ</strong>
+                        <strong class="text-danger text-uppercase">Danh Sách</strong>
                     </div>
                     <div class="col-md-6 text-right">
                         <a href="#" class="btn btn-sm btn-success">Content</a>
@@ -29,13 +28,22 @@
                 <table class="table">
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.ThanhVien.Ten)
-                        </th>
-                        <th>
                             @Html.DisplayNameFor(model => model.TieuDe)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.MoTa)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TenFile)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ContentType)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.File)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ThoiGianKetThuc)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.IdCLB)
@@ -47,13 +55,22 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.ThanhVien.Ten)
-                            </td>
-                            <td>
                                 @Html.DisplayFor(modelItem => item.TieuDe)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.MoTa)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TenFile)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ContentType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.File)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ThoiGianKetThuc)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.IdCLB)
@@ -76,4 +93,3 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-

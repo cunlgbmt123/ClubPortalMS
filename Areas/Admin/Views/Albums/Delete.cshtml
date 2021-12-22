@@ -5,13 +5,13 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Delete</h2>
-
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+
+    
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper my-2">
         <!-- Main content -->
@@ -21,19 +21,14 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6">
-                            <ul>
-                                <li>
-                                    @Html.ActionLink("Back to List", "Index")
-                                </li>
-                                <li>
-                                    <input type="submit" value="Delete" class="btn btn-default" />
-                                </li>
-                            </ul>
+                            <p>  Mục này sẽ bị xóa và không thể khôi phục! </p>
+                            <input type="submit" value="Delete" class="btn btn-default" /> |
+                            
                             <strong class="text-danger text-uppercase">Xóa</strong>
                         </div>
                         <div class="col-md-6 text-right">
-                            
-                            <a href="#" class="btn btn-sm btn-success">Xóa</a>
+                            @Html.ActionLink("Back to List", "Index")
+                            <a href="#" class="btn btn-sm btn-success">Quay lại</a>
                         </div>
                     </div>
                 </div>
@@ -52,7 +47,7 @@
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.HinhAnh)
+                            <img src="@Url.Content(Model.HinhAnh)" style="width: 100px; height: 100px; margin: 10px;" />
                         </dd>
 
                         <dt>
@@ -60,7 +55,7 @@
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.Video)
+                            <img src="@Url.Content(Model.Video)" style="width: 100px; height: 100px; margin: 10px;" />
                         </dd>
 
                         <dt>
@@ -81,4 +76,8 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+    <div class="form-actions no-color">
+
+    </div>
 }
+

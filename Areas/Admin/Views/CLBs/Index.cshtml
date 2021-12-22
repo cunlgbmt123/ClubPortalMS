@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         @Html.ActionLink("Create New", "Create")
-                        <strong class="text-danger text-uppercase">Trang Chủ</strong>
+                        <strong class="text-danger text-uppercase">Danh Sách</strong>
                     </div>
                     <div class="col-md-6 text-right">
                         <a href="#" class="btn btn-sm btn-success">Content</a>
@@ -41,10 +41,10 @@
                             @Html.DisplayNameFor(model => model.LienHe)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.FanPage)
+                            @Html.DisplayNameFor(model => model.Mota)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.SDT)
+                            @Html.DisplayNameFor(model => model.FanPage)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Email)
@@ -71,10 +71,10 @@
                                 @Html.DisplayFor(modelItem => item.LienHe)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.FanPage)
+                                @Html.DisplayFor(modelItem => item.Mota)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.SDT)
+                                @Html.DisplayFor(modelItem => item.FanPage)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Email)
@@ -88,7 +88,6 @@
                     }
 
                 </table>
-
             </div>
             <!-- /.card-body -->
         </div>
