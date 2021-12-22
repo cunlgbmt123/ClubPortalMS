@@ -52,9 +52,15 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                 var userAccount = db.DBUser.Where(u => u.ID.ToString().Equals(id.ToString())).FirstOrDefault();
                 if (userAccount != null)
                 {
+                    string passWord = changePasswordModel.NewPassword + "A48BF46E-1V4F-58B4-2208-CQH7-U19JC5K2K3NV";
+                    string pw = Processing.EncodePasswordToBase64(passWord);
+                    string salt = pw.Substring(1, 10);
+                    string H_Password = pw.Replace(salt, "");
+                 
                     if (changePasswordModel.OldPassword.Equals(userAccount.HashedPassword))
                     {
-                        userAccount.HashedPassword = changePasswordModel.NewPassword;
+                        userAccount.HashedPassword = H_Password;
+                        userAccount.Salt = salt;
                         db.SaveChanges();
                         ModelState.AddModelError("", "Mật khẩu của tài khoản đổi thành công");
                     }
@@ -86,7 +92,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             if (!string.IsNullOrEmpty(userName))
             {
 
-                ModelState.AddModelError("Warning Email", "Sorry: Email already Exists");
+                ModelState.AddModelError("Warning Email", "Xin lỗi Email bạn nhập đã tồn tại");
                 return View(changeEmailModel);
             }
             int UserID = Convert.ToInt32(Session["UserId"]);
@@ -178,12 +184,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
         }
         #endregion
         #region Xác thực email
-        [HttpGet]
-        public ActionResult ConfirmButton()
-        {
-            return View();
-        }
-        [HttpPost]
+  
         public ActionResult ConfirmButton(int? id)
         {
             int UserID = Convert.ToInt32(Session["UserId"]);

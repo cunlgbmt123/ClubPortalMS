@@ -64,3 +64,53 @@
 .btn-style:hover{
     border:none;
 }
+.table-responsive{
+width: 700px;
+
+}
+.details-profile {
+    text-transform: uppercase;
+}
+.save-profile {
+    background-color: #007BFF;
+    font-weight: bold;
+    color: white;
+    font-size: 15px;
+    float:right;
+}
+.save-profile:hover {
+    background-color:aquamarine;
+    font-weight: bold;
+    font-size: 15px;
+
+}
+.form-edit-profile {
+    font-size:20px;
+    text-transform: uppercase;
+    margin:3% 0% 8% 15%;
+}
+.edit-profile{
+    width:auto;
+    padding-left:0.8%;
+}
+.input-edit {
+    width: 100%;
+    text-transform: uppercase;
+}
+.btn-edit {
+    width:15%;
+    background-color: #007BFF;
+    font-weight: bold;
+    color: white;
+    font-size: 18px;
+    float: right;
+}
+    .btn-edit:hover {
+        background-color: aquamarine;
+        font-weight: bold;
+        width: 15%;
+        font-size: 18px;
+    }
+.timeline:before{
+    background-color:white;
+}

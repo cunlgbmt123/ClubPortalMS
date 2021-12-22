@@ -16,6 +16,12 @@
                 </div>
                 <div class="card-body">
                     <h4 class="login-box-msg"><b>Đăng nhập</b></h4>
+                    @if (ViewBag.Message != null)
+                    {
+                        <div class="alert alert-danger" >
+                            @ViewBag.Message
+                        </div>
+                    }
                     <form action="../../index3.html" method="post">
                         @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                         <div class="input-group mb-3">

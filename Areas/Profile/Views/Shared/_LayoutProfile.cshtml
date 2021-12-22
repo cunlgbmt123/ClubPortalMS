@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="~/Areas/Profile/Resource/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="~/Areas/Profile/Resource/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <link rel="stylesheet" href="~/Areas/Profile/Resource/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/styleProfile.css">
     @RenderSection("header", required: false)
 </head>
 <body class="hold-transition sidebar-mini">
@@ -236,19 +237,19 @@
                                     <li class="nav-item">
                                         <a href="@Url.Action("QLXetDuyetTV_CLB", "QuanLyXetDuyetDKTV", new { id = @Session["UserId"] })" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Xét duyệt đăng ký thành viên</p>
+                                            <p>Xét duyệt thành viên</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="@Url.Action("QLDkyCLB", "QuanLyDkyCLB", new { id = @Session["UserId"] })" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Xét duyệt đăng ký CLB</p>
+                                            <p>Đơn đăng ký CLB</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="@Url.Action("#", "QuanLy", new { id = @Session["UserId"] })" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Quản lý huấn luyện viên</p>
+                                            <p>Quản lý quản trị CLB</p>
                                         </a>
                                     </li>
                                 </ul>

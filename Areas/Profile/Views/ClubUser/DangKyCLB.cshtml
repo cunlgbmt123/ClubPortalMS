@@ -5,11 +5,26 @@
     Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
 }
 
-<h2>Đăng ký Câu Lạc Bộ</h2>
-<h3><strong>@TempData["Message"]</strong></h3>
+<section class="content-header" style="background-color:cornflowerblue">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Đăng ký CLB</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li style="color:black" class="breadcrumb-item">Trang Chủ</li>
+                    <li style="color:black" class="breadcrumb-item active">Đăng ký CLB</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
 @using (Html.BeginForm())
 {
-    <div class="container-fluid">
+
+    <div class="container-fluid" style="margin-top:3%">
         <div class="row">
             <div class="col-md-3">
                 <div class="card card-primary">
@@ -36,36 +51,36 @@
                     <div class="card-header p-2">
                         <div class="nav-item"><a class="nav-link">Đơn đăng ký tham gia Câu Lạc Bộ</a></div>
                     </div>
-                    <div class="card-body">
-                        <hr />
+                    <div class="card-body" style="display: block; margin-left: auto; margin-right: auto; width: 80%; ">
+
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Ten, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                            @Html.LabelFor(model => model.Ten, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-12">
                                 @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.MSSV, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                            @Html.LabelFor(model => model.MSSV, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-12">
                                 @Html.EditorFor(model => model.MSSV, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.MSSV, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-12">
                                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.SDT, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                            @Html.LabelFor(model => model.SDT, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-12">
                                 @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
                             </div>
@@ -73,24 +88,22 @@
 
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.LyDoDkyCLB, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                            @Html.LabelFor(model => model.LyDoDkyCLB, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-12">
                                 @Html.EditorFor(model => model.LyDoDkyCLB, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.LyDoDkyCLB, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
-                            <p class="control-label col-md-2">Danh sách câu lạc bộ</p>
-
-                            @*@Html.LabelFor(, "Câu lạc bộ", htmlAttributes: new { @class = "control-label col-md-2" })*@
-                            <div class="col-md-10">
+                            <label class="control-label col-md-4">Danh sách câu lạc bộ</label>
+                            <div class="col-md-12">
                                 @Html.DropDownList("IDCLB", ViewBag.Test as SelectList, "Chọn Câu lạc bộ", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.IDCLB, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Create" class="btn btn-default" />
+                                <input type="submit" value="Gửi đơn" class="btn btn-default" />
                             </div>
                         </div>
                     </div>
@@ -99,7 +112,3 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

@@ -180,17 +180,26 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             if (ModelState.IsValid)
             {
                 int IdTvien = Convert.ToInt32(Session["UserId"]);
-                QLDSHoatDong qLDSHoatDong = db.QLDSHoatDong.Find(id);
-                var user = new TTNhatKy()
+                QLDSHoatDong qLDSHoatDong = db.QLDSHoatDong.Find(id);            
+                var userAccount = db.TTNhatKy.Where(u => u.IDHoatDong==id).FirstOrDefault();
+                if (userAccount != null)
                 {
-                    IdThanhVien = IdTvien,
-                    TGThamGia = DateTime.Now,
-                    SKDaThamGia = qLDSHoatDong.ChuDe,
-                    IDHoatDong = qLDSHoatDong.ID,
-                    DiemDanh = false
-                };
-                db.TTNhatKy.Add(user);
-                db.SaveChanges();
+                    ViewBag.Message = "Bạn đã tham gia hoạt động này rồi!!";
+                }
+                else
+                {
+                    ViewBag.Message = "Tham gia thành công!!";
+                    var user = new TTNhatKy()
+                    {
+                        IdThanhVien = IdTvien,
+                        TGThamGia = DateTime.Now,
+                        SKDaThamGia = qLDSHoatDong.ChuDe,
+                        IDHoatDong = qLDSHoatDong.ID,
+                        DiemDanh = false
+                    };
+                    db.TTNhatKy.Add(user);
+                    db.SaveChanges();
+                }
                 return RedirectToAction("HoatDongCLB");
             }
             return View();
@@ -210,7 +219,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
         }
         #endregion
         #region Ds sự kiện CLB
-        public ActionResult SuKienCLB()
+        public ActionResult SuKienCLB(string messageRegistration)
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
             List<CLB> cLBs = db.CLB.ToList();
@@ -229,30 +238,40 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                  SuKien = i,
                                  CLB = d
                              };
-
+            ViewBag.Message = messageRegistration;
             return View(DsSuien);
         }
 
         public ActionResult ThamGiaSK(int? id)
         {
+            string messageRegistration = string.Empty;
             if (ModelState.IsValid)
             {
-
+               
                 int IdTvien = Convert.ToInt32(Session["UserId"]);
                 SuKien suKien = db.SuKien.Find(id);
-                var user = new TTNhatKy()
+                var userAccount = db.TTNhatKy.Where(u => u.IDSuKien==id).FirstOrDefault();
+                if (userAccount != null)
                 {
-                  IdThanhVien=IdTvien,
-                  TGThamGia=DateTime.Now,
-                  SKDaThamGia=suKien.TieuDeSK,
-                  IDSuKien = suKien.ID,
-                  DiemDanh=false
-                };
-                db.TTNhatKy.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("SuKienCLB");
+                    messageRegistration = "Bạn đã tham gia hoạt động này rồi!!";
+                }
+                else
+                {
+                    var user = new TTNhatKy()
+                    {
+                        IdThanhVien = IdTvien,
+                        TGThamGia = DateTime.Now,
+                        SKDaThamGia = suKien.TieuDeSK,
+                        IDSuKien = suKien.ID,
+                        DiemDanh = false
+                    };
+                    db.TTNhatKy.Add(user);
+                    db.SaveChanges();
+                    messageRegistration = "Tham gia thành công!!";
+                }
+               
             }
-            return View();
+            return RedirectToAction("SuKienCLB", new { messageRegistration });
         }
         public FileResult DocumentDownloadHD(int? id)
         {
@@ -274,13 +293,14 @@ namespace ClubPortalMS.Areas.Profile.Controllers
         }
         #endregion
         #region Nhật ký CLB
-        public List<TTNhatKy> ListAllNhatKy()
+        public ActionResult NhatKyCLB(int? page)
         {
-            return db.TTNhatKy.OrderByDescending(x => x.ID).ToList();
-        }
-        public ActionResult NhatKyCLB()
-        {
-            ViewBag.ListNhatKy = ListAllNhatKy();
+            int IdTvien = Convert.ToInt32(Session["UserId"]);
+            List<TTNhatKy> tTNhatKies = db.TTNhatKy.ToList();
+            var listNhatKy = from e in tTNhatKies
+                             where e.IdThanhVien == IdTvien
+                             select e;
+            ViewBag.ListNhatKy = listNhatKy.OrderByDescending(x => x.ID).ToList().ToPagedList(page ?? 1, 5);
             return View();
         }
         #endregion

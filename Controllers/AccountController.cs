@@ -22,10 +22,6 @@ namespace ClubPortalMS.Controllers
     
     public class AccountController : Controller
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
         #region Đăng nhập
         [HttpGet]
         public ActionResult Login(string ReturnUrl = "")
@@ -88,8 +84,8 @@ namespace ClubPortalMS.Controllers
                         return RedirectToAction("Index","Dashboard", new { area = "Profile" });
                     }
                 }
+                else {ViewBag.Message= "Tài khoản hoặc mật khẩu không đúng"; }
             }
-            ModelState.AddModelError("", "Có lỗi xảy ra: Tài khoản hoặc mật khẩu không đúng");
             return View(loginView);
         }
         #endregion
@@ -128,10 +124,10 @@ namespace ClubPortalMS.Controllers
                     //Save User Data
                     using (ApplicationDbContext dbContext = new ApplicationDbContext())
                     {
-                        //string passWord = registrationView.Password + "A48BF46E-1V4F-58B4-2208-CQH7-U19JC5K2K3NV";
-                        //string pw = Processing.EncodePasswordToBase64(passWord);
-                        //string salt = pw.Substring(1, 10);
-                        //string H_Password = pw.Replace(salt, "");
+                        string passWord = registrationView.Password + "A48BF46E-1V4F-58B4-2208-CQH7-U19JC5K2K3NV";
+                        string pw = Processing.EncodePasswordToBase64(passWord);
+                        string salt = pw.Substring(1, 10);
+                        string H_Password = pw.Replace(salt, "");
                         registrationView.ActivationCode = Guid.NewGuid();
                         var user = new DBUser()
                         {
@@ -139,7 +135,8 @@ namespace ClubPortalMS.Controllers
                             FirstName = registrationView.FirstName,
                             LastName = registrationView.LastName,
                             Email = registrationView.Email,
-                            HashedPassword = registrationView.Password,
+                            HashedPassword = H_Password,
+                            Salt = salt,
                             IsLocked = false,
                             EmailConfirmation = false,
                             ActivationCode = registrationView.ActivationCode,

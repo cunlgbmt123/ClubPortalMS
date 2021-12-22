@@ -4,81 +4,65 @@
     ViewBag.Title = "Details";
     Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
 }
+<section class="content-header"style="background-color: cornflowerblue">
+    <div class="container-fluid" >
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Hồ sơ người dùng</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li style="color:black" class="breadcrumb-item">Trang Chủ</li>
+                    <li style="color:black" class="breadcrumb-item active">Hồ sơ người dùng</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
 
-<h2>Hồ Sơ</h2>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row" style="margin:2% 0 2% 0">
+            <div class="card card-primary" style="margin:auto;">
+                <div class="card-body">
 
-<div>
-    <h4>ThanhVien</h4>
-    <hr />
-    <dl class="page-admin-content dl-horizontal">
+                    <div class="table-responsive ">
+                        <table class="table">
+                            <tr>
+                                <th style="width:50%">Tên:</th>
+                                <td class="details-profile"> @Html.DisplayFor(model => model.Ten)</td>
+                            </tr>
+                            <tr>
+                                <th>Họ và tên lót:</th>
+                                <td class="details-profile"> @Html.DisplayFor(model => model.Ho)</td>
+                            </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DBUser.FirstName)
-        </dt>
+                            <tr>
+                                <th>Ngày sinh</th>
+                                <td class="details-profile"> @Html.DisplayFor(model => model.NgaySinh)</td>
+                            </tr>
+                            <tr>
+                                <th>Mã số sinh viên:</th>
+                                <td class="details-profile"> @Html.DisplayFor(model => model.MSSV)</td>
+                            </tr>
+                            <tr>
+                                <th>Lớp:</th>
+                                <td class="details-profile"> @Html.DisplayFor(model => model.Lop)</td>
+                            </tr>
+                            <tr>
+                                <th>Số điện thoại:</th>
+                                <td class="details-profile"> @Html.DisplayFor(model => model.SDT)</td>
+                            </tr>
+                        </table>
 
-        <dd>
-            @Html.DisplayFor(model => model.DBUser.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ten)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ten)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ho)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ho)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NgaySinh)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NgaySinh)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MSSV)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MSSV)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Lop)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Lop)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SDT)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SDT)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Mail)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Mail)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                    </div>
+                    <div class="row no-print">
+                        <div class="col-12">
+                            <a href="@Url.Action("Edit", new { id = Model.ID })" class="btn btn-default  save-profile"><i class="fas fa-print"></i> SỬA HỒ SƠ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
