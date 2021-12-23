@@ -4515,6 +4515,9 @@
     <Content Include="Areas\Profile\Views\web.config" />
     <Content Include="Areas\Profile\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Albums\View.cshtml" />
+    <Content Include="Areas\Profile\Views\ClubUser\ThongBao_CLB.cshtml" />
+    <Content Include="Areas\Profile\Views\ClubUser\HoatDong_CLB.cshtml" />
+    <Content Include="Areas\Profile\Views\ClubUser\SuKien_CLB.cshtml" />
     <None Include="packages.config" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

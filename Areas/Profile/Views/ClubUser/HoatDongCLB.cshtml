@@ -1,78 +1,88 @@
-﻿@model IEnumerable<ClubPortalMS.Models.HoatDongViewModel>
+﻿
+@using PagedList.Mvc;
+@using PagedList;
+
 @{
-    ViewBag.Title = "HoatDongCLB";
+    ViewBag.Title = "Thông báo câu lạc bộ";
     Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+    var DsHoatDong = (IPagedList<ClubPortalMS.Models.HoatDongViewModel>)ViewBag.DsHoatDong;
+
 }
 
-<h2>HoatDongCLB</h2>
-@if (ViewBag.Message != null)
-{
-    <div class="alert alert-success" style="background-color:powderblue; color:black;border:1px solid black">
-        @ViewBag.Message
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Câu lạc bộ</h1>
+            </div>
+        </div>
     </div>
-}
-<table class="table">
-    <tr>
-        <th>
-            Tên CLB
-        </th>
-        <th>
-            Tiêu Đề
-        </th>
-        <th>
-            Ngày bắt đầu
-        </th>
-        <th>
-            Ngày kết thúc
-        </th>
-        <th>
-            Mô tả
-        </th>
-        <th>
-            Nội dung
-        </th>
-        <th>
-            Trang thái
-        </th>
-        <th>
-            Địa điểm
-        </th>
-        <th></th>
-    </tr>
+</section>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @item.CLB.TenCLB
-            </td>
-            <td>
-                @item.QLDSHoatDong.ChuDe
-            </td>
-            <td>
-                @item.QLDSHoatDong.NgayBatDau
-            </td>
-            <td>
-                @item.QLDSHoatDong.NgayKetThuc
-            </td>
-            <td>
-                @item.QLDSHoatDong.Mota
-            </td>
-            <td>
-                @item.QLDSHoatDong.NoiDung
-            </td>
-            <td>
-                @item.QLDSHoatDong.TrangThai
-            </td>
-            <td>
-                @item.QLDSHoatDong.DiaDiem
-            </td>
-            <td>
-                @Html.ActionLink("Xem chi tiết", "BaiVietHDCLB", new { id = item.QLDSHoatDong.ID })
-                @Html.ActionLink("Tham Gia", "ThamGiaHD", new { id = item.QLDSHoatDong.ID })
-            </td>
-        </tr>
-    }
-
-</table>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="callout callout-info">
+                    <h5><i class="fas fa-list"></i> Danh sách hoạt động:</h5>
+                </div>
+                <div class="invoice p-3 mb-3">
+                    <div class="row">
+                        <div class="col-12 table table-responsive">
+                            <table id="myTable" class="table table-striped table table-bordered table-hover table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Tiêu Đề
+                                        </th>
+                                        <th>
+                                            Ngày bắt đầu
+                                        </th>
+                                        <th>
+                                            Ngày kết thúc
+                                        </th>
+                                        <th>
+                                            Mô tả
+                                        </th>
+                                        <th>
+                                            Địa điểm
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.DsHoatDong)
+                                    {
+                                    <tr>
+                                        <td>
+                                            @item.QLDSHoatDong.ChuDe
+                                        </td>
+                                        <td>
+                                            @item.QLDSHoatDong.NgayBatDau
+                                        </td>
+                                        <td>
+                                            @item.QLDSHoatDong.NgayKetThuc
+                                        </td>
+                                        <td>
+                                            @item.QLDSHoatDong.Mota
+                                        </td>
+                                        <td>
+                                            @item.QLDSHoatDong.DiaDiem
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Xem chi tiết", "BaiVietHDCLB", new { id = item.QLDSHoatDong.ID })
+                                            @Html.ActionLink("Tham Gia", "ThamGiaHD", new { id = item.QLDSHoatDong.ID })
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            @Html.PagedListPager(DsHoatDong, page => Url.Action("HoatDOngCLB", new { page, id = ViewBag.idCLB }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 

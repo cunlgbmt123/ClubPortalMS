@@ -28,13 +28,18 @@
         <p>
             Địa điểm: @Html.DisplayFor(model => model.DiaDiem)
         </p>
-        <p>
-            <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v2</a>
-        </p>
+        @if (Model.File == null)
+        {<p>Không có file đính kèm</p>}
+        else
+        {
+            <p>
+                File Đính kèm:<a href="@Url.Action("DocumentDownloadSK","ClubUser", new { id = Model.ID})" class="link-black text-sm"><i class="fas fa-link mr-1"></i>>@Model.TenFile</a>
+            </p>
+        }
     </div>
     <p>
 
-        @Html.ActionLink("Quay lại", "SuKienCLB")
+        @Html.ActionLink("Quay lại", "SuKienCLB", new { id = ViewBag.idCLB })
     </p>
 </div>
 

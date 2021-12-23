@@ -34,13 +34,13 @@
         {<p>Không có file đính kèm</p>}
         else{
         <p>
-            File Đính kèm:<a href="@Url.Action("DocumentDownloadHD","ClubUser", new { id = Model.ID})" class="link-black text-sm"><i class="fas fa-link mr-1"></i>>@Model.TenFile</a>
+            File Đính kèm:<a href="@Url.Action("DocumentDownloadSK","ClubUser", new { id = Model.ID})" class="link-black text-sm"><i class="fas fa-link mr-1"></i>>@Model.TenFile</a>
         </p>
         }
     </div>
     <p>
 
-        @Html.ActionLink("Quay lại", "HoatDongCLB")
+        @Html.ActionLink("Quay lại", "HoatDongCLB", new {id = ViewBag.idCLB })
     </p>
 </div>
 

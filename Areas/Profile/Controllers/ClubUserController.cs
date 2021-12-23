@@ -15,27 +15,58 @@ namespace ClubPortalMS.Areas.Profile.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
         #region' Thông báo CLB
         //Thông báo CLB
-        public ActionResult ThongBaoCLB()
+        public ActionResult ThongBao_CLB()
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
-            List<CLB> cLBs = db.CLB.ToList();
+            List<ThanhVien_CLB> thanhVien_clb = db.ThanhVien_CLB.ToList();
+            List<CLB> clb = db.CLB.ToList();
+            var Dsclbthamgia = from e in thanhVien_clb
+                                   //join d in thanhVien on e.IDtvien equals IdTvien into table1
+                                   //from d in table1.ToList()
+                               join i in clb on e.IDCLB equals i.ID into table
+                               from i in table.ToList()
+                               where e.IDtvien == IdTvien
+                               && e.IDRoles == 1
+                               select new PhanHoiCLBViewModel
+                               {
+                                   TenCLB = i.TenCLB,
+                                   IdCLB = i.ID
+                               };
+            ViewBag.DsCLB = Dsclbthamgia;
+
+            List<ThongBao> thongBaos = db.ThongBao.ToList();
+            var DsTBGanDay = from e in thanhVien_clb
+                             join d in thongBaos on e.IDCLB equals d.IdCLB into table1
+                             from d in table1.ToList()
+                             where e.IDtvien == IdTvien
+                             && e.IDRoles == 1
+                             select new ThongBaoViewModel
+                             {
+                                 ThanhVien_CLB = e,
+                                 ThongBao = d
+                             };
+            ViewBag.DsTBGanDay = DsTBGanDay.OrderByDescending(x => x.ThongBao.ID).Take(3).ToList();
+            return View();
+        }
+        public ActionResult ThongBaoCLB(int? id,int? page)
+        {
+            int IdTvien = Convert.ToInt32(Session["UserId"]);
             List<ThongBao> thongBaos = db.ThongBao.ToList();
             List<ThanhVien_CLB> thanhVien_clb = db.ThanhVien_CLB.ToList();
-            var DsThongBao = from e in thanhVien_clb
-                               join d in cLBs on e.IDCLB equals d.ID into table1
-                               from d in table1.ToList()
+            var DsThongBao = from e in thanhVien_clb                             
                                join i in thongBaos on e.IDCLB equals i.IdCLB into table
                                from i in table.ToList()
                                where e.IDtvien == IdTvien
                                && e.IDRoles == 1
+                               && i.IdCLB == id
                                select new ThongBaoViewModel
                                {
                                    ThanhVien_CLB = e,
-                                   ThongBao = i,
-                                   CLB = d
+                                   ThongBao = i
                                };
-
-            return View(DsThongBao);
+            ViewBag.idCLB = id;
+            ViewBag.DsThongBao = DsThongBao.ToList().ToPagedList(page ?? 1, 5);
+            return View();
         }
         #endregion
         #region' Đăng ký CLB
@@ -153,26 +184,56 @@ namespace ClubPortalMS.Areas.Profile.Controllers
         }
         #endregion
         #region Danh sách Hoạt động CLB
-        public ActionResult HoatDongCLB()
+        public ActionResult HoatDong_CLB()
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
-            List<CLB> cLBs = db.CLB.ToList();
+            List<ThanhVien_CLB> thanhVien_clb = db.ThanhVien_CLB.ToList();
+            List<CLB> clb = db.CLB.ToList();
+            var Dsclbthamgia = from e in thanhVien_clb
+                                   //join d in thanhVien on e.IDtvien equals IdTvien into table1
+                                   //from d in table1.ToList()
+                               join i in clb on e.IDCLB equals i.ID into table
+                               from i in table.ToList()
+                               where e.IDtvien == IdTvien
+                               && e.IDRoles == 1
+                               select new PhanHoiCLBViewModel
+                               {
+                                   TenCLB = i.TenCLB,
+                                   IdCLB = i.ID
+                               };
+            ViewBag.DsCLB = Dsclbthamgia;
+            List<QLDSHoatDong> hoatDongs = db.QLDSHoatDong.ToList();
+            var DsHDGanDay = from e in thanhVien_clb
+                             join d in hoatDongs on e.IDCLB equals d.IdCLB into table1
+                             from d in table1.ToList()
+                             where e.IDtvien == IdTvien
+                             && e.IDRoles == 1
+                             select new ViewModel1
+                             {
+                                 ThanhVien_CLB = e,
+                                 QLDSHoatDong = d
+                             };
+            ViewBag.DsHDGanDay = DsHDGanDay.OrderByDescending(x => x.QLDSHoatDong.ID).Take(3).ToList();
+            return View()
+;        }
+        public ActionResult HoatDongCLB(int? id, int? page)
+        {
+            int IdTvien = Convert.ToInt32(Session["UserId"]);
             List<QLDSHoatDong> QLDShoatDongs = db.QLDSHoatDong.ToList();
             List<ThanhVien_CLB> thanhVien_clb = db.ThanhVien_CLB.ToList();
             var DsHoatDong = from e in thanhVien_clb
-                             join d in cLBs on e.IDCLB equals d.ID into table1
-                             from d in table1.ToList()
                              join i in QLDShoatDongs on e.IDCLB equals i.IdCLB into table
                              from i in table.ToList()
                              where e.IDtvien == IdTvien
                              && e.IDRoles == 1
+                             && i.IdCLB == id
                              select new HoatDongViewModel
                              {
                                  ThanhVien_CLB = e,
                                  QLDSHoatDong = i,
-                                 CLB = d
                              };
-
+            ViewBag.idCLB = id;
+            ViewBag.DsHoatDong = DsHoatDong.ToList().ToPagedList(page ?? 1, 5);
             return View(DsHoatDong);
         }
         public ActionResult ThamGiaHD(int? id)
@@ -211,35 +272,73 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             QLDSHoatDong hoatDong = db.QLDSHoatDong.Find(id);
+            ViewBag.idCLB = hoatDong.IdCLB;
             if (hoatDong == null)
             {
                 return HttpNotFound();
             }
             return View(hoatDong);
         }
+        public FileResult DocumentDownloadHD(int? id)
+        {
+            var hoatDong = db.QLDSHoatDong.Where(u => u.ID == id).FirstOrDefault();
+            return File(hoatDong.File, hoatDong.ContentType, hoatDong.TenFile);
+        }
         #endregion
         #region Ds sự kiện CLB
-        public ActionResult SuKienCLB(string messageRegistration)
+        public ActionResult SuKien_CLB()
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
-            List<CLB> cLBs = db.CLB.ToList();
+            List<ThanhVien_CLB> thanhVien_clb = db.ThanhVien_CLB.ToList();
+            List<CLB> clb = db.CLB.ToList();
+            var Dsclbthamgia = from e in thanhVien_clb
+                                   //join d in thanhVien on e.IDtvien equals IdTvien into table1
+                                   //from d in table1.ToList()
+                               join i in clb on e.IDCLB equals i.ID into table
+                               from i in table.ToList()
+                               where e.IDtvien == IdTvien
+                               && e.IDRoles == 1
+                               select new PhanHoiCLBViewModel
+                               {
+                                   TenCLB = i.TenCLB,
+                                   IdCLB = i.ID
+                               };
+            ViewBag.DsCLB = Dsclbthamgia;
+            List<SuKien> suKiens = db.SuKien.ToList();
+            var DsSKGanDay = from e in thanhVien_clb
+                             join d in suKiens on e.IDCLB equals d.IdCLB into table1
+                             from d in table1.ToList()
+                             where e.IDtvien == IdTvien
+                             && e.IDRoles == 1
+                             select new ViewModel1
+                             {
+                                 ThanhVien_CLB = e,
+                                 SuKien = d
+                             };
+            ViewBag.DsSKGanDay = DsSKGanDay.OrderByDescending(x => x.SuKien.ID).Take(3).ToList();
+            return View()
+;
+        }
+        public ActionResult SuKienCLB(string messageRegistration, int? id , int? page)
+        {
+            int IdTvien = Convert.ToInt32(Session["UserId"]);
             List<SuKien> suKiens = db.SuKien.ToList();
             List<ThanhVien_CLB> thanhVien_clb = db.ThanhVien_CLB.ToList();
             var DsSuien = from e in thanhVien_clb
-                             join d in cLBs on e.IDCLB equals d.ID into table1
-                             from d in table1.ToList()
                              join i in suKiens on e.IDCLB equals i.IdCLB into table
                              from i in table.ToList()
                              where e.IDtvien == IdTvien
                              && e.IDRoles == 1
+                             && e.IDCLB == id
                              select new SukienViewModel
                              {
                                  ThanhVien_CLB = e,
-                                 SuKien = i,
-                                 CLB = d
+                                 SuKien = i
                              };
             ViewBag.Message = messageRegistration;
-            return View(DsSuien);
+            ViewBag.idCLB = id;
+            ViewBag.DsSuien = DsSuien.ToList().ToPagedList(page ?? 1, 5);
+            return View();
         }
 
         public ActionResult ThamGiaSK(int? id)
@@ -273,10 +372,10 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             }
             return RedirectToAction("SuKienCLB", new { messageRegistration });
         }
-        public FileResult DocumentDownloadHD(int? id)
+        public FileResult DocumentDownloadSK(int? id)
         {
-            var hoatDong = db.QLDSHoatDong.Where(u => u.ID == id).FirstOrDefault();
-            return File(hoatDong.File, hoatDong.ContentType, hoatDong.TenFile);
+            var suKien = db.SuKien.Where(u => u.ID == id).FirstOrDefault();
+            return File(suKien.File, suKien.ContentType, suKien.TenFile);
         }
         public ActionResult BaiVietSKCLB(int? id)
         {
@@ -285,6 +384,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             SuKien suKien = db.SuKien.Find(id);
+            ViewBag.idCLB = suKien.IdCLB;
             if (suKien == null)
             {
                 return HttpNotFound();
