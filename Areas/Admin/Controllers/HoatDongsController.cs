@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -46,11 +47,29 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Ten,MoTa,KeyWord,URL,HinhAnhChiTiet,HinhAnhBaiViet,NgayDang,TenNguoiDang")] HoatDong hoatDong)
+        public ActionResult Create( HoatDong hoatDong)
         {
+            
             if (ModelState.IsValid)
             {
                 db.HoatDong.Add(hoatDong);
+                string hinhanhchitiet = Path.GetFileNameWithoutExtension(hoatDong.ImageFileChitiet.FileName);
+
+                string hinhanhbaiviet = Path.GetFileNameWithoutExtension(hoatDong.ImageFileBaiviet.FileName);
+
+                string imgchitietExtension = Path.GetExtension(hoatDong.ImageFileChitiet.FileName);
+
+                string imgbaivietExtension = Path.GetExtension(hoatDong.ImageFileBaiviet.FileName);
+
+                hinhanhchitiet = hinhanhchitiet + DateTime.Now.ToString("yyyymmssfff") + imgchitietExtension;
+                hinhanhbaiviet = hinhanhbaiviet + DateTime.Now.ToString("yyyymmssfff") + imgbaivietExtension;
+
+                hoatDong.HinhAnhChiTiet = "~/Areas/Admin/Resource/HinhAnh/" + hinhanhchitiet;
+                hoatDong.HinhAnhBaiViet = "~/Areas/Admin/Resource/HinhAnh/" + hinhanhbaiviet;
+                hinhanhchitiet = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanhchitiet);
+                hinhanhbaiviet = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanhbaiviet);
+                hoatDong.ImageFileChitiet.SaveAs(hinhanhchitiet);
+                hoatDong.ImageFileBaiviet.SaveAs(hinhanhbaiviet);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -80,9 +99,27 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Ten,MoTa,KeyWord,URL,HinhAnhChiTiet,HinhAnhBaiViet,NgayDang,TenNguoiDang")] HoatDong hoatDong)
         {
+            
             if (ModelState.IsValid)
             {
                 db.Entry(hoatDong).State = EntityState.Modified;
+                string hinhanhchitiet = Path.GetFileNameWithoutExtension(hoatDong.ImageFileChitiet.FileName);
+
+                string hinhanhbaiviet = Path.GetFileNameWithoutExtension(hoatDong.ImageFileBaiviet.FileName);
+
+                string imgchitietExtension = Path.GetExtension(hoatDong.ImageFileChitiet.FileName);
+
+                string imgbaivietExtension = Path.GetExtension(hoatDong.ImageFileBaiviet.FileName);
+
+                hinhanhchitiet = hinhanhchitiet + DateTime.Now.ToString("yyyymmssfff") + imgchitietExtension;
+                hinhanhbaiviet = hinhanhbaiviet + DateTime.Now.ToString("yyyymmssfff") + imgbaivietExtension;
+
+                hoatDong.HinhAnhChiTiet = "~/Areas/Admin/Resource/HinhAnh/" + hinhanhchitiet;
+                hoatDong.HinhAnhBaiViet = "~/Areas/Admin/Resource/HinhAnh/" + hinhanhbaiviet;
+                hinhanhchitiet = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanhchitiet);
+                hinhanhbaiviet = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanhbaiviet);
+                hoatDong.ImageFileChitiet.SaveAs(hinhanhchitiet);
+                hoatDong.ImageFileBaiviet.SaveAs(hinhanhbaiviet);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

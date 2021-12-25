@@ -4154,11 +4154,6 @@
     <Content Include="Areas\Admin\Views\CLBs\Details.cshtml" />
     <Content Include="Areas\Admin\Views\CLBs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\CLBs\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\GioiThieux\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\GioiThieux\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\GioiThieux\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\GioiThieux\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\GioiThieux\Index.cshtml" />
     <Content Include="Areas\Admin\Views\DangKies\Create.cshtml" />
     <Content Include="Areas\Admin\Views\DangKies\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\DangKies\Details.cshtml" />
@@ -4515,7 +4510,11 @@
     <Content Include="Areas\Profile\Views\ThongTinTV\Edit.cshtml" />
     <Content Include="Areas\Profile\Views\web.config" />
     <Content Include="Areas\Profile\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\Albums\View.cshtml" />
+    <Content Include="Areas\Admin\Views\GioiThieux\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\GioiThieux\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\GioiThieux\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\GioiThieux\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\GioiThieux\Index.cshtml" />
     <None Include="packages.config" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

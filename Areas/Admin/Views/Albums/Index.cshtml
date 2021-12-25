@@ -50,10 +50,12 @@
                                 @Html.DisplayFor(modelItem => item.TieuDe)
                             </td>
                             <td>
-                                <img src="@Html.DisplayFor(modelItem => item.HinhAnh)" style="width: 100px; height: 100px; margin: 10px;" />                     
+                                <img src="@Url.Content(item.HinhAnh)" style="width: 100px; height: 100px; margin: 10px;"/>
+                                
                             </td>
                             <td>
-                               <img src="@Html.DisplayFor(modelItem => item.Video)" style="width: 100px; height: 100px; margin: 10px;"/>
+                                <img src="@Url.Content(item.Video)" style="width: 100px; height: 100px; margin: 10px;" />
+                                
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.MoTa)

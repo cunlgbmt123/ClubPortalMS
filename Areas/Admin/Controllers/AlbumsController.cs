@@ -50,37 +50,39 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Album album)
         {
-            string hinhanh = Path.GetFileNameWithoutExtension(album.ImageFile.FileName);
-            string video = Path.GetFileNameWithoutExtension(album.VideoFile.FileName);
             
-            string imgExtension = Path.GetExtension(album.ImageFile.FileName);
 
-            string videoExtension = Path.GetExtension(album.VideoFile.FileName);
-
-            hinhanh = hinhanh + DateTime.Now.ToString("yyyymmssfff") + imgExtension;
-            video = video + DateTime.Now.ToString("yyyymmssfff") + videoExtension;
             
-            album.HinhAnh = "~/Areas/Admin/Resource/HinhAnh/" + hinhanh;
-            album.Video = "~/Areas/Admin/Resource/Video/" + video;
-            hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanh);
-            video = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/Video/"), video);
-            album.ImageFile.SaveAs(hinhanh);
-            album.ImageFile.SaveAs(video);
             if (ModelState.IsValid)
-            {
+            {               
                 
                 db.Album.Add(album);
+                string hinhanh = Path.GetFileNameWithoutExtension(album.ImageFile.FileName);
+                string imgExtension = Path.GetExtension(album.ImageFile.FileName);
+                hinhanh = hinhanh + DateTime.Now.ToString("yyyymmssfff") + imgExtension;
+                album.HinhAnh = "~/Areas/Admin/Resource/HinhAnh/" + hinhanh;
+                hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanh);
+                album.ImageFile.SaveAs(hinhanh);
+                string video = Path.GetFileNameWithoutExtension(album.VideoFile.FileName);
+                string videoExtension = Path.GetExtension(album.VideoFile.FileName);
+                video = video + DateTime.Now.ToString("yyyymmssfff") + videoExtension;
+                album.Video = "~/Areas/Admin/Resource/Video/" + video;
+                video = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/Video/"), video);
+                album.VideoFile.SaveAs(video);
                 db.SaveChanges();
-               /* ModelState.Clear();*/
+                /* ModelState.Clear();*/
                 return RedirectToAction("Index");
             }
-
             return View(album);
         }
-
+        
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         // GET: Admin/Albums/Edit/5
         public ActionResult Edit(int? id)
         {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -100,27 +102,27 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Album album)
         {
-            string hinhanh = Path.GetFileNameWithoutExtension(album.ImageFile.FileName);
-            string video = Path.GetFileNameWithoutExtension(album.VideoFile.FileName);
-
-            string imgExtension = Path.GetExtension(album.ImageFile.FileName);
-
-            string videoExtension = Path.GetExtension(album.VideoFile.FileName);
-
-            hinhanh = hinhanh + DateTime.Now.ToString("yyyymmssfff") + imgExtension;
-            video = video + DateTime.Now.ToString("yyyymmssfff") + videoExtension;
-
-            album.HinhAnh = "~/Areas/Admin/Resource/HinhAnh/" + hinhanh;
-            album.Video = "~/Areas/Admin/Resource/Video/" + video;
-            hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanh);
-            video = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/Video/"), video);
-            album.ImageFile.SaveAs(hinhanh);
-            album.ImageFile.SaveAs(video);
+            
             if (ModelState.IsValid)
             {
-
                 db.Entry(album).State = EntityState.Modified;
+                string hinhanh = Path.GetFileNameWithoutExtension(album.ImageFile.FileName);
+                string imgExtension = Path.GetExtension(album.ImageFile.FileName);
+                hinhanh = hinhanh + DateTime.Now.ToString("yyyymmssfff") + imgExtension;
+                album.HinhAnh = "~/Areas/Admin/Resource/HinhAnh/" + hinhanh;
+                hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanh);
+                album.ImageFile.SaveAs(hinhanh);
+
+
+                string video = Path.GetFileNameWithoutExtension(album.VideoFile.FileName);
+                string videoExtension = Path.GetExtension(album.VideoFile.FileName);
+                video = video + DateTime.Now.ToString("yyyymmssfff") + videoExtension;
+                album.Video = "~/Areas/Admin/Resource/Video/" + video;
+                video = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/Video/"), video);
+                album.VideoFile.SaveAs(video);
+
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             return View(album);

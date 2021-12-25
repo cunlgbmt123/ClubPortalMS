@@ -8,11 +8,11 @@
     }
 }
 function Showvideo(upLoad1, preViewvideo) {
-    if (upLoad1.files && upLoad1.files[0]) {
+    if (upLoad1.files && upLoad1.files[1]) {
         var reader = new FileReader();
         reader.onload = function (e) {
             $(preViewvideo).attr('src', e.target.result);
         }
-        reader.readAsDataURL(upLoad1.files[0])
+        reader.readAsDataURL(upLoad1.files[1])
     }
 }

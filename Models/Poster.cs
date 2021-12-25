@@ -11,9 +11,18 @@ namespace ClubPortalMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web;
+
     public partial class Poster
     {
+        public Poster()
+        {
+            HinhAnh = "~/Areas/Admin/Resource/HinhAnh/addImg.jpg";
+            
+        }
+        [NotMapped]
+        public HttpPostedFileBase ImageFile { get; set; }
         public int ID { get; set; }
         public string TenPoster { get; set; }
         public string HinhAnh { get; set; }

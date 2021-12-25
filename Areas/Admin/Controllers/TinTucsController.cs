@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -38,6 +39,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/TinTucs/Create
         public ActionResult Create()
         {
+            TinTuc tinTuc = new TinTuc();
             return View();
         }
 
@@ -46,11 +48,29 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TieuDe,MoTa,KeyWord,URL,HinhAnhBaiViet,HinhAnhChiTiet,NgayDang,TenNguoiDang")] TinTuc tinTuc)
+        public ActionResult Create( TinTuc tinTuc)
         {
+            
             if (ModelState.IsValid)
             {
                 db.TinTucs.Add(tinTuc);
+                string hinhanhchitiet = Path.GetFileNameWithoutExtension(tinTuc.ImageFileChitiet.FileName);
+
+                string hinhanhbaiviet = Path.GetFileNameWithoutExtension(tinTuc.ImageFileBaiviet.FileName);
+
+                string imgchitietExtension = Path.GetExtension(tinTuc.ImageFileChitiet.FileName);
+
+                string imgbaivietExtension = Path.GetExtension(tinTuc.ImageFileBaiviet.FileName);
+
+                hinhanhchitiet = hinhanhchitiet + DateTime.Now.ToString("yyyymmssfff") + imgchitietExtension;
+                hinhanhbaiviet = hinhanhbaiviet + DateTime.Now.ToString("yyyymmssfff") + imgbaivietExtension;
+
+                tinTuc.HinhAnhChiTiet = "~/Areas/Admin/Resource/HinhAnh/" + hinhanhchitiet;
+                tinTuc.HinhAnhBaiViet = "~/Areas/Admin/Resource/HinhAnh/" + hinhanhbaiviet;
+                hinhanhchitiet = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanhchitiet);
+                hinhanhbaiviet = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanhbaiviet);
+                tinTuc.ImageFileChitiet.SaveAs(hinhanhchitiet);
+                tinTuc.ImageFileBaiviet.SaveAs(hinhanhbaiviet);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -83,6 +103,23 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(tinTuc).State = EntityState.Modified;
+                string hinhanhchitiet = Path.GetFileNameWithoutExtension(tinTuc.ImageFileChitiet.FileName);
+
+                string hinhanhbaiviet = Path.GetFileNameWithoutExtension(tinTuc.ImageFileBaiviet.FileName);
+
+                string imgchitietExtension = Path.GetExtension(tinTuc.ImageFileChitiet.FileName);
+
+                string imgbaivietExtension = Path.GetExtension(tinTuc.ImageFileBaiviet.FileName);
+
+                hinhanhchitiet = hinhanhchitiet + DateTime.Now.ToString("yyyymmssfff") + imgchitietExtension;
+                hinhanhbaiviet = hinhanhbaiviet + DateTime.Now.ToString("yyyymmssfff") + imgbaivietExtension;
+
+                tinTuc.HinhAnhChiTiet = "~/Areas/Admin/Resource/HinhAnh/" + hinhanhchitiet;
+                tinTuc.HinhAnhBaiViet = "~/Areas/Admin/Resource/HinhAnh/" + hinhanhbaiviet;
+                hinhanhchitiet = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanhchitiet);
+                hinhanhbaiviet = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanhbaiviet);
+                tinTuc.ImageFileChitiet.SaveAs(hinhanhchitiet);
+                tinTuc.ImageFileBaiviet.SaveAs(hinhanhbaiviet);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

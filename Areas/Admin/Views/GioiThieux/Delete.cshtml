@@ -6,6 +6,7 @@
 }
 
 
+
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -50,7 +51,7 @@
                             </dt>
 
                             <dd>
-                                @Html.DisplayFor(model => model.HinhAnh)
+                                <img src="@Url.Content(Model.HinhAnh)" style="width: 100px; height: 100px; margin: 10px;" />
                             </dd>
 
                             <dt>
@@ -62,7 +63,6 @@
                             </dd>
 
                         </dl>
-
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -71,4 +71,8 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
+        <div class="form-actions no-color">
+            
+        </div>
     }
+

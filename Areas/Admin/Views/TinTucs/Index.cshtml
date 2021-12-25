@@ -57,37 +57,39 @@
 
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TieuDe)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.MoTa)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.KeyWord)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.URL)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.HinhAnhBaiViet)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.HinhAnhChiTiet)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NgayDang)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TenNguoiDang)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                            </td>
-                        </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TieuDe)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MoTa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.KeyWord)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.URL)
+                    </td>
+
+                    <td>
+                        <img src="@Url.Content(item.HinhAnhBaiViet)" style="width: 100px; height: 100px; margin: 10px;" />
+                    </td>
+                    <td>
+                        <img src="@Url.Content(item.HinhAnhChiTiet)" style="width: 100px; height: 100px; margin: 10px;" />
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayDang)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenNguoiDang)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
                     }
 
                 </table>

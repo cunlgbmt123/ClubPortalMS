@@ -11,9 +11,22 @@ namespace ClubPortalMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web;
+
     public partial class HoatDong
     {
+        public HoatDong()
+        {
+            HinhAnhChiTiet = "~/Areas/Admin/Resource/HinhAnh/addImg.jpg";
+            HinhAnhBaiViet = "~/Areas/Admin/Resource/Video/addImg.jpg";
+        }
+        [NotMapped]
+        public HttpPostedFileBase ImageFileChitiet { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ImageFileBaiviet { get; set; }
+
         public int ID { get; set; }
         public string Ten { get; set; }
         public string MoTa { get; set; }

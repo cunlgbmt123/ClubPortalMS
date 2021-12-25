@@ -52,6 +52,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                cLB.NgayThanhLap = DateTime.Now ;
                 db.CLB.Add(cLB);
                 db.SaveChanges();
                 return RedirectToAction("Index");

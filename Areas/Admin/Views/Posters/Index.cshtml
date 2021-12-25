@@ -46,7 +46,7 @@
                                 @Html.DisplayFor(modelItem => item.TenPoster)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.HinhAnh)
+                                <img src="@Url.Content(item.HinhAnh)" style="width: 100px; height: 100px; margin: 10px;" />
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Status)

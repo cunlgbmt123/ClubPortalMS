@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -38,6 +39,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/Posters/Create
         public ActionResult Create()
         {
+            Poster poster = new Poster();
             return View();
         }
 
@@ -46,11 +48,28 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TenPoster,HinhAnh,Status")] Poster poster)
+        public ActionResult Create( Poster poster)
         {
+            
             if (ModelState.IsValid)
             {
                 db.Poster.Add(poster);
+                string hinhanh = Path.GetFileNameWithoutExtension(poster.ImageFile.FileName);
+
+
+                string imgExtension = Path.GetExtension(poster.ImageFile.FileName);
+
+
+
+                hinhanh = hinhanh + DateTime.Now.ToString("yyyymmssfff") + imgExtension;
+
+
+                poster.HinhAnh = "~/Areas/Admin/Resource/HinhAnh/" + hinhanh;
+
+                hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanh);
+
+                poster.ImageFile.SaveAs(hinhanh);
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -78,11 +97,29 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TenPoster,HinhAnh,Status")] Poster poster)
+        public ActionResult Edit( Poster poster)
         {
+            string hinhanh = Path.GetFileNameWithoutExtension(poster.ImageFile.FileName);
+
+
+            string imgExtension = Path.GetExtension(poster.ImageFile.FileName);
+
+
+
+            hinhanh = hinhanh + DateTime.Now.ToString("yyyymmssfff") + imgExtension;
+
+
+            poster.HinhAnh = "~/Areas/Admin/Resource/HinhAnh/" + hinhanh;
+
+            hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanh);
+
+            poster.ImageFile.SaveAs(hinhanh);
+
             if (ModelState.IsValid)
             {
                 db.Entry(poster).State = EntityState.Modified;
+
+                
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

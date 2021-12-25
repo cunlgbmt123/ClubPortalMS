@@ -22,15 +22,22 @@ namespace ClubPortalMS.Models
             HinhAnh = "~/Areas/Admin/Resource/HinhAnh/addImg.jpg";
             Video = "~/Areas/Admin/Resource/Video/addImg.jpg";
         }
+        
+
         public int ID { get; set; }
         public string TieuDe { get; set; }
+        public string MoTa { get; set; }
+
         [DisplayName("Tải hình ảnh lên")]
         public string HinhAnh { get; set; }
+
         [DisplayName("Tải video lên")]
         public string Video { get; set; }
-        public string MoTa { get; set; }
+        
+
         [NotMapped]
         public HttpPostedFileBase ImageFile { get; set; }
+
         [NotMapped]
         public HttpPostedFileBase VideoFile { get; set; }
     }

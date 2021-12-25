@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -39,6 +40,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/GioiThieux/Create
         public ActionResult Create()
         {
+            GioiThieu gioiThieu = new GioiThieu();
             ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB");
             return View();
         }
@@ -48,10 +50,28 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,IdCLB,MoTa,HinhAnh,LichSuHinhThanh")] GioiThieu gioiThieu)
+        public ActionResult Create(GioiThieu gioiThieu)
         {
+            
+            string hinhanh = Path.GetFileNameWithoutExtension(gioiThieu.ImageFile.FileName);
+            
+
+            string imgExtension = Path.GetExtension(gioiThieu.ImageFile.FileName);
+
+            
+
+            hinhanh = hinhanh + DateTime.Now.ToString("yyyymmssfff") + imgExtension;
+
+
+            gioiThieu.HinhAnh = "~/Areas/Admin/Resource/HinhAnh/" + hinhanh;
+            
+            hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanh);
+
+            gioiThieu.ImageFile.SaveAs(hinhanh);
+            
             if (ModelState.IsValid)
             {
+                
                 db.GioiThieu.Add(gioiThieu);
                 db.SaveChanges();
                 return RedirectToAction("Index");

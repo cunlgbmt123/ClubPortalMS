@@ -17,7 +17,8 @@
                         <p>
                             @Html.ActionLink("Create New", "Create")
                         </p>
-                        <strong class="text-danger text-uppercase">Trang Chủ</strong>
+
+                        <strong class="text-danger text-uppercase">Danh Sách</strong>
                     </div>
                     <div class="col-md-6 text-right">
                         <a href="#" class="btn btn-sm btn-success">Content</a>
@@ -52,7 +53,7 @@
                                 @Html.DisplayFor(modelItem => item.MoTa)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.HinhAnh)
+                                <img src="@Url.Content(item.HinhAnh)" style="width: 100px; height: 100px; margin: 10px;" />
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.LichSuHinhThanh)
@@ -75,5 +76,3 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
-
