@@ -25,7 +25,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                from i in table.ToList()
                                where e.IDtvien == IdTvien
                                && e.IDRoles == 2
-                               select new ViewModel3
+                               select new CLBDaThamGiaViewModel
                                {
                                    TenCLB = i.TenCLB,
                                    IDCLB = i.ID,
@@ -35,7 +35,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             ViewBag.DsCLB = Dsclbthamgia;
             return View();
         }
-        public ActionResult QLHoatDong(int? id, int? page)
+        public ActionResult QLHoatDong(int? id)
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
             List<QLDSHoatDong> hoatDongs = db.QLDSHoatDong.ToList();
@@ -52,7 +52,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                              };
             int? idCLB = id;
             ViewBag.idCLB = idCLB;
-            ViewBag.DsHoatDong = DsHoatDong.ToList().ToPagedList(page ?? 1, 5);
+            ViewBag.DsHoatDong = DsHoatDong.OrderByDescending(x => x.QLDSHoatDong.ID).ToList();
             return View();
         }
         public ActionResult XemHD(int? id)
@@ -111,17 +111,17 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                     hoatDong.ContentType = contentType;
                     db.QLDSHoatDong.Add(hoatDong);
                     db.SaveChanges();
-                    return RedirectToAction("QLHoatDong_CLB", new { id = IdTvien });
+                   
                 }
                 else
                 {
                     db.QLDSHoatDong.Add(hoatDong);
                     db.SaveChanges();
-                    return RedirectToAction("QLHoatDong_CLB", new { id = IdTvien });
+                  
                 }
+                return RedirectToAction("QLHoatDong_CLB", new { id = IdTvien });
             }
             ViewBag.IdLoaiHD = new SelectList(db.LoaiHD, "ID", "TenLoaiHD", hoatDong.IdLoaiHD);
-        
             return View(hoatDong);
         }
         [HttpGet]
@@ -188,7 +188,14 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                     QLDSHoatDong hoatDongs = db.QLDSHoatDong.Find(hoatDong.ID);
                     if (hoatDongs.File == null)
                     {
-                        db.Entry(hoatDong).State = EntityState.Modified;
+                        hoatDongs.IdCLB = hoatDong.IdCLB;
+                        hoatDongs.ChuDe = hoatDong.ChuDe;
+                        hoatDongs.Mota = hoatDong.Mota;
+                        hoatDongs.NgayBatDau = hoatDong.NgayBatDau;
+                        hoatDongs.NgayKetThuc = hoatDong.NgayKetThuc;
+                        hoatDongs.NoiDung = hoatDong.NoiDung;
+                        hoatDongs.DiaDiem = hoatDong.DiaDiem;
+                        hoatDongs.IdLoaiHD = hoatDong.IdLoaiHD;
                         db.SaveChanges();
                     }
                     else
@@ -201,57 +208,44 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                         hoatDongs.NoiDung = hoatDong.NoiDung;
                         hoatDongs.DiaDiem = hoatDong.DiaDiem;
                         hoatDongs.IdLoaiHD = hoatDong.IdLoaiHD;
+                        hoatDongs.File = hoatDongs.File;
+                        hoatDongs.TenFile = hoatDongs.TenFile;
+                        hoatDongs.ContentType = hoatDongs.ContentType;
                         db.SaveChanges();
                     }
                 }
-                return RedirectToAction("QLHoatDong", new { hoatDong.IdCLB });
+                return RedirectToAction("XemHD", new { id=hoatDong.ID });
             }
             ViewBag.IdLoaiHD = new SelectList(db.LoaiHD, "ID", "TenLoaiHD", hoatDong.IdLoaiHD);
             return View(hoatDong);
         }
 
-        // GET: Admin/ThongBaos/Delete/5
-        public ActionResult XoaHD(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            QLDSHoatDong hoatDong = db.QLDSHoatDong.Find(id);
-            if (hoatDong == null)
-            {
-                return HttpNotFound();
-            }
-            return View(hoatDong);
-        }
-
-        // POST: Admin/ThongBaos/Delete/5
-        [HttpPost, ActionName("XoaHD")]
-        [ValidateAntiForgeryToken]
         public ActionResult XacNhanXoaHD(int? id)
         {
             QLDSHoatDong hoatDong = db.QLDSHoatDong.Find(id);
             db.QLDSHoatDong.Remove(hoatDong);
             db.SaveChanges();
-            return RedirectToAction("QLHoatDong", new { hoatDong.IdCLB });
+            return RedirectToAction("QLHoatDong", new { id = hoatDong.IdCLB });
         }
+
         [HttpGet]
         public ActionResult DiemDanh( int? id, int? id2) {
             List<TTNhatKy> tTNhatKies = db.TTNhatKy.ToList();
             List<ThanhVien_CLB> thanhVien_clb = db.ThanhVien_CLB.ToList();
             var DsthanhVienHD = from e in thanhVien_clb
-                               join i in tTNhatKies on e.IDtvien equals i.IdThanhVien into table
-                               from i in table.ToList()
-                               where e.IDRoles == 1
-                               && i.IDHoatDong == id
-                               && e.IDCLB == id2
-                               select new DiemDanhCLBViewModel
-                               {                              
+                                join i in tTNhatKies on e.IDtvien equals i.IdThanhVien into table
+                                from i in table.ToList()
+                                where e.IDRoles == 1
+                                && i.IDHoatDong == id
+                                && e.IDCLB == id2
+                                select new DiemDanhCLBViewModel
+                                {
                                  ID = i.ID,
                                  DiemDanh = i.DiemDanh,
-                                 ThanhVien_CLB=e
+                                
+                                 ThanhVien_CLB =e
                                };
-            //ViewBag.DsthanhVienHD = DsthanhVienHD.ToList();
+            ViewBag.IdHD = id;
             return View(DsthanhVienHD.ToList()); 
         }
         [HttpPost]

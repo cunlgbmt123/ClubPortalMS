@@ -78,10 +78,11 @@ namespace ClubPortalMS.Areas.Profile.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Details([Bind(Include = "FileNop")] NhiemVu_ThanhVien nhiemVu, HttpPostedFileBase upload, int id)
+        public ActionResult Details([Bind(Include = "FileNop,GhiChu")] NhiemVu_ThanhVien nhiemVu, HttpPostedFileBase upload, int id)
         {
             if (ModelState.IsValid)
             {
+                var nhiemVus = db.NhiemVu.Where(i => i.ID == nhiemVu.IdNv).FirstOrDefault();
                 if (upload != null)
                 {
                     int filelength = upload.ContentLength;
@@ -94,13 +95,16 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                     nhiemVUs.FileNop = nhiemVu.FileNop;
                     nhiemVUs.ContentType = contentType;
                     nhiemVUs.TenFileNop = fileName;
+                    nhiemVUs.GhiChu = nhiemVu.GhiChu; 
                     db.SaveChanges();
-                    return RedirectToAction("Index", new { id = nhiemVUs.ID });
                 }
                 else
                 {
-                    return RedirectToAction("Index", new { id = nhiemVu.ID });
+                    var nhiemVUs = db.NhiemVu_ThanhVien.Where(u => u.ID == id).FirstOrDefault();
+                    nhiemVUs.GhiChu = nhiemVu.GhiChu;
+                    db.SaveChanges();
                 }
+                return RedirectToAction("Index", new { id = nhiemVus .IdCLB});
             }
 
             return View(nhiemVu);

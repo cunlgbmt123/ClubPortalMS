@@ -27,7 +27,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                from i in table.ToList()
                                where e.IDtvien == IdTvien
                                && e.IDRoles == 2
-                               select new ViewModel3
+                               select new CLBDaThamGiaViewModel
                                {
                                    TenCLB = i.TenCLB,
                                    IDCLB = i.ID,
@@ -75,28 +75,11 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             return View(thanhVien);
         }
 
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ThanhVien_CLB thanhVien = db.ThanhVien_CLB.Find(id);
-            if (thanhVien == null)
-            {
-                return HttpNotFound();
-            }
-            return View(thanhVien);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id, int id2)
-        {
+        public ActionResult LoaiTruThanhVien(int id) {
             ThanhVien_CLB thanhVien = db.ThanhVien_CLB.Find(id);
             db.ThanhVien_CLB.Remove(thanhVien);
             db.SaveChanges();
-            return RedirectToAction("QuanLyThanhVien", new { id = id2 });
+            return RedirectToAction("QuanLyThanhVien",new { id=thanhVien.IDCLB});
         }
         #endregion
 

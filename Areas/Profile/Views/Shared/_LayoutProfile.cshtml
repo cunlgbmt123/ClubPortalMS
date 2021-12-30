@@ -5,287 +5,218 @@
 <head>
     <title>@Page.Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="~/Content/PagedList.css" />
-    <link rel="stylesheet" href="~/Areas/Profile/Resource/plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="~/Areas/Profile/Resource/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="~/Areas/Profile/Resource/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="~/Areas/Profile/Resource/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-    <link rel="stylesheet" href="~/Areas/Profile/Resource/dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/styleProfile.css">
+
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/owl.theme.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/owl.transitions.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/animate.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/normalize.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/style.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/meanmenu.min.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/main.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/educate-custon-icon.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/morris~/Areas/Profile/Resource/js/morris.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/metisMenu/metisMenu.min.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/metisMenu/metisMenu-vertical.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/calendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/calendar/fullcalendar.print.min.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/editor/select2.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/editor/datetimepicker.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/editor/bootstrap-editable.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/editor/x-editor-style.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/notifications/Lobibox.min.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/notifications/notifications.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/data-table/bootstrap-table.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/data-table/bootstrap-editable.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/style.css">
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/modals.css">
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Areas/Profile/Resource/css/responsive.css">
+    <script src="~/Areas/Profile/Resource/js/vendor/modernizr-2.8.3.min.js"></script>
     @RenderSection("header", required: false)
 </head>
-<body class="hold-transition sidebar-mini">
+<body>
+    @if (Request.IsAuthenticated)
+    {
+        <div class="left-sidebar-pro">
+            <nav id="sidebar" class="">
+                <div class="sidebar-header">
+                    <a href="index.html"><img class="main-logo" src="~/Areas/Profile/Resource/img/logo/logo.png" alt="" /></a>
+                    <strong><a href="index.html">UEF</a></strong>
+                </div>
+                <div class="left-custom-menu-adp-wrap comment-scrollbar">
+                    <nav class="sidebar-nav left-sidebar-menu-pro">
 
-    <!-- Site wrapper -->
-    <div class="wrapper">
-        <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-                </li>
-                @*<li class="nav-item d-none d-sm-inline-block">
-                        <a href="@Url.Action("Index","Dashboard")">Home</a>
-                    </li>
-                    <li class="nav-item d-none d-sm-inline-block">
-                        <a href="#" class="nav-link">Contact</a>
-                    </li>*@
-            </ul>
+                        <ul class="metismenu" id="menu1">
+                            <li>
+                                <a href="@Url.Action("DangKyCLB", "ClubUser", new { id = @Session["UserId"] })" aria-expanded="false"><span class="educate-icon educate-library icon-wrap"></span> <span class="mini-click-non">Tham gia CLB</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("DSCLB", "ClubUser", new { id = @Session["UserId"] })">
+                                    <span class="educate-icon educate-home icon-wrap"></span>
+                                    <span class="mini-click-non">Câu lạc bộ</span>
+                                </a>
 
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Navbar Search -->
-                <!-- Messages Dropdown Menu -->
-                <li class="nav-item">
-                    @Html.Partial("_LoginPartial")
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-comments"></i>
-                        @*<span class="badge badge-danger navbar-badge">3</span>*@
-                    </a>
+                            </li>
+                            <li>
+                                <a class="has-arrow" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span> <span class="mini-click-non">Hoạt động</span></a>
+                                <ul class="submenu-angle" aria-expanded="false">
+                                    <li><a title="Sự kiện" href="@Url.Action("SuKien_CLB", "ClubUser", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Sự kiện</span></a></li>
+                                    <li><a title="Hoạt động" href="@Url.Action("HoatDong_CLB", "ClubUser", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Hoạt động</span></a></li>
+                                    <li><a title="Lịch hoạt động" href="@Url.Action("LichTap_CLB", "ClubUser", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Lịch hoạt động</span></a></li>
+                                    <li><a title="Thông báo" href="@Url.Action("ThongBao_CLB", "ClubUser", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Thông báo</span></a></li>
+                                    <li><a title="Nhật ký" href="@Url.Action("NhatKyCLB", "ClubUser", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Nhật ký</span></a></li>
 
-                </li>
-                <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        @*<span class="badge badge-warning navbar-badge">15</span>*@
-                    </a>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("listCLB", "NhiemVU", new { id = @Session["UserId"] })" aria-expanded="false"><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Nhiệm vụ</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("PhanHoiCLB", "ClubUser", new { id = @Session["UserId"] })" aria-expanded="false"><span class="educate-icon educate-form icon-wrap"></span> <span class="mini-click-non">Phản hồi</span></a>
+                            </li>
+                            <li>
+                                <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">Quản lý CLB</span></a>
+                                <ul class="submenu-angle" aria-expanded="false">
+                                    <li><a title="Câu lạc bộ" href="@Url.Action("QuanLyCLB_DSCLB", "QuanLyCLB", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Câu lạc bộ</span></a></li>
+                                    <li><a title="Thành viên" href="@Url.Action("CLBQL", "QuanLyThanhVien", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Thành viên</span></a></li>
+                                    <li><a title="Phản hồi" href="@Url.Action("QLPhanHoi_CLB", "QuanLyPhanHoi", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Phản hồi</span></a></li>
+                                    <li><a title="Xét duyệt thành viên" href="@Url.Action("QLXetDuyetTV_CLB", "QuanLyXetDuyetDKTV", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Xét duyệt thành viên</span></a></li>
+                                    <li><a title="Xét duyệt CLB" href="@Url.Action("QLDkyCLB", "QuanLyDkyCLB", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Xét duyệt CLB</span></a></li>
+                                </ul>
+                            </li>
 
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!-- /.navbar -->
-        <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <!-- Brand Logo -->
-            <a href="#" class="brand-link">
-                @*<img src="~/Profile/assetsdist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">*@
-                <span class="brand-text font-weight-light">UEF Club Management</span>
-            </a>
+                            <li>
+                                <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-data-table icon-wrap"></span> <span class="mini-click-non">Quản lý hoạt động</span></a>
+                                <ul class="submenu-angle" aria-expanded="false">
+                                    <li><a title="Hoạt động" href="@Url.Action("QLHoatDong_CLB", "QuanLyHoatDong", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Hoạt động</span></a></li>
+                                    <li><a title="Sự kiện" href="@Url.Action("QLSuKien_CLB", "QuanLySuKien", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Sự kiện</span></a></li>
+                                    <li><a title="Thông báo" href="@Url.Action("QLTBCLB", "QuanLyThongBao", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Thông báo</span></a></li>
+                                    <li><a title="Lịch hoạt động" href="@Url.Action("QLLichTap_CLB", "QuanLyLichTap", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Lịch hoạt động</span></a></li>
+                                    <li><a title="Nhiệm vụ" href="@Url.Action("QLNhiemVu_CLB", "QuanLyNhiemVu", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Nhiệm vụ</span></a></li>
+                                </ul>
+                            </li>
 
-            <!-- Sidebar -->
-            <div class="sidebar">
-                <!-- Sidebar user (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-sidebar">
-                                <i class="fas fa-search fa-fw"></i>
-                            </button>
+                            <li>
+                                <a href="@Url.Action("DangKyTLCLB", "ClubUser", new { id = @Session["UserId"] })" aria-expanded="false"><span class="educate-icon educate-apps icon-wrap"></span> <span class="mini-click-non">Đăng ký CLB</span></a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </nav>
+        </div>
+
+    }
+    <div class="all-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="logo-pro">
+                        <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-advance-area">
+            <div class="header-top-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="header-top-wraper">
+                                <div class="row">
+                                    <div class="col-lg-1 col-md-0 col-sm-1 col-xs-12">
+                                        <div class="menu-switcher-pro">
+                                            <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
+                                                <i class="educate-icon educate-nav"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
+
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                        <div class="header-right-info">
+                                            <ul class="nav navbar-nav mai-top-nav header-right-menu">
+                                                <li class="nav-item">
+                                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                                        <img src="~/Areas/Profile/Resource/img/profile/1.jpg" alt="" />
+                                                        <span class="admin-name">@Session["Ho"] @Session["Ten"]</span>
+                                                        <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
+                                                    </a>
+                                                    <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
+                                                        <li>
+                                                            <a href="@Url.Action("Index", "QLTaiKhoan", new { id = @Session["UserId"] })"><span class="edu-icon edu-home-admin author-log-ic"></span>Tài khoản</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="@Url.Action("HoSo", "ThongTinTV", new { id = @Session["UserId"] })"><span class="edu-icon edu-user-rounded author-log-ic"></span>Hồ sơ</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="@Url.Action("Logout","Account",new { area = "" })"><span class="edu-icon edu-locked author-log-ic"></span>Đăng xuất</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-
-                <!-- SidebarSearch Form -->
-                <!-- Sidebar Menu -->
-                @if (Request.IsAuthenticated)
-                {
-                    <nav class="mt-2">
-                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                            <!-- Add icons to the links using the .nav-icon class
-                            with font-awesome or any other icon font library -->
-                            <li class="nav-item">
-                                <a href="@Url.Action("Details", "ThongTinTV", new { id = @Session["UserId"] })" class="nav-link">
-                                    <i class="nav-icon fas fa-id-card"></i>
-                                    <p>
-                                        Hồ sơ
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="@Url.Action("Index", "QLTaiKhoan", new { id = @Session["UserId"] })" class="nav-link">
-                                    <i class="nav-icon fas fa-id-card"></i>
-                                    <p>
-                                        Tài Khoản
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-th"></i>
-                                    <p>
-                                        Câu lạc bộ
-                                        <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("DangKyTLCLB", "ClubUser", new { id = @Session["UserId"] })" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Đăng ký thành lập CLB</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("DangKyCLB", "ClubUser", new { id = @Session["UserId"] })" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Đăng ký tham gia CLB</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("LichTap_CLB", "ClubUser", new { id = @Session["UserId"] })" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p> Lịch tập</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("NhatKyCLB", "ClubUser", new { id = @Session["UserId"] })" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p> Nhật Ký</p>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("listCLB", "NhiemVU", new { id = @Session["UserId"] })" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p> Nhiệm vụ</p>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("ThongBao_CLB", "ClubUser", new { id = @Session["UserId"] })" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Thông báo</p>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("HoatDong_CLB", "ClubUser", new { id = @Session["UserId"] })" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Hoạt động</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("SuKien_CLB", "ClubUser", new { id = @Session["UserId"] })" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Sự kiện</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("PhanHoiCLB", "ClubUser", new { id = @Session["UserId"] })" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Phản hồi</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-th"></i>
-                                    <p>
-                                        Quản lý Câu lạc bộ
-                                        <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("CLBQL", "QuanLyThanhVien", new { id = @Session["UserId"] })" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Quản lý thành viên CLB</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("QLTBCLB", "QuanLyThongBao", new { id = @Session["UserId"] })" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Quản lý thông báo</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("QLHoatDong_CLB", "QuanLyHoatDong", new { id = @Session["UserId"] })" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Quản lý hoạt động</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("QLSuKien_CLB", "QuanLySuKien", new { id = @Session["UserId"] })" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Quản lý sự kiện</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("QLLichTap_CLB", "QuanLyLichTap", new { id = @Session["UserId"] })" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Quản lý lịch tập</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("QLNhiemVu_CLB", "QuanLyNhiemVu", new { id = @Session["UserId"] })" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Quản lý nhiệm vụ</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("QLPhanHoi_CLB", "QuanLyPhanHoi", new { id = @Session["UserId"] })" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Quản lý phản hồi</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("QLXetDuyetTV_CLB", "QuanLyXetDuyetDKTV", new { id = @Session["UserId"] })" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Xét duyệt thành viên</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("QLDkyCLB", "QuanLyDkyCLB", new { id = @Session["UserId"] })" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Đơn đăng ký CLB</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("#", "QuanLy", new { id = @Session["UserId"] })" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Quản lý quản trị CLB</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>}
-                <!-- /.sidebar-menu -->
             </div>
-            <!-- /.sidebar -->
-        </aside>
-
-        <div class="content-wrapper my-2">
-            <section class="content">
-                <div class="card">
-                    @RenderBody()
-                </div>
-            </section>
         </div>
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                <b>Version</b> 3.2.0-rc
-            </div>
-        </footer>
-
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+        @RenderBody()
     </div>
-    <!-- AdminLTE for demo purposes -->
-    <script src="~/Areas/Profile/Resource/dist/js/demo.js"></script>
-    <script src="~/Areas/Profile/Resource/plugins/jquery/jquery.min.js"></script>
-    <script src="~/Areas/Profile/Resource/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/Areas/Profile/Resource/dist/js/adminlte.min.js"></script>
-    <script src="~/Areas/Profile/Resource/dist/js/demo.js"></script>
-    @RenderSection("footer", required: false)
+    <script src="~/Areas/Profile/Resource/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Areas/Profile/Resource/js/bootstrap.js"></script>
+    <script src="~/Areas/Profile/Resource/js/bootstrap.min.js"></script>
+    <script src="~/Areas/Profile/Resource/js/wow.min.js"></script>
+    <script src="~/Areas/Profile/Resource/js/jquery-price-slider.js"></script>
+    <script src="~/Areas/Profile/Resource/js/jquery.meanmenu.js"></script>
+    <script src="~/Areas/Profile/Resource/js/owl.carousel.min.js"></script>
+    <script src="~/Areas/Profile/Resource/js/jquery.sticky.js"></script>
+    <script src="~/Areas/Profile/Resource/js/jquery.scrollUp.min.js"></script>
+    <script src="~/Areas/Profile/Resource/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/Areas/Profile/Resource/js/scrollbar/mCustomScrollbar-active.js"></script>
+    <script src="~/Areas/Profile/Resource/js/metisMenu/metisMenu.min.js"></script>
+    <script src="~/Areas/Profile/Resource/js/metisMenu/metisMenu-active.js"></script>
+    <script src="~/Areas/Profile/Resource/js/data-table/bootstrap-table.js"></script>
+    <script src="~/Areas/Profile/Resource/js/data-table/tableExport.js"></script>
+    <script src="~/Areas/Profile/Resource/js/data-table/data-table-active.js"></script>
+    <script src="~/Areas/Profile/Resource/js/data-table/bootstrap-table-editable.js"></script>
+    <script src="~/Areas/Profile/Resource/js/data-table/bootstrap-editable.js"></script>
+    <script src="~/Areas/Profile/Resource/js/data-table/bootstrap-table-resizable.js"></script>
+    <script src="~/Areas/Profile/Resource/js/data-table/colResizable-1.5.source.js"></script>
+    <script src="~/Areas/Profile/Resource/js/data-table/bootstrap-table-export.js"></script>
+    <script src="~/Areas/Profile/Resource/js/chart/jquery.peity.min.js"></script>
+    <script src="~/Areas/Profile/Resource/js/peity/peity-active.js"></script>
+    <script src="~/Areas/Profile/Resource/js/tab.js"></script>
+    <script src="~/Areas/Profile/Resource/js/notifications/Lobibox.js"></script>
+    <script src="~/Areas/Profile/Resource/js/notifications/notification-active.js"></script>
+    <script src="~/Areas/Profile/Resource/js/editable/jquery.mockjax.js"></script>
+    <script src="~/Areas/Profile/Resource/js/editable/mock-active.js"></script>
+    <script src="~/Areas/Profile/Resource/js/editable/select2.js"></script>
+    <script src="~/Areas/Profile/Resource/js/editable/moment.min.js"></script>
+    <script src="~/Areas/Profile/Resource/js/editable/bootstrap-datetimepicker.js"></script>
+    <script src="~/Areas/Profile/Resource/js/editable/bootstrap-editable.js"></script>
+    <script src="~/Areas/Profile/Resource/js/editable/xediable-active.js"></script>
+    <script src="~/Areas/Profile/Resource/js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="~/Areas/Profile/Resource/js/sparkline/jquery.charts-sparkline.js"></script>
+    <script src="~/Areas/Profile/Resource/js/sparkline/sparkline-active.js"></script>
+    <script src="~/Areas/Profile/Resource/js/calendar/moment.min.js"></script>
+    <script src="~/Areas/Profile/Resource/js/calendar/fullcalendar.min.js"></script>
+    <script src="~/Areas/Profile/Resource/js/calendar/fullcalendar-active.js"></script>
+    <script src="~/Areas/Profile/Resource/js/plugins.js"></script>
+    <script src="~/Areas/Profile/Resource/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-    </html>
+</html>

@@ -148,6 +148,7 @@ namespace ClubPortalMS.Controllers
                             User_ID = user.ID,
                             Ten = registrationView.FirstName,
                             Ho = registrationView.LastName,
+                            Mail = registrationView.Email,
                         };
                         dbContext.ThanhVien.Add(getIDUser);
                         dbContext.SaveChanges();

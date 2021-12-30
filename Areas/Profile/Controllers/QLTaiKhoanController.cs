@@ -52,21 +52,24 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                 var userAccount = db.DBUser.Where(u => u.ID.ToString().Equals(id.ToString())).FirstOrDefault();
                 if (userAccount != null)
                 {
-                    string passWord = changePasswordModel.NewPassword + "A48BF46E-1V4F-58B4-2208-CQH7-U19JC5K2K3NV";
+                    string passWord = changePasswordModel.OldPassword + "A48BF46E-1V4F-58B4-2208-CQH7-U19JC5K2K3NV";
                     string pw = Processing.EncodePasswordToBase64(passWord);
                     string salt = pw.Substring(1, 10);
                     string H_Password = pw.Replace(salt, "");
-                 
-                    if (changePasswordModel.OldPassword.Equals(userAccount.HashedPassword))
+                    if (H_Password.Equals(userAccount.HashedPassword))
                     {
-                        userAccount.HashedPassword = H_Password;
+                        string newpassWord = changePasswordModel.NewPassword + "A48BF46E-1V4F-58B4-2208-CQH7-U19JC5K2K3NV";
+                        string pws = Processing.EncodePasswordToBase64(newpassWord);
+                        string salts = pws.Substring(1, 10);
+                        string H_Passwords = pws.Replace(salts, "");
+                        userAccount.HashedPassword = H_Passwords;
                         userAccount.Salt = salt;
                         db.SaveChanges();
-                        ModelState.AddModelError("", "Mật khẩu của tài khoản đổi thành công");
+                       ViewBag.Message= "Mật khẩu của tài khoản đổi thành công";
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Mật khẩu của tài khoản hiện tại không chính xác");
+                       ViewBag.Messages = "Mật khẩu của tài khoản hiện tại không chính xác";
                     }
                 }
                 else
@@ -102,17 +105,21 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                 var userAccount = db.DBUser.Where(u => u.ID.ToString().Equals(id.ToString())).FirstOrDefault();
                 if (userAccount != null)
                 {
-                    if (changeEmailModel.OldPassword.Equals(userAccount.HashedPassword))
+                    string passWord = changeEmailModel.OldPassword + "A48BF46E-1V4F-58B4-2208-CQH7-U19JC5K2K3NV";
+                    string pw = Processing.EncodePasswordToBase64(passWord);
+                    string salt = pw.Substring(1, 10);
+                    string H_Password = pw.Replace(salt, "");
+                    if (H_Password.Equals(userAccount.HashedPassword))
                     {
                         userAccount.Email = changeEmailModel.NewEmail;
                         userAccount.EmailConfirmation = false;
                         db.SaveChanges();
                         VerificationEmail(changeEmailModel.NewEmail, userAccount.ActivationCode.ToString());
-                        ModelState.AddModelError("", "Email của tài khoản đổi thành công");
+                        ViewBag.Message = "Đổi email thành công!! Một email đã được gửi đến email của bạn để xác thực, vui lòng kiểm tra và xác thực email";
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Mật khẩu của tài khoản hiện tại không chính xác");
+                       ViewBag.Messages= "Mật khẩu bạn nhập không chính xác!!! Vui lòng kiểm tra lại";
                     }
                 }
                 else

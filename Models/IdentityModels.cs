@@ -50,6 +50,7 @@ namespace ClubPortalMS.Models
         public DbSet<DBUserRoles> DBUserRoles { get; set; }
         public DbSet<TinTuc> TinTucs { get; set; }
         public DbSet<DkyCLB> DkyCLB { get; set; }
+        public DbSet<Khoa> Khoa { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

@@ -18,6 +18,9 @@ namespace ClubPortalMS.Models
         public string SDT { get; set; }
         public string Mail { get; set; }
         public int? User_ID { get; set; }
+        public int? Khoa_ID { get; set; }
+        [ForeignKey("Khoa_ID ")]
+        public virtual Khoa Khoa { get; set; }
         [ForeignKey("User_ID")]
         public virtual DBUser DBUser { get; set; }
         public virtual ICollection<DkyCLB> DkyCLB { get; set; }

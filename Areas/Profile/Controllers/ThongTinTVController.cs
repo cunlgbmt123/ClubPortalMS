@@ -14,70 +14,54 @@ namespace ClubPortalMS.Areas.Profile.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Admin/ThongTinTV
-        public ActionResult Index()
+
+        #region task chỉnh sửa  hồ sơ
+        [HttpGet]
+        public ActionResult HoSo(int? id)
         {
+            int UserID = Convert.ToInt32(Session["UserId"]);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (id != UserID)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ThanhVien thanhVien = db.ThanhVien.Find(id);
+            if (thanhVien == null)
+            {
+                return HttpNotFound();
+            }
+            
+            ViewBag.Khoa_ID = new SelectList(db.Khoa, "ID", "TenKhoa", thanhVien.Khoa_ID);
+            ViewBag.ThanhVien = thanhVien;
             return View();
         }
 
-        #region Task xem Hồ sơ
-        public ActionResult Details(int? id)
-        {
-            int UserID = Convert.ToInt32(Session["UserId"]);
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            if (id != UserID)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ThanhVien thanhVien = db.ThanhVien.Find(id);
-            if (thanhVien == null)
-            {
-                return HttpNotFound();
-            }
-            return View(thanhVien);
-        }
-        #endregion
-        #region task chỉnh sửa  hồ sơ
-
-        // GET: Admin/ThongTinTV/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            int UserID = Convert.ToInt32(Session["UserId"]);
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            if (id != UserID)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ThanhVien thanhVien = db.ThanhVien.Find(id);
-            if (thanhVien == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.User_ID = new SelectList(db.DBUser, "ID", "FirstName", thanhVien.User_ID);
-            return View(thanhVien);
-        }
-
-        // POST: Admin/ThongTinTV/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Ten,Ho,NgaySinh,MSSV,Lop,SDT,Mail,CLB_ID,User_ID")] ThanhVien thanhVien)
+        public ActionResult HoSo(ProfileViewModel thanhVien)
         {
+            int UserID = Convert.ToInt32(Session["UserId"]);
             if (ModelState.IsValid)
             {
-                db.Entry(thanhVien).State = EntityState.Modified;
+                ThanhVien thanhViens = db.ThanhVien.Find(thanhVien.ID);
+                thanhViens.ID = thanhVien.ID;
+                thanhViens.Ho = thanhVien.Ho;
+                thanhViens.Ten = thanhVien.Ten;
+                thanhViens.Lop = thanhVien.Lop;
+                thanhViens.MSSV = thanhVien.MSSV;
+                thanhViens.Khoa_ID = thanhVien.Khoa_ID;
+                thanhViens.NgaySinh = thanhVien.NgaySinh;
+                thanhViens.Mail = thanhVien.Email;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                ViewBag.ThanhVien = thanhViens;
+                ViewBag.Message = "Cập nhật hồ sơ thành công!";
+
             }
-            
-            ViewBag.User_ID = new SelectList(db.DBUser, "ID", "FirstName", thanhVien.User_ID);
+            ViewBag.Khoa_ID = new SelectList(db.Khoa, "ID", "TenKhoa", thanhVien.Khoa_ID);
             return View(thanhVien);
         }
         #endregion

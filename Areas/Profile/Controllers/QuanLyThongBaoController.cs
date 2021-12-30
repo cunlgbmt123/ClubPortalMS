@@ -26,7 +26,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                from i in table.ToList()
                                where e.IDtvien == IdTvien
                                && e.IDRoles == 2
-                               select new ViewModel3
+                               select new CLBDaThamGiaViewModel
                                {
                                    TenCLB = i.TenCLB,
                                    IDCLB = i.ID,
@@ -56,7 +56,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                              };
             int? idCLB = id;
             ViewBag.idCLB = idCLB;
-            ViewBag.DsThongBao = DsThongBao.ToList().ToPagedList(page ?? 1, 5);
+            ViewBag.DsThongBao = DsThongBao.OrderByDescending(x => x.ThongBao.ID).ToList();
             return View();
         }
         public ActionResult XemChiTietTB(int? id)
@@ -189,14 +189,18 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                 thongBao.ContentType = contentType;
                 db.Entry(thongBao).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                
                 }
                 else
                 {
                     ThongBao thongBaos = db.ThongBao.Find(thongBao.ID);
                     if (thongBaos.File == null)
                     {
-                        db.Entry(thongBao).State = EntityState.Modified;
+                        thongBaos.IdCLB = thongBao.IdCLB;
+                        thongBaos.TieuDe = thongBao.TieuDe;
+                        thongBaos.MoTa = thongBao.MoTa;
+                        thongBaos.NgayThongBao = thongBao.NgayThongBao;
+                        thongBaos.NoiDung = thongBao.NoiDung;
                         db.SaveChanges();
                     }
                     else
@@ -206,38 +210,25 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                         thongBaos.MoTa = thongBao.MoTa;
                         thongBaos.NgayThongBao = thongBao.NgayThongBao;
                         thongBaos.NoiDung = thongBao.NoiDung;
+                        thongBaos.File = thongBao.File;
+                        thongBaos.TenFile = thongBao.TenFile;
+                        thongBaos.ContentType = thongBaos.ContentType;
                         db.SaveChanges();
                     }
                 }
             }
+           
             ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", thongBao.IdCLB);
-            return View(thongBao);
+            return RedirectToAction("XemChiTietTB", new { id = thongBao.ID });
         }
 
-        // GET: Admin/ThongBaos/Delete/5
-        public ActionResult XoaTB(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ThongBao thongBao = db.ThongBao.Find(id);
-            if (thongBao == null)
-            {
-                return HttpNotFound();
-            }
-            return View(thongBao);
-        }
-
-        // POST: Admin/ThongBaos/Delete/5
-        [HttpPost, ActionName("XoaTB")]
-        [ValidateAntiForgeryToken]
         public ActionResult XacNhanXoaTB(int id)
         {
             ThongBao thongBao = db.ThongBao.Find(id);
             db.ThongBao.Remove(thongBao);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("QLThongBao", new { id = thongBao.IdCLB });
+
         }
     }
 }

@@ -4,59 +4,61 @@
     Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
 }
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Quản lý câu lạc bộ</h1>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="content">
-    <div class="container-fluid">
-        <div class="row">
-
-            <div class="col-12">
-                <div class="callout callout-info">
-                    <h5><i class="fas fa-list"></i> Danh sách hoạt động:</h5>
-                    Đây là trang quản lý các hoạt động của câu lạc bộ của bạn
-                </div>
-                <div class="col-12">
-                    <a href="@Url.Action("TaoHD")">
-                        <h6>Tạo hoạt động mới</h6>
-                    </a>
-                </div>
-                <!-- Main content -->
-                <div class="invoice p-3 mb-3">
-                    <div class="row">
-                        <div class="col-12 table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Tên câu lạc bộ</th>
-
-                                        <th>Tác vụ</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in ViewBag.DsCLB)
-                                    {
-                                        <tr>
-                                            <td>@item.TenCLB</td>
-
-                                            <td>
-                                                @Html.ActionLink("Xem Chi tiết", "QLHoatDong", new { id = item.IDCLB })
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
+<div class="header-advance-area-style" style="margin-top:3%">
+    <div class="breadcome-area">
+        <div class="container-fluids">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcome-list single-page-breadcome">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="breadcome-heading">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <ul class="breadcome-menu">
+                                    <li>
+                                        <a href="#">Trang chủ</a> <span class="bread-slash">/</span>
+                                    </li>
+                                    <li>
+                                        <span class="bread-blod">Quản lý hoạt động</span>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
+<div class="data-map-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10">
+                <h3>Quản lý hoạt động</h3>
+            </div>
+            <div class="col-md-2">
+                <h4>@Html.ActionLink("Tạo hoạt động", "TaoHD")</h4>
+            </div>
+            @foreach (var item in ViewBag.DsCLB)
+            {
+                <a href="@Url.Action("QLHoatDong", new { id = item.IDCLB })">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="margin-bottom:2%">
+                        <div class="sparkline8-list responsive-mg-b-30">
+                            <div class="sparkline8-hd">
+                                <div class="main-sparkline8-hd">
+                                    <h1>@item.TenCLB</h1>
+                                </div>
+                            </div>
+                            <div class="sparkline8-graph ">
+                                <img class="img-size-style" src="~/Content/img/Album/img1.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+</div>
+

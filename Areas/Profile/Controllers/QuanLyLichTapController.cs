@@ -49,7 +49,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                              };
             int? idCLB = id;
             ViewBag.idCLB = idCLB;
-            ViewBag.DsLichTap = DsLichTap.ToList().ToPagedList(page ?? 1, 5);
+            ViewBag.DsLichTap = DsLichTap.OrderByDescending(x => x.LichTap.ID).ToList();
             return View();
         }
         public ActionResult XemLT(int? id)
@@ -111,7 +111,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                         db.LichTap_ThanhVien.Add(lichTap_ThanhVien);
                         db.SaveChanges();
                     }
-                    return RedirectToAction("QLLichTap_CLB", new { id = IdTvien });
+                    return RedirectToAction("QLLichTap_CLB");
             
             }
             return View(lichTap);
@@ -183,29 +183,13 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                     db.LichTap_ThanhVien.Add(lichTap_ThanhVien);
                     db.SaveChanges();
                 }
-                return RedirectToAction("QLLichTap_CLB");
+                return RedirectToAction("QLLichTap", new { id = lichTap.IdCLB });
             }
             return View(lichTap);
         }
 
      
-        public ActionResult XoaLT(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            LichTap lichTap = db.LichTap.Find(id);
-            if (lichTap == null)
-            {
-                return HttpNotFound();
-            }
-            return View(lichTap);
-        }
 
-      
-        [HttpPost, ActionName("XoaLT")]
-        [ValidateAntiForgeryToken]
         public ActionResult XacNhanXoaLT(int id)
         {
             LichTap lichTap = db.LichTap.Find(id);
@@ -224,7 +208,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             }
             db.LichTap.Remove(lichTap);
             db.SaveChanges();
-            return RedirectToAction("QLLichTap_CLB");
+            return RedirectToAction("QLLichTap",new { id=lichTap.IdCLB});
         }
 
     }

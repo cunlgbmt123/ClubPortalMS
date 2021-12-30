@@ -3,35 +3,53 @@
     //var DsthanhVienHD = (IList<ClubPortalMS.Models.DiemDanhCLBViewModel>)ViewBag.DsthanhVienHD;
     ViewBag.Title = "Quản lý hoạt động";
     Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
-    string[] TableHeaders = new string[] {"STT","MSSV"
-                        ,"Tên"
+   string[] TableHeaders = new string[] {"STT","MSSV"
+                        ,"Tên "
                         ,"Điểm danh"
                         };
 }
 
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Quản lý câu lạc bộ</h1>
+<div class="header-advance-area-style" style="margin-top:3%">
+    <div class="breadcome-area">
+        <div class="container-fluids">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcome-list single-page-breadcome">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="breadcome-heading">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <ul class="breadcome-menu">
+                                    <li>
+                                        <a href="#">Trang chủ</a> <span class="bread-slash">/</span>
+                                    </li>
+                                    <li>
+                                        <span class="bread-blod">Quản lý hoạt động</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 @using (Html.BeginForm("DiemDanh", "QuanLyHoatDong", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    <section class="content">
+    <div class="x-editable-area mg-b-15">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="callout callout-info">
-                        <h5><i class="fas fa-list"></i> Điểm danh:</h5>
-                        Đây là trang điểm danh cho hoạt động
-                    </div>
-                    <div class="invoice p-3 mb-3">
-                        <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="x-editable-list" style="height:auto">
+                            <div class="alert-title">
+                                <h2>Điểm danh hoạt động</h2>
+                            </div>
                             <div class="col-12 table table-responsive">
                                 <table id="myTable" class="table table-striped table table-bordered table-hover table-sm">
                                     <thead>
@@ -45,20 +63,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @*@foreach (var item in Model)
-                                            {
-                                                <tr>
-                                                    <td>@item.ID</td>
-                                                    @Html.HiddenFor(model=>item.ID)
-                                                    <td>@item.ThanhVien_CLB.ThanhVien.MSSV</td>
-                                                    <td>@item.ThanhVien_CLB.ThanhVien.Ho @item.ThanhVien_CLB.ThanhVien.Ten</td>
-                                                    <td>@Html.CheckBox("DiemDanh", (bool)item.DiemDanh)</td>
-                                                </tr>
-                                            }*@
                                         @for (int i = 0; i < Model.Count; i++)
                                         {
                                             <tr>
-                                                <td>@Model[i].ID</td>
+
+                                                <td>@(i+1)</td>
                                                 @Html.HiddenFor(model => Model[i].ID)
                                                 <td>@Model[i].ThanhVien_CLB.ThanhVien.MSSV</td>
                                                 <td>@Model[i].ThanhVien_CLB.ThanhVien.Ho @Model[i].ThanhVien_CLB.ThanhVien.Ten</td>
@@ -67,12 +76,16 @@
                                         }
                                     </tbody>
                                 </table>
-                                <input type="submit" value="Submit" />
+                                <input style="margin-top:1%" class=" btn btn-primary" type="submit" value="Xác nhận" />
+                                <div style="float:right;margin-top:3%">
+                                    @Html.ActionLink("Quay lại", "XemHD", new { id = ViewBag.IdHD })
+                                </div>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-}
+        
+    }

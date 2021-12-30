@@ -23,7 +23,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                from i in table.ToList()
                                where e.IDtvien == IdTvien
                                && e.IDRoles == 2
-                               select new ViewModel3
+                               select new CLBDaThamGiaViewModel
                                {
                                    TenCLB = i.TenCLB,
                                    IDCLB = i.ID,
@@ -33,7 +33,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             ViewBag.DsCLB = Dsclbthamgia;
             return View();
         }
-        public ActionResult QLNhiemVu(int? id, int? page)
+        public ActionResult QLNhiemVu(int? id)
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
             List<NhiemVu> nhiemVus = db.NhiemVu.ToList();
@@ -50,7 +50,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                             };
             int? idCLB = id;
             ViewBag.idCLB = idCLB;
-            ViewBag.DsNhiemVu = DsNhiemVu.ToList().ToPagedList(page ?? 1, 5);
+            ViewBag.DsNhiemVu = DsNhiemVu.OrderByDescending(x => x.NhiemVu.ID).ToList();
             return View();
         }
         public ActionResult XemNV(int? id)
@@ -163,6 +163,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             var nhiemVu = db.NhiemVu_ThanhVien.Where(u => u.ID == id).FirstOrDefault();
             return File(nhiemVu.FileNop, nhiemVu.ContentType, nhiemVu.TenFileNop);
         }
+        [HttpGet]
         public ActionResult SuaNV(int? id)
         {
             if (id == null)
@@ -215,7 +216,10 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                     NhiemVu nhiemVus = db.NhiemVu.Find(nhiemVu.ID);
                     if ( nhiemVus.File == null)
                     {
-                        db.Entry(nhiemVu).State = EntityState.Modified;
+                        nhiemVus.IdCLB = nhiemVu.IdCLB;
+                        nhiemVus.TieuDe = nhiemVu.TieuDe;
+                        nhiemVus.MoTa = nhiemVu.MoTa;
+                        nhiemVus.ThoiGianKetThuc = nhiemVu.ThoiGianKetThuc;
                         db.SaveChanges();
                     }
                     else 
@@ -224,6 +228,9 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                         nhiemVus.TieuDe = nhiemVu.TieuDe;                       
                         nhiemVus.MoTa = nhiemVu.MoTa;                       
                         nhiemVus.ThoiGianKetThuc = nhiemVu.ThoiGianKetThuc;
+                        nhiemVus.File = nhiemVu.File;
+                        nhiemVus.TenFile = nhiemVu.TenFile;
+                        nhiemVus.ContentType = nhiemVu.ContentType;
                         db.SaveChanges();
                     }
                 }
@@ -258,27 +265,11 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                     db.NhiemVu_ThanhVien.Add(nhiemVu_ThanhVien);
                     db.SaveChanges();
                 }
-                return RedirectToAction("QLNhiemVu", new { nhiemVu.IdCLB });
+                return RedirectToAction("XemNV", new { id=nhiemVu.ID });
             }
             return View(nhiemVu);
         }
-        public ActionResult XoaNV(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            NhiemVu nhiemVu = db.NhiemVu.Find(id);
-            if (nhiemVu == null)
-            {
-                return HttpNotFound();
-            }
-            return View(nhiemVu);
-        }
-
-        // POST: Admin/ThongBaos/Delete/5
-        [HttpPost, ActionName("XoaNV")]
-        [ValidateAntiForgeryToken]
+ 
         public ActionResult XacNhanXoaNV(int? id)
         {
             NhiemVu nhiemVu = db.NhiemVu.Find(id);
@@ -297,7 +288,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             }
             db.NhiemVu.Remove(nhiemVu);
             db.SaveChanges();
-            return RedirectToAction("QLNhiemVu", new { nhiemVu.IdCLB });
+            return RedirectToAction("QLNhiemVu", new {id= nhiemVu.IdCLB });
         }
         public ActionResult XemBaiNop(int? id, int? id2)
         {
@@ -314,8 +305,9 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                     NhiemVu_ThanhVien = i,
                                     ThanhVien_CLB = e
                                 };
-            //ViewBag.DsthanhVienHD = DsthanhVienHD.ToList();
-            return View(DsthanhVienNV.ToList());
+            ViewBag.IDNV = id;
+            ViewBag.DsthanhVienNV = DsthanhVienNV.OrderByDescending(x => x.NhiemVu_ThanhVien.ID).ToList();
+            return View();
         }
 
     }

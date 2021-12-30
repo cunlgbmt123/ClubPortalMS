@@ -14,6 +14,8 @@ namespace ClubPortalMS.Models
         public string TenFileNop { get; set; }
         public string ContentType { get; set; }
         public byte[] FileNop { get; set; }
+        public string GhiChu { get; set; }
+
         [ForeignKey("IdTVien")]
         public virtual ThanhVien ThanhVien { get; set; }
         [ForeignKey("IdNv")]

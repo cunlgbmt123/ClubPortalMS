@@ -27,7 +27,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                   LoaiCLB = i
                               };
 
-            ViewBag.DsDangKyCLB = DsDangKyCLB.ToList().ToPagedList(page ?? 1, 5);
+            ViewBag.DsDangKyCLB = DsDangKyCLB;
             return View();
         }
         public ActionResult ThemCLB(int? id)

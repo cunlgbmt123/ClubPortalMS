@@ -22,7 +22,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                from i in table.ToList()
                                where e.IDtvien == IdTvien
                                && e.IDRoles == 2
-                               select new ViewModel3
+                               select new CLBDaThamGiaViewModel
                                {
                                    TenCLB = i.TenCLB,
                                    IDCLB = i.ID,
@@ -43,7 +43,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                {
                                  DangKy=e
                                };
-            ViewBag.DsTvDangKy = DsTvDangKy.ToList().ToPagedList(page ?? 1, 5);
+            ViewBag.DsTvDangKy = DsTvDangKy;
             return View();
         }
         public ActionResult ThemTV(int? id)

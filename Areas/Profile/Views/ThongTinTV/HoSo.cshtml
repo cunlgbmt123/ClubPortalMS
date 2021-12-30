@@ -1,0 +1,181 @@
+﻿@model ClubPortalMS.Models.ProfileViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+
+}
+
+<div class="header-advance-area-style" style="margin-top:3%">
+    <div class="breadcome-area">
+        <div class="container-fluids">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcome-list single-page-breadcome">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="breadcome-heading">
+                                    @*<form role="search" class="sr-input-func">
+                                            <input type="text" placeholder="Search..." class="search-int form-control">
+                                            <a href="#"><i class="fa fa-search"></i></a>
+                                        </form>*@
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <ul class="breadcome-menu">
+                                    <li>
+                                        <a href="#">Trang chủ</a> <span class="bread-slash">/</span>
+                                    </li>
+                                    <li>
+                                        <span class="bread-blod">Hồ sơ</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ 
+
+<div class="single-pro-review-area mt-t-30 mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="profile-info-inner">
+                    <div class="profile-img">
+                        <img src="~/Areas/Profile/Resource/img/profile/1.jpg" alt="" />
+                    </div>
+                    <div class="profile-details-hr">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                <div class="address-hr">
+                                    <p><b>Họ và tên</b><br /> @ViewBag.ThanhVien.Ho @ViewBag.ThanhVien.Ten</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                    <p><b>Ngày Sinh</b><br /> @ViewBag.ThanhVien.NgaySinh</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                <div class="address-hr">
+                                    <p><b>Mã số sinh viên</b><br /> @ViewBag.ThanhVien.MSSV</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                    <p><b>Số điện thoại</b><br /> @ViewBag.ThanhVien.SDT</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                <div class="address-hr">
+                                    <p><b>Lớp</b><br /> @ViewBag.ThanhVien.Lop</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                    <p><b>Khoa</b><br /> @ViewBag.ThanhVien.Khoa.TenKhoa</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                    <p><b>Khoa</b><br /> @ViewBag.ThanhVien.Mail</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
+                        <ul id="myTabedu1" class="tab-review-design">
+                            <li><a href="#INFORMATION">Cập nhật hồ sơ</a></li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
+
+                            <div class="product-tab-list tab-pane fade active in" id="INFORMATION">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="review-content-section">
+                                            <div class="row">
+                                                @if (ViewBag.Message != null)
+                                                {
+                                                    <div class="alert alert-success">
+                                                        <strong>@ViewBag.Message</strong>
+                                                    </div>
+                                                }
+                                          
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+
+                                                        @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control", placeholder = "Tên", Value = @ViewBag.ThanhVien.Ten } })
+                                                        @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.EditorFor(model => model.Ho, new { htmlAttributes = new { @class = "form-control", placeholder = "Họ và Tên đệm", Value = @ViewBag.ThanhVien.Ho } })
+                                                        @Html.ValidationMessageFor(model => model.Ho, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.EditorFor(model => model.NgaySinh, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @class = "form-control", type = "date", Value = @ViewBag.ThanhVien.NgaySinh } })
+
+
+                                                        @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.EditorFor(model => model.MSSV, new { htmlAttributes = new { @class = "form-control", placeholder = "Mã số sinh viên", Value = @ViewBag.ThanhVien.MSSV } })
+                                                        @Html.ValidationMessageFor(model => model.MSSV, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-lg-6">
+
+                                                    <div class="form-group">
+                                                        @Html.DropDownList("Khoa_ID", null, htmlAttributes: new { @class = "form-control", Value = @ViewBag.ThanhVien.Khoa_ID })
+                                                        @Html.ValidationMessageFor(model => model.Khoa_ID, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.EditorFor(model => model.Lop, new { htmlAttributes = new { @class = "form-control", placeholder = "Lớp", Value = @ViewBag.ThanhVien.Lop } })
+                                                        @Html.ValidationMessageFor(model => model.Lop, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control", placeholder = "Số điện thoại", Value = @ViewBag.ThanhVien.SDT } })
+                                                        @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email", Value = @ViewBag.ThanhVien.Mail } })
+                                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="payment-adress mg-t-15">
+                                                        <button type="submit"  class="btn btn-primary waves-effect waves-light mg-b-15 activec" style="float:right">Xác nhận</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+

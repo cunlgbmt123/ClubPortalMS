@@ -25,7 +25,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                from i in table.ToList()
                                where e.IDtvien == IdTvien
                                && e.IDRoles == 2
-                               select new ViewModel3
+                               select new CLBDaThamGiaViewModel
                                {
                                    TenCLB = i.TenCLB,
                                    IDCLB = i.ID,
@@ -35,7 +35,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             ViewBag.DsCLB = Dsclbthamgia;
             return View();
         }
-        public ActionResult QLSuKien(int? id, int? page)
+        public ActionResult QLSuKien(int? id)
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
             List<SuKien> suKiens = db.SuKien.ToList();
@@ -47,12 +47,11 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                              select new ViewModel1
                              {
                                  ThanhVien_CLB = e,
-                                 //CLB = i,
                                  SuKien = d
                              };
             int? idCLB = id;
             ViewBag.idCLB = idCLB;
-            ViewBag.DsSuKien = DsSuKien.ToList().ToPagedList(page ?? 1, 5);
+            ViewBag.DsSuKien = DsSuKien.OrderByDescending(x => x.SuKien.ID).ToList(); 
             return View();
         }
         public ActionResult XemSK(int? id)
@@ -159,10 +158,6 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             ViewBag.IdLoaiSK = new SelectList(db.LoaiSuKien, "ID", "TenLoaiSK", suKien.IdLoaiSK);
             return View(suKien);
         }
-
-        // POST: Admin/ThongBaos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SuaSK([Bind(Include = "ID,TieuDeSK,MoTa,NgayBatDau,NgayKetThuc,NoiDung,DiaDiem,File,IdCLB,IdLoaiSK")] SuKien suKien, HttpPostedFileBase upload)
@@ -189,7 +184,14 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                     SuKien suKiens = db.SuKien.Find(suKien.ID);
                     if (suKiens.File == null)
                     {
-                        db.Entry(suKien).State = EntityState.Modified;
+                        suKiens.IdCLB = suKien.IdCLB;
+                        suKiens.TieuDeSK = suKien.TieuDeSK;
+                        suKiens.MoTa = suKien.MoTa;
+                        suKiens.NgayBatDau = suKien.NgayBatDau;
+                        suKiens.NgayKetThuc = suKien.NgayKetThuc;
+                        suKiens.NoiDung = suKien.NoiDung;
+                        suKiens.DiaDiem = suKien.DiaDiem;
+                        suKiens.IdLoaiSK = suKien.IdLoaiSK;
                         db.SaveChanges();
                     }
                     else
@@ -202,39 +204,24 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                         suKiens.NoiDung = suKien.NoiDung;
                         suKiens.DiaDiem = suKien.DiaDiem;
                         suKiens.IdLoaiSK = suKien.IdLoaiSK;
+                        suKiens.File = suKien.File;
+                        suKiens.TenFile = suKien.TenFile;
+                        suKiens.ContentType = suKien.ContentType;
                         db.SaveChanges();
                     }
                 }
-                return RedirectToAction("QLSuKien", new { suKien.IdCLB });
+                return RedirectToAction("XemSK", new { id = suKien.ID });
             }
             ViewBag.IdLoaiSK = new SelectList(db.LoaiSuKien, "ID", "TenLoaiSK", suKien.IdLoaiSK);
             return View(suKien);
         }
 
-        // GET: Admin/ThongBaos/Delete/5
-        public ActionResult XoaSK(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SuKien suKien = db.SuKien.Find(id);
-            if (suKien == null)
-            {
-                return HttpNotFound();
-            }
-            return View(suKien);
-        }
-
-        // POST: Admin/ThongBaos/Delete/5
-        [HttpPost, ActionName("XoaSK")]
-        [ValidateAntiForgeryToken]
         public ActionResult XacNhanXoaSK(int? id)
         {
             SuKien suKien = db.SuKien.Find(id);
             db.SuKien.Remove(suKien);
             db.SaveChanges();
-            return RedirectToAction("QLSuKien", new { suKien.IdCLB });
+            return RedirectToAction("QLSuKien", new {id= suKien.IdCLB });
         }
         [HttpGet]
         public ActionResult DiemDanh(int? id, int? id2)
@@ -250,9 +237,11 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                 select new DiemDanhCLBViewModel
                                 {
                                     ID = i.ID,
+                                   
                                     DiemDanh = i.DiemDanh,
                                     ThanhVien_CLB = e
                                 };
+            ViewBag.IdSK = id;
             return View(DsthanhVienSK.ToList());
         }
         [HttpPost]
