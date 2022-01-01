@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ClubPortalMS.Models.LienHe>
+﻿@model IEnumerable<ClubPortalMS.ViewModel.LienHe.LienHeViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -53,22 +53,22 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.TieuDe)
+                                @item.TieuDe
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.DiaChi)
+                                item.DiaChi
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.HotLine)
+                                @item.HotLine
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Email)
+                                @item.Email
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Ten)
+                                @item.Ten
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.NoiDung)
+                                @item.NoiDung
                             </td>
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |

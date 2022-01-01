@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ClubPortalMS.Models.DBRoles>
+﻿@model IEnumerable<ClubPortalMS.ViewModel.User.RoleViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -13,11 +13,12 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                        <p>
-                            @Html.ActionLink("Create New", "Create")
-                        </p>
 
-                        <strong class="text-danger text-uppercase">Tạo Mới</strong>
+
+                        <strong class="text-danger text-uppercase">Danh Sách Các Quền hiện có</strong>
+                        <p>
+                            @Html.ActionLink("Thêm mới", "Create")
+                        </p>
                     </div>
                     <div class="col-md-6 text-right">
                         <a href="#" class="btn btn-sm btn-success">Content</a>

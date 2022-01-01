@@ -1,0 +1,162 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+<h2>QLDkyCLB</h2>
+@{
+    var DsDangKyCLB = (IPagedList<ClubPortalMS.Models.ViewModel1>)ViewBag.DsDangKyCLB;
+    ViewBag.Title = "Xét duyệt thành viên";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    string[] TableHeaders = new string[] {"STT"
+                        ,"Họ và tên"
+                        ,"Tên Câu lạc bộ"
+                        ,"Loại Câu lạc bộ"
+                        ,"Lý do thành lập"
+                        ,"Tác vụ"
+                        };
+    var DsCLB = (IPagedList<ClubPortalMS.Models.ViewModel1>)ViewBag.DsDangKyCLB;
+    
+    string[] TableHeader = new string[] {"Loại Câu Lạc Bộ"
+                        ,"Tên Câu Lạc Bộ"
+                        ,"Trạng Thái"
+                        ,"Mô Tả"
+                        ,"Ngày Thành Lập"
+                        ,"Liên Hệ"
+                        ,"Fan Page"
+                        ,"Email"
+                        };
+    
+}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper my-2">
+    <!-- Main content -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="card">
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Quản lý câu lạc bộ</h1>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a href="#" class="btn btn-info">Trang chủ</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="card-body">
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="callout callout-info">
+                                    <h5><i class="fas fa-list"></i> Danh sách yêu cầu Đăng ký CLB:</h5>
+                                </div>
+                                
+                                <div class="invoice p-3 mb-3">
+                                    <div class="row">
+                                        <div class="col-12 table table-responsive">
+                                            <table id="myTable" class="table table-striped table table-bordered table-hover table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        @foreach (var head in TableHeaders)
+                                                        {
+                                                            <th>
+                                                                @head
+                                                            </th>
+                                                        }
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in ViewBag.DsDangKyCLB)
+                                                    {
+                                                        <tr>
+                                                            <td>@item.DkyCLB.ID</td>
+                                                            <td>@item.DkyCLB.ThanhVien.Ho @item.DkyCLB.ThanhVien.Ten</td>
+                                                            <td>@item.DkyCLB.TenCLB</td>
+                                                            <td>@item.LoaiCLB.TenLoaiCLB</td>
+                                                            <td>@item.DkyCLB.LyDoThanhLap</td>
+
+                                                            <td>
+                                                                @*@Html.ActionLink("Xem", "XemChiTiet", new { id = item.SuKien.ID }) |*@
+                                                                @Html.ActionLink("Xét duyệt", "ThemCLB", new { id = item.DkyCLB.ID }) |
+                                                                @Html.ActionLink("Từ chối", "TuChoiCLB", new { id = item.DkyCLB.ID })
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+
+                                            @Html.PagedListPager(DsDangKyCLB, page => Url.Action("QLDkyCLB", new { page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                       
+                    </div>
+                </section>
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="callout callout-info">
+                                    <h5><i class="fas fa-list"></i> Danh sách các CLB:</h5>
+                                </div>
+                                <div class="invoice p-3 mb-3">
+                                    <div class="row">
+                                        <div class="col-12 table table-responsive">
+                                            <table id="myTable" class="table table-striped table table-bordered table-hover table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        @foreach (var head in TableHeader)
+                                                        {
+                                                            <th>
+                                                                @head
+                                                            </th>
+                                                        }
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in ViewBag.DsDangKyCLB)
+                                                    {
+                                                    <tr>
+                                                        <td>@item.CLB.ID</td>
+                                                        <td>@item.LoaiCLB.TenLoaiCLB</td>
+                                                        <td>@item.CLB.TenCLB</td>
+                                                        <td>@item.CLB.TrangThai</td>
+                                                        <td>@item.CLB.MoTa</td>
+                                                        <td>@item.CLB.NgayThanhLap</td>
+                                                        <td>@item.CLB.LienHe</td>
+                                                        <td>@item.CLB.FanPage</td>
+                                                        <td>@item.CLB.Email</td>
+
+                                                        <td>
+                                                            @Html.ActionLink("Edit", "Edit", new { id = item.CLB.ID }) |
+                                                            @Html.ActionLink("Details", "Details", new { id = item.CLB.ID }) |
+                                                            @Html.ActionLink("Delete", "Delete", new { id = item.CLB.ID })
+                                                        </td>
+                                                    </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+
+                                            @Html.PagedListPager(DsDangKyCLB, page => Url.Action("QLDkyCLB", new { page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="@Url.Action("Create")" class="btn btn-outline-success">Thêm Mới</a>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

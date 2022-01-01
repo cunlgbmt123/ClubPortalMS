@@ -17,6 +17,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/DBUserRoles
         public ActionResult Index()
         {
+
             var dBUserRoles = db.DBUserRoles.Include(d => d.DBRoles).Include(d => d.DBUser);
             return View(dBUserRoles.ToList());
         }

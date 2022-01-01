@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
+using ClubPortalMS.ViewModel.CLB;
+using ClubPortalMS.ViewModel.ThongBao;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
@@ -17,8 +19,25 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/ThongBaos
         public ActionResult Index()
         {
-            var thongBao = db.ThongBao.Include(t => t.CLB);
-            return View(thongBao.ToList());
+            List<ThongBao> thongBaos = db.ThongBao.ToList();
+            List<CLB> CLB = db.CLB.ToList();
+            var dsTB = from e in thongBaos
+                       join i in CLB on e.IdCLB equals i.ID into table
+                       from i in table.ToList()
+                       select new ThongBaoViewModels
+                          {
+                              ID = e.ID,
+                              TieuDe = e.TieuDe,
+                              MoTa = e.MoTa,
+                              IdCLB = e.IdCLB,
+                              NgayThongBao = e.NgayThongBao,
+                              NoiDung = e.NoiDung,
+                              TenFile = e.TenFile,
+                              ContentType = e.ContentType,
+                              File = e.File,
+                          };
+
+            return View(dsTB);
         }
 
         // GET: Admin/ThongBaos/Details/5
@@ -28,37 +47,71 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ThongBao thongBao = db.ThongBao.Find(id);
-            if (thongBao == null)
+            var e = db.ThongBao.SingleOrDefault(n => n.ID == id);
+            if (e == null)
             {
                 return HttpNotFound();
             }
-            return View(thongBao);
-        }
+            var viewModel = new ThongBaoViewModels
+            {
+                ID = e.ID,
+                TieuDe = e.TieuDe,
+                MoTa = e.MoTa,
+                IdCLB = e.IdCLB,
+                NgayThongBao = e.NgayThongBao,
+                NoiDung = e.NoiDung,
+                TenFile = e.TenFile,
+                ContentType = e.ContentType,
+                File = e.File,
 
+            };
+            return View(viewModel);
+        }
+        public IEnumerable<CLBViewModel> getCLB()
+        {
+            var CLB = db.CLB.Select(n => new CLBViewModel
+            {
+                ID = n.ID,
+                TenCLB = n.TenCLB
+
+            });
+            return CLB;
+            
+        }
         // GET: Admin/ThongBaos/Create
         public ActionResult Create()
         {
-            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB");
-            return View();
-        }
+            var createThongbao = new ThongBaoViewModels();
+            ViewBag.IdCLB = new SelectList(getCLB(), "ID", "TenCLB", createThongbao.IdCLB);
+            return View(createThongbao);
+        } 
 
         // POST: Admin/ThongBaos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TieuDe,MoTa,IdCLB,NgayThongBao,NoiDung,File")] ThongBao thongBao)
+        public ActionResult Create(ThongBaoViewModels thongBaoView)
         {
             if (ModelState.IsValid)
             {
+                ThongBao thongBao = new ThongBao();
+                thongBao.ID = thongBaoView.ID;
+                thongBao.TieuDe = thongBaoView.TieuDe;
+                thongBao.MoTa = thongBaoView.MoTa;
+                thongBao.IdCLB = thongBaoView.IdCLB;
+                thongBao.NgayThongBao = thongBaoView.NgayThongBao;
+                thongBao.NoiDung = thongBaoView.NoiDung;
+                thongBao.TenFile = thongBaoView.TenFile;
+                thongBao.ContentType = thongBaoView.ContentType;
+                thongBao.File = thongBaoView.File;
                 db.ThongBao.Add(thongBao);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", thongBao.IdCLB);
-            return View(thongBao);
+            ViewBag.IdCLB = new SelectList(getCLB(), "ID", "TenCLB", thongBaoView.IdCLB);
+            return View(thongBaoView);
         }
 
         // GET: Admin/ThongBaos/Edit/5

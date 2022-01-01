@@ -1,12 +1,9 @@
-﻿@model ClubPortalMS.Models.Album
+﻿@model ClubPortalMS.ViewModel.Album.AlbumViewModel
 
 @{
     ViewBag.Title = "Chỉnh Sửa";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-
-
 
 @using (Html.BeginForm("Edit","Albums", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -29,6 +26,7 @@
                     </div>
                 </div>
                 <div class="card-body">
+
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.HiddenFor(model => model.ID)
 
@@ -45,19 +43,15 @@
                         <div class="col-md-10">
                             <img src="@Url.Content(Model.HinhAnh)" style="width: 100px; height: 100px; margin: 10px;" id="preView" />
                             <input type="file" name="ImageFile" onchange="ShowImg(this, document.getElementById('preView'))" />
-
                         </div>
-
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.Video, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            <img src="@Url.Content(Model.Video)" style="width: 100px; height: 100px; margin: 10px;" id="preViewvideo" />
-                            <input type="file" name="VideoFile" onchange="Showvideo(this, document.getElementById('preViewvideo'))" />
-
+                            <img src="@Url.Content(Model.Video)" style="width: 100px; height: 100px; margin: 10px;" id="preView" />
+                            <input type="file" name="ImageFile" onchange="ShowImg(this, document.getElementById('preView'))" />
                         </div>
-
                     </div>
 
                     <div class="form-group">
@@ -67,7 +61,6 @@
                             @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Save" class="btn btn-default" />

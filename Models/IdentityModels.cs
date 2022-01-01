@@ -61,5 +61,9 @@ namespace ClubPortalMS.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<ClubPortalMS.ViewModel.Album.AlbumViewModel> AlbumViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<ClubPortalMS.ViewModel.CLB.CLBViewModel> CLBViewModels { get; set; }
     }
 }

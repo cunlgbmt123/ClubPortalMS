@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
+using ClubPortalMS.ViewModel.CLB;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
@@ -17,7 +18,15 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/LoaiCLBs
         public ActionResult Index()
         {
-            return View(db.LoaiCLB.ToList());
+            List<LoaiCLB> loaiCLB = db.LoaiCLB.ToList();
+            var ds = from e in loaiCLB
+                          select new LoaiCLBViewModel
+                          {
+                              IDLoaiCLB = e.IDLoaiCLB,
+                              TenLoaiCLB = e.TenLoaiCLB
+                          };
+
+            return View(ds);
         }
 
         // GET: Admin/LoaiCLBs/Details/5
@@ -27,18 +36,25 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LoaiCLB loaiCLB = db.LoaiCLB.Find(id);
-            if (loaiCLB == null)
+            var data = db.LoaiCLB.SingleOrDefault(n => n.IDLoaiCLB == id);
+            if (data == null)
             {
                 return HttpNotFound();
             }
-            return View(loaiCLB);
+            var viewModel = new LoaiCLBViewModel
+            {
+                IDLoaiCLB = data.IDLoaiCLB,
+                TenLoaiCLB = data.TenLoaiCLB
+
+            };
+            return View(viewModel);
         }
 
         // GET: Admin/LoaiCLBs/Create
         public ActionResult Create()
         {
-            return View();
+            var createLoaiCLB = new LoaiCLBViewModel();
+            return View(createLoaiCLB);
         }
 
         // POST: Admin/LoaiCLBs/Create
@@ -46,16 +62,20 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDLoaiCLB,TenLoaiCLB")] LoaiCLB loaiCLB)
+        public ActionResult Create([Bind(Include = "IDLoaiCLB,TenLoaiCLB")] LoaiCLBViewModel loaiCLBView)
         {
             if (ModelState.IsValid)
             {
+                LoaiCLB loaiCLB = new LoaiCLB();
+                loaiCLB.IDLoaiCLB = loaiCLBView.IDLoaiCLB;
+                loaiCLB.TenLoaiCLB = loaiCLBView.TenLoaiCLB;
+
                 db.LoaiCLB.Add(loaiCLB);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(loaiCLB);
+            return View(loaiCLBView);
         }
 
         // GET: Admin/LoaiCLBs/Edit/5
@@ -65,12 +85,18 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LoaiCLB loaiCLB = db.LoaiCLB.Find(id);
-            if (loaiCLB == null)
+            var data = db.LoaiCLB.SingleOrDefault(n => n.IDLoaiCLB == id);
+            if (data == null)
             {
                 return HttpNotFound();
             }
-            return View(loaiCLB);
+            var viewModel = new LoaiCLBViewModel
+            {
+                IDLoaiCLB = data.IDLoaiCLB,
+                TenLoaiCLB = data.TenLoaiCLB
+
+            };
+            return View(viewModel);
         }
 
         // POST: Admin/LoaiCLBs/Edit/5
@@ -78,15 +104,26 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDLoaiCLB,TenLoaiCLB")] LoaiCLB loaiCLB)
+        public ActionResult Edit(LoaiCLBViewModel loaiCLBView, int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var data = db.LoaiCLB.SingleOrDefault(n => n.IDLoaiCLB == id);
+            if (data == null)
+            {
+                return HttpNotFound();
+            }
             if (ModelState.IsValid)
             {
-                db.Entry(loaiCLB).State = EntityState.Modified;
+                data.IDLoaiCLB = loaiCLBView.IDLoaiCLB;
+                data.TenLoaiCLB = loaiCLBView.TenLoaiCLB;
+                db.Entry(data).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(loaiCLB);
+            return View(loaiCLBView);
         }
 
         // GET: Admin/LoaiCLBs/Delete/5
@@ -96,20 +133,28 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LoaiCLB loaiCLB = db.LoaiCLB.Find(id);
-            if (loaiCLB == null)
+            var data = db.LoaiCLB.SingleOrDefault(n => n.IDLoaiCLB == id);
+            if (data == null)
             {
                 return HttpNotFound();
             }
-            return View(loaiCLB);
+            var viewModel = new LoaiCLBViewModel
+            {
+                IDLoaiCLB = data.IDLoaiCLB,
+                TenLoaiCLB = data.TenLoaiCLB
+
+            };
+            return View(viewModel);
         }
 
         // POST: Admin/LoaiCLBs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(LoaiCLBViewModel loaiCLBView,int id)
         {
             LoaiCLB loaiCLB = db.LoaiCLB.Find(id);
+            loaiCLB.IDLoaiCLB = loaiCLBView.IDLoaiCLB;
+            loaiCLB.TenLoaiCLB = loaiCLBView.TenLoaiCLB;
             db.LoaiCLB.Remove(loaiCLB);
             db.SaveChanges();
             return RedirectToAction("Index");
