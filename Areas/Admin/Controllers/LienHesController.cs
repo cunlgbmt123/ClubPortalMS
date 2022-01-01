@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
+using ClubPortalMS.ViewModel.LienHe;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
@@ -17,7 +18,19 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/LienHes
         public ActionResult Index()
         {
-            return View(db.LienHe.ToList());
+            List<LienHe> lienhe = db.LienHe.ToList();
+            var dsLienhe = from e in lienhe
+                          select new LienHeViewModel
+                          {
+                              ID = e.ID,
+                              TieuDe = e.TieuDe,
+                              DiaChi = e.DiaChi,
+                              HotLine = e.HotLine,
+                              Email = e.Email,
+                              NoiDung = e.NoiDung
+                          };
+
+            return View(dsLienhe);
         }
 
         // GET: Admin/LienHes/Details/5
@@ -27,18 +40,31 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LienHe lienHe = db.LienHe.Find(id);
-            if (lienHe == null)
+            var data = db.LienHe.SingleOrDefault(n => n.ID == id);
+            if (data == null)
             {
                 return HttpNotFound();
             }
-            return View(lienHe);
+            var viewModel = new LienHeViewModel
+            {
+                ID = data.ID,
+                TieuDe = data.TieuDe,
+                DiaChi = data.DiaChi,
+                HotLine = data.HotLine,
+                Ten = data.Ten,
+                Email = data.Email,
+                NoiDung = data.NoiDung
+
+            };
+            return View(viewModel);
         }
 
         // GET: Admin/LienHes/Create
         public ActionResult Create()
         {
-            return View();
+            var themLH = new LienHeViewModel();
+
+            return View(themLH);
         }
 
         // POST: Admin/LienHes/Create
@@ -46,16 +72,24 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TieuDe,DiaChi,HotLine,Email,Ten,NoiDung")] LienHe lienHe)
+        public ActionResult Create(LienHeViewModel lienHeView, int? id)
         {
             if (ModelState.IsValid)
             {
+                LienHe lienHe = new LienHe();
+                lienHe.ID = lienHeView.ID;
+                lienHe.TieuDe = lienHeView.TieuDe;
+                lienHe.DiaChi = lienHeView.DiaChi;
+                lienHe.HotLine = lienHeView.HotLine;
+                lienHe.Ten = lienHeView.Ten;
+                lienHe.Email = lienHeView.Email;
+                lienHe.NoiDung = lienHeView.Email;
                 db.LienHe.Add(lienHe);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("index");
             }
 
-            return View(lienHe);
+            return View(lienHeView);
         }
 
         // GET: Admin/LienHes/Edit/5
@@ -65,12 +99,23 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LienHe lienHe = db.LienHe.Find(id);
-            if (lienHe == null)
+            var data = db.LienHe.SingleOrDefault(n => n.ID == id);
+            if (data == null)
             {
                 return HttpNotFound();
             }
-            return View(lienHe);
+            var viewModel = new LienHeViewModel
+            {
+                ID = data.ID,
+                TieuDe = data.TieuDe,
+                DiaChi = data.DiaChi,
+                HotLine = data.HotLine,
+                Ten = data.Ten,
+                Email = data.Email,
+                NoiDung = data.NoiDung
+
+            };
+            return View(viewModel);
         }
 
         // POST: Admin/LienHes/Edit/5
@@ -78,15 +123,31 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TieuDe,DiaChi,HotLine,Email,Ten,NoiDung")] LienHe lienHe)
+        public ActionResult Edit( LienHeViewModel lienHeView,int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var data = db.LienHe.SingleOrDefault(n => n.ID == id);
+            if (data == null)
+            {
+                return HttpNotFound();
+            }
             if (ModelState.IsValid)
             {
-                db.Entry(lienHe).State = EntityState.Modified;
+                data.ID = lienHeView.ID;
+                data.TieuDe = lienHeView.TieuDe;
+                data.DiaChi = lienHeView.DiaChi;
+                data.HotLine = lienHeView.HotLine;
+                data.Ten = lienHeView.Ten;
+                data.Email = lienHeView.Email;
+                data.NoiDung = lienHeView.Email;
+                db.Entry(data).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(lienHe);
+            return View(lienHeView);
         }
 
         // GET: Admin/LienHes/Delete/5
@@ -96,21 +157,39 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LienHe lienHe = db.LienHe.Find(id);
-            if (lienHe == null)
+            var data = db.LienHe.SingleOrDefault(n => n.ID == id);
+            if (data == null)
             {
                 return HttpNotFound();
             }
-            return View(lienHe);
+            var viewModel = new LienHeViewModel
+            {
+                ID = data.ID,
+                TieuDe = data.TieuDe,
+                DiaChi = data.DiaChi,
+                HotLine = data.HotLine,
+                Ten = data.Ten,
+                Email = data.Email,
+                NoiDung = data.NoiDung
+
+            };
+            return View(viewModel);
         }
 
         // POST: Admin/LienHes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(LienHeViewModel lienHeView, int id)
         {
-            LienHe lienHe = db.LienHe.Find(id);
-            db.LienHe.Remove(lienHe);
+            LienHe data = db.LienHe.Find(id);
+            data.ID = lienHeView.ID;
+            data.TieuDe = lienHeView.TieuDe;
+            data.DiaChi = lienHeView.DiaChi;
+            data.HotLine = lienHeView.HotLine;
+            data.Ten = lienHeView.Ten;
+            data.Email = lienHeView.Email;
+            data.NoiDung = lienHeView.Email;
+            db.LienHe.Remove(data);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

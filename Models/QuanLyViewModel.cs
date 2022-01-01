@@ -35,18 +35,7 @@ namespace ClubPortalMS.Models
         public LichTap_ThanhVien LichTap_ThanhVien { get; set; }
     }
 
-    public class CLBViewModel
-    {
-            public int ID { get; set; }
-            public int IdLoaiCLB { get; set; }
-            public string TenCLB { get; set; }
-            public bool? TrangThai { get; set; }
-            public DateTime? NgayThanhLap { get; set; }
-            public string LienHe { get; set; }
-            public string Mota { get; set; }
-            public string FanPage { get; set; }
-            public string Email { get; set; }
-    }
+    
     public class ViewModel2
     {
         public int IDCLB { get; set; }

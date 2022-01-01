@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ClubPortalMS.Models.Album>
+﻿@model IEnumerable<ClubPortalMS.ViewModel.Album.AlbumViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <table class="table">
+                <table class="table ">
                     <tr>
                         <th>
                             @Html.DisplayNameFor(model => model.TieuDe)
@@ -47,16 +47,16 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.TieuDe)
+                                @item.TieuDe
                             </td>
                             <td>
-                                <img src="@Html.DisplayFor(modelItem => item.HinhAnh)" style="width: 100px; height: 100px; margin: 10px;" />                     
+                                <img src="@Url.Content(item.HinhAnh)" style="width: 100px; height: 100px; margin: 10px;" />                     
                             </td>
                             <td>
-                               <img src="@Html.DisplayFor(modelItem => item.Video)" style="width: 100px; height: 100px; margin: 10px;"/>
+                               <img src="@Url.Content(item.Video)" style="width: 100px; height: 100px; margin: 10px;"/>
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.MoTa)
+                                @item.MoTa
                             </td>
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |

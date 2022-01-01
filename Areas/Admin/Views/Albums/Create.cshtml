@@ -1,11 +1,11 @@
-﻿@model ClubPortalMS.Models.Album
+﻿@model ClubPortalMS.ViewModel.Album.AlbumViewModel
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Create</h2>
+
 
 
 @using (Html.BeginForm("Create","Albums",FormMethod.Post, new { enctype = "multipart/form-data" }))

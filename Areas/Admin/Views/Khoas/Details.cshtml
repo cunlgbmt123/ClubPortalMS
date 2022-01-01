@@ -1,0 +1,48 @@
+﻿@model ClubPortalMS.ViewModel.Khoa.KhoaViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper my-2">
+    <!-- Main content -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong class="text-danger text-uppercase">chi tiết</strong>
+                        <p>
+                            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+                            @Html.ActionLink("Back to List", "Index")
+                        </p>
+
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a href="#" class="btn btn-sm btn-success">Khoa</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TenKhoa)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.TenKhoa)
+                    </dd>
+
+                </dl>
+
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
