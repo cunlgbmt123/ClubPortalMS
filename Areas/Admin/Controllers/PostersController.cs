@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
+using ClubPortalMS.ViewModel.Poster;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
@@ -17,7 +19,18 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/Posters
         public ActionResult Index()
         {
-            return View(db.Poster.ToList());
+            List<Poster> poster = db.Poster.ToList();
+            var ds = from e in poster
+                          select new PosterViewModel
+                          {
+                              ID = e.ID,
+                              TenPoster = e.TenPoster,
+                              HinhAnh = e.HinhAnh,
+                              Status = e.Status,
+                              
+                          };
+
+            return View(ds);
         }
 
         // GET: Admin/Posters/Details/5
@@ -27,18 +40,27 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Poster poster = db.Poster.Find(id);
-            if (poster == null)
+            var data = db.Poster.SingleOrDefault(n => n.ID == id);
+            if (data == null)
             {
                 return HttpNotFound();
             }
-            return View(poster);
+            var viewModel = new PosterViewModel
+            {
+                ID = data.ID,
+                TenPoster = data.TenPoster,
+                HinhAnh = data.HinhAnh,
+                Status = data.Status
+
+            };
+            return View(viewModel);
         }
 
         // GET: Admin/Posters/Create
         public ActionResult Create()
         {
-            return View();
+            var createPoster = new PosterViewModel();
+            return View(createPoster);
         }
 
         // POST: Admin/Posters/Create
@@ -46,16 +68,30 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TenPoster,HinhAnh,Status")] Poster poster)
+        public ActionResult Create(PosterViewModel posterView,int? id)
         {
+            string hinhanh = Path.GetFileNameWithoutExtension(posterView.ImageFile.FileName);
+            string imgExtension = Path.GetExtension(posterView.ImageFile.FileName);
+            hinhanh = hinhanh + DateTime.Now.ToString("yyyymmssfff") + imgExtension;
+            posterView.HinhAnh = "~/Areas/Admin/Resource/HinhAnh/" + hinhanh;
+            
+            hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanh);
+
+            posterView.ImageFile.SaveAs(hinhanh);
+            
             if (ModelState.IsValid)
             {
+                Poster poster = new Poster();
+                poster.ID = posterView.ID;
+                poster.TenPoster = posterView.TenPoster;
+                poster.HinhAnh = posterView.HinhAnh;
+                poster.Status = posterView.Status;
                 db.Poster.Add(poster);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(poster);
+            return View(posterView);
         }
 
         // GET: Admin/Posters/Edit/5
@@ -65,12 +101,20 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Poster poster = db.Poster.Find(id);
-            if (poster == null)
+            var data = db.Poster.SingleOrDefault(n => n.ID == id);
+            if (data == null)
             {
                 return HttpNotFound();
             }
-            return View(poster);
+            var viewModel = new PosterViewModel
+            {
+                ID = data.ID,
+                TenPoster = data.TenPoster,
+                HinhAnh = data.HinhAnh,
+                Status = data.Status
+
+            };
+            return View(viewModel);
         }
 
         // POST: Admin/Posters/Edit/5
@@ -78,15 +122,37 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TenPoster,HinhAnh,Status")] Poster poster)
+        public ActionResult Edit(PosterViewModel posterView, int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var data = db.Poster.SingleOrDefault(n => n.ID == id);
+            if (data == null)
+            {
+                return HttpNotFound();
+            }
             if (ModelState.IsValid)
             {
-                db.Entry(poster).State = EntityState.Modified;
+                string hinhanh = Path.GetFileNameWithoutExtension(posterView.ImageFile.FileName);
+                string imgExtension = Path.GetExtension(posterView.ImageFile.FileName);
+                hinhanh = hinhanh + DateTime.Now.ToString("yyyymmssfff") + imgExtension;
+                posterView.HinhAnh = "~/Areas/Admin/Resource/HinhAnh/" + hinhanh;
+
+                hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanh);
+
+                posterView.ImageFile.SaveAs(hinhanh);
+
+                data.ID = posterView.ID;
+                data.TenPoster = posterView.TenPoster;
+                data.HinhAnh = posterView.HinhAnh;
+                data.Status = posterView.Status;
+                db.Entry(data).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(poster);
+            return View(posterView);
         }
 
         // GET: Admin/Posters/Delete/5
@@ -96,20 +162,32 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Poster poster = db.Poster.Find(id);
-            if (poster == null)
+            var data = db.Poster.SingleOrDefault(n => n.ID == id);
+            if (data == null)
             {
                 return HttpNotFound();
             }
-            return View(poster);
+            var viewModel = new PosterViewModel
+            {
+                ID = data.ID,
+                TenPoster = data.TenPoster,
+                HinhAnh = data.HinhAnh,
+                Status = data.Status
+
+            };
+            return View(viewModel);
         }
 
         // POST: Admin/Posters/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(PosterViewModel posterView,int id)
         {
             Poster poster = db.Poster.Find(id);
+            poster.ID = posterView.ID;
+            poster.TenPoster = posterView.TenPoster;
+            poster.HinhAnh = posterView.HinhAnh;
+            poster.Status = posterView.Status;
             db.Poster.Remove(poster);
             db.SaveChanges();
             return RedirectToAction("Index");

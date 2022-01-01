@@ -1,4 +1,4 @@
-﻿@model ClubPortalMS.Models.Album
+﻿@model IList<ClubPortalMS.ViewModel.Album.AlbumViewModel>
 
 @{
     ViewBag.Title = "Details";
@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <p>
-                            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+                            @Html.ActionLink("Edit", "Edit", new { id = Model[0].ID }) |
                             @Html.ActionLink("Back to List", "Index")
                         </p>
 
@@ -29,35 +29,35 @@
             <div class="card-body">
                 <dl class="dl-horizontal">
                     <dt>
-                        @Html.DisplayNameFor(model => model.TieuDe)
+                        @Html.DisplayNameFor(model => model[0].TieuDe)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.TieuDe)
+                        @Html.DisplayFor(model => model[0].TieuDe)
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.HinhAnh)
+                        @Html.DisplayNameFor(model => model[0].HinhAnh)
                     </dt>
 
                     <dd>
-                        <img src="@Url.Content(Model.HinhAnh)" style="width: 100px; height: 100px; margin: 10px;" />
+                        <img src="@Url.Content(Model[0].HinhAnh)" style="width: 100px; height: 100px; margin: 10px;" />
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.Video)
+                        @Html.DisplayNameFor(model => model[0].Video)
                     </dt>
 
                     <dd>
-                        <img src="@Url.Content(Model.Video)" style="width: 100px; height: 100px; margin: 10px;" />
+                        <img src="@Url.Content(Model[0].Video)" style="width: 100px; height: 100px; margin: 10px;" />
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.MoTa)
+                        @Html.DisplayNameFor(model => model[0].MoTa)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.MoTa)
+                        @Html.DisplayFor(model => model[0].MoTa)
                     </dd>
 
                 </dl>

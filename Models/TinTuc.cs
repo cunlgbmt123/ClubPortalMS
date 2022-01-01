@@ -10,7 +10,7 @@ namespace ClubPortalMS.Models
     {
         [Key]
         public int ID { get; set; }
-        public string TieuDe{ get; set; }
+        public string TieuDe { get; set; }
         public string MoTa { get; set; }
         public string NoiDung { get; set; }
 
@@ -20,6 +20,6 @@ namespace ClubPortalMS.Models
         public string HinhAnhChiTiet { get; set; }
         public DateTime NgayDang { get; set; }
         public string TenNguoiDang { get; set; }
-        
+
     }
 }
