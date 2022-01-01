@@ -39,7 +39,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/CLBs/Create
         public ActionResult Create()
         {
-            ViewBag.IdLoaiCLB = new SelectList(db.LoaiCLB, "IDLoaiCLB", "TenLoaiCLB");
+            
             return View();
         }
 

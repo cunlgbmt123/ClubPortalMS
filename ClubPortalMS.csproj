@@ -2461,6 +2461,8 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Hinh\HinhCLB\CLB_default.png" />
+    <Content Include="Hinh\HinhDaiDienNguoiDung\avatar_default.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -2755,7 +2757,6 @@
     <Content Include="Areas\Profile\Views\QuanLyXetDuyetDKTV\QLXetDuyetTV.cshtml" />
     <Content Include="Areas\Profile\Views\QuanLyXetDuyetDKTV\QLXetDuyetTV_CLB.cshtml" />
     <Content Include="Areas\Profile\Views\Shared\_LayoutProfile.cshtml" />
-    <Content Include="Areas\Profile\Views\Shared\_LayoutProfileManager.cshtml" />
     <Content Include="Areas\Profile\Views\ThongTinTV\HoSo.cshtml" />
     <Content Include="Areas\Profile\Views\web.config" />
     <Content Include="Areas\Profile\Views\_ViewStart.cshtml" />
@@ -2827,7 +2828,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Web.config" />
-    <Content Include="Views\Sweet\Alert.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

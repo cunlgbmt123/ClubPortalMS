@@ -27,10 +27,11 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                from i in table.ToList()
                                where e.IDtvien == IdTvien
                                && e.IDRoles == 1
-                               select new PhanHoiCLBViewModel
+                               select new CLBShowViewModel
                                {
                                    TenCLB = i.TenCLB,
-                                   IdCLB = i.ID
+                                   IdCLB = i.ID,
+                                   HinhCLB=i.HinhCLB
                                };
             ViewBag.DsCLB = Dsclbthamgia;
 
@@ -250,10 +251,11 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                from i in table.ToList()
                                where e.IDtvien == IdTvien
                                && e.IDRoles == 1
-                               select new PhanHoiCLBViewModel
+                               select new CLBShowViewModel
                                {
                                    TenCLB = i.TenCLB,
-                                   IdCLB = i.ID
+                                   IdCLB = i.ID,
+                                   HinhCLB = i.HinhCLB
                                };
             ViewBag.DsCLB = Dsclbthamgia;
             List<QLDSHoatDong> hoatDongs = db.QLDSHoatDong.ToList();
@@ -270,7 +272,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             ViewBag.DsHDGanDay = DsHDGanDay.OrderByDescending(x => x.QLDSHoatDong.ID).Take(3).ToList();
             return View()
 ;        }
-        public ActionResult HoatDongCLB(int? id, int? page)
+        public ActionResult HoatDongCLB(int? id,string message,string messages)
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
             List<QLDSHoatDong> QLDShoatDongs = db.QLDSHoatDong.ToList();
@@ -286,12 +288,16 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                  ThanhVien_CLB = e,
                                  QLDSHoatDong = i,
                              };
+            ViewBag.Message = message;
+            ViewBag.Messages = messages;
             ViewBag.idCLB = id;
             ViewBag.DsHoatDong = DsHoatDong.OrderByDescending(x => x.QLDSHoatDong.ID).ToList();
             return View(DsHoatDong);
         }
         public ActionResult ThamGiaHD(int? id)
         {
+            string message = null;
+            string messages = null;
             if (ModelState.IsValid)
             {
                 int IdTvien = Convert.ToInt32(Session["UserId"]);
@@ -299,11 +305,11 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                 var userAccount = db.TTNhatKy.Where(u => u.IDHoatDong==id).FirstOrDefault();
                 if (userAccount != null)
                 {
-                    ViewBag.Message = "Bạn đã tham gia hoạt động này rồi!!";
+                    message = "Bạn đã tham gia hoạt động này rồi!!";
                 }
                 else
                 {
-                    ViewBag.Message = "Tham gia thành công!!";
+                    messages = "Tham gia thành công!!";
                     var user = new TTNhatKy()
                     {
                         IdThanhVien = IdTvien,
@@ -315,7 +321,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                     db.TTNhatKy.Add(user);
                     db.SaveChanges();
                 }
-                return RedirectToAction("HoatDongCLB");
+                return RedirectToAction("HoatDongCLB", new { id = qLDSHoatDong.IdCLB, message= message, messages= messages });
             }
             return View();
         }
@@ -352,10 +358,11 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                from i in table.ToList()
                                where e.IDtvien == IdTvien
                                && e.IDRoles == 1
-                               select new PhanHoiCLBViewModel
+                               select new CLBShowViewModel
                                {
                                    TenCLB = i.TenCLB,
-                                   IdCLB = i.ID
+                                   IdCLB = i.ID,
+                                   HinhCLB = i.HinhCLB
                                };
             ViewBag.DsCLB = Dsclbthamgia;
             List<SuKien> suKiens = db.SuKien.ToList();
@@ -495,25 +502,39 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                from i in table.ToList()
                                where e.IDtvien == IdTvien
                                && e.IDRoles == 1
-                               select new PhanHoiCLBViewModel
+                               select new CLBShowViewModel
                                {
                                    TenCLB = i.TenCLB,
-                                   IdCLB = i.ID
+                                   IdCLB = i.ID,
+                                   HinhCLB = i.HinhCLB
                                };
             ViewBag.Dsclbthamgia = Dsclbthamgia;
+            List<LichTap_ThanhVien> lichTaps = db.LichTap_ThanhVien.ToList();
+            var DsLTGanDay = from e in thanhVien_clb
+                             join d in lichTaps on e.IDCLB equals d.LichTap.IdCLB into table1
+                             from d in table1.ToList()
+                             where e.IDtvien == d.IDTvien 
+                             && d.IDTvien == IdTvien
+                             && e.IDRoles == 1
+                             
+                             select new ViewModel1
+                             {
+                                 ThanhVien_CLB = e,
+                                 LichTap_ThanhVien = d
+                             };
+            ViewBag.DsLTGanDay = DsLTGanDay.OrderByDescending(x => x.LichTap_ThanhVien.IdLT).Take(3).ToList();
             return View();
         }
-        public ActionResult LichTap(int? id, int? page)
+        public ActionResult LichTap(int? id)
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
             List<LichTap_ThanhVien> lichTap_ThanhVien = db.LichTap_ThanhVien.ToList();
-            var nhiemVu_CLB = from e in lichTap_ThanhVien
+            var DsLichTap = from e in lichTap_ThanhVien
                               where e.LichTap.IdCLB == id
                               && e.IDTvien == IdTvien
-                              select e;
-            int? idCLB = id;
-            ViewBag.idCLB = idCLB;
-            ViewBag.nhiemVu_CLB = nhiemVu_CLB.ToList().ToPagedList(page ?? 1, 5);
+                              select e;        
+            ViewBag.idCLB = id;
+            ViewBag.DsLichTap = DsLichTap.ToList().OrderByDescending(x => x.LichTap.ID).ToList();
             return View();
         }
         #endregion
@@ -531,6 +552,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                select new CLBDaThamGiaViewModel
                                {
                                    TenCLB = i.TenCLB,
+                                   HinhCLB = i.HinhCLB,
                                    IDCLB = i.ID,
                                    Mota = i.Mota,
                                    NgayThanhLap = i.NgayThanhLap

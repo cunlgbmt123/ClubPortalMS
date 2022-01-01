@@ -27,6 +27,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                && e.IDRoles == 2
                                select new CLBDaThamGiaViewModel
                                {
+                                   HinhCLB = i.HinhCLB,
                                    TenCLB = i.TenCLB,
                                    IDCLB = i.ID,
                                    Mota = i.Mota,
@@ -160,9 +161,6 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             return View(hoatDong);
         }
 
-        // POST: Admin/ThongBaos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SuaHD([Bind(Include = "ID,ChuDe,MoTa,NgayBatDau,NgayKetThuc,NoiDung,DiaDiem,File,IdCLB,IdLoaiHD")] QLDSHoatDong hoatDong, HttpPostedFileBase upload)

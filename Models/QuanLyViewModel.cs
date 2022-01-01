@@ -17,6 +17,8 @@ namespace ClubPortalMS.Models
         public string Mota { get; set; }
         public string FanPage { get; set; }
         public string Email { get; set; }
+        public string HinhCLB { get; set; }
+        public HttpPostedFileBase ImageFile { get; set; }
     }
     public class ViewModel1
     {
@@ -37,15 +39,15 @@ namespace ClubPortalMS.Models
 
     public class CLBViewModel
     {
-            public int ID { get; set; }
-            public int IdLoaiCLB { get; set; }
-            public string TenCLB { get; set; }
-            public bool? TrangThai { get; set; }
-            public DateTime? NgayThanhLap { get; set; }
-            public string LienHe { get; set; }
-            public string Mota { get; set; }
-            public string FanPage { get; set; }
-            public string Email { get; set; }
+        public int ID { get; set; }
+        public int IdLoaiCLB { get; set; }
+        public string TenCLB { get; set; }
+        public bool? TrangThai { get; set; }
+        public DateTime? NgayThanhLap { get; set; }
+        public string LienHe { get; set; }
+        public string Mota { get; set; }
+        public string FanPage { get; set; }
+        public string Email { get; set; }
     }
     public class ViewModel2
     {
@@ -56,8 +58,15 @@ namespace ClubPortalMS.Models
     {
         public int IDCLB { get; set; }
         public string TenCLB { get; set; }
+        public string HinhCLB { get; set; }
         public string Mota { get; set; }
         public DateTime? NgayThanhLap { get; set; }
+    }
+    public class CLBShowViewModel
+    {
+        public int IdCLB { get; set; }
+        public string TenCLB { get; set; }
+        public string HinhCLB { get; set; }
     }
     public class PhanHoiCLBViewModel
     {

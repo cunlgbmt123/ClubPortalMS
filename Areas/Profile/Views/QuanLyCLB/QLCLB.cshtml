@@ -36,8 +36,15 @@
 <div class="x-editable-area mg-b-15">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="x-editable-list" style="height:450px">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="profile-info-inner">
+                    <div class="profile-img">
+                        <img src="@Model.HinhCLB" alt="" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                <div class="x-editable-list" >
                     <div class="alert-title">
                         <h2>Thông tin Câu lạc bộ</h2>
                     </div>
@@ -58,7 +65,7 @@
                             <tr>
                                 <td>Mô tả</td>
                                 <td>
-                                    <a href="#" id="firstname" data-type="text" data-pk="1" data-placement="right" data-placeholder="Required" > @Html.DisplayFor(model => model.Mota)</a>
+                                    <a href="#" id="firstname" data-type="text" data-pk="1" data-placement="right" data-placeholder="Required"> @Html.DisplayFor(model => model.Mota)</a>
                                 </td>
                             </tr>
                             <tr>
@@ -92,7 +99,7 @@
                         <a class="btn btn-primary" href="@Url.Action("SuaCLB", new { id = @Model.ID })"><i style="font-size:15px" class="fa fa-pencil-square" aria-hidden="true">  Chỉnh sửa</i></a>
                         <a class="btn btn-danger" data-toggle="modal" data-target="#DangerModalalert"><i style="font-size:15px;" class="fa fa-trash" aria-hidden="true"></i>  Xóa</a>
                     </div>
-                 
+
                     <div style="margin-top:2%"> @Html.ActionLink("Quay lại", "QuanLyCLB_DSCLB")</div>
                 </div>
             </div>

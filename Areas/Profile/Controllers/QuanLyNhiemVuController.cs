@@ -27,6 +27,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                {
                                    TenCLB = i.TenCLB,
                                    IDCLB = i.ID,
+                                   HinhCLB = i.HinhCLB,
                                    Mota = i.Mota,
                                    NgayThanhLap = i.NgayThanhLap
                                };

@@ -49,6 +49,8 @@
                                 <thead>
                                     <tr>
                                         <th data-field="state" data-checkbox="true"></th>
+                                        <th data-field="Ảnh đại diện">Ảnh đại diện </th>
+
                                         <th data-field="Họ và tên" data-editable="true">Họ và tên</th>
                                         <th data-field="Ngày sinh" data-editable="true">Ngày sinh</th>
                                         <th data-field="Mã số sinh viên" data-editable="true">Mã số sinh viên</th>
@@ -61,23 +63,24 @@
                                 <tbody>
                                     @foreach (var item in ViewBag.DsThanhVien)
                                     {
-                                        <tr class="sacss">
-                                            <td></td>
-                                            <td>@item.ThanhVien.Ho @item.ThanhVien.Ten</td>
-                                            <td>@item.ThanhVien.NgaySinh</td>
-                                            <td>@item.ThanhVien.MSSV</td>
-                                            <td>@item.ThanhVien.SDT</td>
-                                            <td>@item.ThanhVien.Mail</td>
-                                            <td class="datatable-ct">
-                                                <div class="button-ap-list responsive-btn">
-                                                    <div class="btn-group btn-custom-groups" style="margin-left:26%">
-                                                        <a class="btn btn-primary" href="@Url.Action("XemChiTietTV", new { id = item.ThanhVien_CLB.IDtvien })"><i style="font-size:15px" class="fa fa-info-circle" aria-hidden="true"></i></a>
+                                    <tr class="sacss">
+                                        <td></td>
+                                        <td> <img src="@item.ThanhVien.HinhDaiDien" width="50" height="20" alt=""/></td>
+                                        <td>@item.ThanhVien.Ho @item.ThanhVien.Ten</td>
+                                        <td>@item.ThanhVien.NgaySinh</td>
+                                        <td>@item.ThanhVien.MSSV</td>
+                                        <td>@item.ThanhVien.SDT</td>
+                                        <td>@item.ThanhVien.Mail</td>
+                                        <td class="datatable-ct">
+                                            <div class="button-ap-list responsive-btn">
+                                                <div class="btn-group btn-custom-groups" style="margin-left:26%">
+                                                    <a class="btn btn-primary" href="@Url.Action("XemChiTietTV", new { id = item.ThanhVien_CLB.IDtvien })"><i style="font-size:15px" class="fa fa-info-circle" aria-hidden="true"></i></a>
 
-                                                    </div>
                                                 </div>
+                                            </div>
 
-                                            </td>
-                                        </tr>
+                                        </td>
+                                    </tr>
                                       
                                     }
                                 </tbody>

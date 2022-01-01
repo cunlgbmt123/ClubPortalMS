@@ -33,45 +33,57 @@
     </div>
 </div>
 
-
-<section class="content">
+<div class="data-map-area mg-b-15">
     <div class="container-fluid">
         <div class="row">
-
-            <div class="col-12">
-                <div class="callout callout-info">
-                    <h5><i class="fas fa-list"></i>Lịch tập:</h5>
-                    Trang truy vấn lịch tập của bạn
+        <div class="col-md-3">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h4 class="card-title">Lịch hoạt động mới nhất</h4>
                 </div>
-                <!-- Main content -->
-                <div class="invoice p-3 mb-3">
-                    <div class="row">
-                        <div class="col-12 table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Tên câu lạc bộ</th>
+                <div class="card-body" style="background-color:white;padding:30px 30px 30px 30px;">
+                    @foreach (var item in ViewBag.DsLTGanDay)
+                    {
+                        <strong><i class="fa fa-cc-diners-club"></i> @item.ThanhVien_CLB.CLB.TenCLB</strong>
+                        <p class="text-muted">
+                            <a href=@Url.Action("BaiVietLTCLB", new { id = item.LichTap_ThanhVien.IdLT } )><h5>@item.LichTap_ThanhVien.LichTap.TieuDe</h5></a>
+                        </p>
+                        <p class="text-muted">
+                            @item.LichTap_ThanhVien.LichTap.DiaDiem
+                        </p>
+                        <hr>
+                    }
+                </div>
+            </div>
+        </div>
 
-                                        <th>Tác vụ</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in ViewBag.Dsclbthamgia)
-                                    {
-                                        <tr>
-                                            <td>@item.TenCLB</td>
+        <div class="col-md-9">
+            <div class="card">
+                <div class="col-md-10">
+                    <h3>Lịch Hoạt động</h3>
+                </div>
+                <div class="card-body">
 
-                                            <td>
-                                                @Html.ActionLink("Xem Chi tiết", "LichTap", new { id = item.IdCLB })
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
+                    @foreach (var item in ViewBag.Dsclbthamgia)
+                    {
+                        <a href="@Url.Action("LichTap", new { id = item.IdCLB })">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:2%">
+                                <div class="sparkline8-list responsive-mg-b-30">
+                                    <div class="sparkline8-hd">
+                                        <div class="main-sparkline8-hd">
+                                            <h1>@item.TenCLB</h1>
+                                        </div>
+                                    </div>
+                                    <div class="sparkline8-graph ">
+                                        <img src="@item.HinhCLB" />
+                                    </div>
+                                </div>
+                            </div>
+                         </a>
+                        }
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>

@@ -32,17 +32,24 @@ namespace ClubPortalMS.Areas.Profile.Controllers
         }
         public ActionResult ThemCLB(int? id)
         {
+            int IdTvien = Convert.ToInt32(Session["UserId"]);
             DkyCLB dangKy = db.DkyCLB.Find(id);
             CLB cLB = new CLB();
             cLB.IdLoaiCLB = dangKy.IDLoaiCLB;
             cLB.TenCLB = dangKy.TenCLB;
             cLB.NgayThanhLap = DateTime.Now;
+            cLB.HinhCLB = "/Hinh/HinhCLB/CLB_default.png";
             db.CLB.Add(cLB);
             ThanhVien_CLB thanhVien_CLB = new ThanhVien_CLB();
             thanhVien_CLB.IDCLB = cLB.ID;
             thanhVien_CLB.IDtvien = dangKy.IdTvien;
             thanhVien_CLB.IDRoles = 2;
+            ThanhVien_CLB thanhVien_CLB2 = new ThanhVien_CLB();
+            thanhVien_CLB.IDCLB = cLB.ID;
+            thanhVien_CLB.IDtvien = IdTvien;
+            thanhVien_CLB.IDRoles = 2;
             db.ThanhVien_CLB.Add(thanhVien_CLB);
+            db.ThanhVien_CLB.Add(thanhVien_CLB2);
             db.DkyCLB.Remove(dangKy);
             db.SaveChanges();
             return RedirectToAction("QLDkyCLB");

@@ -43,10 +43,10 @@
                             <div class="latest-blog-single blog-single-full-view">
                                 <div class="blog-image">
                                     <a href="#">
-                                        <img style="width:1250px;height:460px;" src="~/Content/img/Album/img1.jpg" alt="" />
+                                        <img style="width:1250px;height:460px;" src="@Model.HinhCLB" alt="" />
                                     </a>
                                     <div class="blog-date">
-                                        <p><span class="blog-day">@DateTime.Today.Day</span> @DateTime.Now.ToString("MMM")</p>
+                                        <p><span class="blog-day">@DateTime.Now.ToString("dd")</span> @DateTime.Now.ToString("MMM")</p>
                                     </div>
                                 </div>
                                 <div class="blog-details blog-sig-details">

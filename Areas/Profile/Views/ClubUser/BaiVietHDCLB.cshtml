@@ -5,43 +5,112 @@
     Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
 }
 
-<div class="card-header">
-    <div class="row">
-        <div class="col-md-6">
-            <strong class="text-danger text-uppercase">Chi tiết hoạt động</strong>
-        </div>
-        <div class="col-md-6 text-right">
-            <a href="#" class="btn btn-sm btn-success">@Html.DisplayFor(model => model.CLB.TenCLB)</a>
+<div class="header-advance-area-style" style="margin-top:3%">
+    <div class="breadcome-area">
+        <div class="container-fluids">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcome-list single-page-breadcome">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="breadcome-heading">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <ul class="breadcome-menu">
+                                    <li>
+                                        <a href="#">Trang chủ</a> <span class="bread-slash">/</span>
+                                    </li>
+                                    <li>
+                                        <span class="bread-blod">Quản lý hoạt động</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<div class="x-editable-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="x-editable-list" >
+                    <div class="alert-title">
+                        <h2>Thông tin chi tiết</h2>
 
-<div class="card-body">
-    <h4>  @Html.DisplayNameFor(model => model.ChuDe) </h4>
-    <div class="post">
-        <div class="user-block">
-            <div class="description" style="margin: 0% 5% 0% 0%">@Html.DisplayFor(model => model.NgayBatDau) -  @Html.DisplayFor(model => model.NgayKetThuc)</div>
+                    </div>
+                    <table id="user" class="table table-bordered table-striped x-editor-custom">
+                        <tbody>
+                            <tr>
+                                <td>Tiêu đề hoạt động</td>
+                                <td>
+                                    <a href="#" id="username" data-type="text" data-pk="1"> @Html.DisplayFor(model => model.ChuDe)</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mô tả</td>
+                                <td>
+                                    <a href="#" id="username" data-type="text" data-pk="1"> @Html.DisplayFor(model => model.Mota)</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Nội dung</td>
+                                <td>
+                                    <a href="#" id="username" data-type="text" data-pk="1"> @Html.DisplayFor(model => model.NoiDung)</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ngày bắt đầu</td>
+                                <td>
+                                    <a href="#" id="firstname" data-type="text" data-pk="1" data-placement="right" data-placeholder="Required" data-title="Enter your firstname"> @Html.DisplayFor(model => model.NgayBatDau)</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ngày kết thúc</td>
+                                <td>
+                                    <a href="#" id="status" data-type="select" data-pk="1" data-value=""> @Html.DisplayFor(model => model.NgayKetThuc)</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Địa điểm</td>
+                                <td>
+                                    <a href="#" id="status" data-type="select" data-pk="1" data-value=""> @Html.DisplayFor(model => model.DiaDiem)</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Loại hoạt động</td>
+                                <td>
+                                    <a href="#" id="status" data-type="select" data-pk="1" data-value=""> @Html.DisplayFor(model => model.LoaiHD.TenLoaiHD)</a>
+                                </td>
+                            </tr>
+
+                            @if (Model.File == null)
+                            {
+                                <tr>
+                                    <th>File đính kèm:</th>
+                                    <td class="details-profile"> Trống</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>File đính kèm</td>
+                                    <td>
+                                        <a href="@Url.Action("DocumentDownload", new { id = Model.ID})" id="status" data-type="select" data-pk="1" data-value=""> @Html.DisplayFor(model => model.TenFile)</a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+                    <div style="margin-top:2%"> @Html.ActionLink("Quay lại", "HoatDongCLB", new { id = Model.IdCLB })</div>
+
+                </div>
+            </div>
         </div>
-        <!-- /.user-block -->
-        <p>
-            @Html.DisplayFor(model => model.NoiDung)
-        </p>
-        <p>Loại Hoạt động  @Html.DisplayFor(model => model.LoaiHD.TenLoaiHD)</p>
-        <p>
-            Địa điểm: @Html.DisplayFor(model => model.DiaDiem)
-        </p>
-        @if (Model.File == null)
-        {<p>Không có file đính kèm</p>}
-        else{
-        <p>
-            File Đính kèm:<a href="@Url.Action("DocumentDownloadSK","ClubUser", new { id = Model.ID})" class="link-black text-sm"><i class="fas fa-link mr-1"></i>>@Model.TenFile</a>
-        </p>
-        }
     </div>
-    <p>
-
-        @Html.ActionLink("Quay lại", "HoatDongCLB", new {id = ViewBag.idCLB })
-    </p>
 </div>
-
-

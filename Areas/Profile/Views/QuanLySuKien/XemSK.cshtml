@@ -21,7 +21,7 @@
                                         <a href="#">Trang chủ</a> <span class="bread-slash">/</span>
                                     </li>
                                     <li>
-                                        <span class="bread-blod">Quản lý Lịch hoạt động</span>
+                                        <span class="bread-blod">Quản lý sự kiện</span>
                                     </li>
                                 </ul>
                             </div>
@@ -79,7 +79,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Loại hoạt động</td>
+                                <td>Loại sự kiện</td>
                                 <td>
                                     <a href="#" id="status" data-type="select" data-pk="1" data-value=""> @Html.DisplayFor(model => model.LoaiSuKien.TenLoaiSK)</a>
                                 </td>
@@ -136,71 +136,3 @@
         </div>
     </div>
 </div>
-@*<section class="content">
-        <div class="container-fluid">
-            <div class="row" style="margin:2% 0 2% 0">
-                <div class="card card-primary" style="margin:auto;">
-                    <div class="card-body">
-
-                        <div class="table-responsive ">
-                            <table class="table">
-                                <tr>
-                                    <th style="width:50%">Tiêu đề:</th>
-                                    <td class="details-profile"> @Html.DisplayFor(model => model.TieuDeSK)</td>
-                                </tr>
-                                <tr>
-                                    <th>Mô tả:</th>
-                                    <td class="details-profile"> @Html.DisplayFor(model => model.MoTa)</td>
-                                </tr>
-                                <tr>
-                                    <th>Nội dung:</th>
-                                    <td class="details-profile"> @Html.DisplayFor(model => model.NoiDung)</td>
-                                </tr>
-                                <tr>
-                                    <th>Thời gian bắt đầu:</th>
-                                    <td class="details-profile"> @Html.DisplayFor(model => model.NgayBatDau)</td>
-                                </tr>
-                                <tr>
-                                    <th>Thời gian kết thúc:</th>
-                                    <td class="details-profile"> @Html.DisplayFor(model => model.NgayKetThuc)</td>
-                                </tr>
-                                <tr>
-                                    <th>Loại Sự kiện:</th>
-                                    <td class="details-profile"> @Html.DisplayFor(model => model.LoaiSuKien.TenLoaiSK)</td>
-                                </tr>
-                                @if (Model.File == null)
-                                {
-                                    <tr>
-                                        <th>File đính kèm:</th>
-                                        <td class="details-profile"> Trống</td>
-                                    </tr>
-                                }
-                                else
-                                {
-                                    <tr>
-                                        <th>File đính kèm:</th>
-                                        <td class="details-profile">
-                                            <a href="@Url.Action("DocumentDownload","QuanLySuKien", new { id = Model.ID})" class="link-black text-sm"><i class="fas fa-link mr-1"></i>>@Model.TenFile</a>
-                                        </td>
-
-                                    </tr>
-                                }
-
-                            </table>
-
-                        </div>
-                        <div class="row no-print">
-                            <div class="col-12">
-                                <a href="@Url.Action("XoaSK", new { id = Model.ID })" class="btn btn-danger btn-edit-style"> XÓA</a>
-                                <a href="@Url.Action("SuaSK", new { id = Model.ID })" style="width: 70px;  " class="btn btn-default save-profile"> SỬA</a>
-                            </div>
-                        </div>
-                        @Html.ActionLink("Quay lại", "QLSuKien", new { id = Model.IdCLB })
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </section>*@
-
-

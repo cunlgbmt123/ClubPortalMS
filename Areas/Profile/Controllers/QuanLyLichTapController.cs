@@ -24,10 +24,11 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                from i in table.ToList()
                                where e.IDtvien == IdTvien
                                && e.IDRoles == 2
-                               select new PhanHoiCLBViewModel
+                               select new CLBShowViewModel
                                {
                                    TenCLB = i.TenCLB,
-                                   IdCLB = i.ID
+                                   IdCLB = i.ID,
+                                   HinhCLB = i.HinhCLB
                                };
             ViewBag.DsCLB = Dsclbthamgia;
             return View();

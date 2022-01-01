@@ -44,6 +44,11 @@ namespace ClubPortalMS.Controllers
                     var user = (CustomMembershipUser)Membership.GetUser(loginView.UserName, false);
                     if (user != null)
                     {
+                        using (ApplicationDbContext db = new ApplicationDbContext())
+                        {
+                            ThanhVien thanhViens = db.ThanhVien.Find(user.ID);
+                            Session["AnhDaiDien"] = thanhViens.HinhDaiDien;
+                        }
                         Session["Ten"] = user.FirstName;
                         Session["Ho"] = user.LastName;
                         Session["UserId"] = user.ID;
@@ -149,6 +154,7 @@ namespace ClubPortalMS.Controllers
                             Ten = registrationView.FirstName,
                             Ho = registrationView.LastName,
                             Mail = registrationView.Email,
+                            HinhDaiDien = "/Hinh/HinhDaiDienNguoiDung/avatar_default.jpg"
                         };
                         dbContext.ThanhVien.Add(getIDUser);
                         dbContext.SaveChanges();
@@ -411,6 +417,7 @@ namespace ClubPortalMS.Controllers
             Session["Ten"] = user.FirstName;
             Session["Ho"] = user.LastName;
             Session["UserId"] = user.ID;
+           
             HttpContext.GetOwinContext().Authentication.SignIn(
                         new AuthenticationProperties { IsPersistent = false }, ident);
             return Redirect("~/");

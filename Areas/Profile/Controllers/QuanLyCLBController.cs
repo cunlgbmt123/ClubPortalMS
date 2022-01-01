@@ -1,6 +1,7 @@
 ﻿using ClubPortalMS.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -23,6 +24,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                && e.IDRoles == 2
                                select new CLBDaThamGiaViewModel
                                {
+                                   HinhCLB = i.HinhCLB,
                                    TenCLB = i.TenCLB,
                                    IDCLB = i.ID,
                                    Mota = i.Mota,
@@ -57,7 +59,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                 return HttpNotFound();
             }
             ViewBag.CLB = cLB;
-            ViewBag.IdLoaiCLB = new SelectList(db.LoaiCLB, "IDLoaiCLB", "TenLoaiCLB", cLB.IdLoaiCLB);
+            ViewBag.IdLoaiCLB = new SelectList(db.LoaiCLB, "IDLoaiCLB", "TenLoaiCLB");
             return View();          
         }
         [HttpPost]
@@ -67,17 +69,44 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             int UserID = Convert.ToInt32(Session["UserId"]);
             if (ModelState.IsValid)
             {
-                CLB cLB = db.CLB.Find(cLBViewModel.ID);
-                cLB.Email = cLBViewModel.Email;
-                cLB.FanPage = cLBViewModel.FanPage;
-                cLB.IdLoaiCLB = cLBViewModel.IdLoaiCLB;
-                cLB.Mota = cLBViewModel.Mota;
-                cLB.TenCLB = cLBViewModel.TenCLB;
-                cLB.LienHe = cLBViewModel.LienHe;
-                cLB.FanPage = cLBViewModel.FanPage;
-                cLB.NgayThanhLap = cLBViewModel.NgayThanhLap;
-                db.SaveChanges();
-                ViewBag.IdLoaiCLB = new SelectList(db.LoaiCLB, "IDLoaiCLB", "TenLoaiCLB", cLB.IdLoaiCLB);
+                if (cLBViewModel.ImageFile != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(cLBViewModel.ImageFile.FileName);
+                    string extension = Path.GetExtension(cLBViewModel.ImageFile.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    cLBViewModel.HinhCLB = "/Hinh/HinhCLB/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Hinh/HinhCLB/"), fileName);
+                    cLBViewModel.ImageFile.SaveAs(fileName);
+
+                    CLB cLB = db.CLB.Find(cLBViewModel.ID);
+                    cLB.Email = cLBViewModel.Email;
+                    cLB.FanPage = cLBViewModel.FanPage;
+                    cLB.IdLoaiCLB = cLBViewModel.IdLoaiCLB;
+                    cLB.Mota = cLBViewModel.Mota;
+                    cLB.TenCLB = cLBViewModel.TenCLB;
+                    cLB.LienHe = cLBViewModel.LienHe;
+                    cLB.FanPage = cLBViewModel.FanPage;
+                    cLB.NgayThanhLap = cLBViewModel.NgayThanhLap;
+
+                    cLB.HinhCLB = cLBViewModel.HinhCLB;
+                    cLB.ImageFile = cLBViewModel.ImageFile;
+                    db.SaveChanges();
+                    ViewBag.IdLoaiCLB = new SelectList(db.LoaiCLB, "IDLoaiCLB", "TenLoaiCLB", cLB.IdLoaiCLB);
+                }
+                else 
+                {
+                    CLB cLB = db.CLB.Find(cLBViewModel.ID);
+                    cLB.Email = cLBViewModel.Email;
+                    cLB.FanPage = cLBViewModel.FanPage;
+                    cLB.IdLoaiCLB = cLBViewModel.IdLoaiCLB;
+                    cLB.Mota = cLBViewModel.Mota;
+                    cLB.TenCLB = cLBViewModel.TenCLB;
+                    cLB.LienHe = cLBViewModel.LienHe;
+                    cLB.FanPage = cLBViewModel.FanPage;
+                    cLB.NgayThanhLap = cLBViewModel.NgayThanhLap;
+                    ViewBag.IdLoaiCLB = new SelectList(db.LoaiCLB, "IDLoaiCLB", "TenLoaiCLB", cLB.IdLoaiCLB);
+                }
+
             }
             return RedirectToAction("QLCLB",new {id = cLBViewModel.ID});
         }

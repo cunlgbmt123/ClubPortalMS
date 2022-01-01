@@ -28,19 +28,21 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                from i in table.ToList()
                                where e.IDtvien == IdTvien
                                && e.IDRoles == 1
-                               select new PhanHoiCLBViewModel
+                               select new CLBShowViewModel
                                {
                                    TenCLB = i.TenCLB,
-                                   IdCLB = i.ID
+                                   IdCLB = i.ID,
+                                   HinhCLB = i.HinhCLB
                                };
             ViewBag.DsCLB = Dsclbthamgia;
 
             var DsNVGanDay = from e in thanhVien_clb
                              join d in nhiemVus on e.IDtvien equals d.IdTVien  into table1
                              from d in table1.ToList()
-                             where e.IDtvien == IdTvien
+                             where e.IDtvien == d.IdTVien
                              && e.IDCLB == d.NhiemVu.IdCLB
                              && e.IDRoles == 1
+                             && d.IdTVien == IdTvien
                              select new ViewModel1
                              {
                                  ThanhVien_CLB = e,
@@ -54,9 +56,11 @@ namespace ClubPortalMS.Areas.Profile.Controllers
         // GET: Profile/NhiemVu
         public ActionResult Index(int? id)
         {
+            int IdTvien = Convert.ToInt32(Session["UserId"]);
             List<NhiemVu_ThanhVien> nhiemVus = db.NhiemVu_ThanhVien.ToList();
             var nhiemVu_CLB = from e in nhiemVus
                               where e.NhiemVu.IdCLB == id
+                              && e.IdTVien == IdTvien
                               select e;
             return View(nhiemVu_CLB);
         }
@@ -78,7 +82,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Details([Bind(Include = "FileNop,GhiChu")] NhiemVu_ThanhVien nhiemVu, HttpPostedFileBase upload, int id)
+        public ActionResult Details([Bind(Include = "IdNv,FileNop,GhiChu")] NhiemVu_ThanhVien nhiemVu, HttpPostedFileBase upload, int id)
         {
             if (ModelState.IsValid)
             {
@@ -114,6 +118,12 @@ namespace ClubPortalMS.Areas.Profile.Controllers
         {
             var nhiemVUs = db.NhiemVu_ThanhVien.Where(u => u.ID == id).FirstOrDefault();
             return File(nhiemVUs.FileNop, nhiemVUs.ContentType, nhiemVUs.TenFileNop);
+        }
+        [HttpGet]
+        public FileResult DocumentDownloadFileDinhKem(int? id)
+        {
+            var nhiemVUs = db.NhiemVu.Where(u => u.ID == id).FirstOrDefault();
+            return File(nhiemVUs.File, nhiemVUs.ContentType, nhiemVUs.TenFile);
         }
         #endregion
         #region code tự sinh
