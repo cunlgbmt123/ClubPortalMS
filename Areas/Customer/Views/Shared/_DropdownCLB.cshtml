@@ -1,0 +1,17 @@
+﻿@using ClubPortalMS.Models
+
+@using (ApplicationDbContext db = new ApplicationDbContext())
+{
+        List<LoaiCLB> loaiCLB = db.LoaiCLB.ToList();
+   
+    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        CÂU LẠC BỘ
+    </a>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        @foreach(var item in loaiCLB) 
+        { 
+         <a class="dropdown-item" style=" text-transform: uppercase;" href="#">@item.TenLoaiCLB</a> 
+        }
+    
+    </div> 
+}

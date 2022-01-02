@@ -47,7 +47,7 @@ namespace ClubPortalMS.Controllers
                         using (ApplicationDbContext db = new ApplicationDbContext())
                         {
                             ThanhVien thanhViens = db.ThanhVien.Find(user.ID);
-                            Session["AnhDaiDien"] = thanhViens.HinhDaiDien;
+                            Session["AnhDaiDien"] = thanhViens.HinhDaiDien;                            
                         }
                         Session["Ten"] = user.FirstName;
                         Session["Ho"] = user.LastName;

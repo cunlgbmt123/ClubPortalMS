@@ -1,72 +1,90 @@
-﻿@model IEnumerable<ClubPortalMS.Models.Poster>
+﻿@model IEnumerable<ClubPortalMS.ViewModel.Poster.PosterViewModel>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper my-2">
+<div class="content-wrapper ">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Posters</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Posters</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
     <!-- Main content -->
     <section class="content">
-        <!-- Default box -->
-        <div class="card">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p>
-                            @Html.ActionLink("Create New", "Create")
-                        </p>
-
-                        <strong class="text-danger text-uppercase">Trang chủ</strong>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Quản lý Posters</h3>
                     </div>
-                    <div class="col-md-6 text-right">
-                        <a href="#" class="btn btn-sm btn-success">Content</a>
+                    <div class="card-body">
+                        <div class="col-2" style="position: absolute; z-index: 1; ">
+                            <a class="btn btn-info btn-block btn-flat" style="border-radius: 4px;" type="button" href="@Url.Action("Create")">
+                                <i class="fa fa-plus-square" aria-hidden="true"></i> Thêm ảnh mới
+                            </a>
+                        </div>
+                        <table id="table1" class="table table-bordered table-striped">
+
+                            <thead>
+                                <tr>
+                                    <th>Tiêu đề</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+
+                                        <td>
+                                            <a href="@Url.Action("Details", new { id = item.ID })">
+                                                @item.TenPoster
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Details", new { id = item.ID })">
+                                                <img src="@Url.Content(item.HinhAnh)" style="max-width: 400px; max-height: 150px; margin: 10px;" />
+                                            </a>
+                                        </td>
+
+                                        <td>
+                                            @if (@item.Status == true)
+                                            {
+                                                <p>Hiển thị</p>
+                                            }
+                                            else
+                                            {
+                                                <p>Không hiển thị</p>
+                                            }
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Tiêu đề</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <table class="table">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.TenPoster)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.HinhAnh)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Status)
-                        </th>
-                        <th></th>
-                    </tr>
-
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TenPoster)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.HinhAnh)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Status)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                            </td>
-                        </tr>
-                    }
-
-                </table>
-
-            </div>
-            <!-- /.card-body -->
         </div>
-        <!-- /.card -->
     </section>
     <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
-

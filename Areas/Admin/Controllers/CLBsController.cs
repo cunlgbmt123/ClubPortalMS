@@ -7,118 +7,71 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
+using ClubPortalMS.ViewModel.CLB;
+using PagedList;
+using CLBViewModels = ClubPortalMS.ViewModel.CLB.CLBViewModels;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
     public class CLBsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-        // GET: Admin/CLBs
-        public ActionResult Index()
+        public ActionResult QLDkyCLB(int? page)
         {
-            var cLB = db.CLB.Include(c => c.LoaiCLB);
-            return View(cLB.ToList());
-        }
+            int IdTvien = Convert.ToInt32(Session["UserId"]);
+            List<DkyCLB> dangKies = db.DkyCLB.ToList();
+            List<CLB> CLB = db.CLB.ToList();
+            List<LoaiCLB> loaiCLBs = db.LoaiCLB.ToList();
+            var DsDangKyCLB = from e in dangKies
+                              join i in loaiCLBs on e.IDLoaiCLB equals i.IDLoaiCLB into table
+                              from i in table.ToList()
+                              select new ViewModel1
+                              {
+                                  DkyCLB = e,
+                                  LoaiCLB = i
+                              };
+            ViewBag.DsDangKyCLB = DsDangKyCLB.ToList().ToPagedList(page ?? 1, 5);
 
-        // GET: Admin/CLBs/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CLB cLB = db.CLB.Find(id);
-            if (cLB == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cLB);
-        }
+            var DsCLB = from e in CLB
+                        join i in loaiCLBs on e.IdLoaiCLB equals i.IDLoaiCLB into table
+                        from i in table.ToList()
+                        select new ViewModel1
+                        {
+                            CLB = e,
+                            LoaiCLB = i
 
-        // GET: Admin/CLBs/Create
-        public ActionResult Create()
-        {
+                        };
+
+            ViewBag.DsCLB = DsCLB.ToList().ToPagedList(page ?? 1,5);
             
             return View();
         }
-
-        // POST: Admin/CLBs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,IdLoaiCLB,TenCLB,TrangThai,NgayThanhLap,LienHe,Mota,FanPage,Email")] CLB cLB)
+        public ActionResult ThemCLB(int? id)
         {
-            if (ModelState.IsValid)
-            {
-                db.CLB.Add(cLB);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.IdLoaiCLB = new SelectList(db.LoaiCLB, "IDLoaiCLB", "TenLoaiCLB", cLB.IdLoaiCLB);
-            return View(cLB);
-        }
-
-        // GET: Admin/CLBs/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CLB cLB = db.CLB.Find(id);
-            if (cLB == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.IdLoaiCLB = new SelectList(db.LoaiCLB, "IDLoaiCLB", "TenLoaiCLB", cLB.IdLoaiCLB);
-            return View(cLB);
-        }
-
-        // POST: Admin/CLBs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,IdLoaiCLB,TenCLB,TrangThai,NgayThanhLap,LienHe,Mota,FanPage,Email")] CLB cLB)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(cLB).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.IdLoaiCLB = new SelectList(db.LoaiCLB, "IDLoaiCLB", "TenLoaiCLB", cLB.IdLoaiCLB);
-            return View(cLB);
-        }
-
-        // GET: Admin/CLBs/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CLB cLB = db.CLB.Find(id);
-            if (cLB == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cLB);
-        }
-
-        // POST: Admin/CLBs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            CLB cLB = db.CLB.Find(id);
-            db.CLB.Remove(cLB);
+            DkyCLB dangKy = db.DkyCLB.Find(id);
+            CLB cLB = new CLB();
+            cLB.IdLoaiCLB = dangKy.IDLoaiCLB;
+            cLB.TenCLB = dangKy.TenCLB;
+            cLB.NgayThanhLap = DateTime.Now;
+            db.CLB.Add(cLB);
+            ThanhVien_CLB thanhVien_CLB = new ThanhVien_CLB();
+            thanhVien_CLB.IDCLB = cLB.ID;
+            thanhVien_CLB.IDtvien = dangKy.IdTvien;
+            thanhVien_CLB.IDRoles = 2;
+            db.ThanhVien_CLB.Add(thanhVien_CLB);
+            db.DkyCLB.Remove(dangKy);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("QLDkyCLB");
         }
+        public ActionResult TuChoiCLB(int? id)
+        {
+            DkyCLB dangKy = db.DkyCLB.Find(id);
+            db.DkyCLB.Remove(dangKy);
+            db.SaveChanges();
+            return RedirectToAction("QLDkyCLB");
+        }
+        // GET: Admin/CLBs
+        
 
         protected override void Dispose(bool disposing)
         {

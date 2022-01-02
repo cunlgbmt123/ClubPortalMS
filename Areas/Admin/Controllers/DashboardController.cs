@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
-    [CustomAuthorize(Roles = "ADMIN, MOD")]
+    /*[CustomAuthorize(Roles = "ADMIN, MOD")]*/
     public class DashboardController : Controller
     {
         // GET: Admin/Dashboard

@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@Page.Title</title>
-    <link rel="stylesheet" href="~/Content/PagedList.css" />
     <link rel="stylesheet" href="~/Areas/Customer/Resource/css/bootstrap.css">
     <link rel="stylesheet" href="~/Areas/Customer/Resource/css/maicons.css">
     <link rel="stylesheet" href="~/Areas/Customer/Resource/vendor/animate/animate.css">
@@ -12,6 +11,7 @@
     <link rel="stylesheet" href="~/Areas/Customer/Resource/vendor/fancybox/css/jquery.fancybox.css">
     <link rel="stylesheet" href="~/Areas/Customer/Resource/css/theme.css">
     <link rel="stylesheet" href="~/Areas/Customer/Resource/css/style.css">
+    <link rel="stylesheet" href="~/Content/PagedList.css" />
 
     @RenderSection("header", required: false)
 </head>
@@ -41,29 +41,29 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="navbar-collapse collapse" id="navbarContent">
-                <ul class="navbar-nav ml-auto pt-3 pt-lg-0">
-                    <li class="nav-item active">
-                        <a href="@Url.Action("Index","TrangChu")" class="nav-link">TRANG CHỦ</a>
+            <div class="navbar-collapse collapse"  id="navbarContent">
+                <ul class="navbar-nav ml-auto pt-3 pt-lg-0 nav-pills" >
+                    <li class="nav-item ">
+                        <a href="@Url.Action("Index","TrangChu")" style="color:white" class="nav-link active">TRANG CHỦ</a>
                     </li>
  
                     <li class="nav-item">
-                        <a href="@Url.Action("Index","GioiThieu")" class="nav-link">GIỚI THIỆU</a>
+                        <a href="@Url.Action("Index","GioiThieu")"  class="nav-link nav-button">GIỚI THIỆU</a>
                     </li>
                     <li class="nav-item">
-                        <a href="@Url.Action("Index","TinTuc")" class="nav-link">TIN TỨC</a>
+                        <a href="@Url.Action("Index","TinTuc")" class="nav-link nav-button">TIN TỨC</a>
                     </li>
                     <li class="nav-item">
-                        <a href="@Url.Action("Index","Albums")" class="nav-link">ALBUMS</a>
+                        <a href="@Url.Action("Index","Albums")" class="nav-link nav-button">ALBUMS</a>
                     </li>
                     <li class="nav-item">
-                        <a href="@Url.Action("Index","HoatDongs")" class="nav-link">HOẠT ĐỘNG</a>
+                        <a href="@Url.Action("Index","HoatDongs")" class="nav-link nav-button">HOẠT ĐỘNG</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        @Html.Partial("_DropdownCLB")
                     </li>
                     <li class="nav-item">
-                        <a href="@Url.Action("#","#")" class="nav-link">CÂU LẠC BỘ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="@Url.Action("Create","LienHe")" class="nav-link">LIÊN HỆ</a>
+                        <a href="@Url.Action("Create","LienHe")" class="nav-link nav-button">LIÊN HỆ</a>
                     </li>
                 </ul>
             </div>
