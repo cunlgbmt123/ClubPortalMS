@@ -1,4 +1,4 @@
-﻿@model ClubPortalMS.Models.HoatDong
+﻿@model ClubPortalMS.ViewModel.HoatDong.HoatdongViewModels
 
 @{
     ViewBag.Title = "Delete";
@@ -66,13 +66,16 @@
                             </dt>
 
                             <dd>
-                                @Html.DisplayFor(model => model.HinhAnhChiTiet)
+                                <img src="@Url.Content(Model.HinhAnhChiTiet)" style="width: 100px; height: 100px; margin: 10px;" />
                             </dd>
 
                             <dt>
                                 @Html.DisplayNameFor(model => model.HinhAnhBaiViet)
                             </dt>
-
+                            
+                            <dd>
+                                <img src="@Url.Content(Model.HinhAnhBaiViet)" style="width: 100px; height: 100px; margin: 10px;" />
+                            </dd>
                             <dd>
                                 @Html.DisplayFor(model => model.HinhAnhBaiViet)
                             </dd>

@@ -203,6 +203,7 @@
     <Compile Include="ViewModel\CLB\CLBViewModels.cs" />
     <Compile Include="ViewModel\CLB\ListCLBViewModel.cs" />
     <Compile Include="ViewModel\CLB\LoaiCLBViewModel.cs" />
+    <Compile Include="ViewModel\HoatDong\HoatdongViewModels.cs" />
     <Compile Include="ViewModel\HoatDong\LoaiHDViewModel.cs" />
     <Compile Include="ViewModel\Khoa\KhoaViewModel.cs" />
     <Compile Include="ViewModel\LienHe\LienHeViewModel.cs" />
