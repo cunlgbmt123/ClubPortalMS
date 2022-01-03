@@ -40,15 +40,26 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album albums = db.Album.Find(id);
-            return View(albums);
+            var data = db.Album.SingleOrDefault(n => n.ID == id);
+            if (data == null)
+            {
+                return HttpNotFound();
+            }
+            var viewModel = new AlbumViewModel
+            {
+                ID = data.ID,
+                TieuDe = data.TieuDe,
+                HinhAnh = data.HinhAnh,
+                MoTa = data.MoTa
+
+            };
+            return View(viewModel);
         }
 
         public ActionResult Create()
         {
-            var createAlbum = new AlbumViewModel();
-            return View(createAlbum); 
-            
+            var create = new AlbumViewModel();
+            return View(create);
         }
 
        
@@ -109,16 +120,6 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(AlbumViewModel albumView,int? id)
         {
-
-            string hinhanh = Path.GetFileNameWithoutExtension(albumView.ImageFile.FileName);
-
-            string imgExtension = Path.GetExtension(albumView.ImageFile.FileName);
-
-            hinhanh = hinhanh + DateTime.Now.ToString("yyyymmssfff") + imgExtension;
-
-            albumView.HinhAnh = "/Areas/Admin/Resource/HinhAnh/Albums/" + hinhanh;
-            hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/Albums/"), hinhanh);
-            albumView.ImageFile.SaveAs(hinhanh);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -128,6 +129,28 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            if (albumView.ImageFile == null)
+            {
+                if (ModelState.IsValid)
+                {
+                    data.ID = albumView.ID;
+                    data.TieuDe = albumView.TieuDe;
+                    data.MoTa = albumView.MoTa;
+                    db.Entry(data).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            string hinhanh = Path.GetFileNameWithoutExtension(albumView.ImageFile.FileName);
+
+            string imgExtension = Path.GetExtension(albumView.ImageFile.FileName);
+
+            hinhanh = hinhanh + DateTime.Now.ToString("yyyymmssfff") + imgExtension;
+
+            albumView.HinhAnh = "/Areas/Admin/Resource/HinhAnh/Albums/" + hinhanh;
+            hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/Albums/"), hinhanh);
+            albumView.ImageFile.SaveAs(hinhanh);
+            
             if (ModelState.IsValid)
             {
                 data.ID = albumView.ID;
@@ -135,26 +158,17 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 data.HinhAnh = albumView.HinhAnh;
                 data.Video = albumView.Video;
                 data.MoTa = albumView.MoTa;
-
-
                 db.Entry(data).State = EntityState.Modified;
-                
                 db.SaveChanges();
-                /* ModelState.Clear();*/
                 return RedirectToAction("Index");
             }
 
             return View(albumView);
         }
        
-        public ActionResult DeleteConfirmed(AlbumViewModel albumView,int id)
+        public ActionResult DeleteConfirmed(AlbumViewModel albumView)
         {
-            Album data = db.Album.Find(id);
-            data.ID = albumView.ID;
-            data.TieuDe = albumView.TieuDe;
-            data.HinhAnh = albumView.HinhAnh;
-            data.Video = albumView.Video;
-            data.MoTa = albumView.MoTa;
+            Album data = db.Album.Find(albumView.ID); 
             db.Album.Remove(data);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -58,7 +58,7 @@
                 <div class="owl-carousel team-carousel mt-5">
                     @foreach (var item in ListHD)
                     {                      
-                        <div class="card-testimonial" >
+                        <div class="card-testimonial" style="width:400px;height:480px">
                             <div class="content gioi-han">
                                 <a href="@Url.Action("BaiViet","HoatDongs", new {id = item.ID})">
                                     <img src="@item.HinhAnhBaiViet" alt="">
@@ -117,9 +117,11 @@
                 </div>
                 <div class="owl-carousel testimonial-carousel">
                     @foreach (var item in ListNews) {
-                        <div class="card-testimonial">
+                        <div class="card-testimonial" style="width:400px;height:480px">
                             <div class="content gioi-han">
-                                @item.MoTa
+                                <a href="@Url.Action("BaiViet","TinTuc", new {id = item.ID})">
+                                    <img src="@item.HinhAnhBaiViet" alt="">
+                                </a>
                             </div>
                             <div class="author">
 
@@ -127,7 +129,8 @@
                                     <a href="@Url.Action("BaiViet","TinTuc", new {id = item.ID})">
                                         <div class="author-name">@item.TieuDe</div>
                                     </a>
-                                        <div class="author-info">@item.NgayDang</div>
+                                    <div class="text-sm fg-grey gioi-han">@item.MoTa</div>
+                                    <div class="author-info">@item.NgayDang</div>
                                 </div>
                             </div>
                         </div>                    

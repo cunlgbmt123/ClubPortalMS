@@ -203,6 +203,7 @@
     <Compile Include="ViewModel\CLB\CLBViewModels.cs" />
     <Compile Include="ViewModel\CLB\ListCLBViewModel.cs" />
     <Compile Include="ViewModel\CLB\LoaiCLBViewModel.cs" />
+    <Compile Include="ViewModel\HoatDong\HoatDongsViewModel.cs" />
     <Compile Include="ViewModel\HoatDong\LoaiHDViewModel.cs" />
     <Compile Include="ViewModel\Khoa\KhoaViewModel.cs" />
     <Compile Include="ViewModel\LienHe\LienHeViewModel.cs" />
@@ -2661,7 +2662,6 @@
     <Content Include="Areas\Admin\Views\GioiThieux\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\GioiThieux\Index.cshtml" />
     <Content Include="Areas\Admin\Views\HoatDongs\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\HoatDongs\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\HoatDongs\Details.cshtml" />
     <Content Include="Areas\Admin\Views\HoatDongs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\HoatDongs\Index.cshtml" />
@@ -2729,7 +2729,6 @@
     <Content Include="Areas\Admin\Views\ThongBaos\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ThongBaos\Index.cshtml" />
     <Content Include="Areas\Admin\Views\TinTucs\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\TinTucs\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\TinTucs\Details.cshtml" />
     <Content Include="Areas\Admin\Views\TinTucs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\TinTucs\Index.cshtml" />

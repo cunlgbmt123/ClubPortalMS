@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -12,20 +13,21 @@ namespace ClubPortalMS.ViewModel.TinTuc
         public TinTucViewModel()
         {
             
-            HinhAnhBaiViet = "~/Areas/Admin/Resource/HinhAnh/addImg.jpg";
-            HinhAnhChiTiet = "~/Areas/Admin/Resource/HinhAnh/addImg.jpg";
+            HinhAnhBaiViet = "~/Areas/Admin/Resource/HinhAnh/TinTuc/addImg.jpg";
+            HinhAnhChiTiet = "~/Areas/Admin/Resource/HinhAnh/TinTuc/addImg.jpg";
         }
 
         public int ID { get; set; }
         [DisplayName("Tiêu Đề")]
         public string TieuDe { get; set; }
         [DisplayName("Mô Tả")]
+        [DataType(DataType.MultilineText)]
         public string MoTa { get; set; }
         [DisplayName("Nội Dung")]
         public string NoiDung { get; set; }
         public string KeyWord { get; set; }
         public string URL { get; set; }
-        [DisplayName("thumbnail")]
+        [DisplayName("Hình ảnh bài viết")]
         public string HinhAnhBaiViet { get; set; }
         [DisplayName("Hình Ảnh Chi tiết")]
         public string HinhAnhChiTiet { get; set; }

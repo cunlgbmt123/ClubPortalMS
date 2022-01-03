@@ -1,102 +1,102 @@
-﻿@model ClubPortalMS.Models.HoatDong
+﻿@model ClubPortalMS.ViewModel.HoatDong.HoatDongsViewModel
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper my-2">
+<div class="content-wrapper ">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Hoạt động</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Hoạt động</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
     <!-- Main content -->
     <section class="content">
-        <!-- Default box -->
-        <div class="card">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-md-6">
-                        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-                        @Html.ActionLink("Back to List", "Index")
-                        <strong class="text-danger text-uppercase">Thông Tin</strong>
-                    </div>
-                    <div class="col-md-6 text-right">
-                        <a href="#" class="btn btn-sm btn-success">Content</a>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Quản lý Hoạt động</h3>
+                        </div>
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
+                            <table id="table1" class="table table-bordered table-striped">
+                                <tr>
+                                    <th>Tiêu đề</th>
+                                    <td>@Html.DisplayFor(model => model.Ten)</td>
+                                </tr>
+                                <tr>
+                                    <th>Ngày đăng</th>
+                                    <td>@Html.DisplayFor(model => model.NgayDang)</td>
+                                </tr>
+                                <tr>
+                                    <th>Mô tả</th>
+                                    <td style="width:80%"> @Html.DisplayFor(model => model.MoTa)</td>
+                                </tr>
+                                <tr>
+                                    <th>Hình ảnh bài viết</th>
+                                    <td> <img src="@Url.Content(Model.HinhAnhBaiViet)" style="max-width: 1000px; max-height: 1000px; margin: auto; " /></td>
+                                </tr>
+                                <tr>
+                                    <th>Hình ảnh chi tiết</th>
+                                    <td> <img src="@Url.Content(Model.HinhAnhChiTiet)" style="max-width: 1000px; max-height: 1000px; margin: auto; " /></td>
+                                </tr>
+                                <tr>
+                                    <th>Tác giả</th>
+                                    <td> @Html.DisplayFor(model => model.TenNguoiDang)</td>
+                                </tr>
+                            </table>
+                            <div class=" col-12">
+                                <a style="float:right" data-toggle="modal" data-target="#modal-danger" class="btn btn-app bg-danger">
+                                    <i class="fa fa-trash" aria-hidden="true"></i> Xóa
+                                </a>
+                                <a style="float:right" class="btn btn-app bg-info" href="@Url.Action( "Edit", new { id = Model.ID })">
+                                    <i class="fas fa-edit"></i> Chỉnh sửa
+                                </a>
+                            </div>
+                            <div class="col-md-4" style="padding-top:4%">  @Html.ActionLink("Quay lại", "Index")</div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <dl class="dl-horizontal">
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Ten)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Ten)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.MoTa)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.MoTa)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.KeyWord)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.KeyWord)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.URL)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.URL)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.HinhAnhChiTiet)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.HinhAnhChiTiet)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.HinhAnhBaiViet)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.HinhAnhBaiViet)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.NgayDang)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.NgayDang)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.TenNguoiDang)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.TenNguoiDang)
-                    </dd>
-
-                </dl>
-
-            </div>
-            <!-- /.card-body -->
         </div>
-        <!-- /.card -->
     </section>
-    <!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
 
+</div>
+
+
+<div class="modal fade" id="modal-danger">
+    <div class="modal-dialog">
+        <div class="modal-content bg-danger">
+            <div class="modal-header">
+                <h4 class="modal-title">Cẩn thận!!</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="background-color:white; color:black">
+                <p>Không thể khôi phục dữ liệu nếu đã xóa&hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between" style="background-color:white">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy bỏ</button>
+                <a type="button" class="btn  btn-danger" href="@Url.Action( "DeleteConfirmed", new { id = Model.ID })">Xóa</a>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

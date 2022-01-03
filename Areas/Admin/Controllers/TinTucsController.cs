@@ -75,15 +75,17 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             return View(createTintuc);
         }
 
-        // POST: Admin/TinTucs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(TinTucViewModel data)
         {
             if (ModelState.IsValid)
             {
+                if (data.ImageFile == null || data.ImageDetailFile == null)
+                {
+                    ViewBag.Message = "Bạn chưa chọn ảnh cho bài viết";
+                    return View(data);
+                }
                 string hinhanh = Path.GetFileNameWithoutExtension(data.ImageFile.FileName);
                 string hinhanhchitiet = Path.GetFileNameWithoutExtension(data.ImageDetailFile.FileName);
 
@@ -94,10 +96,10 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 hinhanh = hinhanh + DateTime.Now.ToString("yyyymmssfff") + imgExtension;
                 hinhanhchitiet = hinhanhchitiet + DateTime.Now.ToString("yyyymmssfff") + hinhanhchitietExtension;
 
-                data.HinhAnhChiTiet = "~/Areas/Admin/Resource/HinhAnh/" + hinhanh;
-                data.HinhAnhBaiViet = "~/Areas/Admin/Resource/HinhAnh/" + hinhanhchitiet;
-                hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanh);
-                hinhanhchitiet = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanhchitiet);
+                data.HinhAnhBaiViet = "/Areas/Admin/Resource/HinhAnh/TinTuc/" + hinhanh;
+                data.HinhAnhChiTiet = "/Areas/Admin/Resource/HinhAnh/TinTuc/" + hinhanhchitiet;
+                hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/TinTuc/"), hinhanh);
+                hinhanhchitiet = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/TinTuc/"), hinhanhchitiet);
                 data.ImageFile.SaveAs(hinhanh);
                 data.ImageDetailFile.SaveAs(hinhanhchitiet);
 
@@ -107,11 +109,9 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 tintuc.TieuDe = data.TieuDe;
                 tintuc.MoTa = data.MoTa;
                 tintuc.NoiDung = data.NoiDung;
-                tintuc.KeyWord = data.KeyWord;
-                tintuc.URL = data.URL;
                 tintuc.HinhAnhBaiViet = data.HinhAnhBaiViet;
                 tintuc.HinhAnhChiTiet = data.HinhAnhChiTiet;
-                tintuc.NgayDang = data.NgayDang;
+                tintuc.NgayDang = DateTime.Now;
                 tintuc.TenNguoiDang = data.TenNguoiDang;
                 db.TinTucs.Add(tintuc);
                 db.SaveChanges();
@@ -149,30 +149,10 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             };
             return View(viewModel);
         }
-
-        // POST: Admin/TinTucs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(TinTucViewModel tinTucView,int? id)
+        public ActionResult Edit(TinTucViewModel tinTucView, int? id)
         {
-            string hinhanh = Path.GetFileNameWithoutExtension(tinTucView.ImageFile.FileName);
-            string hinhanhchitiet = Path.GetFileNameWithoutExtension(tinTucView.ImageDetailFile.FileName);
-
-            string imgExtension = Path.GetExtension(tinTucView.ImageFile.FileName);
-
-            string hinhanhchitietExtension = Path.GetExtension(tinTucView.ImageDetailFile.FileName);
-
-            hinhanh = hinhanh + DateTime.Now.ToString("yyyymmssfff") + imgExtension;
-            hinhanhchitiet = hinhanhchitiet + DateTime.Now.ToString("yyyymmssfff") + hinhanhchitietExtension;
-
-            tinTucView.HinhAnhChiTiet = "~/Areas/Admin/Resource/HinhAnh/" + hinhanh;
-            tinTucView.HinhAnhBaiViet = "~/Areas/Admin/Resource/HinhAnh/" + hinhanhchitiet;
-            hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanh);
-            hinhanhchitiet = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanhchitiet);
-            tinTucView.ImageFile.SaveAs(hinhanh);
-            tinTucView.ImageDetailFile.SaveAs(hinhanhchitiet);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -182,7 +162,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            if (ModelState.IsValid)
+            if (tinTucView.ImageFile == null && tinTucView.ImageDetailFile == null)
             {
                 data.ID = tinTucView.ID;
                 data.TieuDe = tinTucView.TieuDe;
@@ -190,14 +170,89 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 data.NoiDung = tinTucView.NoiDung;
                 data.KeyWord = tinTucView.KeyWord;
                 data.URL = tinTucView.URL;
-                data.HinhAnhBaiViet = tinTucView.HinhAnhBaiViet;
-                data.HinhAnhChiTiet = tinTucView.HinhAnhChiTiet;
                 data.NgayDang = tinTucView.NgayDang;
                 data.TenNguoiDang = tinTucView.TenNguoiDang;
 
                 db.Entry(data).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+            if (tinTucView.ImageFile == null)
+            {
+                string hinhanhchitiet = Path.GetFileNameWithoutExtension(tinTucView.ImageDetailFile.FileName);
+                string hinhanhchitietExtension = Path.GetExtension(tinTucView.ImageDetailFile.FileName);
+                hinhanhchitiet = hinhanhchitiet + DateTime.Now.ToString("yyyymmssfff") + hinhanhchitietExtension;
+                tinTucView.HinhAnhChiTiet = "/Areas/Admin/Resource/HinhAnh/TinTuc/" + hinhanhchitiet;
+                hinhanhchitiet = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/TinTuc/"), hinhanhchitiet);
+                tinTucView.ImageDetailFile.SaveAs(hinhanhchitiet);
+                data.ID = tinTucView.ID;
+                data.TieuDe = tinTucView.TieuDe;
+                data.MoTa = tinTucView.MoTa;
+                data.HinhAnhChiTiet = tinTucView.HinhAnhChiTiet;
+                data.NoiDung = tinTucView.NoiDung;
+                data.KeyWord = tinTucView.KeyWord;
+                data.URL = tinTucView.URL;
+                data.NgayDang = tinTucView.NgayDang;
+                data.TenNguoiDang = tinTucView.TenNguoiDang;
+
+                db.Entry(data).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            if (tinTucView.ImageDetailFile == null)
+            {
+                string hinhanh = Path.GetFileNameWithoutExtension(tinTucView.ImageFile.FileName);
+                string imgExtension = Path.GetExtension(tinTucView.ImageFile.FileName);
+                hinhanh = hinhanh + DateTime.Now.ToString("yyyymmssfff") + imgExtension;
+                tinTucView.HinhAnhBaiViet = "/Areas/Admin/Resource/HinhAnh/TinTuc/" + hinhanh;
+                hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/TinTuc/"), hinhanh);
+                tinTucView.ImageFile.SaveAs(hinhanh);
+                data.ID = tinTucView.ID;
+                data.TieuDe = tinTucView.TieuDe;
+                data.MoTa = tinTucView.MoTa;
+                data.HinhAnhBaiViet = tinTucView.HinhAnhBaiViet;
+                data.NoiDung = tinTucView.NoiDung;
+                data.KeyWord = tinTucView.KeyWord;
+                data.URL = tinTucView.URL;
+                data.NgayDang = tinTucView.NgayDang;
+                data.TenNguoiDang = tinTucView.TenNguoiDang;
+
+                db.Entry(data).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            if (tinTucView.ImageFile != null && tinTucView.ImageDetailFile != null)
+            {
+                string hinhanh = Path.GetFileNameWithoutExtension(tinTucView.ImageFile.FileName);
+                string hinhanhchitiet = Path.GetFileNameWithoutExtension(tinTucView.ImageDetailFile.FileName);
+                string imgExtension = Path.GetExtension(tinTucView.ImageFile.FileName);
+                string hinhanhchitietExtension = Path.GetExtension(tinTucView.ImageDetailFile.FileName);
+                hinhanh = hinhanh + DateTime.Now.ToString("yyyymmssfff") + imgExtension;
+                hinhanhchitiet = hinhanhchitiet + DateTime.Now.ToString("yyyymmssfff") + hinhanhchitietExtension;
+                tinTucView.HinhAnhBaiViet = "/Areas/Admin/Resource/HinhAnh/TinTuc/" + hinhanh;
+                tinTucView.HinhAnhChiTiet = "/Areas/Admin/Resource/HinhAnh/TinTuc/" + hinhanhchitiet;
+                hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/TinTuc/"), hinhanh);
+                hinhanhchitiet = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/TinTuc/"), hinhanhchitiet);
+                tinTucView.ImageFile.SaveAs(hinhanh);
+                tinTucView.ImageDetailFile.SaveAs(hinhanhchitiet);
+
+                if (ModelState.IsValid)
+                {
+                    data.ID = tinTucView.ID;
+                    data.TieuDe = tinTucView.TieuDe;
+                    data.MoTa = tinTucView.MoTa;
+                    data.NoiDung = tinTucView.NoiDung;
+                    data.KeyWord = tinTucView.KeyWord;
+                    data.URL = tinTucView.URL;
+                    data.HinhAnhBaiViet = tinTucView.HinhAnhBaiViet;
+                    data.HinhAnhChiTiet = tinTucView.HinhAnhChiTiet;
+                    data.NgayDang = tinTucView.NgayDang;
+                    data.TenNguoiDang = tinTucView.TenNguoiDang;
+
+                    db.Entry(data).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
             return View(tinTucView);
         }

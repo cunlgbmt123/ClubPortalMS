@@ -42,6 +42,12 @@
                 </div>
             </div>
             <div class="card-body">
+                @if (ViewBag.Message != null)
+                {
+                    <div class="alert alert-danger">
+                        <strong>@ViewBag.Message</strong>
+                    </div>
+                }
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     @Html.LabelFor(model => model.TenPoster, htmlAttributes: new { @class = "control-label col-md-2" })

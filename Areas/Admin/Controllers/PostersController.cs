@@ -67,11 +67,16 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(PosterViewModel posterView,int? id)
         {
+            if (posterView.ImageFile == null)
+            {
+                ViewBag.Message = "Chưa có hình ảnh nào được chọn!!";
+                return View(posterView);
+            }
             string hinhanh = Path.GetFileNameWithoutExtension(posterView.ImageFile.FileName);
             string imgExtension = Path.GetExtension(posterView.ImageFile.FileName);
             hinhanh = hinhanh + DateTime.Now.ToString("yyyymmssfff") + imgExtension;
-            posterView.HinhAnh = "/Areas/Admin/Resource/HinhAnh/" + hinhanh;
-            hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanh);
+            posterView.HinhAnh = "/Areas/Admin/Resource/HinhAnh/Poster/" + hinhanh;
+            hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/Poster/"), hinhanh);
 
             posterView.ImageFile.SaveAs(hinhanh);
             
@@ -120,18 +125,26 @@ namespace ClubPortalMS.Areas.Admin.Controllers
          
             if (ModelState.IsValid)
             {
-                string hinhanh = Path.GetFileNameWithoutExtension(posterView.ImageFile.FileName);
-                string imgExtension = Path.GetExtension(posterView.ImageFile.FileName);
-                hinhanh = hinhanh + DateTime.Now.ToString("yyyymmssfff") + imgExtension;
-                posterView.HinhAnh = "/Areas/Admin/Resource/HinhAnh/" + hinhanh;
-                hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/"), hinhanh);
-                posterView.ImageFile.SaveAs(hinhanh);
-
                 var data = db.Poster.SingleOrDefault(n => n.ID == id);
                 if (data == null)
                 {
                     return HttpNotFound();
                 }
+                if(posterView.ImageFile == null) 
+                {
+                    data.ID = posterView.ID;
+                    data.TenPoster = posterView.TenPoster;
+                    data.Status = posterView.Status;
+                    db.Entry(data).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                string hinhanh = Path.GetFileNameWithoutExtension(posterView.ImageFile.FileName);
+                string imgExtension = Path.GetExtension(posterView.ImageFile.FileName);
+                hinhanh = hinhanh + DateTime.Now.ToString("yyyymmssfff") + imgExtension;
+                posterView.HinhAnh = "/Areas/Admin/Resource/HinhAnh/Poster/" + hinhanh;
+                hinhanh = Path.Combine(Server.MapPath("~/Areas/Admin/Resource/HinhAnh/Poster/"), hinhanh);
+                posterView.ImageFile.SaveAs(hinhanh);
                 data.ID = posterView.ID;
                 data.TenPoster = posterView.TenPoster;
                 data.HinhAnh = posterView.HinhAnh;
@@ -144,13 +157,9 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         }
 
 
-        public ActionResult DeleteConfirmed(PosterViewModel posterView,int id)
+        public ActionResult DeleteConfirmed(PosterViewModel posterView)
         {
-            Poster poster = db.Poster.Find(id);
-            poster.ID = posterView.ID;
-            poster.TenPoster = posterView.TenPoster;
-            poster.HinhAnh = posterView.HinhAnh;
-            poster.Status = posterView.Status;
+            Poster poster = db.Poster.Find(posterView.ID);         
             db.Poster.Remove(poster);
             db.SaveChanges();
             return RedirectToAction("Index");

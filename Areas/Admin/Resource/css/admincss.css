@@ -4,3 +4,11 @@
 .table > tbody > tr > td {
     vertical-align: middle;
 }
+.gioi-han {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 20px;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}

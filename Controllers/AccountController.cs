@@ -398,6 +398,8 @@ namespace ClubPortalMS.Controllers
                     User_ID = user.ID,
                     Ten = loginInfo.givenname,
                     Ho = loginInfo.surname,
+                    Mail = loginInfo.emailaddress,
+                    HinhDaiDien = "/Hinh/HinhDaiDienNguoiDung/avatar_default.jpg"
                 };
                 db.ThanhVien.Add(getIDUser);
                 db.SaveChanges();

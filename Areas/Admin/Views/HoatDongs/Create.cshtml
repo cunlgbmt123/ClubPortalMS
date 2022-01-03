@@ -1,4 +1,4 @@
-﻿@model ClubPortalMS.Models.HoatDong
+﻿@model ClubPortalMS.ViewModel.HoatDong.HoatDongsViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -8,101 +8,92 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "HoatDongs", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper my-2">
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Hoạt động</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Hoạt động</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
         <!-- Main content -->
         <section class="content">
-            <!-- Default box -->
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-6">
-                            @Html.ActionLink("Back to List", "Index")
-                            <strong class="text-danger text-uppercase">Thêm Mới</strong>
+                        <div class="col-md-12">
+                            <strong class="text-danger text-uppercase">Tạo mới</strong>
                         </div>
-                        <div class="col-md-6 text-right">
-                            <a href="#" class="btn btn-sm btn-success">Content</a>
-                        </div>
+
                     </div>
                 </div>
                 <div class="card-body">
+                    @if (ViewBag.Message != null)
+                    {
+                        <div class="alert alert-danger">
+                            <strong>@ViewBag.Message</strong>
+                        </div>
+                    }
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Ten, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <label class="control-label col-md-4"> Tiêu đề</label>
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control", placeholder = "Tiêu đề" } })
                             @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.MoTa, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <label class="control-label col-md-4"> Mô tả</label>
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control", rows = "15", placeholder = "Mô tả" } })
                             @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.KeyWord, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <label class="control-label col-md-4"> Hình ảnh bài viết</label>
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.KeyWord, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.KeyWord, "", new { @class = "text-danger" })
+                            <img src="@Url.Content(Model.HinhAnhBaiViet)" style="width: 100px; height: 100px; margin: 10px;" id="preView" />
+                            <input type="file" name="ImageFile" onchange="ShowImg(this, document.getElementById('preView'))" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.URL, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <label class="control-label col-md-4"> Hình ảnh chi tiết</label>
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.URL, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.URL, "", new { @class = "text-danger" })
+                            <img src="@Url.Content(Model.HinhAnhChiTiet)" style="width: 100px; height: 100px; margin: 10px;" id="preView" />
+                            <input type="file" name="ImageDetailFile" onchange="ShowImg(this, document.getElementById('preView'))" />
                         </div>
                     </div>
-
                     <div class="form-group">
-                        @Html.LabelFor(model => model.HinhAnhChiTiet, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <label class="control-label col-md-4"> Tác giả</label>
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.HinhAnhChiTiet, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.HinhAnhChiTiet, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.HinhAnhBaiViet, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.HinhAnhBaiViet, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.HinhAnhBaiViet, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.NgayDang, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.NgayDang, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.NgayDang, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.TenNguoiDang, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.TenNguoiDang, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.TenNguoiDang, new { htmlAttributes = new { @class = "form-control", placeholder = "Tác giả" } })
                             @Html.ValidationMessageFor(model => model.TenNguoiDang, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Create" class="btn btn-default" />
+                            <input type="submit" value="Tạo" class="btn btn-default" />
                         </div>
                     </div>
+                    @Html.ActionLink("Quay lại", "Index")
                 </div>
-                <!-- /.card-body -->
             </div>
-            <!-- /.card -->
         </section>
         <!-- /.content -->
     </div>
