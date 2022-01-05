@@ -69,6 +69,25 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             ViewBag.DsThongBao = DsThongBao.ToList().ToPagedList(page ?? 1, 5);
             return View();
         }
+        public ActionResult BaiVietTBCLB(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ThongBao thongBao = db.ThongBao.Find(id);
+            ViewBag.idCLB = thongBao.IdCLB;
+            if (thongBao == null)
+            {
+                return HttpNotFound();
+            }
+            return View(thongBao);
+        }
+        public FileResult DocumentDownloadTB(int? id)
+        {
+            var thongBao = db.ThongBao.Where(u => u.ID == id).FirstOrDefault();
+            return File(thongBao.File, thongBao.ContentType, thongBao.TenFile);
+        }
         #endregion
         #region' Đăng ký CLB
 
@@ -380,7 +399,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             return View()
 ;
         }
-        public ActionResult SuKienCLB(string messageRegistration, int? id , int? page)
+        public ActionResult SuKienCLB( int? id , string message, string messages)
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
             List<SuKien> suKiens = db.SuKien.ToList();
@@ -396,15 +415,17 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                  ThanhVien_CLB = e,
                                  SuKien = i
                              };
-            ViewBag.Message = messageRegistration;
+            ViewBag.Message = message;
+            ViewBag.Messages = messages;
             ViewBag.idCLB = id;
-            ViewBag.DsSukien = DsSuien.ToList().ToPagedList(page ?? 1, 5);
+            ViewBag.DsSukien = DsSuien.ToList();
             return View();
         }
 
         public ActionResult ThamGiaSK(int? id)
         {
-            string messageRegistration = string.Empty;
+            string message = null;
+            string messages = null;
             if (ModelState.IsValid)
             {
                
@@ -413,7 +434,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                 var userAccount = db.TTNhatKy.Where(u => u.IDSuKien==id).FirstOrDefault();
                 if (userAccount != null)
                 {
-                    messageRegistration = "Bạn đã tham gia hoạt động này rồi!!";
+                    message = "Bạn đã tham gia hoạt động này rồi!!";
                 }
                 else
                 {
@@ -427,11 +448,11 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                     };
                     db.TTNhatKy.Add(user);
                     db.SaveChanges();
-                    messageRegistration = "Tham gia thành công!!";
+                    messages = "Tham gia thành công!!";
                 }
-               
+                return RedirectToAction("SuKienCLB", new { id = suKien.IdCLB, message = message, messages = messages });
             }
-            return RedirectToAction("SuKienCLB", new { messageRegistration });
+            return View();
         }
         public FileResult DocumentDownloadSK(int? id)
         {
@@ -536,6 +557,20 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             ViewBag.idCLB = id;
             ViewBag.DsLichTap = DsLichTap.ToList().OrderByDescending(x => x.LichTap.ID).ToList();
             return View();
+        }
+        public ActionResult BaiVietLTCLB(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            LichTap lichTap = db.LichTap.Find(id);
+            ViewBag.idCLB = lichTap.IdCLB;
+            if (lichTap == null)
+            {
+                return HttpNotFound();
+            }
+            return View(lichTap);
         }
         #endregion
         #region CLB

@@ -50,7 +50,18 @@
 
                     <div class="sparkline13-graph">
                         <div class="datatable-dashv1-list custom-datatable-overright">
-
+                            @if (ViewBag.Message != null)
+                            {
+                                <div class="alert alert-danger">
+                                    <strong>@ViewBag.Message</strong>
+                                </div>
+                            }
+                            @if (ViewBag.Messages != null)
+                            {
+                                <div class="alert alert-success">
+                                    <strong>@ViewBag.Messages</strong>
+                                </div>
+                            }
                             <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
                                    data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                                 <thead>

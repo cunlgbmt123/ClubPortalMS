@@ -10,5 +10,6 @@ namespace ClubPortalMS
         {
             ConfigureAuth(app);
         }
+
     }
 }

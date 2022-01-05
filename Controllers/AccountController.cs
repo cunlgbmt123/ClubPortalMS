@@ -144,6 +144,7 @@ namespace ClubPortalMS.Controllers
                             Salt = salt,
                             IsLocked = false,
                             EmailConfirmation = false,
+                            DateCreated = DateTime.Now,
                             ActivationCode = registrationView.ActivationCode,
                         };
                         dbContext.DBUser.Add(user);
@@ -422,8 +423,7 @@ namespace ClubPortalMS.Controllers
            
             HttpContext.GetOwinContext().Authentication.SignIn(
                         new AuthenticationProperties { IsPersistent = false }, ident);
-            return Redirect("~/");
-
+            return RedirectToAction("Index", "Dashboard", new { area = "Profile" });
         }
         #endregion
     }

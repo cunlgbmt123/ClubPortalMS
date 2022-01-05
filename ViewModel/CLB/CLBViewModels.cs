@@ -12,7 +12,7 @@ namespace ClubPortalMS.ViewModel.CLB
 
         public int ID { get; set; }
         [DisplayName("Loại Câu Lạc Bộ")]
-        public Nullable<int> IdLoaiCLB { get; set; }
+        public string LoaiCLB { get; set; }
         [DisplayName("Tên Câu Lạc Bộ")]
         public string TenCLB { get; set; }
         [DisplayName("Trạng Thái")]
@@ -24,9 +24,11 @@ namespace ClubPortalMS.ViewModel.CLB
         public string LienHe { get; set; }
         [DisplayName("Mô Tả")]
         public string Mota { get; set; }
+        [DisplayName("Hình đại diện CLB")]
+        public string HinhCLB { get; set; }
         public string FanPage { get; set; }
-        public string Email { get; set; }
+        [DisplayName("Mô Tả")]
 
-        public LoaiCLBViewModel LoaiCLBView { get; set; }
-}
+        public string Email { get; set; }   
+    }
 }

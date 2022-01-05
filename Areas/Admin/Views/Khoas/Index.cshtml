@@ -5,58 +5,79 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper my-2">
-    <!-- Main content -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Khoa</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Khoa</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
     <section class="content">
-        <!-- Default box -->
-        <div class="card">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-md-6">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Quản lý Khoa</h3>
+                        </div>
 
-                        <strong class="text-danger text-uppercase">Danh Sách</strong>
-                        <p>
-                            @Html.ActionLink("Thêm mới", "Create")
-                        </p>
-                    </div>
-                    <div class="col-md-6 text-right">
-                        <a href="#" class="btn btn-sm btn-success">Khoa</a>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="col-2" style="position: absolute; z-index: 1; ">
+                                <a class="btn btn-info btn-block btn-flat" style="border-radius: 4px;" type="button" href="@Url.Action("Create")">
+                                    <i class="fa fa-plus-square" aria-hidden="true"></i> Thêm mới
+                                </a>
+                            </div>
+                            <table id="table1" class="table table-bordered table-striped">
+
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Khoa</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                        <tr>
+
+                                            <td>
+                                                <a href="@Url.Action("Details", new { id = item.ID })">
+                                                    @item.ID
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("Details", new { id = item.ID })">
+                                                    @item.TenKhoa
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Khoa</th>
+
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <table class="table">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.TenKhoa)
-                        </th>
-                        <th></th>
-                    </tr>
-
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TenKhoa)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                            </td>
-                        </tr>
-                    }
-
-                </table>
-
-            </div>
-            <!-- /.card-body -->
         </div>
-        <!-- /.card -->
     </section>
-    <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
-
 

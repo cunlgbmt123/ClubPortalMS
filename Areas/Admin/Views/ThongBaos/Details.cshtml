@@ -1,89 +1,96 @@
-﻿@model ClubPortalMS.Models.ThongBao
+﻿@model ClubPortalMS.ViewModel.ThongBao.ThongBaosViewModels
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper my-2">
-    <!-- Main content -->
-    <section class="content">
-        <!-- Default box -->
-        <div class="card">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p>
-                            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-                            @Html.ActionLink("Back to List", "Index")
-                        </p>
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Thông báo</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Thông báo</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
 
-                        <strong class="text-danger text-uppercase">Thông Tin</strong>
-                    </div>
-                    <div class="col-md-6 text-right">
-                        <a href="#" class="btn btn-sm btn-success">Content</a>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Quản lý Thông báo</h3>
+                        </div>
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
+                            <table id="table1" class="table table-bordered table-striped">
+                                <tr>
+                                    <th>Câu lạc bộ</th>
+                                    <td>@Html.DisplayFor(model => model.CLB)</td>
+                                </tr>
+                                <tr>
+                                    <th>Tiêu đề</th>
+                                    <td>@Html.DisplayFor(model => model.TieuDe)</td>
+                                </tr>
+                                <tr>
+                                    <th>Mô tả</th>
+                                    <td> @Html.DisplayFor(model => model.MoTa)</td>
+                                </tr>
+                                <tr>
+                                    <th>Nội dung</th>
+                                    <td> @Html.DisplayFor(model => model.NoiDung)</td>
+                                </tr>
+                                <tr>
+                                    <th>Tệp đính kèm</th>
+                                    <td> <a href="@Url.Action("DocumentDownloadFileDinhKem", new { id = Model.ID })">@Model.TenFile</a></td>
+                                </tr>
+                                <tr>
+                                    <th>Thời gian thông báo</th>
+                                    <td> @Html.DisplayFor(model => model.NgayThongBao)</td>
+                                </tr>
+                            </table>
+                            <div class=" col-12">
+                                <a style="float:right" data-toggle="modal" data-target="#modal-danger" class="btn btn-app bg-danger">
+                                    <i class="fa fa-trash" aria-hidden="true"></i> Xóa
+                                    @Html.ActionLink("Quay lại", "Index")
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-body">
-                <dl class="dl-horizontal">
-                    <dt>
-                        @Html.DisplayNameFor(model => model.CLB.TenCLB)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.CLB.TenCLB)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.TieuDe)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.TieuDe)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.MoTa)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.MoTa)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.NgayThongBao)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.NgayThongBao)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.NoiDung)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.NoiDung)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.File)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.File)
-                    </dd>
-
-                </dl>
-
-
-            </div>
-            <!-- /.card-body -->
+            </div> 
         </div>
-        <!-- /.card -->
     </section>
-    <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
-
+<div class="modal fade" id="modal-danger">
+    <div class="modal-dialog">
+        <div class="modal-content bg-danger">
+            <div class="modal-header">
+                <h4 class="modal-title">Cẩn thận!!</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="background-color:white; color:black">
+                <p>Không thể khôi phục dữ liệu nếu đã xóa&hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between" style="background-color:white">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy bỏ</button>
+                <a type="button" class="btn  btn-danger" href="@Url.Action( "DeleteConfirmed", new { id = Model.ID })">Xóa</a>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>  

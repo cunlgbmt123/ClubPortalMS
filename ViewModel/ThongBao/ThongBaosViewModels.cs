@@ -7,7 +7,7 @@ using System.Web;
 
 namespace ClubPortalMS.ViewModel.ThongBao
 {
-    public class ThongBaoViewModels
+    public class ThongBaosViewModels
     {
         public int ID { get; set; }
         [DisplayName("Tiêu Đề")]
@@ -15,7 +15,7 @@ namespace ClubPortalMS.ViewModel.ThongBao
         [DisplayName("Mô tả")]
         public string MoTa { get; set; }
         [DisplayName("CLB")]
-        public int IdCLB { get; set; }
+        public string CLB { get; set; }
         [DisplayName("Ngày Thông Báo")]
         public DateTime NgayThongBao { get; set; }
         [DisplayName("Nội Dung")]

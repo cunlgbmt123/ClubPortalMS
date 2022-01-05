@@ -27,7 +27,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                               DiaChi = e.DiaChi,
                               HotLine = e.HotLine,
                               Email = e.Email,
-                              NoiDung = e.NoiDung
+                              NoiDung = e.NoiDung,
+                              Ten=e.Ten
                           };
 
             return View(dsLienhe);
@@ -60,135 +61,93 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         }
 
         // GET: Admin/LienHes/Create
-        public ActionResult Create()
-        {
-            var themLH = new LienHeViewModel();
+        //public ActionResult Create()
+        //{
+        //    var themLH = new LienHeViewModel();
 
-            return View(themLH);
-        }
+        //    return View(themLH);
+        //}
 
-        // POST: Admin/LienHes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(LienHeViewModel lienHeView, int? id)
-        {
-            if (ModelState.IsValid)
-            {
-                LienHe lienHe = new LienHe();
-                lienHe.ID = lienHeView.ID;
-                lienHe.TieuDe = lienHeView.TieuDe;
-                lienHe.DiaChi = lienHeView.DiaChi;
-                lienHe.HotLine = lienHeView.HotLine;
-                lienHe.Ten = lienHeView.Ten;
-                lienHe.Email = lienHeView.Email;
-                lienHe.NoiDung = lienHeView.Email;
-                db.LienHe.Add(lienHe);
-                db.SaveChanges();
-                return RedirectToAction("index");
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(LienHeViewModel lienHeView, int? id)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        LienHe lienHe = new LienHe();
+        //        lienHe.ID = lienHeView.ID;
+        //        lienHe.TieuDe = lienHeView.TieuDe;
+        //        lienHe.DiaChi = lienHeView.DiaChi;
+        //        lienHe.HotLine = lienHeView.HotLine;
+        //        lienHe.Ten = lienHeView.Ten;
+        //        lienHe.Email = lienHeView.Email;
+        //        lienHe.NoiDung = lienHeView.Email;
+        //        db.LienHe.Add(lienHe);
+        //        db.SaveChanges();
+        //        return RedirectToAction("index");
+        //    }
 
-            return View(lienHeView);
-        }
+        //    return View(lienHeView);
+        //}
 
-        // GET: Admin/LienHes/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var data = db.LienHe.SingleOrDefault(n => n.ID == id);
-            if (data == null)
-            {
-                return HttpNotFound();
-            }
-            var viewModel = new LienHeViewModel
-            {
-                ID = data.ID,
-                TieuDe = data.TieuDe,
-                DiaChi = data.DiaChi,
-                HotLine = data.HotLine,
-                Ten = data.Ten,
-                Email = data.Email,
-                NoiDung = data.NoiDung
+        //// GET: Admin/LienHes/Edit/5
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    var data = db.LienHe.SingleOrDefault(n => n.ID == id);
+        //    if (data == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    var viewModel = new LienHeViewModel
+        //    {
+        //        ID = data.ID,
+        //        TieuDe = data.TieuDe,
+        //        DiaChi = data.DiaChi,
+        //        HotLine = data.HotLine,
+        //        Ten = data.Ten,
+        //        Email = data.Email,
+        //        NoiDung = data.NoiDung
 
-            };
-            return View(viewModel);
-        }
+        //    };
+        //    return View(viewModel);
+        //}
 
-        // POST: Admin/LienHes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit( LienHeViewModel lienHeView,int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var data = db.LienHe.SingleOrDefault(n => n.ID == id);
-            if (data == null)
-            {
-                return HttpNotFound();
-            }
-            if (ModelState.IsValid)
-            {
-                data.ID = lienHeView.ID;
-                data.TieuDe = lienHeView.TieuDe;
-                data.DiaChi = lienHeView.DiaChi;
-                data.HotLine = lienHeView.HotLine;
-                data.Ten = lienHeView.Ten;
-                data.Email = lienHeView.Email;
-                data.NoiDung = lienHeView.Email;
-                db.Entry(data).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(lienHeView);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit( LienHeViewModel lienHeView,int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    var data = db.LienHe.SingleOrDefault(n => n.ID == id);
+        //    if (data == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    if (ModelState.IsValid)
+        //    {
+        //        data.ID = lienHeView.ID;
+        //        data.TieuDe = lienHeView.TieuDe;
+        //        data.DiaChi = lienHeView.DiaChi;
+        //        data.HotLine = lienHeView.HotLine;
+        //        data.Ten = lienHeView.Ten;
+        //        data.Email = lienHeView.Email;
+        //        data.NoiDung = lienHeView.Email;
+        //        db.Entry(data).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(lienHeView);
+        //}
 
-        // GET: Admin/LienHes/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var data = db.LienHe.SingleOrDefault(n => n.ID == id);
-            if (data == null)
-            {
-                return HttpNotFound();
-            }
-            var viewModel = new LienHeViewModel
-            {
-                ID = data.ID,
-                TieuDe = data.TieuDe,
-                DiaChi = data.DiaChi,
-                HotLine = data.HotLine,
-                Ten = data.Ten,
-                Email = data.Email,
-                NoiDung = data.NoiDung
-
-            };
-            return View(viewModel);
-        }
-
-        // POST: Admin/LienHes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(LienHeViewModel lienHeView, int id)
+        public ActionResult DeleteConfirmed( int id)
         {
             LienHe data = db.LienHe.Find(id);
-            data.ID = lienHeView.ID;
-            data.TieuDe = lienHeView.TieuDe;
-            data.DiaChi = lienHeView.DiaChi;
-            data.HotLine = lienHeView.HotLine;
-            data.Ten = lienHeView.Ten;
-            data.Email = lienHeView.Email;
-            data.NoiDung = lienHeView.Email;
             db.LienHe.Remove(data);
             db.SaveChanges();
             return RedirectToAction("Index");

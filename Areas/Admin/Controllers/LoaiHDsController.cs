@@ -59,9 +59,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             return View(createLoaiHD);
         }
 
-        // POST: Admin/LoaiHDs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(LoaiHDViewModel loaiHDView)
@@ -99,10 +97,6 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             };
             return View(viewModel);
         }
-
-        // POST: Admin/LoaiHDs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit( LoaiHDViewModel loaiHDView,int? id)
@@ -122,41 +116,14 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 loaiHD.TenLoaiHD = loaiHDView.TenLoaiHD;
                 db.Entry(loaiHD).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details",new { id= loaiHD.ID});
             }
             return View(loaiHDView);
         }
-
-        // GET: Admin/LoaiHDs/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var data = db.LoaiHD.SingleOrDefault(n => n.ID == id);
-            if (data == null)
-            {
-                return HttpNotFound();
-            }
-            var viewModel = new LoaiHDViewModel
-            {
-                ID = data.ID,
-                TenLoaiHD = data.TenLoaiHD
-
-            };
-            return View(viewModel);
-        }
-
-        // POST: Admin/LoaiHDs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(LoaiHDViewModel loaiHDView, int id)
+        public ActionResult DeleteConfirmed(int id)
         {
             
             LoaiHD loaiHD = db.LoaiHD.Find(id);
-            loaiHD.ID = loaiHDView.ID;
-            loaiHD.TenLoaiHD = loaiHDView.TenLoaiHD;
             db.LoaiHD.Remove(loaiHD);
             db.SaveChanges();
             return RedirectToAction("Index");

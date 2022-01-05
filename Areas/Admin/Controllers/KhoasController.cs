@@ -125,36 +125,10 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             return View(khoaView);
         }
 
-        // GET: Admin/Khoas/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var data = db.Khoa.SingleOrDefault(n => n.ID == id);
-            if (data == null)
-            {
-                return HttpNotFound();
-            }
-            var viewModel = new KhoaViewModel
-            {
-                ID = data.ID,
-                TenKhoa = data.TenKhoa
-
-            };
-            return View(viewModel);
-        }
-
-        // POST: Admin/Khoas/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(KhoaViewModel khoaView,int id)
+        public ActionResult DeleteConfirmed(int id)
         {
 
             Khoa khoa = db.Khoa.Find(id);
-            khoa.ID = khoaView.ID;
-            khoa.TenKhoa = khoaView.TenKhoa;
             db.Khoa.Remove(khoa);
             db.SaveChanges();
             return RedirectToAction("Index");

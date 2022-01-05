@@ -7,83 +7,88 @@
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper my-2">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Liên hệ</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Liên hệ</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
     <!-- Main content -->
     <section class="content">
-        <!-- Default box -->
-        <div class="card">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p>
-                            @Html.ActionLink("Create New", "Create")
-                        </p>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Quản lý albums</h3>
+                        </div>
 
-                        <strong class="text-danger text-uppercase">Trang Chủ</strong>
-                    </div>
-                    <div class="col-md-6 text-right">
-                        <a href="#" class="btn btn-sm btn-success">Content</a>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="table1" class="table table-bordered table-striped">
+
+                                <thead>
+                                    <tr>
+                                        <th>Tiêu đề</th>
+                                        <th>Họ và tên</th>
+                                        <th>Địa chỉ</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                    <tr>
+
+                                        <td>
+                                            <a href="@Url.Action("Details", new { id = item.ID })">
+                                                @item.TieuDe
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Details", new { id = item.ID })">
+                                                @item.Ten
+                                            </a>
+                                        </td>
+
+                                        <td>
+                                            @item.DiaChi
+                                        </td>
+
+                                        <td>
+                                            @item.HotLine
+                                        </td>
+                                        <td>
+                                            @item.Email
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Tiêu đề</th>
+                                        <th>Họ và tên</th>
+                                        <th>Địa chỉ</th>                              
+                                        <th>Số điện thoại</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <table class="table">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.TieuDe)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.DiaChi)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.HotLine)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Email)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Ten)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.NoiDung)
-                        </th>
-                        <th></th>
-                    </tr>
-
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @item.TieuDe
-                            </td>
-                            <td>
-                                item.DiaChi
-                            </td>
-                            <td>
-                                @item.HotLine
-                            </td>
-                            <td>
-                                @item.Email
-                            </td>
-                            <td>
-                                @item.Ten
-                            </td>
-                            <td>
-                                @item.NoiDung
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                            </td>
-                        </tr>
-                    }
-
-                </table>
-            </div>
-            <!-- /.card-body -->
         </div>
-        <!-- /.card -->
     </section>
-    <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
+using ClubPortalMS.ViewModel.PhanHoi;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
@@ -17,8 +18,23 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/PhanHois
         public ActionResult Index()
         {
-            var phanHoi = db.PhanHoi.Include(p => p.CLB);
-            return View(phanHoi.ToList());
+            List<PhanHoi> phanHoi = db.PhanHoi.ToList();
+            List<ThanhVien> tv = db.ThanhVien.ToList();
+            var dsPH = from e in phanHoi
+                       join d in tv on e.Idtv equals d.ID
+                       select new PhanHoisViewModel
+                       {
+                           ID = e.ID,
+                           Ten = e.Ten,
+                           DiaChi = e.DiaChi,
+                           SDT = e.SDT,
+                           Email = e.Email,
+                           NoiDung = e.NoiDung,
+                           TGphanhoi = e.TGphanhoi,
+                           TenCLB = e.CLB.TenCLB
+                       };
+
+            return View(dsPH);
         }
 
         // GET: Admin/PhanHois/Details/5
@@ -28,93 +44,30 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PhanHoi phanHoi = db.PhanHoi.Find(id);
-            if (phanHoi == null)
+            var e = db.PhanHoi.SingleOrDefault(n => n.ID == id);
+            var d = db.ThanhVien.SingleOrDefault(c => c.ID == e.Idtv);
+            if (e == null)
             {
                 return HttpNotFound();
             }
-            return View(phanHoi);
+            var viewModel = new PhanHoisViewModel
+            {
+                ID = e.ID,
+                Ten = e.Ten,
+                DiaChi = e.DiaChi,
+                SDT = e.SDT,
+                Email = e.Email,
+                NoiDung = e.NoiDung,    
+                TGphanhoi = e.TGphanhoi,
+                TenCLB = e.CLB.TenCLB
+
+            };
+            return View(viewModel);
         }
 
-        // GET: Admin/PhanHois/Create
-        public ActionResult Create()
+        public ActionResult DeleteConfirmed(PhanHoisViewModel phvm)
         {
-            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB");
-            return View();
-        }
-
-        // POST: Admin/PhanHois/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Ten,NoiDung,Email,SDT,DiaChi,IdCLB")] PhanHoi phanHoi)
-        {
-            if (ModelState.IsValid)
-            {
-                db.PhanHoi.Add(phanHoi);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", phanHoi.IdCLB);
-            return View(phanHoi);
-        }
-
-        // GET: Admin/PhanHois/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PhanHoi phanHoi = db.PhanHoi.Find(id);
-            if (phanHoi == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", phanHoi.IdCLB);
-            return View(phanHoi);
-        }
-
-        // POST: Admin/PhanHois/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Ten,NoiDung,Email,SDT,DiaChi,IdCLB")] PhanHoi phanHoi)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(phanHoi).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", phanHoi.IdCLB);
-            return View(phanHoi);
-        }
-
-        // GET: Admin/PhanHois/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PhanHoi phanHoi = db.PhanHoi.Find(id);
-            if (phanHoi == null)
-            {
-                return HttpNotFound();
-            }
-            return View(phanHoi);
-        }
-
-        // POST: Admin/PhanHois/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            PhanHoi phanHoi = db.PhanHoi.Find(id);
+            PhanHoi phanHoi = db.PhanHoi.Find(phvm.ID);
             db.PhanHoi.Remove(phanHoi);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -1,132 +1,96 @@
-﻿@model IEnumerable<ClubPortalMS.Models.SuKien>
+﻿@model IEnumerable<ClubPortalMS.ViewModel.Sukien.SuKiensViewModel>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper my-2">
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Sự kiện</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Sự kiện</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
     <!-- Main content -->
     <section class="content">
-        <!-- Default box -->
-        <div class="card">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p>
-                            @Html.ActionLink("Create New", "Create")
-                        </p>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Quản lý Sự kiện</h3>
+                        </div>
 
-                        <strong class="text-danger text-uppercase">Danh Sách</strong>
-                    </div>
-                    <div class="col-md-6 text-right">
-                        <a href="#" class="btn btn-sm btn-success">Content</a>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="table1" class="table table-bordered table-striped">
+
+                                <thead>
+                                    <tr>
+                                        <th>Câu lạc bộ</th>
+                                        <th>Tiêu đề</th>
+                                        <th>Mô tả</th>
+                                        <th>Tệp đính kèm</th>
+                                        <th>Thời gian bắt đầu</th>
+                                        <th>Thời gian kết thúc</th>
+                                        <th>Loại Sự kiện</th>
+                                        <th>Địa điểm</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                        <tr>
+                                            <td>
+                                                <a href="@Url.Action("Details", new { id = item.ID })">
+                                                    @item.CLB
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("Details", new { id = item.ID })">
+                                                    @item.TieuDeSK
+                                                </a>
+                                            </td>
+                                            <td>
+                                                @item.MoTa
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("DocumentDownloadFileDinhKem", new { id = item.ID })">@item.TenFile</a>
+                                            </td>
+                                            <td>@item.NgayBatDau</td>
+                                            <td>@item.NgayKetThuc</td>
+                                            <td>@item.LoaiSK</td>
+                                            <td>@item.DiaDiem</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Câu lạc bộ</th>
+                                        <th>Tiêu đề</th>
+                                        <th>Mô tả</th>
+                                        <th>Tệp đính kèm</th>
+                                        <th>Thời gian bắt đầu</th>
+                                        <th>Thời gian kết thúc</th>
+                                        <th>Loại Sự kiện</th>
+                                        <th>Địa điểm</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <table class="table">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.CLB.TenCLB)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.LoaiSuKien.TenLoaiSK)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.TieuDeSK)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.MoTa)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.NgayBatDau)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.NgayKetThuc)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.NoiDung)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.KetQua)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.DiaDiem)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.HinhThuc)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.TenFile)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ContentType)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.File)
-                        </th>
-                        <th></th>
-                    </tr>
-
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CLB.TenCLB)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.LoaiSuKien.TenLoaiSK)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TieuDeSK)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.MoTa)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NgayBatDau)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NgayKetThuc)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NoiDung)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.KetQua)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DiaDiem)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.HinhThuc)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TenFile)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ContentType)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.File)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                            </td>
-                        </tr>
-                    }
-
-                </table>
-
-            </div>
-            <!-- /.card-body -->
         </div>
-        <!-- /.card -->
     </section>
-    <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
-

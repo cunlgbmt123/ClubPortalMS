@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
+using ClubPortalMS.ViewModel.ThanhVien;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
@@ -15,107 +16,77 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin/ThanhViens
-        public ActionResult Index()
+        public ActionResult CLB_TV()
         {
-            var thanhVien = db.ThanhVien.Include(t => t.DBUser);
-            return View(thanhVien.ToList());
+            List<CLB> clb = db.CLB.ToList();
+            var ds = from i in clb
+                     select new CLBDaThamGiaViewModel
+                     {
+                         TenCLB = i.TenCLB,
+                         IDCLB = i.ID,
+                         Mota = i.Mota,
+                         HinhCLB = i.HinhCLB,
+                         NgayThanhLap = i.NgayThanhLap
+                     };
+            return View(ds);
+        }
+        public ActionResult Index(int? id)
+        {
+            List<ThanhVien> tv = db.ThanhVien.ToList();
+            List<ThanhVien_CLB> tvclb = db.ThanhVien_CLB.ToList();
+            var dstv = from e in tv
+                       join d in tvclb on e.ID equals d.IDtvien
+                       where d.IDCLB == id
+                       select new ThanhViensViewModel
+                       {
+                           ID=e.ID,
+                           Ten = e.Ten,
+                           Ho = e.Ho,
+                           NgaySinh = e.NgaySinh,
+                           MSSV = e.MSSV,
+                           Lop = e.Lop,
+                           SDT = e.SDT,
+                           Mail = e.Mail,
+                           HinhDaiDien = e.HinhDaiDien,
+                           Khoa = e.Khoa.TenKhoa,
+                           TenTK = e.DBUser.Username
+                       };
+            ViewBag.IdCLB = id;
+            return View(dstv); 
+        }
+            // GET: Admin/ThanhViens/Details/5
+         public ActionResult Details(int? id,int? id2)
+        {
+         if (id == null)
+         {
+             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+         }
+         var e = db.ThanhVien.SingleOrDefault(n => n.ID == id);
+         if (e == null)
+         {
+             return HttpNotFound();
+         }
+         var viewModel = new ThanhViensViewModel
+         {
+             Ten = e.Ten,
+             Ho = e.Ho,
+             NgaySinh = e.NgaySinh,
+             MSSV = e.MSSV,
+             Lop = e.Lop,
+             SDT = e.SDT,
+             Mail = e.Mail,
+             HinhDaiDien = e.HinhDaiDien,
+             Khoa = e.Khoa.TenKhoa,
+             TenTK = e.DBUser.Username
+         };
+            ViewBag.IdCLB = id2;
+         return View(viewModel);
         }
 
-        // GET: Admin/ThanhViens/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult DeleteConfirmed(ThanhViensViewModel tvvm)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ThanhVien thanhVien = db.ThanhVien.Find(id);
-            if (thanhVien == null)
-            {
-                return HttpNotFound();
-            }
-            return View(thanhVien);
-        }
-
-        // GET: Admin/ThanhViens/Create
-        public ActionResult Create()
-        {
-            ViewBag.User_ID = new SelectList(db.DBUser, "ID", "FirstName");
-            return View();
-        }
-
-        // POST: Admin/ThanhViens/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Ten,Ho,NgaySinh,MSSV,Lop,SDT,Mail,User_ID")] ThanhVien thanhVien)
-        {
-            if (ModelState.IsValid)
-            {
-                db.ThanhVien.Add(thanhVien);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.User_ID = new SelectList(db.DBUser, "ID", "FirstName", thanhVien.User_ID);
-            return View(thanhVien);
-        }
-
-        // GET: Admin/ThanhViens/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ThanhVien thanhVien = db.ThanhVien.Find(id);
-            if (thanhVien == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.User_ID = new SelectList(db.DBUser, "ID", "FirstName", thanhVien.User_ID);
-            return View(thanhVien);
-        }
-
-        // POST: Admin/ThanhViens/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Ten,Ho,NgaySinh,MSSV,Lop,SDT,Mail,User_ID")] ThanhVien thanhVien)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(thanhVien).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.User_ID = new SelectList(db.DBUser, "ID", "FirstName", thanhVien.User_ID);
-            return View(thanhVien);
-        }
-
-        // GET: Admin/ThanhViens/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ThanhVien thanhVien = db.ThanhVien.Find(id);
-            if (thanhVien == null)
-            {
-                return HttpNotFound();
-            }
-            return View(thanhVien);
-        }
-
-        // POST: Admin/ThanhViens/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            ThanhVien thanhVien = db.ThanhVien.Find(id);
-            db.ThanhVien.Remove(thanhVien);
+            var thanhVien = db.ThanhVien_CLB.SingleOrDefault(n => n.IDtvien == tvvm.ID);
+            db.ThanhVien_CLB.Remove(thanhVien);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

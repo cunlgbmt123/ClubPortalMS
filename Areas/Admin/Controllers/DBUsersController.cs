@@ -78,88 +78,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             return View(viewModel);
         }
 
-        // GET: Admin/DBUsers/Create
-        public ActionResult Create()
-        {
-            var createUserView = new UserViewModel();
-            return View(createUserView);
-        }
-
-        // POST: Admin/DBUsers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(UserViewModel dBUserView, int? id)
-        {
-            
-            if (ModelState.IsValid)
-            {
-                DBUser data = new DBUser();
-                data.ID = dBUserView.ID;
-                data.FirstName = dBUserView.FirstName;
-                data.LastName = dBUserView.LastName;
-                data.Username = dBUserView.Username;
-                data.Email = dBUserView.Email;
-                data.Identifier = dBUserView.Identifier;
-                data.EmailConfirmation = dBUserView.EmailConfirmation;
-                data.HashedPassword = dBUserView.HashedPassword;
-                data.Salt = dBUserView.Salt;
-                data.IsLocked = dBUserView.IsLocked;
-                data.DateCreated = dBUserView.DateCreated;
-                data.IsDeleted = dBUserView.IsDeleted;
-                data.ActivationCode = dBUserView.ActivationCode;
-                data.NgayXoa = dBUserView.NgayXoa;
-                data.UserDeleted = dBUserView.UserDeleted;
-
-                db.DBUser.Add(data);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(dBUserView);
-        }
-
-        // GET: Admin/DBUsers/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var data = db.DBUser.SingleOrDefault(n => n.ID == id);
-            if (data == null)
-            {
-                return HttpNotFound();
-            }
-            var viewModel = new UserViewModel
-            {
-                ID = data.ID,
-                FirstName = data.FirstName,
-                LastName = data.LastName,
-                Username = data.Username,
-                Email = data.Email,
-                Identifier = data.Identifier,
-                EmailConfirmation = data.EmailConfirmation,
-                HashedPassword = data.HashedPassword,
-                Salt = data.Salt,
-                IsLocked = data.IsLocked,
-                DateCreated = data.DateCreated,
-                IsDeleted = data.IsDeleted,
-                ActivationCode = data.ActivationCode,
-                NgayXoa = data.NgayXoa,
-                UserDeleted = data.UserDeleted
-
-            };
-            return View(viewModel);
-        }
-
-        // POST: Admin/DBUsers/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(UserViewModel dBUserView, int? id)
+        public ActionResult KhoaTK(int? id)
         {
             if (id == null)
             {
@@ -172,30 +91,13 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             }
             if (ModelState.IsValid)
             {
-                data.ID = dBUserView.ID;
-                data.FirstName = dBUserView.FirstName;
-                data.LastName = dBUserView.LastName;
-                data.Username = dBUserView.Username;
-                data.Email = dBUserView.Email;
-                data.Identifier = dBUserView.Identifier;
-                data.EmailConfirmation = dBUserView.EmailConfirmation;
-                data.HashedPassword = dBUserView.HashedPassword;
-                data.Salt = dBUserView.Salt;
-                data.IsLocked = dBUserView.IsLocked;
-                data.DateCreated = dBUserView.DateCreated;
-                data.IsDeleted = dBUserView.IsDeleted;
-                data.ActivationCode = dBUserView.ActivationCode;
-                data.NgayXoa = dBUserView.NgayXoa;
-                data.UserDeleted = dBUserView.UserDeleted;
-                db.Entry(data).State = EntityState.Modified;
+                data.IsLocked = true;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = id});
             }
-            return View(dBUserView);
+            return View(data);
         }
-
-        // GET: Admin/DBUsers/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult MoTK(int? id)
         {
             if (id == null)
             {
@@ -206,49 +108,19 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            var viewModel = new UserViewModel
+            if (ModelState.IsValid)
             {
-                ID = data.ID,
-                FirstName = data.FirstName,
-                LastName = data.LastName,
-                Username = data.Username,
-                Email = data.Email,
-                Identifier = data.Identifier,
-                EmailConfirmation = data.EmailConfirmation,
-                HashedPassword = data.HashedPassword,
-                Salt = data.Salt,
-                IsLocked = data.IsLocked,
-                DateCreated = data.DateCreated,
-                IsDeleted = data.IsDeleted,
-                ActivationCode = data.ActivationCode,
-                NgayXoa = data.NgayXoa,
-                UserDeleted = data.UserDeleted
-
-            };
-            return View(viewModel);
+                data.IsLocked = false;
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = id });
+            }
+            return View(data);
         }
-
-        // POST: Admin/DBUsers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(UserViewModel dBUserView,int id)
+        public ActionResult DeleteConfirmed(int id)
         {
             DBUser data = db.DBUser.Find(id);
-            data.ID = dBUserView.ID;
-            data.FirstName = dBUserView.FirstName;
-            data.LastName = dBUserView.LastName;
-            data.Username = dBUserView.Username;
-            data.Email = dBUserView.Email;
-            data.Identifier = dBUserView.Identifier;
-            data.EmailConfirmation = dBUserView.EmailConfirmation;
-            data.HashedPassword = dBUserView.HashedPassword;
-            data.Salt = dBUserView.Salt;
-            data.IsLocked = dBUserView.IsLocked;
-            data.DateCreated = dBUserView.DateCreated;
-            data.IsDeleted = dBUserView.IsDeleted;
-            data.ActivationCode = dBUserView.ActivationCode;
-            data.NgayXoa = dBUserView.NgayXoa;
-            data.UserDeleted = dBUserView.UserDeleted;
+            ThanhVien thanhvien = db.ThanhVien.Find(id);
+            db.ThanhVien.Remove(thanhvien);
             db.DBUser.Remove(data);
             db.SaveChanges();
             return RedirectToAction("Index");

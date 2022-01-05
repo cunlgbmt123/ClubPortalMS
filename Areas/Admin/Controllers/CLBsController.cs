@@ -8,70 +8,74 @@ using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
 using ClubPortalMS.ViewModel.CLB;
-using PagedList;
-using CLBViewModels = ClubPortalMS.ViewModel.CLB.CLBViewModels;
+
+
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
     public class CLBsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        public ActionResult QLDkyCLB(int? page)
+        public ActionResult Index(int? page)
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
-            List<DkyCLB> dangKies = db.DkyCLB.ToList();
             List<CLB> CLB = db.CLB.ToList();
-            List<LoaiCLB> loaiCLBs = db.LoaiCLB.ToList();
-            var DsDangKyCLB = from e in dangKies
-                              join i in loaiCLBs on e.IDLoaiCLB equals i.IDLoaiCLB into table
-                              from i in table.ToList()
-                              select new ViewModel1
-                              {
-                                  DkyCLB = e,
-                                  LoaiCLB = i
-                              };
-            ViewBag.DsDangKyCLB = DsDangKyCLB.ToList().ToPagedList(page ?? 1, 5);
+            List<LoaiCLB> loaiCLB = db.LoaiCLB.ToList();
+            var clb = from e in CLB
+                      join d in loaiCLB on e.IdLoaiCLB equals d.IDLoaiCLB
+                      select new ViewModel.CLB.CLBViewModels
+                      {
+                              ID = e.ID,
+                              LoaiCLB = d.TenLoaiCLB,
+                              TenCLB = e.TenCLB,
+                              LienHe = e.LienHe,
+                              Mota = e.Mota,
+                              Email=e.Email,
+                              HinhCLB =e.HinhCLB,
+                              FanPage=e.FanPage,
+                              NgayThanhLap=e.NgayThanhLap
+                      };
 
-            var DsCLB = from e in CLB
-                        join i in loaiCLBs on e.IdLoaiCLB equals i.IDLoaiCLB into table
-                        from i in table.ToList()
-                        select new ViewModel1
-                        {
-                            CLB = e,
-                            LoaiCLB = i
 
-                        };
-
-            ViewBag.DsCLB = DsCLB.ToList().ToPagedList(page ?? 1,5);
-            
-            return View();
+            return View(clb);
         }
-        public ActionResult ThemCLB(int? id)
+
+        public ActionResult Details(int? id)
         {
-            DkyCLB dangKy = db.DkyCLB.Find(id);
-            CLB cLB = new CLB();
-            cLB.IdLoaiCLB = dangKy.IDLoaiCLB;
-            cLB.TenCLB = dangKy.TenCLB;
-            cLB.NgayThanhLap = DateTime.Now;
-            db.CLB.Add(cLB);
-            ThanhVien_CLB thanhVien_CLB = new ThanhVien_CLB();
-            thanhVien_CLB.IDCLB = cLB.ID;
-            thanhVien_CLB.IDtvien = dangKy.IdTvien;
-            thanhVien_CLB.IDRoles = 2;
-            db.ThanhVien_CLB.Add(thanhVien_CLB);
-            db.DkyCLB.Remove(dangKy);
-            db.SaveChanges();
-            return RedirectToAction("QLDkyCLB");
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var e = db.CLB.SingleOrDefault(n => n.ID == id);
+            if (e == null)
+            {
+                return HttpNotFound();
+            }
+            var viewModel = new ViewModel.CLB.CLBViewModels
+            {
+                ID = e.ID,
+                LoaiCLB = e.LoaiCLB.TenLoaiCLB,
+                TenCLB = e.TenCLB,
+                LienHe = e.LienHe,
+                Mota = e.Mota,
+                Email = e.Email,
+                FanPage = e.FanPage,
+                NgayThanhLap = e.NgayThanhLap,
+                HinhCLB=e.HinhCLB
+
+            };
+            return View(viewModel);
         }
-        public ActionResult TuChoiCLB(int? id)
+        public ActionResult DeleteConfirmed(ViewModel.CLB.CLBViewModels cLBViewModels)
         {
-            DkyCLB dangKy = db.DkyCLB.Find(id);
-            db.DkyCLB.Remove(dangKy);
+            CLB data = db.CLB.Find(cLBViewModels.ID);
+            var tv_clb = db.ThanhVien_CLB.Where(u => u.IDCLB.ToString().Equals(cLBViewModels.ID.ToString())).FirstOrDefault();
+            db.ThanhVien_CLB.Remove(tv_clb);
+            db.CLB.Remove(data);
             db.SaveChanges();
-            return RedirectToAction("QLDkyCLB");
+            return RedirectToAction("Index");
         }
-        // GET: Admin/CLBs
-        
 
         protected override void Dispose(bool disposing)
         {

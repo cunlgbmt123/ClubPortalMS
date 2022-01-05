@@ -13,7 +13,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
 
         ApplicationDbContext db = new ApplicationDbContext();
 
-        public ActionResult QLDkyCLB(int? page)
+        public ActionResult QLDkyCLB()
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
             List<DkyCLB> dangKies = db.DkyCLB.ToList();

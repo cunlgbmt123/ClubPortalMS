@@ -1,103 +1,109 @@
-﻿@model IEnumerable<ClubPortalMS.Models.ThanhVien>
-
+﻿@model IEnumerable<ClubPortalMS.ViewModel.ThanhVien.ThanhViensViewModel>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper my-2">
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Thành Viên</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Thành Viên</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
     <!-- Main content -->
     <section class="content">
-        <!-- Default box -->
-        <div class="card">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p>
-                            @Html.ActionLink("Create New", "Create")
-                        </p>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Quản lý Thành Viên</h3>
+                        </div>
 
-                        <strong class="text-danger text-uppercase">Danh Dách</strong>
-                    </div>
-                    <div class="col-md-6 text-right">
-                        <a href="#" class="btn btn-sm btn-success">Content</a>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="col-2" style="position: absolute; z-index: 1; ">
+                                <a class="btn btn-info btn-block btn-flat" style="border-radius: 4px;" type="button" href="@Url.Action("Create")">
+                                    <i class="fa fa-plus-square" aria-hidden="true"></i> Thêm ảnh mới
+                                </a>
+                            </div>
+                            <table id="table1" class="table table-bordered table-striped">
+
+                                <thead>
+                                    <tr>
+                                        <th>Tài khoản</th>
+                                        <th>Họ và tên</th>
+                                        <th>Khoa</th>
+                                        <th>Lớp</th>
+                                        <th>MSSV</th>
+                                        <th>Ngày sinh</th>
+                                        <th>Số điện thoại</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                    <tr>
+                                        <td>
+                                            <a href="@Url.Action("Details","DBUsers", new { id = item.ID })">
+                                                @item.TenTK
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Details", new { id = item.ID ,id2= ViewBag.IdCLB})">
+                                                @item.Ho @item.Ten
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @item.Khoa
+                                        </td>
+                                        <td>
+                                            @item.Lop
+                                        </td>
+                                        <td>
+                                            @item.MSSV
+                                        </td>
+                                        @if (item.NgaySinh == null) { <td> </td>}
+                                        else { 
+                                        <td>
+                                            @item.NgaySinh.Value.ToShortDateString()
+                                        </td>}
+                                        <td>
+                                            @item.SDT
+                                        </td>
+
+
+                                    </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Tài khoản</th>
+                                        <th>Họ và tên</th>
+ 
+                                        <th>Khoa</th>
+                                        <th>Lớp</th>
+                                        <th>MSSV</th>
+                                        <th>Ngày sinh</th>
+                                        <th>Số điện thoại</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <table class="table">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.DBUser.FirstName)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Ten)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Ho)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.NgaySinh)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.MSSV)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Lop)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.SDT)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Mail)
-                        </th>
-                        <th></th>
-                    </tr>
-
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DBUser.FirstName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Ten)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Ho)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NgaySinh)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.MSSV)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Lop)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SDT)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Mail)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                            </td>
-                        </tr>
-                    }
-
-                </table>
-
-            </div>
-            <!-- /.card-body -->
         </div>
-        <!-- /.card -->
     </section>
-    <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
-

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
+using ClubPortalMS.ViewModel.ThongBao;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
@@ -17,8 +18,22 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/ThongBaos
         public ActionResult Index()
         {
-            var thongBao = db.ThongBao.Include(t => t.CLB);
-            return View(thongBao.ToList());
+            List<ThongBao> tb = db.ThongBao.ToList();
+            var dsTB = from e in tb
+                          select new ThongBaosViewModels
+                          {
+                              ID = e.ID,
+                              TieuDe = e.TieuDe,
+                              CLB = e.CLB.TenCLB,
+                              NgayThongBao = e.NgayThongBao,
+                              MoTa = e.MoTa,
+                              TenFile=e.TenFile,
+                              ContentType=e.ContentType,
+                              File=e.File,
+                              NoiDung=e.NoiDung
+                          };
+
+            return View(dsTB);
         }
 
         // GET: Admin/ThongBaos/Details/5
@@ -28,98 +43,41 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ThongBao thongBao = db.ThongBao.Find(id);
-            if (thongBao == null)
+            var e = db.ThongBao.SingleOrDefault(n => n.ID == id);
+            if (e == null)
             {
                 return HttpNotFound();
             }
-            return View(thongBao);
+            var viewModel = new ThongBaosViewModels
+            {
+                ID = e.ID,
+                TieuDe = e.TieuDe,
+                CLB = e.CLB.TenCLB,
+                NgayThongBao = e.NgayThongBao,
+                MoTa = e.MoTa,
+                TenFile = e.TenFile,
+                ContentType = e.ContentType,
+                File = e.File,
+                NoiDung = e.NoiDung
+
+            };
+            return View(viewModel);
         }
 
-        // GET: Admin/ThongBaos/Create
-        public ActionResult Create()
+       
+        public ActionResult DeleteConfirmed(ThongBaosViewModels tbvm)
         {
-            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB");
-            return View();
-        }
-
-        // POST: Admin/ThongBaos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TieuDe,MoTa,IdCLB,NgayThongBao,NoiDung,File")] ThongBao thongBao)
-        {
-            if (ModelState.IsValid)
-            {
-                db.ThongBao.Add(thongBao);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", thongBao.IdCLB);
-            return View(thongBao);
-        }
-
-        // GET: Admin/ThongBaos/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ThongBao thongBao = db.ThongBao.Find(id);
-            if (thongBao == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", thongBao.IdCLB);
-            return View(thongBao);
-        }
-
-        // POST: Admin/ThongBaos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TieuDe,MoTa,IdCLB,NgayThongBao,NoiDung,File")] ThongBao thongBao)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(thongBao).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", thongBao.IdCLB);
-            return View(thongBao);
-        }
-
-        // GET: Admin/ThongBaos/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ThongBao thongBao = db.ThongBao.Find(id);
-            if (thongBao == null)
-            {
-                return HttpNotFound();
-            }
-            return View(thongBao);
-        }
-
-        // POST: Admin/ThongBaos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            ThongBao thongBao = db.ThongBao.Find(id);
+            ThongBao thongBao = db.ThongBao.Find(tbvm.ID);
             db.ThongBao.Remove(thongBao);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        [HttpGet]
+        public FileResult DocumentDownloadFileDinhKem(int? id)
+        {
+            var tb = db.ThongBao.Where(u => u.ID == id).FirstOrDefault();
+            return File(tb.File, tb.ContentType, tb.TenFile);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

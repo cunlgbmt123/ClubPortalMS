@@ -111,8 +111,10 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             return RedirectToAction("QLCLB",new {id = cLBViewModel.ID});
         }
         public ActionResult XacNhanXoaCLB(int id)
-        {
+        {           
             CLB clb = db.CLB.Find(id);
+            var tv_clb = db.ThanhVien_CLB.Where(u => u.IDCLB.ToString().Equals(id.ToString())).FirstOrDefault();
+            db.ThanhVien_CLB.Remove(tv_clb);
             db.CLB.Remove(clb);
             db.SaveChanges();
             return RedirectToAction("QuanLyCLB_DSCLB");

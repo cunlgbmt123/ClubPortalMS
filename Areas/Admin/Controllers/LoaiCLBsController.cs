@@ -126,35 +126,9 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             return View(loaiCLBView);
         }
 
-        // GET: Admin/LoaiCLBs/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var data = db.LoaiCLB.SingleOrDefault(n => n.IDLoaiCLB == id);
-            if (data == null)
-            {
-                return HttpNotFound();
-            }
-            var viewModel = new LoaiCLBViewModel
-            {
-                IDLoaiCLB = data.IDLoaiCLB,
-                TenLoaiCLB = data.TenLoaiCLB
-
-            };
-            return View(viewModel);
-        }
-
-        // POST: Admin/LoaiCLBs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(LoaiCLBViewModel loaiCLBView,int id)
         {
             LoaiCLB loaiCLB = db.LoaiCLB.Find(id);
-            loaiCLB.IDLoaiCLB = loaiCLBView.IDLoaiCLB;
-            loaiCLB.TenLoaiCLB = loaiCLBView.TenLoaiCLB;
             db.LoaiCLB.Remove(loaiCLB);
             db.SaveChanges();
             return RedirectToAction("Index");

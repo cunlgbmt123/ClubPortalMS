@@ -23,6 +23,7 @@ namespace ClubPortalMS.CustomAuthentication
             ID = user.ThanhVien.FirstOrDefault(s => s.ID == user.ID).ID; 
             FirstName = user.ThanhVien.FirstOrDefault(s => s.ID == user.ID).Ten;
             LastName =user.ThanhVien.FirstOrDefault(s => s.ID == user.ID).Ho;
+            Email =user.ThanhVien.FirstOrDefault(s => s.ID == user.ID).Mail;
             ActivationCode = user.ActivationCode;
             DBUserRoles = user.DBUserRoles;
         }

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
+using ClubPortalMS.ViewModel.NhiemVu;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
@@ -17,7 +18,23 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         // GET: Admin/NhiemVus
         public ActionResult Index()
         {
-            return View(db.NhiemVu.ToList());
+            List<NhiemVu> nv = db.NhiemVu.ToList();
+            List<CLB> clb = db.CLB.ToList();
+            var dsAlbum = from e in nv
+                          join d in clb on e.IdCLB equals d.ID
+                          select new NhiemVusViewModel
+                          {
+                              ID = e.ID,
+                              TieuDe = e.TieuDe,
+                              CauLacBo = d.TenCLB,
+                              TenFile = e.TenFile,
+                              MoTa = e.MoTa,
+                              ContentType = e.ContentType,
+                              File = e.File,
+                              ThoiGianKetThuc=e.ThoiGianKetThuc
+                          };
+
+            return View(dsAlbum);
         }
 
         // GET: Admin/NhiemVus/Details/5
@@ -27,94 +44,41 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NhiemVu nhiemVu = db.NhiemVu.Find(id);
-            if (nhiemVu == null)
+            var e = db.NhiemVu.SingleOrDefault(n => n.ID == id);
+            var clb = db.CLB.SingleOrDefault(n => n.ID == e.IdCLB);
+            if (e == null)
             {
                 return HttpNotFound();
             }
-            return View(nhiemVu);
+            var viewModel = new NhiemVusViewModel
+                            {
+                                ID = e.ID,
+                                TieuDe = e.TieuDe,
+                                CauLacBo = clb.TenCLB,
+                                TenFile = e.TenFile,
+                                MoTa = e.MoTa,
+                                ContentType = e.ContentType,
+                                File = e.File,
+                                ThoiGianKetThuc = e.ThoiGianKetThuc
+
+                            };
+            return View(viewModel);
         }
-
-        // GET: Admin/NhiemVus/Create
-        public ActionResult Create()
+        public ActionResult DeleteConfirmed(NhiemVusViewModel nvvm)
         {
-            return View();
-        }
-
-        // POST: Admin/NhiemVus/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TieuDe,MoTa,TenFile,ContentType,File,ThoiGianKetThuc,IdCLB")] NhiemVu nhiemVu)
-        {
-            if (ModelState.IsValid)
-            {
-                db.NhiemVu.Add(nhiemVu);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(nhiemVu);
-        }
-
-        // GET: Admin/NhiemVus/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            NhiemVu nhiemVu = db.NhiemVu.Find(id);
-            if (nhiemVu == null)
-            {
-                return HttpNotFound();
-            }
-            return View(nhiemVu);
-        }
-
-        // POST: Admin/NhiemVus/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TieuDe,MoTa,TenFile,ContentType,File,ThoiGianKetThuc,IdCLB")] NhiemVu nhiemVu)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(nhiemVu).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(nhiemVu);
-        }
-
-        // GET: Admin/NhiemVus/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            NhiemVu nhiemVu = db.NhiemVu.Find(id);
-            if (nhiemVu == null)
-            {
-                return HttpNotFound();
-            }
-            return View(nhiemVu);
-        }
-
-        // POST: Admin/NhiemVus/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            NhiemVu nhiemVu = db.NhiemVu.Find(id);
-            db.NhiemVu.Remove(nhiemVu);
+            NhiemVu data = db.NhiemVu.Find(nvvm.ID);
+            var nvtv = db.NhiemVu_ThanhVien.Where(u => u.IdNv.ToString().Equals(nvvm.ID.ToString())).FirstOrDefault();
+            db.NhiemVu_ThanhVien.Remove(nvtv);
+            db.NhiemVu.Remove(data);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        [HttpGet]
+        public FileResult DocumentDownloadFileDinhKem(int? id)
+        {
+            var nhiemVUs = db.NhiemVu.Where(u => u.ID == id).FirstOrDefault();
+            return File(nhiemVUs.File, nhiemVUs.ContentType, nhiemVUs.TenFile);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
