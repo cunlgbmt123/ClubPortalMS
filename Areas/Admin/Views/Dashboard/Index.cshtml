@@ -1,457 +1,558 @@
-﻿
+﻿@model ClubPortalMS.ViewModel.ThongKe.ThongKeHDSKViewModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-
-    <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__shake" src="~/Areas/Admin/Resource/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-    </div>
-
-
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v1</li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <!-- Small boxes (Stat box) -->
-                <div class="row">
-                    <div class="col-lg-3 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-info">
-                            <div class="inner">
-                                <h3>150</h3>
-
-                                <p>New Orders</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-bag"></i>
-                            </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                        </div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-success">
-                            <div class="inner">
-                                <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                                <p>Bounce Rate</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-stats-bars"></i>
-                            </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                        </div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-warning">
-                            <div class="inner">
-                                <h3>44</h3>
-
-                                <p>User Registrations</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-person-add"></i>
-                            </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                        </div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-danger">
-                            <div class="inner">
-                                <h3>65</h3>
-
-                                <p>Unique Visitors</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-pie-graph"></i>
-                            </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                        </div>
-                    </div>
-                    <!-- ./col -->
-                </div>
-                <!-- /.row -->
-                <!-- Main row -->
-                <div class="row">
-                    <!-- Left col -->
-                    <section class="col-lg-7 connectedSortable">
-                        <!-- Custom tabs (Charts with tabs)-->
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">
-                                    <i class="fas fa-chart-pie mr-1"></i>
-                                    Sales
-                                </h3>
-                                <div class="card-tools">
-                                    <ul class="nav nav-pills ml-auto">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div><!-- /.card-header -->
-                            <div class="card-body">
-                                <div class="tab-content p-0">
-                                    <!-- Morris chart - Sales -->
-                                    <div class="chart tab-pane active" id="revenue-chart"
-                                         style="position: relative; height: 300px;">
-                                        <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
-                                    </div>
-                                    <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
-                                        <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
-                                    </div>
-                                </div>
-                            </div><!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
-                    </section>
-
-                    <section class="col-lg-5 connectedSortable">
-                        <div class="card bg-gradient-info">
-                            <div class="card-header border-0">
-                                <h3 class="card-title">
-                                    <i class="fas fa-th mr-1"></i>
-                                    Sales Graph
-                                </h3>
-
-                                <div class="card-tools">
-                                    <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <canvas class="chart" id="line-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                            </div>
-                            <!-- /.card-body -->
-                            <div class="card-footer bg-transparent">
-                                <div class="row">
-                                    <div class="col-4 text-center">
-                                        <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
-                                               data-fgColor="#39CCCC">
-
-                                        <div class="text-white">Mail-Orders</div>
-                                    </div>
-                                    <!-- ./col -->
-                                    <div class="col-4 text-center">
-                                        <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
-                                               data-fgColor="#39CCCC">
-
-                                        <div class="text-white">Online</div>
-                                    </div>
-                                    <!-- ./col -->
-                                    <div class="col-4 text-center">
-                                        <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60"
-                                               data-fgColor="#39CCCC">
-
-                                        <div class="text-white">In-Store</div>
-                                    </div>
-                                    <!-- ./col -->
-                                </div>
-                                <!-- /.row -->
-                            </div>
-                            <!-- /.card-footer -->
-                        </div>
-                        <!-- /.card -->
-                        <!-- Calendar -->
-                        <div class="card bg-gradient-success">
-                            <div class="card-header border-0">
-
-                                <h3 class="card-title">
-                                    <i class="far fa-calendar-alt"></i>
-                                    Calendar
-                                </h3>
-                                <!-- tools card -->
-                                <div class="card-tools">
-                                    <!-- button with a dropdown -->
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
-                                            <i class="fas fa-bars"></i>
-                                        </button>
-                                        <div class="dropdown-menu" role="menu">
-                                            <a href="#" class="dropdown-item">Add new event</a>
-                                            <a href="#" class="dropdown-item">Clear events</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a href="#" class="dropdown-item">View calendar</a>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-success btn-sm" data-card-widget="remove">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                                <!-- /. tools -->
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body pt-0">
-                                <!--The calendar -->
-                                <div id="calendar" style="width: 100%"></div>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
-                    </section>
-                    <!-- right col -->
-                </div>
-                <!-- /.row (main row) -->
-            </div><!-- /.container-fluid -->
-        </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-
-<!-- Content Wrapper. Contains page content -->
-<!--<div class="content-wrapper">
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Dashboard</h1>
-                </div>--><!-- /.col -->
-                <!--<div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
-                    </ol>
-                </div>--><!-- /.col -->
-            <!--</div>--><!-- /.row -->
-        <!--</div>--><!-- /.container-fluid -->
-    <!--</div>
+                <div class="col-sm-12">
+                    <h1 class="m-0">Trang chủ</h1>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+
     <section class="content">
-        <div class="container-fluid">-->
-            <!-- Small boxes (Stat box) -->
-            <!--<div class="row">
-                <div class="col-lg-3 col-6">-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <!--<div class="small-box bg-info">
+                    <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>150</h3>
+                            <h3>@ViewBag.slclb</h3>
 
-                            <p>New Orders</p>
+                            <p>Câu lạc bộ</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-bag"></i>
+                            <i class="fa fa-cubes" aria-hidden="true"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="@Url.Action("Index", "CLBs")" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
-                </div>-->
+                </div>
                 <!-- ./col -->
-                <!--<div class="col-lg-3 col-6">-->
+                <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <!--<div class="small-box bg-success">
+                    <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">%</sup></h3>
+                            <h3>@ViewBag.sltv<sup style="font-size: 20px"></sup></h3>
 
-                            <p>Bounce Rate</p>
+                            <p>Thành viên</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-stats-bars"></i>
+                            <i class="fa fa-user" aria-hidden="true"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="@Url.Action("CLB_TV", "ThanhViens")" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
-                </div>-->
+                </div>
                 <!-- ./col -->
-                <!--<div class="col-lg-3 col-6">-->
+                <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <!--<div class="small-box bg-warning">
-                        <div class="inner">
-                            <h3>44</h3>
-
-                            <p>User Registrations</p>
+                    <div class="small-box bg-warning">
+                        <div class="inner" style="color:white">
+                            <h3>@ViewBag.slsk</h3>
+                            <p>Sự kiện</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-person-add"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="@Url.Action("Index", "SuKiens")"   class="small-box-footer"><span style="color:white">Xem thêm </span><i style="color:white" class="fas fa-arrow-circle-right"></i></a>
                     </div>
-                </div>-->
+                </div>
                 <!-- ./col -->
-                <!--<div class="col-lg-3 col-6">-->
+                <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <!--<div class="small-box bg-danger">
+                    <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>65</h3>
+                            <h3>@ViewBag.slhd</h3>
 
-                            <p>Unique Visitors</p>
+                            <p>Hoạt động</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
+                            <i class="fa fa-suitcase" aria-hidden="true"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="@Url.Action("Index", "QLDSHoatDongs")" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
-                </div>-->
+                </div>
                 <!-- ./col -->
-            <!--</div>-->
-            <!-- /.row -->
-            <!-- Main row -->
-            <!--<div class="row">-->
+            </div>
+            <div class="row">
                 <!-- Left col -->
-                <!--<section class="col-lg-7 connectedSortable">-->
+                <section class="col-lg-6 connectedSortable">
                     <!-- Custom tabs (Charts with tabs)-->
-                    <!--<div class="card">
+                    <div class="card" >
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="fas fa-chart-pie mr-1"></i>
-                                Sales
+                                Tổng số sinh viên
                             </h3>
                             <div class="card-tools">
                                 <ul class="nav nav-pills ml-auto">
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
+                                        <a class="nav-link active" href="#khoa-chart" data-toggle="tab">Khoa</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
+                                        <a class="nav-link" href="#Khoa-hoc-chart" data-toggle="tab">Khóa học</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#Clb-chart" data-toggle="tab">Câu lạc bộ</a>
                                     </li>
                                 </ul>
                             </div>
-                        </div>--><!-- /.card-header -->
-                        <!--<div class="card-body">
-                            <div class="tab-content p-0">-->
+                        </div><!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="tab-content p-0">
                                 <!-- Morris chart - Sales -->
-                                <!--<div class="chart tab-pane active" id="revenue-chart"
-                                     style="position: relative; height: 300px;">
-                                    <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
+                                <div class="chart tab-pane active" id="khoa-chart"
+                                     style="position: relative; height: auto;">
+                                    <canvas id="chart-line" style="height: auto;"></canvas>
                                 </div>
-                                <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
-                                    <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
+                                <div class="chart tab-pane" id="Khoa-hoc-chart">
+                                    <canvas id="chart-line1" style="height: auto;"></canvas>
+                                </div>
+                                <div class="chart tab-pane" id="Clb-chart">
+                                    <canvas id="chart-line2" style="height: auto;"></canvas>
                                 </div>
                             </div>
-                        </div>--><!-- /.card-body -->
-                    <!--</div>
+                        </div><!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </section>
 
-                </section>-->
-                <!-- /.Left col -->
-                <!-- right col (We are only adding the ID to make the widgets sortable)-->
-                <!--<section class="col-lg-5 connectedSortable">-->
-                    <!-- solid sales graph -->
-                    <!--<div class="card bg-gradient-info">
-                        <div class="card-header border-0">
+                <section class="col-lg-6 connectedSortable">
+                    <!-- Custom tabs (Charts with tabs)-->
+                    <div class="card">
+                        <div class="card-header">
                             <h3 class="card-title">
-                                <i class="fas fa-th mr-1"></i>
-                                Sales Graph
+                                <i class="fas fa-chart-pie mr-1"></i>
+                                Tần suất hoạt động tất cả các câu lạc bộ
                             </h3>
-
                             <div class="card-tools">
-                                <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
-                                    <i class="fas fa-times"></i>
-                                </button>
+                                <ul class="nav nav-pills ml-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#HD-chart" data-toggle="tab">Hoạt động</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#SK-chart" data-toggle="tab">Sự kiện</a>
+                                    </li>
+                                </ul>
                             </div>
+                        </div><!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="tab-content p-0">
+                                <!-- Morris chart - Sales -->
+                                <div class="chart tab-pane active" id="HD-chart"
+                                     style="position: relative; height: auto;">
+                                    <canvas id="chart-hd" style="height: auto;"></canvas>
+                                </div>
+                                <div class="chart tab-pane" id="SK-chart">
+                                    <canvas id="chart-sk" style="height: auto;"></canvas>
+                                </div>
+                            </div>
+                        </div><!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </section>
+                <!-- /.Left col -->
+
+                <section class="col-lg-6 connectedSortable" id="reload-target">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-chart-pie mr-1"></i>
+                                Tần suất sự kiện
+                            </h3>
                         </div>
                         <div class="card-body">
-                            <canvas class="chart" id="line-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                        </div>-->
-                        <!-- /.card-body -->
-                        <!--<div class="card-footer bg-transparent">
-                            <div class="row">
-                                <div class="col-4 text-center">
-                                    <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
-                                           data-fgColor="#39CCCC">
+                            @using (Html.BeginForm())
+                            {
 
-                                    <div class="text-white">Mail-Orders</div>
-                                </div>-->
-                                <!-- ./col -->
-                                <!--<div class="col-4 text-center">
-                                    <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
-                                           data-fgColor="#39CCCC">
-
-                                    <div class="text-white">Online</div>
-                                </div>-->
-                                <!-- ./col -->
-                                <!--<div class="col-4 text-center">
-                                    <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60"
-                                           data-fgColor="#39CCCC">
-
-                                    <div class="text-white">In-Store</div>
-                                </div>-->
-                                <!-- ./col -->
-                            <!--</div>-->
-                            <!-- /.row -->
-                        <!--</div>-->
-                        <!-- /.card-footer -->
-                    <!--</div>-->
-                    <!-- /.card -->
-                    <!-- Calendar -->
-                    <!--<div class="card bg-gradient-success">
-                        <div class="card-header border-0">
-
-                            <h3 class="card-title">
-                                <i class="far fa-calendar-alt"></i>
-                                Calendar
-                            </h3>-->
-                            <!-- tools card -->
-                            <!--<div class="card-tools">-->
-                                <!-- button with a dropdown -->
-                                <!--<div class="btn-group">
-                                    <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
-                                        <i class="fas fa-bars"></i>
-                                    </button>
-                                    <div class="dropdown-menu" role="menu">
-                                        <a href="#" class="dropdown-item">Add new event</a>
-                                        <a href="#" class="dropdown-item">Clear events</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="#" class="dropdown-item">View calendar</a>
+                                <div class="chart tab-pane">
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            @Html.DropDownList("IdCLBSK", ViewBag.DsCLBSK as SelectList, "Chọn Câu lạc bộ", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.IdCLBSK, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-lg-3">
+                                            @Html.DropDownList("YearSK", ViewBag.selectListYear as SelectList, "Chọn năm", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.IdCLBSK, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <input type="submit" class="btn btn-info" value="Xác nhận" />
+                                        </div>
                                     </div>
+                                    <canvas id="chart-sk-loc" style="height: auto;margin-top:5%"></canvas>
                                 </div>
-                                <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-success btn-sm" data-card-widget="remove">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>-->
-                            <!-- /. tools -->
-                        <!--</div>-->
-                        <!-- /.card-header -->
-                        <!--<div class="card-body pt-0">-->
-                            <!--The calendar -->
-                            <!--<div id="calendar" style="width: 100%"></div>
-                        </div>-->
+
+                            }
+                        </div>
+                        <div class="card-footer"><p style="text-align: center; ">Biểu đồ tần suất sự kiện của <span style=" font-weight: bold; color: #4169E1 ">@ViewBag.getNameClubSK</span> theo năm <span style=" font-weight: bold;color: #4169E1 ">@ViewBag.getYearClubSK</span></p></div>
+
                         <!-- /.card-body -->
-                    <!--</div>-->
-                    <!-- /.card -->
-                <!--</section>-->
+                    </div>
+                </section>
+                <section class="col-lg-6 connectedSortable">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-chart-pie mr-1"></i>
+                                Tần suất hoạt động
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            @using (Html.BeginForm())
+                            {
+
+                                <div class="chart tab-pane active" id="HD-Loc-chart">
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            @Html.DropDownList("IdCLBHD", ViewBag.DsCLB as SelectList, "Chọn Câu lạc bộ", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.IdCLBHD, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-lg-3">
+                                            @Html.DropDownList("YearHD", ViewBag.selectListYear as SelectList, "Chọn năm", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.YearHD, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <input type="submit" class="btn btn-info" value="Xác nhận" />
+                                        </div>
+                                    </div>
+                                    <canvas id="chart-hd-loc" style="height: auto; margin-top: 5%"></canvas>
+
+                                </div>
+                            }
+                        </div>
+
+                        <div class="card-footer"><p style="text-align:center">Biểu đồ tần suất hoạt động của <span style=" font-weight: bold; color: #4169E1 ">@ViewBag.getNameClubHD</span> theo năm <span style=" font-weight: bold; color: #4169E1 ">@ViewBag.getYearClubHD</span></p> </div>
+                        <!-- /.card-body -->
+                    </div>
+                </section>
+
                 <!-- right col -->
-            <!--</div>-->
-            <!-- /.row (main row) -->
-        <!--</div>--><!-- /.container-fluid -->
-    <!--</section>
-</div>-->
-<!-- /.content-wrapper -->
+            </div>
+        </div>
+    </section>
+</div>
+<script src="~/Areas/Admin/Resource/other/jquery.min.js"></script>
+
+<script>
+    //chart lọc sv theo khoa
+    $(document).ready(function () {
+        var colors = [];
+        while (colors.length < 100) {
+            do {
+                var color = Math.floor((Math.random() * 1000000) + 1);
+            } while (colors.indexOf(color) >= 0);
+            colors.push("#" + ("000000" + color.toString(16)).slice(-6));
+        }
+        var result = @Html.Raw(ViewBag.DataPoints);
+        var dataPoints = [];
+        var labelPoints = [];
+        for(var i = 0; i < result.length; i++){
+            labelPoints.push(result[i].TenKhoa);
+            dataPoints.push(result[i].soSV);
+        }
+
+        var ctx = $("#chart-line");
+        var myLineChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labelPoints,
+                datasets: [ {
+                    data: dataPoints,
+                    borderColor: "white",
+                    fill: false,
+                    backgroundColor: colors.slice(0, 100),
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    fontSize: '20',
+                    text: 'Số lượng sinh viên theo khoa'
+
+                },
+                legend: {
+                    display: true,
+                    position: 'right'
+                }
+            }
+        });
+    });
+    //chart lọc sv theo khóa học
+     $(document).ready(function () {
+         var colors = [];
+         while (colors.length < 100) {
+             do {
+                 var color = Math.floor((Math.random() * 1000000) + 1);
+             } while (colors.indexOf(color) >= 0);
+             colors.push("#" + ("000000" + color.toString(16)).slice(-6));
+         }
+        var result = @Html.Raw(ViewBag.DataPoints1);
+        var dataPoints = [];
+        var labelPoints = [];
+        for(var i = 0; i < result.length; i++){
+            labelPoints.push(result[i].TenKhoaHoc);
+            dataPoints.push(result[i].soSV);
+        }
+
+        var ctx = $("#chart-line1");
+        var myLineChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labelPoints,
+                datasets: [ {
+                    data: dataPoints,
+                    borderColor: "white",
+                    fill: false,
+                    backgroundColor: colors.slice(0, 100),
+                }]
+            },
+            options: {
+                title: {
+                    display: true, fontSize: '20',
+                    text: 'Số lượng sinh viên theo khóa học'
+
+                },
+                legend: {
+                    display: true,
+                    position: 'right'
+                }
+            }
+        });
+     });
+    //chart lọc sinh viên theo clb
+         $(document).ready(function () {
+             var colors = [];
+             while (colors.length < 100) {
+                 do {
+                     var color = Math.floor((Math.random() * 1000000) + 1);
+                 } while (colors.indexOf(color) >= 0);
+                 colors.push("#" + ("000000" + color.toString(16)).slice(-6));
+             }
+        var result = @Html.Raw(ViewBag.DataPoints2);
+        var dataPoints = [];
+        var labelPoints = [];
+        for(var i = 0; i < result.length; i++){
+            labelPoints.push(result[i].TenCLB);
+            dataPoints.push(result[i].soSV);
+        }
+
+        var ctx = $("#chart-line2");
+        var myLineChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labelPoints,
+                datasets: [ {
+                    data: dataPoints,
+                    borderColor: "white",
+                    fill: false,
+                    backgroundColor: colors.slice(0, 100),
+                }]
+            },
+            options: {
+                title: {
+                    display: true, fontSize: '20',
+                    text: 'Số lượng sinh viên theo câu lạc bộ'
+
+                },
+                legend: {
+                    display: true,
+                    position: 'right'
+                }
+            }
+        });
+         });
+    //chart lọc hoạt động theo năm
+        $(document).ready(function () {
+        var colors = [];
+        while (colors.length < 100) {
+            do {
+                var color = Math.floor((Math.random() * 1000000) + 1);
+            } while (colors.indexOf(color) >= 0);
+            colors.push("#" + ("000000" + color.toString(16)).slice(-6));
+        }
+        var result = @Html.Raw(ViewBag.DataPoints3);
+        var dataPoints = [];
+        var labelPoints = [];
+        for(var i = 0; i < result.length; i++){
+            labelPoints.push("Năm "+result[i].HDtheoNam);
+            dataPoints.push(result[i].soHD);
+        }
+
+        var ctx = $("#chart-hd");
+            var myLineChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labelPoints,
+                    datasets: [{
+                        data: dataPoints,
+                        borderColor: "black",
+
+                        fill: false,
+                        backgroundColor: colors.slice(0, 100),
+                    }]
+                },
+                options: {
+                    title: {
+                        fontColor: 'black',
+                        fontSize: '20',
+                        display: true,
+                        text: 'Tần suất tổ chức hoạt động của tất cả câu lạc bộ'
+
+                    },
+                    legend: {
+                        display: false
+
+                    },
+                    scales: {
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                callback: function (value) { if (value % 1 === 0) { return value; } }
+                            }
+                        }]
+                    }
+            }
+        });
+        });
+    //chart lọc sự kiện theo năm
+            $(document).ready(function () {
+                    var colors = [];
+            while (colors.length < 100) {
+                do {
+                    var color = Math.floor((Math.random() * 1000000) + 1);
+                } while (colors.indexOf(color) >= 0);
+                colors.push("#" + ("000000" + color.toString(16)).slice(-6));
+            }
+        var result = @Html.Raw(ViewBag.DataPoints6);
+        var dataPoints = [];
+        var labelPoints = [];
+        for(var i = 0; i < result.length; i++){
+            labelPoints.push("Năm "+result[i].HDtheoNam);
+            dataPoints.push(result[i].soHD);
+        }
+
+        var ctx = $("#chart-sk");
+            var myLineChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labelPoints,
+                    datasets: [{
+                        data: dataPoints,
+                        borderColor: "black",
+
+                        fill: false,
+                        backgroundColor: colors.slice(0, 100),
+                    }]
+                },
+                options: {
+                    title: {
+                        fontColor: 'black',
+                        fontSize: '20',
+                        display: true,
+                        text: 'Tần suất tổ chức sự kiện các tất cả các câu lạc bộ'
+
+                    },
+                    legend: {
+                        display: false
+                    },
+                    scales: {
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                callback: function (value) { if (value % 1 === 0) { return value; } }
+                            }
+                        }]
+                    }
+            }
+        });
+        });
+    //chart lọc hoạt động theo năm và clb
+    $(document).ready(function () {
+        var colors = ['#007bff', '#28a745', '#333333', '#c3e6cb', '#dc3545', '#6c757d'];
+        var result = @Html.Raw(ViewBag.DataPoints4);
+        var dataPoints = [];
+        var labelPoints = [];
+        for(var i = 0; i < result.length; i++){
+            labelPoints.push("Tháng "+result[i].HDtheoThang);
+            dataPoints.push(result[i].soHD);
+        }
+
+        var ctx = $("#chart-hd-loc");
+            var myLineChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labelPoints,
+                    datasets: [{
+                        data: dataPoints,
+                        borderColor: "#28a745",
+
+                        fill: false,
+                        backgroundColor: colors.slice(0, 6),
+                    }]
+                },
+                options: {
+
+                    legend: {
+                        display: false
+                    },
+                    scales: {
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                callback: function (value) { if (value % 1 === 0) { return value; } }
+                            }
+                        }]
+                    }
+            }
+        });
+        });
+        //chart lọc sự kiện theo năm và clb
+    $(document).ready(function () {
+        var colors = ['#007bff', '#28a745', '#333333', '#c3e6cb', '#dc3545', '#6c757d'];
+        var result = @Html.Raw(ViewBag.DataPoints5);
+        var dataPoints = [];
+        var labelPoints = [];
+        for(var i = 0; i < result.length; i++){
+            labelPoints.push("Tháng "+result[i].HDtheoThang);
+            dataPoints.push(result[i].soHD);
+        }
+
+        var ctx = $("#chart-sk-loc");
+            var myLineChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labelPoints,
+                    datasets: [{
+                        data: dataPoints,
+                        borderColor: "#28a745",
+
+                        fill: false,
+                        backgroundColor: colors.slice(0, 6),
+                    }]
+                },
+                options: {
+
+                    legend:{
+                        display: false
+                    },
+                    scales: {
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                callback: function (value) { if (value % 1 === 0) { return value; } }
+                            }
+                        }]
+                    }
+            }
+        });
+        });
+
+</script>

@@ -215,6 +215,9 @@
     <Compile Include="ViewModel\Sukien\SuKiensViewModel.cs" />
     <Compile Include="ViewModel\ThanhVien\ThanhViensViewModel.cs" />
     <Compile Include="ViewModel\ThongBao\ThongBaosViewModels.cs" />
+    <Compile Include="ViewModel\ThongKe\ThongKeHDCLBViewModel.cs" />
+    <Compile Include="ViewModel\ThongKe\ThongKeHDSKViewModel.cs" />
+    <Compile Include="ViewModel\ThongKe\ThongKeSKCLBViewModel.cs" />
     <Compile Include="ViewModel\TinTuc\TinTucViewModel.cs" />
     <Compile Include="ViewModel\User\RoleViewModel.cs" />
     <Compile Include="ViewModel\User\UserRoleViewModel.cs" />
@@ -354,6 +357,8 @@
     <Content Include="Areas\Admin\Resource\dist\js\pages\dashboard.js" />
     <Content Include="Areas\Admin\Resource\dist\js\pages\dashboard2.js" />
     <Content Include="Areas\Admin\Resource\dist\js\pages\dashboard3.js" />
+    <Content Include="Areas\Admin\Resource\other\Chart.bundle.min.js" />
+    <Content Include="Areas\Admin\Resource\other\jquery.min.js" />
     <Content Include="Areas\Admin\Resource\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="Areas\Admin\Resource\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css" />
     <Content Include="Areas\Admin\Resource\plugins\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />
@@ -382,6 +387,11 @@
     <Content Include="Areas\Admin\Resource\plugins\bs-stepper\css\bs-stepper.min.css" />
     <Content Include="Areas\Admin\Resource\plugins\bs-stepper\js\bs-stepper.js" />
     <Content Include="Areas\Admin\Resource\plugins\bs-stepper\js\bs-stepper.min.js" />
+    <Content Include="Areas\Admin\Resource\plugins\canvas-chart\canvasjs.min.js" />
+    <Content Include="Areas\Admin\Resource\plugins\canvas-chart\canvasjs.react.js" />
+    <Content Include="Areas\Admin\Resource\plugins\canvas-chart\instruction.txt" />
+    <Content Include="Areas\Admin\Resource\plugins\canvas-chart\jquery.canvasjs.min.js" />
+    <Content Include="Areas\Admin\Resource\plugins\canvas-chart\license.txt" />
     <Content Include="Areas\Admin\Resource\plugins\chart.js\Chart.bundle.js" />
     <Content Include="Areas\Admin\Resource\plugins\chart.js\Chart.bundle.min.js" />
     <Content Include="Areas\Admin\Resource\plugins\chart.js\Chart.css" />

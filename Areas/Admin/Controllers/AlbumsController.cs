@@ -16,7 +16,6 @@ namespace ClubPortalMS.Areas.Admin.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Admin/Albums
         public ActionResult Index()
         {
             List<Album> albums = db.Album.ToList();
