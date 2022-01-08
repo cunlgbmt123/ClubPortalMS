@@ -183,8 +183,6 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                  else
                 {
                     SuKien suKiens = db.SuKien.Find(suKien.ID);
-                    if (suKiens.File == null)
-                    {
                         suKiens.IdCLB = suKien.IdCLB;
                         suKiens.TieuDeSK = suKien.TieuDeSK;
                         suKiens.MoTa = suKien.MoTa;
@@ -194,25 +192,23 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                         suKiens.DiaDiem = suKien.DiaDiem;
                         suKiens.IdLoaiSK = suKien.IdLoaiSK;
                         db.SaveChanges();
-                    }
-                    else
-                    {
-                        suKiens.IdCLB = suKien.IdCLB;
-                        suKiens.TieuDeSK = suKien.TieuDeSK;
-                        suKiens.MoTa = suKien.MoTa;
-                        suKiens.NgayBatDau = suKien.NgayBatDau;
-                        suKiens.NgayKetThuc = suKien.NgayKetThuc;
-                        suKiens.NoiDung = suKien.NoiDung;
-                        suKiens.DiaDiem = suKien.DiaDiem;
-                        suKiens.IdLoaiSK = suKien.IdLoaiSK;
-                        suKiens.File = suKien.File;
-                        suKiens.TenFile = suKien.TenFile;
-                        suKiens.ContentType = suKien.ContentType;
-                        db.SaveChanges();
-                    }
                 }
                 return RedirectToAction("XemSK", new { id = suKien.ID });
             }
+            int IdTvien = Convert.ToInt32(Session["UserId"]);
+            List<CLB> clb = db.CLB.ToList();
+            List<ThanhVien_CLB> thanhVien_clb = db.ThanhVien_CLB.ToList();
+            var Dsclbthamgia = from e in thanhVien_clb
+                               join i in clb on e.IDCLB equals i.ID into table
+                               from i in table.ToList()
+                               where e.IDtvien == IdTvien
+                               && e.IDRoles == 2
+                               select new PhanHoiCLBViewModel
+                               {
+                                   TenCLB = i.TenCLB,
+                                   IdCLB = i.ID
+                               };
+            ViewBag.DsCLB = new SelectList(Dsclbthamgia, "IdCLB", "TenCLB");
             ViewBag.IdLoaiSK = new SelectList(db.LoaiSuKien, "ID", "TenLoaiSK", suKien.IdLoaiSK);
             return View(suKien);
         }

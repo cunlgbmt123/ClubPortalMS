@@ -64,7 +64,123 @@ namespace ClubPortalMS.Areas.Admin.Controllers
             return View(viewModel);
         }
 
-       
+        [HttpGet]
+        public ActionResult Create()
+        {
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB");    
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(ThongBaosViewModels thongBao, HttpPostedFileBase upload)
+        {
+            if (ModelState.IsValid)
+            {
+                if (upload != null)
+                {
+                    int filelength = upload.ContentLength;
+                    string fileName = upload.FileName;
+                    string contentType = upload.ContentType;
+                    byte[] Myfile = new byte[filelength];
+                    upload.InputStream.Read(Myfile, 0, filelength);
+                    ThongBao thongBaos = new ThongBao();
+                    thongBaos.File = Myfile;
+                    thongBaos.TenFile = fileName;
+                    thongBaos.ContentType = contentType;
+                    thongBaos.IdCLB = thongBao.IdCLB;
+                    thongBaos.TieuDe = thongBao.TieuDe;
+                    thongBaos.MoTa = thongBao.MoTa;
+                    thongBaos.NgayThongBao = thongBao.NgayThongBao;
+                    thongBaos.NoiDung = thongBao.NoiDung;
+                    db.ThongBao.Add(thongBaos);
+                    db.SaveChanges();
+
+                }
+                else
+                {
+                    ThongBao thongBaos = new ThongBao();
+                    thongBaos.IdCLB = thongBao.IdCLB;
+                    thongBaos.TieuDe = thongBao.TieuDe;
+                    thongBaos.MoTa = thongBao.MoTa;
+                    thongBaos.NgayThongBao = thongBao.NgayThongBao;
+                    thongBaos.NoiDung = thongBao.NoiDung;
+                    db.ThongBao.Add(thongBaos);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("Index");
+            }
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", thongBao.IdCLB);
+            return View(thongBao);
+        }
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ThongBao e = db.ThongBao.Find(id);
+            if (e == null)
+            {
+                return HttpNotFound();
+            }
+            var viewModel = new ThongBaosViewModels
+            {
+                ID = e.ID,
+                TieuDe = e.TieuDe,
+                NgayThongBao = e.NgayThongBao,         
+                MoTa = e.MoTa,
+                TenFile = e.TenFile,
+                ContentType = e.ContentType,
+                File = e.File,
+                NoiDung = e.NoiDung,
+                CLB = e.CLB.TenCLB,
+                IdCLB = e.IdCLB,
+            };
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB");
+            return View(viewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(ThongBaosViewModels thongBao, HttpPostedFileBase upload)
+        {
+            if (ModelState.IsValid)
+            {
+                if (upload != null)
+                {
+                    int filelength = upload.ContentLength;
+                    string fileName = upload.FileName;
+                    string contentType = upload.ContentType;
+                    byte[] Myfile = new byte[filelength];
+                    upload.InputStream.Read(Myfile, 0, filelength);
+                    ThongBao thongBaos = db.ThongBao.Find(thongBao.ID);
+                    thongBaos.File = Myfile;
+                    thongBaos.TenFile = fileName;
+                    thongBaos.ContentType = contentType;
+                    thongBaos.IdCLB = thongBao.IdCLB;
+                    thongBaos.TieuDe = thongBao.TieuDe;
+                    thongBaos.MoTa = thongBao.MoTa;
+                    thongBaos.NgayThongBao = thongBao.NgayThongBao;
+                    thongBaos.NoiDung = thongBao.NoiDung;
+                    db.SaveChanges();
+
+                }
+                else
+                {
+                    ThongBao thongBaos = db.ThongBao.Find(thongBao.ID);
+                    thongBaos.IdCLB = thongBao.IdCLB;
+                    thongBaos.TieuDe = thongBao.TieuDe;
+                    thongBaos.MoTa = thongBao.MoTa;
+                    thongBaos.NgayThongBao = thongBao.NgayThongBao;
+                    thongBaos.NoiDung = thongBao.NoiDung;
+                    db.SaveChanges();
+                }
+                return RedirectToAction("Details", new { id = thongBao.ID });
+            }
+            ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", thongBao.IdCLB);
+            return View(thongBao);
+        }
+
         public ActionResult DeleteConfirmed(ThongBaosViewModels tbvm)
         {
             ThongBao thongBao = db.ThongBao.Find(tbvm.ID);

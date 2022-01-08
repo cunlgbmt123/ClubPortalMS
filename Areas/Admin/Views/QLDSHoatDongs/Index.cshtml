@@ -32,8 +32,12 @@
 
                         <!-- /.card-header -->
                         <div class="card-body">
+                            <div class="col-2" style="position: absolute; z-index: 1; ">
+                                <a class="btn btn-info btn-block btn-flat" style="border-radius: 4px;" type="button" href="@Url.Action("Create")">
+                                    <i class="fa fa-plus-square" aria-hidden="true"></i> Thêm hoạt động
+                                </a>
+                            </div>
                             <table id="table1" class="table table-bordered table-striped">
-
                                 <thead>
                                     <tr>
                                         <th>Câu lạc bộ</th>
@@ -50,28 +54,28 @@
                                     @foreach (var item in Model)
                                     {
 
-                                    <tr>
-                                        <td>
-                                            <a href="@Url.Action("Details", new { id = item.ID })">
-                                                @item.TenCLB
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="@Url.Action("Details", new { id = item.ID })">
-                                                @item.ChuDe
-                                            </a>
-                                        </td>
-                                        <td>
-                                            @item.Mota
-                                        </td>
-                                        <td>
-                                            <a href="@Url.Action("DocumentDownloadFileDinhKem", new { id = item.ID })">@item.TenFile</a>
-                                        </td>
-                                        <td>@item.NgayBatDau</td>
-                                        <td>@item.NgayKetThuc</td>
-                                        <td>@item.LoaiHD</td>                                       
-                                        <td>@item.DiaDiem</td>
-                                    </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="@Url.Action("Details", new { id = item.ID })">
+                                                    @item.TenCLB
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("Details", new { id = item.ID })">
+                                                    @item.ChuDe
+                                                </a>
+                                            </td>
+                                            <td>
+                                                @item.Mota
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("DocumentDownload", new { id = item.ID })">@item.TenFile</a>
+                                            </td>
+                                            <td>@item.NgayBatDau</td>
+                                            <td>@item.NgayKetThuc</td>
+                                            <td>@item.LoaiHD</td>
+                                            <td>@item.DiaDiem</td>
+                                        </tr>
                                     }
                                 </tbody>
                                 <tfoot>

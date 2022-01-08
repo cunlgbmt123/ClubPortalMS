@@ -15,10 +15,10 @@ namespace ClubPortalMS.ViewModel.Sukien
         public string NoiDung { get; set; }
         public string KetQua { get; set; }
         public string DiaDiem { get; set; }
-        public string HinhThuc { get; set; }
         public string TenFile { get; set; }
         public string ContentType { get; set; }
-
+        public int IdLoaiSK { get; set; }
+        public int IdCLB { get; set; }
         public byte[] File { get; set; }
         public string LoaiSK { get; set; }
         public string CLB { get; set; }

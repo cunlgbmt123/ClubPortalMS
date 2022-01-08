@@ -2799,6 +2799,13 @@
     <Content Include="Areas\Admin\Views\LichHoatDong\Details.cshtml" />
     <Content Include="Areas\Admin\Views\ThanhViens\Index.cshtml" />
     <Content Include="Areas\Admin\Views\DBUsers\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\CLBs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\SuKiens\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\SuKiens\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\QLDSHoatDongs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\QLDSHoatDongs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongBaos\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongBaos\Create.cshtml" />
     <None Include="packages.config" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

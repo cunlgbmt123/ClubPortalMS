@@ -184,8 +184,6 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                 else
                 {
                     QLDSHoatDong hoatDongs = db.QLDSHoatDong.Find(hoatDong.ID);
-                    if (hoatDongs.File == null)
-                    {
                         hoatDongs.IdCLB = hoatDong.IdCLB;
                         hoatDongs.ChuDe = hoatDong.ChuDe;
                         hoatDongs.Mota = hoatDong.Mota;
@@ -195,22 +193,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                         hoatDongs.DiaDiem = hoatDong.DiaDiem;
                         hoatDongs.IdLoaiHD = hoatDong.IdLoaiHD;
                         db.SaveChanges();
-                    }
-                    else
-                    {
-                        hoatDongs.IdCLB = hoatDong.IdCLB;
-                        hoatDongs.ChuDe = hoatDong.ChuDe;
-                        hoatDongs.Mota = hoatDong.Mota;
-                        hoatDongs.NgayBatDau = hoatDong.NgayBatDau;
-                        hoatDongs.NgayKetThuc = hoatDong.NgayKetThuc;
-                        hoatDongs.NoiDung = hoatDong.NoiDung;
-                        hoatDongs.DiaDiem = hoatDong.DiaDiem;
-                        hoatDongs.IdLoaiHD = hoatDong.IdLoaiHD;
-                        hoatDongs.File = hoatDongs.File;
-                        hoatDongs.TenFile = hoatDongs.TenFile;
-                        hoatDongs.ContentType = hoatDongs.ContentType;
-                        db.SaveChanges();
-                    }
+                    
                 }
                 return RedirectToAction("XemHD", new { id=hoatDong.ID });
             }

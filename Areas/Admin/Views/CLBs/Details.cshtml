@@ -66,6 +66,9 @@
                                 <a style="float:right" data-toggle="modal" data-target="#modal-danger" class="btn btn-app bg-danger">
                                     <i class="fa fa-trash" aria-hidden="true"></i> Xóa
                                 </a>
+                                <a style="float:right" class="btn btn-app bg-info" href="@Url.Action( "Edit", new { id = Model.ID })">
+                                    <i class="fas fa-edit"></i> Chỉnh sửa
+                                </a>
                                 @Html.ActionLink("Quay lại", "Index")
                             </div>
                         </div>

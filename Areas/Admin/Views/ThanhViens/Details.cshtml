@@ -37,7 +37,7 @@
                                 <tr>
                                     <th>Tài khoản</th>
                                     <td>
-                                        <a href="@Url.Action("Details","DBUsers", new { id = item.ID })">
+                                        <a href="@Url.Action("Details","DBUsers", new { id = Model.ID })">
                                             @Html.DisplayFor(model => model.TenTK)
                                             </a>
                                     </td>

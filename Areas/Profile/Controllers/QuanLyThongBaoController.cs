@@ -195,27 +195,14 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                 else
                 {
                     ThongBao thongBaos = db.ThongBao.Find(thongBao.ID);
-                    if (thongBaos.File == null)
-                    {
+
                         thongBaos.IdCLB = thongBao.IdCLB;
                         thongBaos.TieuDe = thongBao.TieuDe;
                         thongBaos.MoTa = thongBao.MoTa;
                         thongBaos.NgayThongBao = thongBao.NgayThongBao;
                         thongBaos.NoiDung = thongBao.NoiDung;
                         db.SaveChanges();
-                    }
-                    else
-                    {
-                        thongBaos.IdCLB = thongBao.IdCLB;
-                        thongBaos.TieuDe = thongBao.TieuDe;
-                        thongBaos.MoTa = thongBao.MoTa;
-                        thongBaos.NgayThongBao = thongBao.NgayThongBao;
-                        thongBaos.NoiDung = thongBao.NoiDung;
-                        thongBaos.File = thongBao.File;
-                        thongBaos.TenFile = thongBao.TenFile;
-                        thongBaos.ContentType = thongBaos.ContentType;
-                        db.SaveChanges();
-                    }
+
                 }
             }
            

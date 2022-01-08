@@ -52,7 +52,7 @@
                                 </tr>
                                 <tr>
                                     <th>Tệp đính kèm</th>
-                                    <td> <a href="@Url.Action("DocumentDownloadFileDinhKem", new { id = Model.ID })">@Model.TenFile</a></td>
+                                    <td> <a href="@Url.Action("DocumentDownload", new { id = Model.ID })">@Model.TenFile</a></td>
                                 </tr>
                                 <tr>
                                     <th>Thời gian bắt đầu</th>
@@ -75,6 +75,9 @@
                                 <a style="float:right" data-toggle="modal" data-target="#modal-danger" class="btn btn-app bg-danger">
                                     <i class="fa fa-trash" aria-hidden="true"></i> Xóa
                                     @Html.ActionLink("Quay lại", "Index")
+                                </a>
+                                <a style="float:right" class="btn btn-app bg-info" href="@Url.Action( "Edit", new { id = Model.ID })">
+                                    <i class="fas fa-edit"></i> Chỉnh sửa
                                 </a>
                             </div>
                         </div>

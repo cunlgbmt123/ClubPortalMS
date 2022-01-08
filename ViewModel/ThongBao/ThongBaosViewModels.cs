@@ -26,6 +26,6 @@ namespace ClubPortalMS.ViewModel.ThongBao
         [DisplayName("Tệp đính kèm")]
         public byte[] File { get; set; }
 
-       
+       public int IdCLB { get; set; }
     }
 }

@@ -27,8 +27,7 @@ namespace ClubPortalMS.ViewModel.CLB
         [DisplayName("Hình đại diện CLB")]
         public string HinhCLB { get; set; }
         public string FanPage { get; set; }
-        [DisplayName("Mô Tả")]
-
-        public string Email { get; set; }   
+        public string Email { get; set; }
+        public HttpPostedFileBase ImageFile { get; set; }
     }
 }

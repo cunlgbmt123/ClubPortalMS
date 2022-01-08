@@ -68,6 +68,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
          }
          var viewModel = new ThanhViensViewModel
          {
+             ID = e.ID,
              Ten = e.Ten,
              Ho = e.Ho,
              NgaySinh = e.NgaySinh,

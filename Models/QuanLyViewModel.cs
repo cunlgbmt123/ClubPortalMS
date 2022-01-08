@@ -9,7 +9,7 @@ namespace ClubPortalMS.Models
     public class CLBViewModels
     {
         public int ID { get; set; }
-        public int IdLoaiCLB { get; set; }
+        public int? IdLoaiCLB { get; set; }
         public string TenCLB { get; set; }
         public bool? TrangThai { get; set; }
         public DateTime? NgayThanhLap { get; set; }

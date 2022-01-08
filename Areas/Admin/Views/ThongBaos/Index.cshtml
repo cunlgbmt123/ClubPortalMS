@@ -33,6 +33,11 @@
 
                         <!-- /.card-header -->
                         <div class="card-body">
+                            <div class="col-2" style="position: absolute; z-index: 1; ">
+                                <a class="btn btn-info btn-block btn-flat" style="border-radius: 4px;" type="button" href="@Url.Action("Create")">
+                                    <i class="fa fa-plus-square" aria-hidden="true"></i> Thêm thông báo
+                                </a>
+                            </div>
                             <table id="table1" class="table table-bordered table-striped">
 
                                 <thead>
@@ -48,7 +53,8 @@
                                     @foreach (var item in Model)
                                     {
 
-                                        <tr><td>
+                                        <tr>
+                                            <td>
                                                 <a href="@Url.Action("Details", new { id = item.ID })">
                                                     @item.CLB
                                                 </a>
@@ -65,7 +71,7 @@
                                                 <a href="@Url.Action("DocumentDownloadFileDinhKem", new { id = item.ID })">@item.TenFile</a>
                                             </td>
                                             <td>@item.NgayThongBao</td>
-                                            
+
                                         </tr>
                                     }
                                 </tbody>

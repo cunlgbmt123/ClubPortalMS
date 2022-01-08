@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -37,7 +38,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                       };
 
 
-            return View(clb);
+            return View(clb.ToList().OrderBy(x => x.ID));
         }
 
         public ActionResult Details(int? id)
@@ -66,6 +67,79 @@ namespace ClubPortalMS.Areas.Admin.Controllers
 
             };
             return View(viewModel);
+        }
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var e = db.CLB.SingleOrDefault(n => n.ID == id);
+            if (e == null)
+            {
+                return HttpNotFound();
+            }
+            var viewModel = new Models.CLBViewModels
+            {
+                ID = e.ID,
+                IdLoaiCLB = e.IdLoaiCLB,
+                TenCLB = e.TenCLB,
+                LienHe = e.LienHe,
+                Mota = e.Mota,
+                Email = e.Email,
+                FanPage = e.FanPage,
+                NgayThanhLap = e.NgayThanhLap,
+                HinhCLB = e.HinhCLB,
+                ImageFile = e.ImageFile
+            };
+            ViewBag.IdLoaiCLB = new SelectList(db.LoaiCLB, "IDLoaiCLB", "TenLoaiCLB");
+            return View(viewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Models.CLBViewModels cLBViewModel)
+        {
+            int UserID = Convert.ToInt32(Session["UserId"]);
+            if (ModelState.IsValid)
+            {
+                if (cLBViewModel.ImageFile != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(cLBViewModel.ImageFile.FileName);
+                    string extension = Path.GetExtension(cLBViewModel.ImageFile.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    cLBViewModel.HinhCLB = "/Hinh/HinhCLB/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Hinh/HinhCLB/"), fileName);
+                    cLBViewModel.ImageFile.SaveAs(fileName);
+
+                    CLB cLB = db.CLB.Find(cLBViewModel.ID);
+                    cLB.Email = cLBViewModel.Email;
+                    cLB.FanPage = cLBViewModel.FanPage;
+                    cLB.IdLoaiCLB = cLBViewModel.IdLoaiCLB;
+                    cLB.Mota = cLBViewModel.Mota;
+                    cLB.TenCLB = cLBViewModel.TenCLB;
+                    cLB.LienHe = cLBViewModel.LienHe;
+                    cLB.NgayThanhLap = cLBViewModel.NgayThanhLap;
+                    cLB.HinhCLB = cLBViewModel.HinhCLB;
+                    cLB.ImageFile = cLBViewModel.ImageFile;
+                    db.SaveChanges();
+                    ViewBag.IdLoaiCLB = new SelectList(db.LoaiCLB, "IDLoaiCLB", "TenLoaiCLB", cLB.IdLoaiCLB);
+                }
+                else
+                {
+                    CLB cLB = db.CLB.Find(cLBViewModel.ID);
+                    cLB.Email = cLBViewModel.Email;
+                    cLB.IdLoaiCLB = cLBViewModel.IdLoaiCLB;
+                    cLB.Mota = cLBViewModel.Mota;
+                    cLB.TenCLB = cLBViewModel.TenCLB;
+                    cLB.LienHe = cLBViewModel.LienHe;
+                    cLB.FanPage = cLBViewModel.FanPage;
+                    cLB.NgayThanhLap = cLBViewModel.NgayThanhLap;
+                    db.SaveChanges();
+                    ViewBag.IdLoaiCLB = new SelectList(db.LoaiCLB, "IDLoaiCLB", "TenLoaiCLB", cLB.IdLoaiCLB);
+                }
+
+            }
+            return RedirectToAction("Details", new { id = cLBViewModel.ID });
         }
         public ActionResult DeleteConfirmed(ViewModel.CLB.CLBViewModels cLBViewModels)
         {

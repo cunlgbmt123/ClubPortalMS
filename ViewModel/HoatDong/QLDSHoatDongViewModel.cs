@@ -20,5 +20,7 @@ namespace ClubPortalMS.ViewModel.HoatDong
         public byte[] File { get; set; }
         public string TenCLB { get; set; }
         public string LoaiHD { get; set; }
+        public int IdLoaiHD { get; set; }
+        public int IdCLB { get; set; }
     }
 }

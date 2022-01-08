@@ -215,25 +215,13 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                 {
                     
                     NhiemVu nhiemVus = db.NhiemVu.Find(nhiemVu.ID);
-                    if ( nhiemVus.File == null)
-                    {
+
                         nhiemVus.IdCLB = nhiemVu.IdCLB;
                         nhiemVus.TieuDe = nhiemVu.TieuDe;
                         nhiemVus.MoTa = nhiemVu.MoTa;
                         nhiemVus.ThoiGianKetThuc = nhiemVu.ThoiGianKetThuc;
                         db.SaveChanges();
-                    }
-                    else 
-                    {
-                        nhiemVus.IdCLB = nhiemVu.IdCLB;                       
-                        nhiemVus.TieuDe = nhiemVu.TieuDe;                       
-                        nhiemVus.MoTa = nhiemVu.MoTa;                       
-                        nhiemVus.ThoiGianKetThuc = nhiemVu.ThoiGianKetThuc;
-                        nhiemVus.File = nhiemVu.File;
-                        nhiemVus.TenFile = nhiemVu.TenFile;
-                        nhiemVus.ContentType = nhiemVu.ContentType;
-                        db.SaveChanges();
-                    }
+
                 }
                 //Sửa lại nhiệm vụ cho thành viên theo CLB
                 List<NhiemVu_ThanhVien> nhiemVu_ThanhViens = db.NhiemVu_ThanhVien.ToList();

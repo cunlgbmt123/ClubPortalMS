@@ -104,6 +104,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                     cLB.LienHe = cLBViewModel.LienHe;
                     cLB.FanPage = cLBViewModel.FanPage;
                     cLB.NgayThanhLap = cLBViewModel.NgayThanhLap;
+                    db.SaveChanges();
                     ViewBag.IdLoaiCLB = new SelectList(db.LoaiCLB, "IDLoaiCLB", "TenLoaiCLB", cLB.IdLoaiCLB);
                 }
 
