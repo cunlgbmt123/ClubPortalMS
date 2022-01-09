@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 
 
@@ -80,181 +81,181 @@
                 </div>
 
                 <nav class="mt-2">
-                            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                                                        <li class="nav-item">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item">
                             <a href="@Url.Action("Index","Dashboard")" class="nav-link">
                                 <i class="fa fa-home" aria-hidden="true"></i>
                                 <p>
-                                    &nbsp; Trang chủ    
+                                    &nbsp; Trang chủ
                                 </p>
                             </a>
-                         </li>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                <p>
+                                    &nbsp; Quản lý CTT
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+
+                            <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                                        <p>
-                                            &nbsp; Quản lý CTT
-                                            <i class="fas fa-angle-left right"></i>
-                                        </p>
+                                    <a href="@Url.Action("Index", "Albums")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Albums</p>
                                     </a>
-
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("Index", "Albums")" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Albums</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("Index", "Posters")" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Posters</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("Index", "HoatDongs")" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Hoạt Động</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("Index", "TinTucs")" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Tin tức</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("Index", "LienHes")" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Liên Hệ</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-
-
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-user-circle" style="font-size:20px" aria-hidden="true"></i>
-                                        <p>
-                                            &nbsp; Quản lý Người dùng
-                                            <i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("Index", "DBUserRoles")" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Chức vụ quản trị</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("Index", "DBUsers")" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Tài Khoản Người Dùng</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("Index", "Khoas")" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Khoa</p>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-users" aria-hidden="true"></i>
-                                        <p>
-                                            &nbsp; Câu lạc bộ
-                                            <i class="fas fa-angle-left right"></i>
-                                        </p>
+                                    <a href="@Url.Action("Index", "Posters")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Posters</p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("Index", "CLBs")" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Câu Lạc Bộ</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("Index", "LoaiCLBs")" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Loại Câu Lạc Bộ</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("Index", "LoaiHDs")" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Loại Hoạt Động</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("Index", "LoaiSuKiens")" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Loại Sự Kiện</p>
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("CLB_TV", "ThanhViens")" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Thành Viên</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("Index", "ThongBaos")" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Thông Báo</p>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-briefcase" style="font-size:20px" aria-hidden="true"></i>
-                                        <p>
-                                            &nbsp; Hoạt động CLB
-                                            <i class="fas fa-angle-left right"></i>
-                                        </p>
+                                    <a href="@Url.Action("Index", "HoatDongs")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Hoạt Động</p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("Index", "NhiemVus")" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Nhiệm vụ</p>
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("Index", "PhanHois")" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Phản Hồi</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("Index", "QLDSHoatDongs")" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Hoạt động CLB</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("Index", "LichHoatDong")" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Lịch Hoạt động</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("Index", "SuKiens")" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Sự Kiện</p>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
-
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "TinTucs")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Tin tức</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "LienHes")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Liên Hệ</p>
+                                    </a>
+                                </li>
                             </ul>
+                        </li>
+
+
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-user-circle" style="font-size:20px" aria-hidden="true"></i>
+                                <p>
+                                    &nbsp; Quản lý Người dùng
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "DBUserRoles")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Chức vụ quản trị</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "DBUsers")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Tài Khoản Người Dùng</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Khoas")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Khoa</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                                <p>
+                                    &nbsp; Câu lạc bộ
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "CLBs")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Câu Lạc Bộ</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "LoaiCLBs")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Loại Câu Lạc Bộ</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "LoaiHDs")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Loại Hoạt Động</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "LoaiSuKiens")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Loại Sự Kiện</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("CLB_TV", "ThanhViens")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Thành Viên</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "ThongBaos")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Thông Báo</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-briefcase" style="font-size:20px" aria-hidden="true"></i>
+                                <p>
+                                    &nbsp; Hoạt động CLB
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "NhiemVus")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Nhiệm vụ</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "PhanHois")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Phản Hồi</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "QLDSHoatDongs")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Hoạt động CLB</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "LichHoatDong")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lịch Hoạt động</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "SuKiens")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Sự Kiện</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>

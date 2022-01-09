@@ -1,4 +1,5 @@
 ﻿using ClubPortalMS.Models;
+using CustomAuthorizationFilter.Infrastructure;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,8 @@ using System.Web.Mvc;
 
 namespace ClubPortalMS.Areas.Profile.Controllers
 {
+    [CustomAuthenticationFilter]
+    [CustomAuthorize("Admin")]
     public class QuanLyDkyCLBController : Controller
     {
 
@@ -44,12 +47,45 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             thanhVien_CLB.IDCLB = cLB.ID;
             thanhVien_CLB.IDtvien = dangKy.IdTvien;
             thanhVien_CLB.IDRoles = 2;
-            ThanhVien_CLB thanhVien_CLB2 = new ThanhVien_CLB();
-            thanhVien_CLB.IDCLB = cLB.ID;
-            thanhVien_CLB.IDtvien = IdTvien;
-            thanhVien_CLB.IDRoles = 2;
+            var userrole = from e in db.DBUserRoles
+                           where e.UserID == dangKy.IdTvien
+                           select new 
+                           { 
+                               roleid=e.RoleID,
+                               userid = e.UserID
+                           };
+            if(userrole is EmptyResult)
+            {
+                foreach (var role in userrole)
+                {
+                    if (role.roleid == 1)
+                    {
+                        DBUserRoles userroles = new DBUserRoles();
+                        userroles.RoleID = 2;
+                        userroles.UserID = dangKy.IdTvien;
+                        db.DBUserRoles.Add(userroles);
+                    }
+                    else if(role.roleid == 2)
+                    {
+                        DBUserRoles userroles = new DBUserRoles();
+                        userroles.RoleID = 1;
+                        userroles.UserID = dangKy.IdTvien;
+                        db.DBUserRoles.Add(userroles);
+                    }
+                }
+            }
+            else
+            {
+                DBUserRoles userroles = new DBUserRoles();
+                userroles.RoleID = 1;
+                userroles.UserID = dangKy.IdTvien;
+                DBUserRoles userroless = new DBUserRoles();
+                userroless.RoleID = 2;
+                userroless.UserID = dangKy.IdTvien;
+                db.DBUserRoles.Add(userroles);
+                db.DBUserRoles.Add(userroless);
+            }
             db.ThanhVien_CLB.Add(thanhVien_CLB);
-            db.ThanhVien_CLB.Add(thanhVien_CLB2);
             db.DkyCLB.Remove(dangKy);
             db.SaveChanges();
             return RedirectToAction("QLDkyCLB");

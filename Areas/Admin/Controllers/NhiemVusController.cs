@@ -8,9 +8,12 @@ using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
 using ClubPortalMS.ViewModel.NhiemVu;
+using CustomAuthorizationFilter.Infrastructure;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
+    [CustomAuthenticationFilter]
+    [CustomAuthorize("Admin")]
     public class NhiemVusController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

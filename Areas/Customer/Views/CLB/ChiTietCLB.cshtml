@@ -1,0 +1,76 @@
+﻿@model ClubPortalMS.ViewModel.CLB.CLBViewModels
+@{
+    ViewBag.Title = "ChiTietCLB";
+    Layout = "~/Areas/Customer/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-banner bg-img bg-img-parallax overlay-dark" style="height:150px">
+    <div class="container h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-lg-8">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","TrangChu")">Trang Chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Câu lạc bộ</li>
+                        <li class="breadcrumb-item active" aria-current="page">Chi tiết</li>
+                    </ol>
+                </nav>
+                <h1 class="fg-white text-center">CHI TIẾT CÂU LẠC BỘ</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<main>
+    <div class="page-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 py-3">
+                    <div class="subhead">Chi tiết</div>
+                    <h2 class="title-section">@Model.TenCLB</h2>
+
+                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of</p>
+                </div>
+                <div class="col-lg-6 py-3">
+                    <figure class="figure">
+                        <img src="@Model.HinhCLB" width="608" height="405" class="figure-img img-fluid rounded" alt="">
+                    </figure>
+                </div>
+            </div>
+        </div> <!-- .container -->
+    </div> <!-- .page-section -->
+
+</main>
+<section class="page-section">
+    <div class="container">
+        <div class="row welcome_inner">
+            <div class="col-lg-12">
+                <div class="welcome_text">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="wel_item">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                                <h4>$2.5M</h4>
+                                <p>Thành viên</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="wel_item">
+                                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                                <h4>1465</h4>
+                                <p>Sự kiện</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="wel_item">
+                                <i class="fa fa-cubes" aria-hidden="true"></i>
+                                <h4>3965</h4>
+                                <p>Hoạt động</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

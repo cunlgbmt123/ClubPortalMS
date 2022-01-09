@@ -7,14 +7,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using CustomAuthorizationFilter.Infrastructure;
 
 namespace ClubPortalMS.Areas.Profile.Controllers
 {
+    [CustomAuthenticationFilter]
+  
     public class ClubUserController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
         #region' Thông báo CLB
         //Thông báo CLB
+        [CustomAuthorize("Member", "HLV", "Admin")]
         public ActionResult ThongBao_CLB()
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
@@ -49,6 +53,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             ViewBag.DsTBGanDay = DsTBGanDay.OrderByDescending(x => x.ThongBao.ID).Take(3).ToList();
             return View();
         }
+        [CustomAuthorize("Member", "HLV", "Admin")]
         public ActionResult ThongBaoCLB(int? id,int? page)
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
@@ -69,6 +74,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             ViewBag.DsThongBao = DsThongBao.ToList().ToPagedList(page ?? 1, 5);
             return View();
         }
+        [CustomAuthorize("Member", "HLV", "Admin")]
         public ActionResult BaiVietTBCLB(int? id)
         {
             if (id == null)
@@ -83,6 +89,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             }
             return View(thongBao);
         }
+        [CustomAuthorize("Member", "HLV", "Admin")]
         public FileResult DocumentDownloadTB(int? id)
         {
             var thongBao = db.ThongBao.Where(u => u.ID == id).FirstOrDefault();
@@ -162,8 +169,6 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             List<CLB> clb = db.CLB.ToList();
             List<ThanhVien_CLB> thanhVien_clb = db.ThanhVien_CLB.ToList();
             var Dsclbthamgia = from e in thanhVien_clb
-                                   //join d in thanhVien on e.IDtvien equals IdTvien into table1
-                                   //from d in table1.ToList()
                                join i in clb on e.IDCLB equals i.ID into table
                                from i in table.ToList()
                                where e.IDtvien == IdTvien
@@ -196,6 +201,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
         }
         #endregion
         #region Phản hồi CLB
+        [CustomAuthorize("Member", "HLV", "Admin")]
         [HttpGet]
         public ActionResult PhanHoiCLB()
         {
@@ -218,6 +224,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             ViewBag.DsCLB = new SelectList(Dsclbthamgia, "IdCLB", "TenCLB");
             return View();
         }
+        [CustomAuthorize("Member", "HLV", "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult PhanHoiCLB(PhanHoiViewModel phanHoiViewModel)
@@ -255,9 +262,10 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             ViewBag.DsCLB = new SelectList(Dsclbthamgia, "IdCLB", "TenCLB");
             return View(phanHoiViewModel);
         }
-      
+
         #endregion
         #region Danh sách Hoạt động CLB
+        [CustomAuthorize("Member", "HLV", "Admin")]
         public ActionResult HoatDong_CLB()
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
@@ -291,6 +299,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             ViewBag.DsHDGanDay = DsHDGanDay.OrderByDescending(x => x.QLDSHoatDong.ID).Take(3).ToList();
             return View()
 ;        }
+        [CustomAuthorize("Member", "HLV", "Admin")]
         public ActionResult HoatDongCLB(int? id,string message,string messages)
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
@@ -313,6 +322,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             ViewBag.DsHoatDong = DsHoatDong.OrderByDescending(x => x.QLDSHoatDong.ID).ToList();
             return View(DsHoatDong);
         }
+        [CustomAuthorize("Member", "HLV", "Admin")]
         public ActionResult ThamGiaHD(int? id)
         {
             string message = null;
@@ -344,6 +354,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             }
             return View();
         }
+        [CustomAuthorize("Member", "HLV", "Admin")]
         public ActionResult BaiVietHDCLB(int? id)
         {
             if (id == null)
@@ -358,6 +369,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             }
             return View(hoatDong);
         }
+        [CustomAuthorize("Member", "HLV", "Admin")]
         public FileResult DocumentDownloadHD(int? id)
         {
             var hoatDong = db.QLDSHoatDong.Where(u => u.ID == id).FirstOrDefault();
@@ -365,6 +377,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
         }
         #endregion
         #region Ds sự kiện CLB
+        [CustomAuthorize("Member", "HLV", "Admin")]
         public ActionResult SuKien_CLB()
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
@@ -399,6 +412,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             return View()
 ;
         }
+        [CustomAuthorize("Member", "HLV", "Admin")]
         public ActionResult SuKienCLB( int? id , string message, string messages)
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
@@ -421,7 +435,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             ViewBag.DsSukien = DsSuien.ToList();
             return View();
         }
-
+        [CustomAuthorize("Member", "HLV", "Admin")]
         public ActionResult ThamGiaSK(int? id)
         {
             string message = null;
@@ -454,11 +468,13 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             }
             return View();
         }
+        [CustomAuthorize("Member", "HLV", "Admin")]
         public FileResult DocumentDownloadSK(int? id)
         {
             var suKien = db.SuKien.Where(u => u.ID == id).FirstOrDefault();
             return File(suKien.File, suKien.ContentType, suKien.TenFile);
         }
+        [CustomAuthorize("Member", "HLV", "Admin")]
         public ActionResult BaiVietSKCLB(int? id)
         {
             if (id == null)
@@ -475,6 +491,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
         }
         #endregion
         #region Nhật ký CLB
+        [CustomAuthorize("Member", "HLV", "Admin")]
         public ActionResult NhatKyCLB(int? page)
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
@@ -487,12 +504,14 @@ namespace ClubPortalMS.Areas.Profile.Controllers
         }
         #endregion
         #region Đăng ký thành lập CLB
+
         [HttpGet]
         public ActionResult DangKyTLCLB()
         {
             ViewBag.IDLoaiCLB = new SelectList(db.LoaiCLB, "IDLoaiCLB", "TenLoaiCLB");
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DangKyTLCLB([Bind(Include = "ID,TenCLB,IDLoaiCLB,LyDoThanhLap")] DkyCLB dkyCLB)
@@ -510,6 +529,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
         }
         #endregion
         #region Lịch tap
+        [CustomAuthorize("Member", "HLV", "Admin")]
         public ActionResult LichTap_CLB()
         {
             ApplicationDbContext db = new ApplicationDbContext();
@@ -546,6 +566,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             ViewBag.DsLTGanDay = DsLTGanDay.OrderByDescending(x => x.LichTap_ThanhVien.IdLT).Take(3).ToList();
             return View();
         }
+        [CustomAuthorize("Member", "HLV", "Admin")]
         public ActionResult LichTap(int? id)
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
@@ -558,6 +579,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             ViewBag.DsLichTap = DsLichTap.ToList().OrderByDescending(x => x.LichTap.ID).ToList();
             return View();
         }
+        [CustomAuthorize("Member", "HLV", "Admin")]
         public ActionResult BaiVietLTCLB(int? id)
         {
             if (id == null)
@@ -574,6 +596,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
         }
         #endregion
         #region CLB
+        [CustomAuthorize("Member", "HLV", "Admin")]
         public ActionResult DSCLB()
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
@@ -595,6 +618,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             ViewBag.DsCLB = Dsclbthamgia;
             return View();
         }
+        [CustomAuthorize("Member", "HLV", "Admin")]
         public ActionResult ChiTietCLB(int? id)
         {
             if (id == null)

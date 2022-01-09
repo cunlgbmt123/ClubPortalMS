@@ -47,11 +47,17 @@ namespace ClubPortalMS.Controllers
                         using (ApplicationDbContext db = new ApplicationDbContext())
                         {
                             ThanhVien thanhViens = db.ThanhVien.Find(user.ID);
-                            Session["AnhDaiDien"] = thanhViens.HinhDaiDien;                            
+                            Session["AnhDaiDien"] = thanhViens.HinhDaiDien;
+                            var userrole = from e in db.DBUserRoles
+                                           join d in db.DBRoles on e.RoleID equals d.ID
+                                           where e.UserID == user.ID
+                                           select d;
+                            Session["Role"] = userrole.ToList();
                         }
                         Session["Ten"] = user.FirstName;
                         Session["Ho"] = user.LastName;
                         Session["UserId"] = user.ID;
+                        Session["UserName"] = user.UserName;
                         CustomSerializeModel userModel = new CustomSerializeModel()
                         {
                             ID = user.ID,
@@ -413,14 +419,17 @@ namespace ClubPortalMS.Controllers
                         new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider", "ASP.NET Identity", "http://www.w3.org/2001/XMLSchema#string"),
                         new Claim(ClaimTypes.Name, user.Username),
                         new Claim(ClaimTypes.Email, user.Email),						
-						//new Claim(ClaimTypes.Role, "User")
+						//new Claim(ClaimTypes.Role, user.DB)
                     },
                     CookieAuthenticationDefaults.AuthenticationType);
 
             Session["Ten"] = user.FirstName;
             Session["Ho"] = user.LastName;
             Session["UserId"] = user.ID;
-           
+            Session["UserName"] = user.Username;
+
+
+
             HttpContext.GetOwinContext().Authentication.SignIn(
                         new AuthenticationProperties { IsPersistent = false }, ident);
             return RedirectToAction("Index", "Dashboard", new { area = "Profile" });

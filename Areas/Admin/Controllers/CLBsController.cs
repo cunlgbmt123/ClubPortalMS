@@ -9,11 +9,12 @@ using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
 using ClubPortalMS.ViewModel.CLB;
-
-
+using CustomAuthorizationFilter.Infrastructure;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
+    [CustomAuthenticationFilter]
+    [CustomAuthorize("Admin")]
     public class CLBsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

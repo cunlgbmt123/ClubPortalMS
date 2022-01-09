@@ -9,9 +9,12 @@ using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
 using ClubPortalMS.ViewModel.TinTuc;
+using CustomAuthorizationFilter.Infrastructure;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
+    [CustomAuthenticationFilter]
+    [CustomAuthorize("Admin")]
     public class TinTucsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

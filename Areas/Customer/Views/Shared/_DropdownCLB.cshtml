@@ -10,7 +10,7 @@
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
         @foreach(var item in loaiCLB) 
         { 
-         <a class="dropdown-item" style=" text-transform: uppercase;" href="#">@item.TenLoaiCLB</a> 
+         <a class="dropdown-item" style=" text-transform: uppercase;" href="@Url.Action("DsCLBtheoLoai","CLB", new { id = item.IDLoaiCLB })">@item.TenLoaiCLB</a> 
         }
     
     </div> 

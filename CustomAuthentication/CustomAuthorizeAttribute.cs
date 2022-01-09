@@ -9,6 +9,13 @@ namespace ClubPortalMS.CustomAuthentication
 {
     public class CustomAuthorizeAttribute : AuthorizeAttribute
     {
+        private string v;
+
+        public CustomAuthorizeAttribute(string v)
+        {
+            this.v = v;
+        }
+
         protected virtual CustomPrincipal CurrentUser
         {
             get { return HttpContext.Current.User as CustomPrincipal; }

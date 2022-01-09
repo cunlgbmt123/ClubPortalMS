@@ -1,4 +1,5 @@
 ﻿using ClubPortalMS.Models;
+using CustomAuthorizationFilter.Infrastructure;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ using System.Web.Mvc;
 
 namespace ClubPortalMS.Areas.Profile.Controllers
 {
+    [CustomAuthenticationFilter]
+    [CustomAuthorize("HLV", "Admin")]
     public class QuanLyNhiemVuController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();

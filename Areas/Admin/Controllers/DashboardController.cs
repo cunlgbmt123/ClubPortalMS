@@ -1,6 +1,7 @@
-﻿using ClubPortalMS.CustomAuthentication;
+﻿
 using ClubPortalMS.Models;
 using ClubPortalMS.ViewModel.ThongKe;
+using CustomAuthorizationFilter.Infrastructure;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,9 @@ using System.Web.Mvc;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
-	/*[CustomAuthorize(Roles = "ADMIN, MOD")]*/
+
+	[CustomAuthenticationFilter]
+	[CustomAuthorize("Admin")]
 	public class DashboardController : Controller
 	{
 		// GET: Admin/Dashboard

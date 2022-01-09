@@ -15,7 +15,7 @@ namespace ClubPortalMS.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "TrangChu", new { area = "Customer" });
         }
    
     }

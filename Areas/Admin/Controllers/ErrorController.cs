@@ -4,12 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace SweetAlert.Controllers
+namespace ClubPortalMS.Areas.Admin.Controllers
 {
-    public class SweetController : Controller
+    public class ErrorController : Controller
     {
-        // GET: Sweet
-        public ActionResult Alert()
+        // GET: Admin/Error
+        public ActionResult UnAuthorized()
         {
             return View();
         }

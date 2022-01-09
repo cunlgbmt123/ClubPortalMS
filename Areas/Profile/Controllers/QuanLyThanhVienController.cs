@@ -8,9 +8,12 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList.Mvc;
 using PagedList;
+using CustomAuthorizationFilter.Infrastructure;
 
 namespace ClubPortalMS.Areas.Profile.Controllers
 {
+    [CustomAuthenticationFilter]
+    [CustomAuthorize("HLV", "Admin")]
     public class QuanLyThanhVienController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();

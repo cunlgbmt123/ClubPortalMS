@@ -1,0 +1,48 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@{
+    ViewBag.Title = "Câu lạc bộ";
+    Layout = "~/Areas/Customer/Views/Shared/_Layout.cshtml";
+    var Dsclb = (IPagedList<ClubPortalMS.Models.CLB>)ViewBag.Dsclb;
+}
+
+<div class="page-banner bg-img bg-img-parallax overlay-dark" style="height:150px">
+    <div class="container h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-lg-8">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","TrangChu")">Trang Chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Câu lạc bộ</li>
+                    </ol>
+                </nav>
+                <h1 class="fg-white text-center">CÂU LẠC BỘ</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-section">
+    <div class="row tm-catalog-item-list">
+        @foreach (var item in Dsclb)
+        {
+            <div class="col-lg-4 col-md-12 col-sm-12 tm-catalog-item">
+                <div class="position-relative tm-thumbnail-container">
+
+                    <a href="@Url.Action("BaiViet","HoatDongs", new {id = item.ID})">
+                        <img src="@item.HinhCLB" style="width: 400px; height:250px" alt="Image" class="img-fluid tm-catalog-item-img">
+                    </a>
+                </div>
+                <div class="p-4 tm-bg-gray tm-catalog-item-description">
+                    <h4 class="tm-text-primary mb-3 tm-catalog-item-title">@item.TenCLB</h4>
+                    <p class="tm-catalog-item-text gioi-han">
+                        @item.Mota
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+    @Html.PagedListPager(Dsclb, page => Url.Action("Index", new { page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+</div>
+

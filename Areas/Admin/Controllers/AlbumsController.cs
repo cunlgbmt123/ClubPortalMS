@@ -9,9 +9,12 @@ using System.Web.Mvc;
 using ClubPortalMS.Models;
 using System.IO;
 using ClubPortalMS.ViewModel.Album;
+using CustomAuthorizationFilter.Infrastructure;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
 {
+    [CustomAuthenticationFilter]
+    [CustomAuthorize("Admin")]
     public class AlbumsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

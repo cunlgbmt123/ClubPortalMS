@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
-@using Microsoft.AspNet.Identity
+@using ClubPortalMS.Models
 
 <head>
     <title>@Page.Title</title>
@@ -47,7 +47,7 @@
         <div class="left-sidebar-pro">
             <nav id="sidebar" class="">
                 <div class="sidebar-header">
-                    <a href="index.html"><img class="main-logo" src="~/Areas/Profile/Resource/img/logo/logo.png" alt="" /></a>
+                    <a href="@Url.Action("Index", "Dashboard")"><img class="main-logo" src="~/Areas/Profile/Resource/img/logo/logo.png" alt="" /></a>
                     <strong><a href="index.html">UEF</a></strong>
                 </div>
                 <div class="left-custom-menu-adp-wrap comment-scrollbar">
@@ -55,58 +55,88 @@
 
                         <ul class="metismenu" id="menu1">
                             <li>
-                                <a href="@Url.Action("DangKyCLB", "ClubUser", new { id = @Session["UserId"] })" aria-expanded="false"><span class="educate-icon educate-library icon-wrap"></span> <span class="mini-click-non">Tham gia CLB</span></a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("DSCLB", "ClubUser", new { id = @Session["UserId"] })">
+                                <a href="@Url.Action("Index", "Dashboard")">
                                     <span class="educate-icon educate-home icon-wrap"></span>
-                                    <span class="mini-click-non">Câu lạc bộ</span>
+                                    <span class="mini-click-non">Trang chủ</span>
                                 </a>
 
                             </li>
                             <li>
-                                <a class="has-arrow" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span> <span class="mini-click-non">Hoạt động</span></a>
-                                <ul class="submenu-angle" aria-expanded="false">
-                                    <li><a title="Sự kiện" href="@Url.Action("SuKien_CLB", "ClubUser", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Sự kiện</span></a></li>
-                                    <li><a title="Hoạt động" href="@Url.Action("HoatDong_CLB", "ClubUser", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Hoạt động</span></a></li>
-                                    <li><a title="Lịch hoạt động" href="@Url.Action("LichTap_CLB", "ClubUser", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Lịch hoạt động</span></a></li>
-                                    <li><a title="Thông báo" href="@Url.Action("ThongBao_CLB", "ClubUser", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Thông báo</span></a></li>
-                                    <li><a title="Nhật ký" href="@Url.Action("NhatKyCLB", "ClubUser", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Nhật ký</span></a></li>
-
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("listCLB", "NhiemVU", new { id = @Session["UserId"] })" aria-expanded="false"><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Nhiệm vụ</span></a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("PhanHoiCLB", "ClubUser", new { id = @Session["UserId"] })" aria-expanded="false"><span class="educate-icon educate-form icon-wrap"></span> <span class="mini-click-non">Phản hồi</span></a>
-                            </li>
-                            <li>
-                                <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">Quản lý CLB</span></a>
-                                <ul class="submenu-angle" aria-expanded="false">
-                                    <li><a title="Câu lạc bộ" href="@Url.Action("QuanLyCLB_DSCLB", "QuanLyCLB", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Câu lạc bộ</span></a></li>
-                                    <li><a title="Thành viên" href="@Url.Action("CLBQL", "QuanLyThanhVien", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Thành viên</span></a></li>
-                                    <li><a title="Phản hồi" href="@Url.Action("QLPhanHoi_CLB", "QuanLyPhanHoi", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Phản hồi</span></a></li>
-                                    <li><a title="Xét duyệt thành viên" href="@Url.Action("QLXetDuyetTV_CLB", "QuanLyXetDuyetDKTV", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Xét duyệt thành viên</span></a></li>
-                                    <li><a title="Xét duyệt CLB" href="@Url.Action("QLDkyCLB", "QuanLyDkyCLB", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Xét duyệt CLB</span></a></li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-data-table icon-wrap"></span> <span class="mini-click-non">Quản lý hoạt động</span></a>
-                                <ul class="submenu-angle" aria-expanded="false">
-                                    <li><a title="Hoạt động" href="@Url.Action("QLHoatDong_CLB", "QuanLyHoatDong", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Hoạt động</span></a></li>
-                                    <li><a title="Sự kiện" href="@Url.Action("QLSuKien_CLB", "QuanLySuKien", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Sự kiện</span></a></li>
-                                    <li><a title="Thông báo" href="@Url.Action("QLTBCLB", "QuanLyThongBao", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Thông báo</span></a></li>
-                                    <li><a title="Lịch hoạt động" href="@Url.Action("QLLichTap_CLB", "QuanLyLichTap", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Lịch hoạt động</span></a></li>
-                                    <li><a title="Nhiệm vụ" href="@Url.Action("QLNhiemVu_CLB", "QuanLyNhiemVu", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Nhiệm vụ</span></a></li>
-                                </ul>
+                                <a href="@Url.Action("DangKyCLB", "ClubUser", new { id = @Session["UserId"] })" aria-expanded="false"><span class="educate-icon educate-library icon-wrap"></span> <span class="mini-click-non">Tham gia CLB</span></a>
                             </li>
 
                             <li>
                                 <a href="@Url.Action("DangKyTLCLB", "ClubUser", new { id = @Session["UserId"] })" aria-expanded="false"><span class="educate-icon educate-apps icon-wrap"></span> <span class="mini-click-non">Đăng ký CLB</span></a>
                             </li>
+                            @using (var context = new ApplicationDbContext())
+                            {
+                                var dbrole = Session["Role"] as List<DBRoles>;
+                                if (dbrole != null)
+                                {
+                                    foreach (var role in dbrole)
+                                    {
+                                        if (role.Name == "Member")
+                                        {
+                                            <li>
+                                                <a href="@Url.Action("DSCLB", "ClubUser", new { id = @Session["UserId"] })">
+                                                    <span class="educate-icon educate-nav icon-wrap"></span>
+                                                    <span class="mini-click-non">Câu lạc bộ</span>
+                                                </a>
 
+                                            </li>
+                                            <li>
+                                                <a class="has-arrow" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span> <span class="mini-click-non">Hoạt động</span></a>
+                                                <ul class="submenu-angle" aria-expanded="false">
+                                                    <li><a title="Sự kiện" href="@Url.Action("SuKien_CLB", "ClubUser", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Sự kiện</span></a></li>
+                                                    <li><a title="Hoạt động" href="@Url.Action("HoatDong_CLB", "ClubUser", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Hoạt động</span></a></li>
+                                                    <li><a title="Lịch hoạt động" href="@Url.Action("LichTap_CLB", "ClubUser", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Lịch hoạt động</span></a></li>
+                                                    <li><a title="Thông báo" href="@Url.Action("ThongBao_CLB", "ClubUser", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Thông báo</span></a></li>
+                                                    <li><a title="Nhật ký" href="@Url.Action("NhatKyCLB", "ClubUser", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Nhật ký</span></a></li>
+
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("listCLB", "NhiemVU", new { id = @Session["UserId"] })" aria-expanded="false"><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Nhiệm vụ</span></a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("PhanHoiCLB", "ClubUser", new { id = @Session["UserId"] })" aria-expanded="false"><span class="educate-icon educate-form icon-wrap"></span> <span class="mini-click-non">Phản hồi</span></a>
+                                            </li>
+                                        }
+                                        if (role.Name == "HLV")
+                                        {
+                                            <li>
+                                                <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">Quản lý CLB</span></a>
+                                                <ul class="submenu-angle" aria-expanded="false">
+                                                    <li><a title="Câu lạc bộ" href="@Url.Action("QuanLyCLB_DSCLB", "QuanLyCLB", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Câu lạc bộ</span></a></li>
+                                                    <li><a title="Thành viên" href="@Url.Action("CLBQL", "QuanLyThanhVien", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Thành viên</span></a></li>
+                                                    <li><a title="Phản hồi" href="@Url.Action("QLPhanHoi_CLB", "QuanLyPhanHoi", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Phản hồi</span></a></li>
+                                                    <li><a title="Xét duyệt thành viên" href="@Url.Action("QLXetDuyetTV_CLB", "QuanLyXetDuyetDKTV", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Xét duyệt thành viên</span></a></li>
+
+                                                </ul>
+                                            </li>
+
+                                            <li>
+                                                <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-data-table icon-wrap"></span> <span class="mini-click-non">Quản lý hoạt động</span></a>
+                                                <ul class="submenu-angle" aria-expanded="false">
+                                                    <li><a title="Hoạt động" href="@Url.Action("QLHoatDong_CLB", "QuanLyHoatDong", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Hoạt động</span></a></li>
+                                                    <li><a title="Sự kiện" href="@Url.Action("QLSuKien_CLB", "QuanLySuKien", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Sự kiện</span></a></li>
+                                                    <li><a title="Thông báo" href="@Url.Action("QLTBCLB", "QuanLyThongBao", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Thông báo</span></a></li>
+                                                    <li><a title="Lịch hoạt động" href="@Url.Action("QLLichTap_CLB", "QuanLyLichTap", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Lịch hoạt động</span></a></li>
+                                                    <li><a title="Nhiệm vụ" href="@Url.Action("QLNhiemVu_CLB", "QuanLyNhiemVu", new { id = @Session["UserId"] })"><span class="mini-sub-pro">Nhiệm vụ</span></a></li>
+                                                </ul>
+                                            </li>
+
+                                        }
+                                        if (role.Name == "Admin")
+                                        {
+                                            <li>
+                                                <a href="@Url.Action("QLDkyCLB", "QuanLyDkyCLB", new { id = @Session["UserId"] })" aria-expanded="false"><span class="educate-icon educate-apps icon-wrap"></span> <span class="mini-click-non">Xét duyệt CLB</span></a>
+                                            </li>
+
+                                        }
+                                    }
+                                }
+                            }
                         </ul>
                     </nav>
                 </div>

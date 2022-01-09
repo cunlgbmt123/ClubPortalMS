@@ -7,10 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClubPortalMS.Models;
+using CustomAuthorizationFilter.Infrastructure;
 using Microsoft.Owin.Security.Infrastructure;
 
 namespace ClubPortalMS.Areas.Profile.Controllers
 {
+    [CustomAuthenticationFilter]
+    [CustomAuthorize("Member", "HLV", "Admin")]
     public class NhiemVuController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

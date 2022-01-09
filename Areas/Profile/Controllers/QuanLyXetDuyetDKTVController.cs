@@ -5,9 +5,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using CustomAuthorizationFilter.Infrastructure;
 
 namespace ClubPortalMS.Areas.Profile.Controllers
 {
+    [CustomAuthenticationFilter]
+    [CustomAuthorize("HLV", "Admin")]
     public class QuanLyXetDuyetDKTVController : Controller
     {
 
@@ -54,6 +57,26 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             thanhVien_CLB.IDCLB = dangKy.IDCLB;
             thanhVien_CLB.IDtvien = dangKy.IdTv;
             thanhVien_CLB.IDRoles = 1;
+            var userroles = from e in db.DBUserRoles
+                           where e.UserID == dangKy.IdTv
+                           select new
+                           {
+                               roleid = e.RoleID,
+                               userid = e.UserID
+                           };
+            if (userroles is EmptyResult)
+            {
+                foreach (var role in userroles)
+                {
+                    if (role.roleid != 1) 
+                    { 
+                        DBUserRoles userrole = new DBUserRoles();
+                        userrole.RoleID = 1;
+                        userrole.UserID = dangKy.IdTv;
+                        db.DBUserRoles.Add(userrole);
+                    }
+                }
+            }
             db.ThanhVien_CLB.Add(thanhVien_CLB);
             db.DangKy.Remove(dangKy);
             db.SaveChanges();
