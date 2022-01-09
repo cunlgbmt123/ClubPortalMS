@@ -254,6 +254,11 @@ namespace ClubPortalMS.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "Account", null);
         }
+        public ActionResult SignOut()
+        {
+            HttpContext.GetOwinContext().Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
+            return RedirectToAction("Login", "Account", null);
+        }
         #endregion
         #region quên mật khẩu
         [HttpGet]
@@ -422,7 +427,13 @@ namespace ClubPortalMS.Controllers
 						//new Claim(ClaimTypes.Role, user.DB)
                     },
                     CookieAuthenticationDefaults.AuthenticationType);
-
+            ThanhVien thanhViens = db.ThanhVien.Find(user.ID);
+            Session["AnhDaiDien"] = thanhViens.HinhDaiDien;
+            var userrole = from e in db.DBUserRoles
+                           join d in db.DBRoles on e.RoleID equals d.ID
+                           where e.UserID == user.ID
+                           select d;
+            Session["Role"] = userrole.ToList();
             Session["Ten"] = user.FirstName;
             Session["Ho"] = user.LastName;
             Session["UserId"] = user.ID;
