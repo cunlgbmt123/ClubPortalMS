@@ -447,12 +447,14 @@ namespace ClubPortalMS.Controllers
             Session["UserId"] = user.ID;
             Session["UserName"] = user.Username;
 
-
-
             HttpContext.GetOwinContext().Authentication.SignIn(
                         new AuthenticationProperties { IsPersistent = false }, ident);
             return RedirectToAction("Index", "Dashboard", new { area = "Profile" });
         }
-        #endregion
+        public ActionResult GetinfoMember(ThanhVien tv)
+        {
+            return View();
+        }
+            #endregion
     }
 }
