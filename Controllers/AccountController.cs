@@ -104,10 +104,8 @@ namespace ClubPortalMS.Controllers
         #region Đăng ký
         [HttpGet]
         public ActionResult Registration()
-        {
-         
-               ViewBag.IdKhoa = new SelectList(dbContext.Khoa, "ID", "TenKhoa");  
-            
+        {        
+            ViewBag.IdKhoa = new SelectList(dbContext.Khoa, "ID", "TenKhoa");  
             return View();
         }
 
@@ -184,8 +182,7 @@ namespace ClubPortalMS.Controllers
             }
             ViewBag.Message = messageRegistration;
             ViewBag.Status = statusRegistration;
-          
-                ViewBag.IdKhoa = new SelectList(dbContext.Khoa, "ID", "TenKhoa", registrationView.IdKhoa);
+            ViewBag.IdKhoa = new SelectList(dbContext.Khoa, "ID", "TenKhoa", registrationView.IdKhoa);
          
             return View(registrationView);
         }
@@ -397,8 +394,8 @@ namespace ClubPortalMS.Controllers
             {
                 return RedirectToAction("Index");
             }
-            ApplicationDbContext db = new ApplicationDbContext(); //DbContext
-            var user = db.DBUser.FirstOrDefault(x => x.Email == loginInfo.emailaddress);
+
+            var user = dbContext.DBUser.FirstOrDefault(x => x.Email == loginInfo.emailaddress);
             if (user == null)
             {
                 user = new DBUser
@@ -411,8 +408,8 @@ namespace ClubPortalMS.Controllers
                     IsLocked = false,
                     EmailConfirmation = true,
                 };
-                db.DBUser.Add(user);
-                db.SaveChanges();
+                dbContext.DBUser.Add(user);
+                dbContext.SaveChanges();
                 var getIDUser = new ThanhVien()
                 {
                     User_ID = user.ID,
@@ -421,8 +418,9 @@ namespace ClubPortalMS.Controllers
                     Mail = loginInfo.emailaddress,
                     HinhDaiDien = "/Hinh/HinhDaiDienNguoiDung/avatar_default.jpg"
                 };
-                db.ThanhVien.Add(getIDUser);
-                db.SaveChanges();
+                dbContext.ThanhVien.Add(getIDUser);
+                dbContext.SaveChanges();
+                return RedirectToAction("GetinfoMember", new { id = getIDUser.ID});
             }
 
             var ident = new ClaimsIdentity(
@@ -435,10 +433,10 @@ namespace ClubPortalMS.Controllers
 						//new Claim(ClaimTypes.Role, user.DB)
                     },
                     CookieAuthenticationDefaults.AuthenticationType);
-            ThanhVien thanhViens = db.ThanhVien.Find(user.ID);
+            ThanhVien thanhViens = dbContext.ThanhVien.Find(user.ID);
             Session["AnhDaiDien"] = thanhViens.HinhDaiDien;
-            var userrole = from e in db.DBUserRoles
-                           join d in db.DBRoles on e.RoleID equals d.ID
+            var userrole = from e in dbContext.DBUserRoles
+                           join d in dbContext.DBRoles on e.RoleID equals d.ID
                            where e.UserID == user.ID
                            select d;
             Session["Role"] = userrole.ToList();
@@ -451,9 +449,22 @@ namespace ClubPortalMS.Controllers
                         new AuthenticationProperties { IsPersistent = false }, ident);
             return RedirectToAction("Index", "Dashboard", new { area = "Profile" });
         }
-        public ActionResult GetinfoMember(ThanhVien tv)
+        [HttpGet]
+        public ActionResult GetinfoMember(int? id)
         {
+            ViewBag.ID = id;
+            ViewBag.IdKhoa = new SelectList(dbContext.Khoa, "ID", "TenKhoa");
             return View();
+        }
+        [HttpPost]
+        public ActionResult GetinfoMember(GoogleLoginPlusViewModel tv, int? id)
+        {
+            ThanhVien tttv = dbContext.ThanhVien.Find(tv.ID);
+            tttv.Khoa_ID = tv.IdKhoa;
+            tttv.MSSV = tv.MSSV;
+            dbContext.SaveChanges();
+            ViewBag.IdKhoa = new SelectList(dbContext.Khoa, "ID", "TenKhoa", tv.IdKhoa);
+            return RedirectToAction("GoogleLoginCallback");
         }
             #endregion
     }

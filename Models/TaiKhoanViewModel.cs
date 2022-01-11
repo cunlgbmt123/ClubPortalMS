@@ -28,6 +28,14 @@ namespace ClubPortalMS.Models
         [Compare("Password", ErrorMessage = "Mật khẩu xác thực bạn nhập không giống với mật khẩu mới")]
         public string ConfirmPassword { get; set; }
     }
+    public class GoogleLoginPlusViewModel
+    {
+        public int ID { get; set; }
+        [Required(ErrorMessage = "Bạn chưa chọn khoa")]
+        public int IdKhoa { get; set; }
+        [Required(ErrorMessage = "Bạn chưa mã số sinh viên")]
+        public string MSSV { get; set; }
+    }
     public class GoogleLoginViewModel
     {
         public string emailaddress { get; set; }
