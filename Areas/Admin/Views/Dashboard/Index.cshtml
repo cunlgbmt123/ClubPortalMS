@@ -5,235 +5,236 @@
 }
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-       <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-12">
-                    <h1 class="m-0">Thống kê</h1>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-12">
+                <h1 class="m-0">Thống kê</h1>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+
+    <div class="content-header">
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>@ViewBag.slclb</h3>
+
+                                <p>Câu lạc bộ</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                            </div>
+                            <a href="@Url.Action("Index", "CLBs")" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>@ViewBag.sltv<sup style="font-size: 20px"></sup></h3>
+
+                                <p>Thành viên</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </div>
+                            <a href="@Url.Action("CLB_TV", "ThanhViens")" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                            <div class="inner" style="color:white">
+                                <h3>@ViewBag.slsk</h3>
+                                <p>Sự kiện</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </div>
+                            <a href="@Url.Action("Index", "SuKiens")" class="small-box-footer"><span style="color:white">Xem thêm </span><i style="color:white" class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>@ViewBag.slhd</h3>
+
+                                <p>Hoạt động</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-suitcase" aria-hidden="true"></i>
+                            </div>
+                            <a href="@Url.Action("Index", "QLDSHoatDongs")" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                </div>
+                <div class="row">
+                    <!-- Left col -->
+                    <section class="col-lg-6 connectedSortable">
+                        <!-- Custom tabs (Charts with tabs)-->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fas fa-chart-pie mr-1"></i>
+                                    Tổng số sinh viên
+                                </h3>
+                                <div class="card-tools">
+                                    <ul class="nav nav-pills ml-auto">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="#khoa-chart" data-toggle="tab">Khoa</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#Khoa-hoc-chart" data-toggle="tab">Khóa học</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#Clb-chart" data-toggle="tab">Câu lạc bộ</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div><!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="tab-content p-0">
+                                    <!-- Morris chart - Sales -->
+                                    <div class="chart tab-pane active" id="khoa-chart"
+                                         style="position: relative; height: auto;">
+                                        <canvas id="chart-line" style="height: auto;"></canvas>
+                                    </div>
+                                    <div class="chart tab-pane" id="Khoa-hoc-chart">
+                                        <canvas id="chart-line1" style="height: auto;"></canvas>
+                                    </div>
+                                    <div class="chart tab-pane" id="Clb-chart">
+                                        <canvas id="chart-line2" style="height: auto;"></canvas>
+                                    </div>
+                                </div>
+                            </div><!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </section>
+
+                    <section class="col-lg-6 connectedSortable">
+                        <!-- Custom tabs (Charts with tabs)-->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fas fa-chart-pie mr-1"></i>
+                                    Tần suất hoạt động tất cả các câu lạc bộ
+                                </h3>
+                                <div class="card-tools">
+                                    <ul class="nav nav-pills ml-auto">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="#HD-chart" data-toggle="tab">Hoạt động</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#SK-chart" data-toggle="tab">Sự kiện</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div><!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="tab-content p-0">
+                                    <!-- Morris chart - Sales -->
+                                    <div class="chart tab-pane active" id="HD-chart"
+                                         style="position: relative; height: auto;">
+                                        <canvas id="chart-hd" style="height: auto;"></canvas>
+                                    </div>
+                                    <div class="chart tab-pane" id="SK-chart">
+                                        <canvas id="chart-sk" style="height: auto;"></canvas>
+                                    </div>
+                                </div>
+                            </div><!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </section>
+                    <!-- /.Left col -->
+
+                    <section class="col-lg-6 connectedSortable" id="reload-target">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fas fa-chart-pie mr-1"></i>
+                                    Tần suất sự kiện
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                @using (Html.BeginForm())
+                                {
+
+                                    <div class="chart tab-pane">
+                                        <div class="row">
+                                            <div class="col-lg-5">
+                                                @Html.DropDownList("IdCLBSK", ViewBag.DsCLBSK as SelectList, "Chọn Câu lạc bộ", new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.IdCLBSK, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-lg-3">
+                                                @Html.DropDownList("YearSK", ViewBag.selectListYear as SelectList, "Chọn năm", new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.IdCLBSK, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <input type="submit" class="btn btn-info" value="Xác nhận" />
+                                            </div>
+                                        </div>
+                                        <canvas id="chart-sk-loc" style="height: auto;margin-top:5%"></canvas>
+                                    </div>
+
+                                }
+                            </div>
+                            <div class="card-footer"><p style="text-align: center; ">Biểu đồ tần suất sự kiện của <span style=" font-weight: bold; color: #4169E1 ">@ViewBag.getNameClubSK</span> theo năm <span style=" font-weight: bold;color: #4169E1 ">@ViewBag.getYearClubSK</span></p></div>
+
+                            <!-- /.card-body -->
+                        </div>
+                    </section>
+                    <section class="col-lg-6 connectedSortable">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fas fa-chart-pie mr-1"></i>
+                                    Tần suất hoạt động
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                @using (Html.BeginForm())
+                                {
+
+                                    <div class="chart tab-pane active" id="HD-Loc-chart">
+                                        <div class="row">
+                                            <div class="col-lg-5">
+                                                @Html.DropDownList("IdCLBHD", ViewBag.DsCLB as SelectList, "Chọn Câu lạc bộ", new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.IdCLBHD, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-lg-3">
+                                                @Html.DropDownList("YearHD", ViewBag.selectListYear as SelectList, "Chọn năm", new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.YearHD, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <input type="submit" class="btn btn-info" value="Xác nhận" />
+                                            </div>
+                                        </div>
+                                        <canvas id="chart-hd-loc" style="height: auto; margin-top: 5%"></canvas>
+
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="card-footer"><p style="text-align:center">Biểu đồ tần suất hoạt động của <span style=" font-weight: bold; color: #4169E1 ">@ViewBag.getNameClubHD</span> theo năm <span style=" font-weight: bold; color: #4169E1 ">@ViewBag.getYearClubHD</span></p> </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </section>
+
+                    <!-- right col -->
+                </div>
+            </div>
+        </section>
     </div>
- <div class="content-header">
-    
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-info">
-                        <div class="inner">
-                            <h3>@ViewBag.slclb</h3>
-
-                            <p>Câu lạc bộ</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-users" aria-hidden="true"></i>
-                        </div>
-                        <a href="@Url.Action("Index", "CLBs")" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-success">
-                        <div class="inner">
-                            <h3>@ViewBag.sltv<sup style="font-size: 20px"></sup></h3>
-
-                            <p>Thành viên</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                        </div>
-                        <a href="@Url.Action("CLB_TV", "ThanhViens")" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-warning">
-                        <div class="inner" style="color:white">
-                            <h3>@ViewBag.slsk</h3>
-                            <p>Sự kiện</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                        </div>
-                        <a href="@Url.Action("Index", "SuKiens")"   class="small-box-footer"><span style="color:white">Xem thêm </span><i style="color:white" class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-danger">
-                        <div class="inner">
-                            <h3>@ViewBag.slhd</h3>
-
-                            <p>Hoạt động</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-suitcase" aria-hidden="true"></i>
-                        </div>
-                        <a href="@Url.Action("Index", "QLDSHoatDongs")" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-            </div>
-            <div class="row">
-                <!-- Left col -->
-                <section class="col-lg-6 connectedSortable">
-                    <!-- Custom tabs (Charts with tabs)-->
-                    <div class="card" >
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                <i class="fas fa-chart-pie mr-1"></i>
-                                Tổng số sinh viên
-                            </h3>
-                            <div class="card-tools">
-                                <ul class="nav nav-pills ml-auto">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" href="#khoa-chart" data-toggle="tab">Khoa</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#Khoa-hoc-chart" data-toggle="tab">Khóa học</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#Clb-chart" data-toggle="tab">Câu lạc bộ</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div><!-- /.card-header -->
-                        <div class="card-body">
-                            <div class="tab-content p-0">
-                                <!-- Morris chart - Sales -->
-                                <div class="chart tab-pane active" id="khoa-chart"
-                                     style="position: relative; height: auto;">
-                                    <canvas id="chart-line" style="height: auto;"></canvas>
-                                </div>
-                                <div class="chart tab-pane" id="Khoa-hoc-chart">
-                                    <canvas id="chart-line1" style="height: auto;"></canvas>
-                                </div>
-                                <div class="chart tab-pane" id="Clb-chart">
-                                    <canvas id="chart-line2" style="height: auto;"></canvas>
-                                </div>
-                            </div>
-                        </div><!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                </section>
-
-                <section class="col-lg-6 connectedSortable">
-                    <!-- Custom tabs (Charts with tabs)-->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                <i class="fas fa-chart-pie mr-1"></i>
-                                Tần suất hoạt động tất cả các câu lạc bộ
-                            </h3>
-                            <div class="card-tools">
-                                <ul class="nav nav-pills ml-auto">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" href="#HD-chart" data-toggle="tab">Hoạt động</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#SK-chart" data-toggle="tab">Sự kiện</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div><!-- /.card-header -->
-                        <div class="card-body">
-                            <div class="tab-content p-0">
-                                <!-- Morris chart - Sales -->
-                                <div class="chart tab-pane active" id="HD-chart"
-                                     style="position: relative; height: auto;">
-                                    <canvas id="chart-hd" style="height: auto;"></canvas>
-                                </div>
-                                <div class="chart tab-pane" id="SK-chart">
-                                    <canvas id="chart-sk" style="height: auto;"></canvas>
-                                </div>
-                            </div>
-                        </div><!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                </section>
-                <!-- /.Left col -->
-
-                <section class="col-lg-6 connectedSortable" id="reload-target">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                <i class="fas fa-chart-pie mr-1"></i>
-                                Tần suất sự kiện
-                            </h3>
-                        </div>
-                        <div class="card-body">
-                            @using (Html.BeginForm())
-                            {
-
-                                <div class="chart tab-pane">
-                                    <div class="row">
-                                        <div class="col-lg-5">
-                                            @Html.DropDownList("IdCLBSK", ViewBag.DsCLBSK as SelectList, "Chọn Câu lạc bộ", new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.IdCLBSK, "", new { @class = "text-danger" })
-                                        </div>
-                                        <div class="col-lg-3">
-                                            @Html.DropDownList("YearSK", ViewBag.selectListYear as SelectList, "Chọn năm", new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.IdCLBSK, "", new { @class = "text-danger" })
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <input type="submit" class="btn btn-info" value="Xác nhận" />
-                                        </div>
-                                    </div>
-                                    <canvas id="chart-sk-loc" style="height: auto;margin-top:5%"></canvas>
-                                </div>
-
-                            }
-                        </div>
-                        <div class="card-footer"><p style="text-align: center; ">Biểu đồ tần suất sự kiện của <span style=" font-weight: bold; color: #4169E1 ">@ViewBag.getNameClubSK</span> theo năm <span style=" font-weight: bold;color: #4169E1 ">@ViewBag.getYearClubSK</span></p></div>
-
-                        <!-- /.card-body -->
-                    </div>
-                </section>
-                <section class="col-lg-6 connectedSortable">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                <i class="fas fa-chart-pie mr-1"></i>
-                                Tần suất hoạt động
-                            </h3>
-                        </div>
-                        <div class="card-body">
-                            @using (Html.BeginForm())
-                            {
-
-                                <div class="chart tab-pane active" id="HD-Loc-chart">
-                                    <div class="row">
-                                        <div class="col-lg-5">
-                                            @Html.DropDownList("IdCLBHD", ViewBag.DsCLB as SelectList, "Chọn Câu lạc bộ", new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.IdCLBHD, "", new { @class = "text-danger" })
-                                        </div>
-                                        <div class="col-lg-3">
-                                            @Html.DropDownList("YearHD", ViewBag.selectListYear as SelectList, "Chọn năm", new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.YearHD, "", new { @class = "text-danger" })
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <input type="submit" class="btn btn-info" value="Xác nhận" />
-                                        </div>
-                                    </div>
-                                    <canvas id="chart-hd-loc" style="height: auto; margin-top: 5%"></canvas>
-
-                                </div>
-                            }
-                        </div>
-
-                        <div class="card-footer"><p style="text-align:center">Biểu đồ tần suất hoạt động của <span style=" font-weight: bold; color: #4169E1 ">@ViewBag.getNameClubHD</span> theo năm <span style=" font-weight: bold; color: #4169E1 ">@ViewBag.getYearClubHD</span></p> </div>
-                        <!-- /.card-body -->
-                    </div>
-                </section>
-
-                <!-- right col -->
-            </div>
-        </div>
-    </section>
 </div>
 <script src="~/Areas/Admin/Resource/other/jquery.min.js"></script>
 
