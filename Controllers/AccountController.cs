@@ -117,6 +117,7 @@ namespace ClubPortalMS.Controllers
 
             if (ModelState.IsValid)
             {
+                ViewBag.IdKhoa = new SelectList(dbContext.Khoa, "ID", "TenKhoa", registrationView.IdKhoa);
                 // Email Verification
                 string userName = Membership.GetUserNameByEmail(registrationView.Email);
                 if (!string.IsNullOrEmpty(userName))
@@ -134,9 +135,7 @@ namespace ClubPortalMS.Controllers
                 }
                 else
                 {
-                    //Save User Data
-                    using (ApplicationDbContext dbContext = new ApplicationDbContext())
-                    {
+                   
                         string passWord = registrationView.Password + "A48BF46E-1V4F-58B4-2208-CQH7-U19JC5K2K3NV";
                         string pw = Processing.EncodePasswordToBase64(passWord);
                         string salt = pw.Substring(1, 10);
@@ -169,7 +168,7 @@ namespace ClubPortalMS.Controllers
                         };
                         dbContext.ThanhVien.Add(getIDUser);
                         dbContext.SaveChanges();
-                    }
+                    
                 } 
                 //Verification Email
                 VerificationEmail(registrationView.Email, registrationView.ActivationCode.ToString());
@@ -182,7 +181,7 @@ namespace ClubPortalMS.Controllers
             }
             ViewBag.Message = messageRegistration;
             ViewBag.Status = statusRegistration;
-            ViewBag.IdKhoa = new SelectList(dbContext.Khoa, "ID", "TenKhoa", registrationView.IdKhoa);
+            
          
             return View(registrationView);
         }
@@ -459,11 +458,11 @@ namespace ClubPortalMS.Controllers
         [HttpPost]
         public ActionResult GetinfoMember(GoogleLoginPlusViewModel tv, int? id)
         {
+            ViewBag.IdKhoa = new SelectList(dbContext.Khoa, "ID", "TenKhoa", tv.IdKhoa);
             ThanhVien tttv = dbContext.ThanhVien.Find(tv.ID);
             tttv.Khoa_ID = tv.IdKhoa;
             tttv.MSSV = tv.MSSV;
             dbContext.SaveChanges();
-            ViewBag.IdKhoa = new SelectList(dbContext.Khoa, "ID", "TenKhoa", tv.IdKhoa);
             return RedirectToAction("GoogleLoginCallback");
         }
             #endregion
