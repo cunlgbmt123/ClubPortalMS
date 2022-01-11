@@ -69,6 +69,20 @@
                                 </div>
                             </div>
                         </div>
+                        @Html.ValidationMessageFor(model => model.MSSV, "", new { @class = "text-danger" })
+                        @Html.ValidationMessage("Lỗi Email", new { @class = "text-danger" })
+                        <div class="input-group mb-3">
+                            @Html.EditorFor(model => model.MSSV, new { htmlAttributes = new { @class = "form-control", placeholder = "Mã số sinh viên" } })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.IdKhoa, "", new { @class = "text-danger" })
+                        <div class="input-group mb-3">
+                            @Html.DropDownList("IdKhoa", null, htmlAttributes: new { @class = "form-control" })
+                        </div>
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                         <div class="input-group mb-3">
                             @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Mật khẩu" } })
@@ -78,6 +92,7 @@
                                 </div>
                             </div>
                         </div>
+
                         @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
                         <div class="input-group mb-3">
                             @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Xác nhận mật khẩu" } })

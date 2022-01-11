@@ -124,6 +124,10 @@ namespace ClubPortalMS.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        [Required(ErrorMessage = "Bạn chưa chọn khoa")]
+        public int IdKhoa { get; set; }
+        [Required(ErrorMessage = "Bạn chưa nhập mã số sinh viên")]
+        public string MSSV { get; set; }
 
         [Required(ErrorMessage = "Bạn chưa nhập mật khẩu")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

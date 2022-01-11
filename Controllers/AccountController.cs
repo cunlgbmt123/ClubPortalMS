@@ -22,6 +22,7 @@ namespace ClubPortalMS.Controllers
     
     public class AccountController : Controller
     {
+        ApplicationDbContext dbContext = new ApplicationDbContext();
         #region Đăng nhập
         [HttpGet]
         public ActionResult Login(string ReturnUrl = "")
@@ -104,6 +105,9 @@ namespace ClubPortalMS.Controllers
         [HttpGet]
         public ActionResult Registration()
         {
+         
+               ViewBag.IdKhoa = new SelectList(dbContext.Khoa, "ID", "TenKhoa");  
+            
             return View();
         }
 
@@ -158,6 +162,8 @@ namespace ClubPortalMS.Controllers
                         var getIDUser = new ThanhVien()
                         {
                             User_ID = user.ID,
+                            Khoa_ID = registrationView.IdKhoa,
+                            MSSV = registrationView.MSSV,
                             Ten = registrationView.FirstName,
                             Ho = registrationView.LastName,
                             Mail = registrationView.Email,
@@ -178,7 +184,9 @@ namespace ClubPortalMS.Controllers
             }
             ViewBag.Message = messageRegistration;
             ViewBag.Status = statusRegistration;
-
+          
+                ViewBag.IdKhoa = new SelectList(dbContext.Khoa, "ID", "TenKhoa", registrationView.IdKhoa);
+         
             return View(registrationView);
         }
         #endregion
