@@ -22,7 +22,7 @@ namespace CustomAuthorizationFilter.Infrastructure
                 filterContext.Result = new RedirectToRouteResult(
                 new RouteValueDictionary
                 {
-                     { "route","" },
+                     { "area","" },
                      { "controller", "Account" },
                      { "action", "Login" }
 

@@ -17,9 +17,10 @@ namespace ClubPortalMS.ViewModel.Album
         }
         public int ID { get; set; }
         /*[DisplayName("Tiêu Đề")]*/
+        [Required(ErrorMessage = "Bạn cần nhập tiêu đề")]
         public string TieuDe { get; set; }
         [DisplayName("Tải hình ảnh lên")]
-        [Required]
+        [Required(ErrorMessage = "Bạn cần tải ảnh lên")]
         public string HinhAnh { get; set; }
         [DisplayName("Tải video lên")]
         public string Video { get; set; }

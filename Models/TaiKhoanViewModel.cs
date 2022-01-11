@@ -9,7 +9,7 @@ namespace ClubPortalMS.Models
 {
     public class ForgotPasswordView
     {
-        [Required]
+        [Required(ErrorMessage = "Bạn chưa nhập Email")]
         [EmailAddress]
         [Display(Name = "Nhập Email của bạn:")]
         public string Email { get; set; }
@@ -17,7 +17,7 @@ namespace ClubPortalMS.Models
     }
     public class ResetPasswordView
     {
-        [Required]
+        [Required(ErrorMessage = "Bạn chưa nhập mật khẩu")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -25,7 +25,7 @@ namespace ClubPortalMS.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Mật khẩu xác thực bạn nhập không giống với mật khẩu mới")]
         public string ConfirmPassword { get; set; }
     }
     public class GoogleLoginViewModel
@@ -67,12 +67,12 @@ namespace ClubPortalMS.Models
     }
     public class ChangePasswordModel
     {
-        [Required]
+        [Required(ErrorMessage = "Bạn chưa nhập mật khẩu hiện tại")]
         [DataType(DataType.Password)]
         [Display(Name = "Current password")]
         public string OldPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn chưa nhập mật khẩu mới")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "New password")]
@@ -80,17 +80,17 @@ namespace ClubPortalMS.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Compare("NewPassword", ErrorMessage = "Mật khẩu mới và mật khẩu xác nhận không khớp.")]
         public string ConfirmPassword { get; set; }
     }
     public class ChangeEmailModel
     {
-        [Required]
+        [Required(ErrorMessage = "Bạn chưa nhập mật khẩu hiện tại")]
         [DataType(DataType.Password)]
         [Display(Name = "Current password")]
         public string OldPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn chưa nhập email")]
         [EmailAddress]
         [Display(Name = "Nhập Email mới:")]
         public string NewEmail { get; set; }
@@ -98,10 +98,10 @@ namespace ClubPortalMS.Models
     }
     public class UserLoginView
     {
-        [Required]
+        [Required(ErrorMessage = "Bạn cần nhập tên đăng nhập")]
         [Display(Name = "User Name")]
         public string UserName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Bạn cần nhập mật khẩu")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
@@ -111,21 +111,21 @@ namespace ClubPortalMS.Models
     }
     public class UserRegisterView
     {
-        [Required]
+        [Required(ErrorMessage = "Bạn chưa nhập tên đăng nhập")]
         [Display(Name = "Tên tài khoản")]
         public string UserName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Bạn chưa nhập tên")]
         [Display(Name = "Tên")]
         public string FirstName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Bạn chưa nhập họ")]
         [Display(Name = "Họ")]
         public string LastName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Bạn chưa nhập Email")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn chưa nhập mật khẩu")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -133,7 +133,7 @@ namespace ClubPortalMS.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Mật khẩu mới và mật khẩu xác nhận không khớp.")]
         public string ConfirmPassword { get; set; }
         public Guid ActivationCode { get; set; }
     }

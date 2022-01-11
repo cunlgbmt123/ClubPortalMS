@@ -67,7 +67,7 @@
                         <div class="form-group row">
                             <label for="inputName2" class="col-sm-2 col-form-label">Thời gian bắt đầu:</label>
                             <div class="col-sm-10">
-                                @Html.EditorFor(model => model.NgayBatDau, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                                @Html.EditorFor(model => model.NgayBatDau, new { htmlAttributes = new { @class = "form-control", type = "datetime" } })
                                 @Html.ValidationMessageFor(model => model.NgayBatDau, "", new { @class = "text-danger" })
                             </div>
                         </div>

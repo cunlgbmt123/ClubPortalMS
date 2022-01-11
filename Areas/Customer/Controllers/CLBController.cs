@@ -18,7 +18,8 @@ namespace ClubPortalMS.Areas.Customer.Controllers
             var dsclb = from e in clb
                         where e.IdLoaiCLB == id
                         select e;
-            ViewBag.Dsclb = dsclb.OrderByDescending(x => x.ID).ToList().ToPagedList(page ?? 1, 3);
+            ViewBag.Dsclb = dsclb.OrderBy(x => x.ID).ToList().ToPagedList(page ?? 1, 3);
+            ViewBag.IDloaiclb = id;
             return View();
         }
         public ActionResult ChiTietCLB(int? id)
@@ -45,6 +46,19 @@ namespace ClubPortalMS.Areas.Customer.Controllers
                 HinhCLB = e.HinhCLB
 
             };
+            var slTV = from c in db.ThanhVien
+                       join d in db.ThanhVien_CLB on c.ID equals d.IDtvien
+                       where d.IDCLB == id
+                       select c;
+            var slHD = from c in db.QLDSHoatDong
+                       where c.IdCLB == id
+                       select c;
+            var slSK = from d in db.SuKien
+                       where d.IdCLB == id
+                       select d;
+            ViewBag.slTV = slTV.Count();
+            ViewBag.slHD = slHD.Count();
+            ViewBag.slSK = slSK.Count();
             return View(viewModel);
         }
     }

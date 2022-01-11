@@ -432,7 +432,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             ViewBag.Message = message;
             ViewBag.Messages = messages;
             ViewBag.idCLB = id;
-            ViewBag.DsSukien = DsSuien.ToList();
+            ViewBag.DsSukien = DsSuien.OrderByDescending(x => x.SuKien.ID).ToList(); ;
             return View();
         }
         [CustomAuthorize("Member", "HLV", "Admin")]

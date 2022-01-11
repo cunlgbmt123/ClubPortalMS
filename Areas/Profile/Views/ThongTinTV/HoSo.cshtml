@@ -43,30 +43,32 @@
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="profile-info-inner">
                     <div class="profile-img">
-                        <img src="@ViewBag.ThanhVien.HinhDaiDien" alt="" />
+                        <img src="@Model.HinhDaiDien" alt="" />
                     </div>
                     <div class="profile-details-hr">
                         <div class="row">
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                 <div class="address-hr">
-                                    <p><b>Họ và tên</b><br /> @ViewBag.ThanhVien.Ho @ViewBag.ThanhVien.Ten</p>
+                                    <p><b>Họ và tên</b><br /> @Model.Ho @Model.Ten</p>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                 <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                    <p><b>Ngày Sinh</b><br /> @ViewBag.ThanhVien.NgaySinh</p>
+                                    @if (Model.NgaySinh == null)
+                                    {<p><b>Ngày Sinh</b><br /></p>}
+                                    else { <p><b>Ngày Sinh</b><br /> @Model.NgaySinh.Value.ToString("dd/MM/yyyy")</p>}                                    
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                 <div class="address-hr">
-                                    <p><b>Mã số sinh viên</b><br /> @ViewBag.ThanhVien.MSSV</p>
+                                    <p><b>Mã số sinh viên</b><br /> @Model.MSSV</p>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                 <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                    <p><b>Số điện thoại</b><br /> @ViewBag.ThanhVien.SDT</p>
+                                    <p><b>Số điện thoại</b><br /> @Model.SDT</p>
                                 </div>
                             </div>
                         </div>
@@ -74,14 +76,14 @@
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                 <div class="address-hr">
                                   
-                                    <p><b>Lớp</b><br /> @ViewBag.ThanhVien.Lop</p>
+                                    <p><b>Lớp</b><br /> @Model.Lop</p>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                 <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                    @if (ViewBag.ThanhVien.Khoa_ID != null)
+                                    @if (Model.Khoa_ID != null)
                                     {
-                                        <p><b>Khoa</b><br /> @ViewBag.ThanhVien.Khoa.TenKhoa</p>
+                                        <p><b>Khoa</b><br /> @Model.TenKhoa</p>
 
                                     }
                                     else
@@ -92,7 +94,7 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                    <p><b>Email</b><br /> @ViewBag.ThanhVien.Mail</p>
+                                    <p><b>Email</b><br /> @Model.Email</p>
                                 </div>
                             </div>
                         </div>
@@ -123,43 +125,46 @@
                                                     </div>
                                                 }
 
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
 
-                                                        @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control", placeholder = "Tên", Value = @ViewBag.ThanhVien.Ten } })
-                                                        @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
-                                                    </div>
-                                                    <div class="form-group">
-                                                        @Html.EditorFor(model => model.Ho, new { htmlAttributes = new { @class = "form-control", placeholder = "Họ và Tên đệm", Value = @ViewBag.ThanhVien.Ho } })
-                                                        @Html.ValidationMessageFor(model => model.Ho, "", new { @class = "text-danger" })
-                                                    </div>
-                                                    <div class="form-group">
-                                                        @Html.EditorFor(model => model.NgaySinh, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @class = "form-control", type = "date", Value = @ViewBag.ThanhVien.NgaySinh } })
-                                                        @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
-                                                    </div>
-                                                    <div class="form-group">
-                                                        @Html.EditorFor(model => model.MSSV, new { htmlAttributes = new { @class = "form-control", placeholder = "Mã số sinh viên", Value = @ViewBag.ThanhVien.MSSV } })
-                                                        @Html.ValidationMessageFor(model => model.MSSV, "", new { @class = "text-danger" })
-                                                    </div>
-
+                                                    @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control", placeholder = "Tên" } })
+                                                    @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
                                                 </div>
+                                                <div class="form-group">
+                                                    @Html.EditorFor(model => model.Ho, new { htmlAttributes = new { @class = "form-control", placeholder = "Họ và Tên đệm" } })
+                                                    @Html.ValidationMessageFor(model => model.Ho, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group">
+                                                    @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control", Value = Model.NgaySinh } })
+                                                    @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group">
+                                                    @Html.EditorFor(model => model.MSSV, new { htmlAttributes = new { @class = "form-control", placeholder = "Mã số sinh viên" } })
+                                                    @Html.ValidationMessageFor(model => model.MSSV, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group">
+                                              
+                                                </div>
+
+                                            </div>
                                                 <div class="col-lg-6">
 
                                                     <div class="form-group">
-                                                        @Html.DropDownList("Khoa_ID", null, htmlAttributes: new { @class = "form-control", Value = @ViewBag.ThanhVien.Khoa_ID })
+                                                        @Html.DropDownList("Khoa_ID", null, htmlAttributes: new { @class = "form-control"})
                                                         @Html.ValidationMessageFor(model => model.Khoa_ID, "", new { @class = "text-danger" })
                                                     </div>
                                                     <div class="form-group">
-                                                        @Html.EditorFor(model => model.Lop, new { htmlAttributes = new { @class = "form-control", placeholder = "Lớp", Value = @ViewBag.ThanhVien.Lop } })
+                                                        @Html.EditorFor(model => model.Lop, new { htmlAttributes = new { @class = "form-control", placeholder = "Lớp" } })
                                                         @Html.ValidationMessageFor(model => model.Lop, "", new { @class = "text-danger" })
                                                     </div>
 
                                                     <div class="form-group">
-                                                        @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control", placeholder = "Số điện thoại", Value = @ViewBag.ThanhVien.SDT } })
+                                                        @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control", placeholder = "Số điện thoại" } })
                                                         @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="file" name="ImageFile" value="@ViewBag.ThanhVien.HinhDaiDien"/>
+                                                        <input type="file" name="ImageFile" />
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-12">

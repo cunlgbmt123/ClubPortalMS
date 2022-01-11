@@ -38,76 +38,44 @@
     </div>
 </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="timeline" style="margin:3% 0 3% 0;font-size:20px">
-                    <div>
-                        <i class="fa fa-envelope" style="background-color: dodgerblue; color: white" aria-hidden="true"></i>
-                        <div class="timeline-item" >
-                            <h3 class="timeline-header">Email</h3>
-                            <span class="timeline-footer time" style="margin-right:20px">
-                                @if (Model.EmailConfirmation != true)
-                                {
-                                    <a href="@Url.Action("ConfirmButton", new { id = Model.ID })" style="width:120px" class="btn btn-primary btn-sm">Xác thực Email</a>
-                                }
-                                <a href="@Url.Action("ChangeEmail", new { id = Model.ID })" style="width:120px" class="btn btn-danger btn-sm">Đổi Email</a>
-                            </span>
-                            <div class="timeline-body" style="height:50px">
-                                @Html.DisplayFor(model => model.Email)
-                            </div>
-
+<div class="container-fluid" style="background-color: #f6f8fa;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="timeline" style="margin:3% 0 3% 0;font-size:20px">
+                <div>
+                    <i class="fa fa-envelope" style="background-color: dodgerblue; color: white" aria-hidden="true"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header">Email</h3>
+                        <span class="timeline-footer time" style="margin-right:20px">
+                            @if (Model.EmailConfirmation != true)
+                            {
+                                <a href="@Url.Action("ConfirmButton", new { id = Model.ID })" style="width:120px" class="btn btn-primary btn-sm">Xác thực Email</a>
+                            }
+                            <a href="@Url.Action("ChangeEmail", new { id = Model.ID })" style="width:120px" class="btn btn-danger btn-sm">Đổi Email</a>
+                        </span>
+                        <div class="timeline-body" style="height:50px">
+                            @Html.DisplayFor(model => model.Email)
                         </div>
-                    </div>
 
-                    <div>
-                        <i class="fa fa-user" style="background-color:forestgreen; color:white" aria-hidden="true"></i>
-                        <div class="timeline-item">
-                            <h3 class="timeline-header no-border">Mật khẩu</h3>
-                            <span class="timeline-footer time" style="margin-right:20px">
-                            <a href="@Url.Action("ChangePassword", new { id = Model.ID })" style="width:120px" class="btn btn-danger btn-sm">Đổi Mật khẩu</a>
-                            </span>
-                            <div class="timeline-body" style="height:50px">
-                               ***************
-                            </div>
-                        </div>
                     </div>
-
                 </div>
+
+                <div>
+                    <i class="fa fa-user" style="background-color:forestgreen; color:white" aria-hidden="true"></i>
+                    <div class="timeline-item">
+                        <h3 class="timeline-header no-border">Mật khẩu</h3>
+                        <span class="timeline-footer time" style="margin-right:20px">
+                            <a href="@Url.Action("ChangePassword", new { id = Model.ID })" style="width:120px" class="btn btn-danger btn-sm">Đổi Mật khẩu</a>
+                        </span>
+                        <div class="timeline-body" style="height:50px">
+                            ***************
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
- 
+    </div>
+</div>
 
 
-@*<div>
-    <h4>DBUser</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        @if (Model.EmailConfirmation == true && Convert.ToBoolean(Model.EmailConfirmation))
-        {
-            <p>Tài khoản của bạn đã được xác thực email</p>
-        }
-        else
-        {
-            @Html.ActionLink("Xác Thực Email", "ConfirmButton", new { id = Model.ID })
-        }
-
-        @Html.ActionLink("Chỉnh Sửa", "ChangeEmail", new { id = Model.ID })
-        <dt>
-            @Html.DisplayNameFor(model => model.HashedPassword)
-        </dt>
-        @if (Model.HashedPassword == null)
-        {
-            <dd>
-                <p>Mật khẩu của bạn chưa được đặt</p>
-            </dd>
-        }
-        @Html.ActionLink("Chỉnh Sửa", "ChangePassword", new { id = Model.ID })
-    </dl>
-</div>*@

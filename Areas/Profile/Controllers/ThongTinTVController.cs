@@ -18,7 +18,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
 
         #region task chỉnh sửa  hồ sơ
         [HttpGet]
-        public ActionResult HoSo(int? id)
+        public ActionResult HoSo(int? id, string message)
         {
             int UserID = Convert.ToInt32(Session["UserId"]);
             if (id == null)
@@ -29,15 +29,33 @@ namespace ClubPortalMS.Areas.Profile.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ThanhVien thanhVien = db.ThanhVien.Find(id);
+
+            var thanhVien = db.ThanhVien.SingleOrDefault(n => n.ID == id);
             if (thanhVien == null)
             {
                 return HttpNotFound();
             }
-            
+
+            var viewModel = new ProfileViewModel
+            {
+                ID = thanhVien.ID,
+                Ho = thanhVien.Ho,
+                Ten = thanhVien.Ten,
+                HinhDaiDien = thanhVien.HinhDaiDien,
+                NgaySinh = thanhVien.NgaySinh,
+                User_ID = thanhVien.User_ID,
+                UserName = thanhVien.DBUser.Username,
+                Khoa_ID = thanhVien.Khoa_ID,
+                TenKhoa = thanhVien.Khoa.TenKhoa,
+                SDT = thanhVien.SDT,
+                Lop = thanhVien.Lop,
+                MSSV = thanhVien.MSSV,
+                Email = thanhVien.Mail,
+
+            };
             ViewBag.Khoa_ID = new SelectList(db.Khoa, "ID", "TenKhoa", thanhVien.Khoa_ID);
-            ViewBag.ThanhVien = thanhVien;
-            return View();
+            ViewBag.Message = message;
+            return View(viewModel);
         }
 
         
@@ -46,6 +64,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
         public ActionResult HoSo(ProfileViewModel thanhVien)
         {
             int UserID = Convert.ToInt32(Session["UserId"]);
+            string message = "";
             if (ModelState.IsValid)
             {
                 if (thanhVien.ImageFile != null) {
@@ -69,7 +88,7 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                     thanhViens.ImageFile = thanhVien.ImageFile;
                     db.SaveChanges();
                     ViewBag.ThanhVien = thanhViens;
-                    ViewBag.Message = "Cập nhật hồ sơ thành công!";
+                    message = "Cập nhật hồ sơ thành công!";
                 }
                 else
                 {
@@ -84,11 +103,11 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                     thanhViens.NgaySinh = thanhVien.NgaySinh;
                     db.SaveChanges();
                     ViewBag.ThanhVien = thanhViens;
-                    ViewBag.Message = "Cập nhật hồ sơ thành công!";
+                    message = "Cập nhật hồ sơ thành công!";
                 }
             }
             ViewBag.Khoa_ID = new SelectList(db.Khoa, "ID", "TenKhoa", thanhVien.Khoa_ID);
-            return View(thanhVien);
+            return RedirectToAction("HoSo", new { id = thanhVien.ID , message = message });
         }
         #endregion
     }
