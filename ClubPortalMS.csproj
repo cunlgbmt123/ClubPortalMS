@@ -198,6 +198,8 @@
     <Compile Include="Areas\Admin\Controllers\ThongBaosController.cs" />
     <Compile Include="Areas\Admin\Controllers\TinTucsController.cs" />
     <Content Include="Areas\Admin\Resource\css\404style.css" />
+    <Compile Include="Areas\Admin\Controllers\TrangChuController.cs" />
+    <Compile Include="Areas\Admin\Controllers\VaiTroController.cs" />
     <Compile Include="Areas\Customer\Controllers\CLBController.cs" />
     <Content Include="Areas\Customer\Resource\css\styleCLBs.css" />
     <Compile Include="Areas\Profile\Controllers\ErrorController.cs" />
@@ -2843,6 +2845,11 @@
     <Content Include="Areas\Customer\Resource\vendor\font-awesome-4.7.0\scss\_variables.scss" />
     <Content Include="Areas\Admin\Views\Error\UnAuthorized.cshtml" />
     <Content Include="Areas\Profile\Views\Error\UnAuthorized.cshtml" />
+    <Content Include="Areas\Admin\Views\VaiTro\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\VaiTro\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\VaiTro\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\VaiTro\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\TrangChu\Index.cshtml" />
     <None Include="packages.config" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -2893,7 +2900,6 @@
     <Folder Include="Areas\Admin\Resource\HinhAnh\HoatDong\" />
     <Folder Include="Areas\Admin\Resource\HinhAnh\Poster\" />
     <Folder Include="Areas\Admin\Resource\HinhAnh\TinTuc\" />
-    <Folder Include="Areas\Admin\Views\Home\" />
     <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
