@@ -64,12 +64,32 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                roleid = e.RoleID,
                                userid = e.UserID
                            };
-            if (userroles is EmptyResult)
+            if (userroles == null || userroles.Count() == 0)
             {
+                DBUserRoles userrole = new DBUserRoles();
+                userrole.RoleID = 1;
+                userrole.UserID = dangKy.IdTv;
+                db.DBUserRoles.Add(userrole);
+            }
+            else
+            {
+                Boolean hasRole1 = false;
+                Boolean hasRole2 = false;
                 foreach (var role in userroles)
                 {
-                    if (role.roleid != 1) 
-                    { 
+                    if (role.roleid == 1)
+                    {
+                        hasRole1 = true;
+                    }
+                    if (role.roleid == 2)
+                    {
+                        hasRole2 = true;
+                    }
+                }
+                foreach (var role in userroles)
+                {
+                    if (!hasRole1 && hasRole2)
+                    {
                         DBUserRoles userrole = new DBUserRoles();
                         userrole.RoleID = 1;
                         userrole.UserID = dangKy.IdTv;
@@ -77,6 +97,8 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                     }
                 }
             }
+           
+
             db.ThanhVien_CLB.Add(thanhVien_CLB);
             db.DangKy.Remove(dangKy);
             db.SaveChanges();

@@ -54,36 +54,39 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                                roleid=e.RoleID,
                                userid = e.UserID
                            };
-            if(userrole is EmptyResult)
+            if (userrole == null|| userrole.Count() == 0)
             {
+                DBUserRoles userroless = new DBUserRoles();
+                userroless.RoleID = 2;
+                userroless.UserID = dangKy.IdTvien;
+                db.DBUserRoles.Add(userroless);
+            }
+            else
+            {
+                Boolean hasRole1 = false;
+                Boolean hasRole2 = false;
                 foreach (var role in userrole)
                 {
                     if (role.roleid == 1)
+                    {
+                        hasRole1 = true;
+                    }
+                    if (role.roleid == 2)
+                    {
+                        hasRole2 = true;
+                    }
+                }
+                foreach (var role in userrole)
+                {
+                    if (hasRole1 && !hasRole2)
                     {
                         DBUserRoles userroles = new DBUserRoles();
                         userroles.RoleID = 2;
                         userroles.UserID = dangKy.IdTvien;
                         db.DBUserRoles.Add(userroles);
                     }
-                    else if(role.roleid == 2)
-                    {
-                        DBUserRoles userroles = new DBUserRoles();
-                        userroles.RoleID = 1;
-                        userroles.UserID = dangKy.IdTvien;
-                        db.DBUserRoles.Add(userroles);
-                    }
                 }
-            }
-            else
-            {
-                DBUserRoles userroles = new DBUserRoles();
-                userroles.RoleID = 1;
-                userroles.UserID = dangKy.IdTvien;
-                DBUserRoles userroless = new DBUserRoles();
-                userroless.RoleID = 2;
-                userroless.UserID = dangKy.IdTvien;
-                db.DBUserRoles.Add(userroles);
-                db.DBUserRoles.Add(userroless);
+              
             }
             db.ThanhVien_CLB.Add(thanhVien_CLB);
             db.DkyCLB.Remove(dangKy);
