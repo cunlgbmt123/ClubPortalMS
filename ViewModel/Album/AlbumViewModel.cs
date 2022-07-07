@@ -12,8 +12,8 @@ namespace ClubPortalMS.ViewModel.Album
     {
         public AlbumViewModel()
         {
-            HinhAnh = "~/Areas/Admin/Resource/HinhAnh/addImg.jpg";
-            Video = "~/Areas/Admin/Resource/Video/addImg.jpg";
+            HinhAnh = "/Areas/Admin/Resource/HinhAnh/imguef.jfif";
+            Video = "/Areas/Admin/Resource/HinhAnh/imguef.jfif";
         }
         public int ID { get; set; }
         /*[DisplayName("Tiêu Đề")]*/

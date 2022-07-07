@@ -9,7 +9,6 @@ namespace ClubPortalMS.ViewModel.CLB
 {
     public class CLBViewModels
     {
-
         public int ID { get; set; }
         [DisplayName("Loại Câu Lạc Bộ")]
         public string LoaiCLB { get; set; }

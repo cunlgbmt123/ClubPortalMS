@@ -13,13 +13,14 @@ namespace ClubPortalMS.Models
         public string TieuDe{ get; set; }
         public string MoTa { get; set; }
         public string NoiDung { get; set; }
-
         public string KeyWord { get; set; }
         public string URL { get; set; }
         public string HinhAnhBaiViet { get; set; }
         public string HinhAnhChiTiet { get; set; }
         public DateTime NgayDang { get; set; }
         public string TenNguoiDang { get; set; }
-        
+        public int? LuotView { get; set; }
+
+
     }
 }

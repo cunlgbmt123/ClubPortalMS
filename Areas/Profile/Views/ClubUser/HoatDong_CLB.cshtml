@@ -41,9 +41,13 @@
                         <h4 class="card-title">Hoạt động mới nhất</h4>
                     </div>
                     <div class="card-body" style="background-color:white;padding:30px 30px 30px 30px;">
+                        @if (ViewBag.DsHDGanDay.Count == 0)
+                        {
+                            <p>Không có hoạt động nào gần đây</p>
+                        }
                         @foreach (var item in ViewBag.DsHDGanDay)
                         {
-                            <strong><i class="fa fa-cc-diners-club"></i> @item.ThanhVien_CLB.CLB.TenCLB</strong>
+                            <strong><i class="fa fa-bookmark" aria-hidden="true"></i> @item.ThanhVien_CLB.CLB.TenCLB</strong>
                             <p class="text-muted">
                                 <a href=@Url.Action("BaiVietHDCLB", new { id = item.QLDSHoatDong.ID } )><h5>@item.QLDSHoatDong.ChuDe</h5></a>
                             </p>

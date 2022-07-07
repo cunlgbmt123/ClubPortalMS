@@ -127,21 +127,32 @@
 
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-
-                                                    @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control", placeholder = "Tên" } })
-                                                    @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
+                                                    @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control", placeholder = "Tên",
+                                                   required = "required",
+                                                   oninvalid = "this.setCustomValidity('Xin vui lòng nhập tên')",
+                                                   oninput = "this.setCustomValidity('')"
+                                               } })
                                                 </div>
                                                 <div class="form-group">
-                                                    @Html.EditorFor(model => model.Ho, new { htmlAttributes = new { @class = "form-control", placeholder = "Họ và Tên đệm" } })
-                                                    @Html.ValidationMessageFor(model => model.Ho, "", new { @class = "text-danger" })
+                                                    @Html.EditorFor(model => model.Ho, new { htmlAttributes = new { @class = "form-control", placeholder = "Họ và Tên đệm",
+                                                   required = "required",
+                                                   oninvalid = "this.setCustomValidity('Xin vui lòng nhập họ và tên đệm')",
+                                                   oninput = "this.setCustomValidity('')"
+                                               } })
                                                 </div>
                                                 <div class="form-group">
-                                                    @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control", Value = Model.NgaySinh } })
-                                                    @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                                                    @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control", Value = Model.NgaySinh,
+                                                   required = "required",
+                                                   oninvalid = "this.setCustomValidity('Xin vui lòng nhập Ngày sinh')",
+                                                   oninput = "this.setCustomValidity('')"
+                                               } })
                                                 </div>
                                                 <div class="form-group">
-                                                    @Html.EditorFor(model => model.MSSV, new { htmlAttributes = new { @class = "form-control", placeholder = "Mã số sinh viên" } })
-                                                    @Html.ValidationMessageFor(model => model.MSSV, "", new { @class = "text-danger" })
+                                                    @Html.EditorFor(model => model.MSSV, new { htmlAttributes = new { @class = "form-control", placeholder = "Mã số sinh viên",
+                                                   required = "required",
+                                                   oninvalid = "this.setCustomValidity('Xin vui lòng nhập mã số sinh viên')",
+                                                   oninput = "this.setCustomValidity('')"
+                                               } })
                                                 </div>
                                                 <div class="form-group">
                                               
@@ -152,16 +163,21 @@
 
                                                     <div class="form-group">
                                                         @Html.DropDownList("Khoa_ID", null, htmlAttributes: new { @class = "form-control"})
-                                                        @Html.ValidationMessageFor(model => model.Khoa_ID, "", new { @class = "text-danger" })
                                                     </div>
                                                     <div class="form-group">
-                                                        @Html.EditorFor(model => model.Lop, new { htmlAttributes = new { @class = "form-control", placeholder = "Lớp" } })
-                                                        @Html.ValidationMessageFor(model => model.Lop, "", new { @class = "text-danger" })
+                                                        @Html.EditorFor(model => model.Lop, new { htmlAttributes = new { @class = "form-control", placeholder = "Lớp",
+                                                       required = "required",
+                                                       oninvalid = "this.setCustomValidity('Xin vui lòng nhập Lớp')",
+                                                       oninput = "this.setCustomValidity('')"
+                                                   } })
                                                     </div>
 
                                                     <div class="form-group">
-                                                        @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control", placeholder = "Số điện thoại" } })
-                                                        @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                                                        @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control", placeholder = "Số điện thoại",
+                                                       required = "required",
+                                                       oninvalid = "this.setCustomValidity('Xin vui lòng nhập Số điện thoại')",
+                                                       oninput = "this.setCustomValidity('')"
+                                                   } })
                                                     </div>
                                                     <div class="form-group">
                                                         <input type="file" name="ImageFile" />

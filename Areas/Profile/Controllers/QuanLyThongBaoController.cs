@@ -108,9 +108,9 @@ namespace ClubPortalMS.Areas.Profile.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult TaoTB([Bind(Include = "ID,TieuDe,MoTa,IdCLB,NgayThongBao,NoiDung,File")] ThongBao thongBao, HttpPostedFileBase uploadfile)
         {
+            int IdTvien = Convert.ToInt32(Session["UserId"]);
             if (ModelState.IsValid)
-            {
-                int IdTvien = Convert.ToInt32(Session["UserId"]);
+            { 
                 if (uploadfile != null)
                 {
                     int filelength = uploadfile.ContentLength;
@@ -132,7 +132,21 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                 }
                 return RedirectToAction("QLTBCLB", new { id = IdTvien });
             }
-
+            List<CLB> clb = db.CLB.ToList();
+            List<ThanhVien_CLB> thanhVien_clb = db.ThanhVien_CLB.ToList();
+            var Dsclbthamgia = from e in thanhVien_clb
+                                   //join d in thanhVien on e.IDtvien equals IdTvien into table1
+                                   //from d in table1.ToList()
+                               join i in clb on e.IDCLB equals i.ID into table
+                               from i in table.ToList()
+                               where e.IDtvien == IdTvien
+                               && e.IDRoles == 2
+                               select new PhanHoiCLBViewModel
+                               {
+                                   TenCLB = i.TenCLB,
+                                   IdCLB = i.ID
+                               };
+            ViewBag.DsCLB = new SelectList(Dsclbthamgia, "IdCLB", "TenCLB");
             ViewBag.IdCLB = new SelectList(db.CLB, "ID", "TenCLB", thongBao.IdCLB);
             return View(thongBao);
         }

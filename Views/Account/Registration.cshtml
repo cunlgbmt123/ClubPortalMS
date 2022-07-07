@@ -81,7 +81,7 @@
                         </div>
                         @Html.ValidationMessageFor(model => model.IdKhoa, "", new { @class = "text-danger" })
                         <div class="input-group mb-3">
-                            @Html.DropDownList("IdKhoa", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.DropDownList("IdKhoa", ViewBag.IdKhoa as SelectList, "Chọn khoa", htmlAttributes: new { @class = "form-control" })
                         </div>
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                         <div class="input-group mb-3">

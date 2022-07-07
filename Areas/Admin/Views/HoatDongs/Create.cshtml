@@ -65,6 +65,7 @@
 
                     <div class="form-group">
                         <label class="control-label col-md-4"> Hình ảnh bài viết</label>
+                        @Html.ValidationMessageFor(model => model.HinhAnhBaiViet, "", new { @class = "text-danger" })
                         <div class="col-md-10">
                             <img src="@Url.Content(Model.HinhAnhBaiViet)" style="width: 100px; height: 100px; margin: 10px;" id="preView" />
                             <input type="file" name="ImageFile" onchange="ShowImg(this, document.getElementById('preView'))" />
@@ -73,6 +74,7 @@
 
                     <div class="form-group">
                         <label class="control-label col-md-4"> Hình ảnh chi tiết</label>
+                        @Html.ValidationMessageFor(model => model.HinhAnhChiTiet, "", new { @class = "text-danger" })
                         <div class="col-md-10">
                             <img src="@Url.Content(Model.HinhAnhChiTiet)" style="width: 100px; height: 100px; margin: 10px;" id="preView" />
                             <input type="file" name="ImageDetailFile" onchange="ShowImg(this, document.getElementById('preView'))" />

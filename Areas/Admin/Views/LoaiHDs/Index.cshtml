@@ -28,16 +28,17 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Quản lý loại hoạt động</h3>
+                            <div class="row">
+                                <div class="col-sm-9"><h3 class="card-title">Quản lý loại hoạt động</h3></div>
+                                <div class="col-sm-3">
+                                    <a class="btn btn-info btn-block btn-flat" style="border-radius: 4px;" type="button" href="@Url.Action("Create")">
+                                        <i class="fa fa-plus-square" aria-hidden="true"></i> Thêm mới
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <div class="col-2" style="position: absolute; z-index: 1; ">
-                                <a class="btn btn-info btn-block btn-flat" style="border-radius: 4px;" type="button" href="@Url.Action("Create")">
-                                    <i class="fa fa-plus-square" aria-hidden="true"></i> Thêm mới
-                                </a>
-                            </div>
                             <table id="table1" class="table table-bordered table-striped">
 
                                 <thead>

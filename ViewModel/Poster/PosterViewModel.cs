@@ -9,7 +9,7 @@ namespace ClubPortalMS.ViewModel.Poster
     {
         public PosterViewModel()
         {
-            HinhAnh = "~/Areas/Admin/Resource/HinhAnh/addImg.jpg";
+            HinhAnh = "/Areas/Admin/Resource/HinhAnh/imguef.jfif";
         }
         public int ID { get; set; }
         [DisplayName("Tên Poster")]

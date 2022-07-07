@@ -36,6 +36,7 @@ namespace ClubPortalMS
 
                 HttpContext.Current.User = principal;
             }
+
         }
     }
 }

@@ -43,6 +43,7 @@
                                         <th>Địa chỉ</th>
                                         <th>Số điện thoại</th>
                                         <th>Email</th>
+                                        <th>Đã xử lý</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -72,16 +73,27 @@
                                         <td>
                                             @item.Email
                                         </td>
-                                    </tr>
+                                        <td style="text-align: center;font-size:30px;color:#007BFF">
+                                            @if (item.HoanThanh == false || item.HoanThanh == null)
+                                            {
+                                            <i class="fa fa-window-close" aria-hidden="true"></i>
+                                            }
+                                            else if(item.HoanThanh == true)
+                                            {                                            
+                                            <i class="fa fa-check-square" aria-hidden="true"></i>
+                                            }
+                                        </td>
+                                        </tr>
                                     }
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <th>Tiêu đề</th>
                                         <th>Họ và tên</th>
-                                        <th>Địa chỉ</th>                              
+                                        <th>Địa chỉ</th>
                                         <th>Số điện thoại</th>
                                         <th>Email</th>
+                                        <th>Đã xử lý</th>
                                     </tr>
                                 </tfoot>
                             </table>

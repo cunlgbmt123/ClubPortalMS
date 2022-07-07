@@ -52,8 +52,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="fas fa-th-large"></i>
+                    <a class="nav-link" data-bs-toggle=" tooltip" title="Chuyển sang Normal Mode"  href="@Url.Action("Index", "Dashboard", new { area = "Profile" })">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
                     </a>
                 </li>
             </ul>
@@ -94,7 +94,7 @@
                             <a href="@Url.Action("Index","Dashboard")" class="nav-link">
                                 <i class="fas fa-chart-pie mr-1"></i>
                                 <p>
-                                   Thống kê
+                                    Thống kê
                                 </p>
                             </a>
                         </li>
@@ -316,12 +316,13 @@
     <script src="~/Areas/Admin/Resource/dist/js/adminlte.js"></script>
     <script src="~/Areas/Admin/Resource/dist/js/demo.js"></script>
 
+
     <script>
         $(function () {
             $("#table1").DataTable({
                 "responsive": true, "lengthChange": false, "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            }).buttons().container().appendTo('#table1_wrapper .col-md-6:eq(0)');
             $('#table2').DataTable({
                 "paging": true,
                 "lengthChange": false,
@@ -332,6 +333,12 @@
                 "responsive": true,
             });
         });
+
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
     </script>
+
 </body>
 </html>

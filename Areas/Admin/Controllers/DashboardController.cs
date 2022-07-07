@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ClubPortalMS.Areas.Admin.Controllers
@@ -21,6 +20,11 @@ namespace ClubPortalMS.Areas.Admin.Controllers
 		[HttpGet]
 		public ActionResult Index()
 		{
+			List<HoatDong> hdctt = db.HoatDong.ToList();
+			List<TinTuc> ttctt = db.TinTucs.ToList();
+			var viewHoatDong = hdctt.Sum(s => s.LuotView);
+			var viewTinTuc = ttctt.Sum(s => s.LuotView);
+			var ViewAll = viewHoatDong + viewTinTuc;
 			List<ThanhVien> tv = db.ThanhVien.ToList();
 			List<SuKien> qlskhd = db.SuKien.ToList();
 			List<Khoa> khoa = db.Khoa.ToList();
@@ -40,7 +44,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
 						   ID = d.ID,
 						   TenKhoaHoc = "Khóa "+d.MSSV.Substring(0,2)
 						});
-
+			
 			var tv_khoahoc = from e in tv	
 							 join d in khoahoc on e.ID equals d.ID
 							 group e.ID by d.TenKhoaHoc into g
@@ -107,6 +111,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
 							 soHD = g.Count(),
 							 HDtheoThang = g.Key
 						 };
+			
 			var getNameClubHD = (from e in clb
 								where e.ID == 1
 								select new { TenCLB = e.TenCLB }).FirstOrDefault();
@@ -141,6 +146,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
 				ViewBag.slclb = slclb;
 				ViewBag.slsk = slsk;
 				ViewBag.slhd = slhd;
+				ViewBag.LuotView = ViewAll;
 				return View();
 			}
 			catch (System.Data.Entity.Core.EntityException)
@@ -159,6 +165,11 @@ namespace ClubPortalMS.Areas.Admin.Controllers
 		[HttpPost]
 		public ActionResult Index(ThongKeHDSKViewModel hdsk)
 		{
+			List<HoatDong> hdctt = db.HoatDong.ToList();
+			List<TinTuc> ttctt = db.TinTucs.ToList();
+			var viewHoatDong = hdctt.Sum(s => s.LuotView);
+			var viewTinTuc = ttctt.Sum(s => s.LuotView);
+			var ViewAll = viewHoatDong + viewTinTuc;
 			if (hdsk.IdCLBHD == 0 || hdsk.YearHD == 0) 
 			{
 				hdsk.IdCLBHD = 1;
@@ -287,6 +298,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
 			ViewBag.slclb = slclb;
 			ViewBag.slsk = slsk;
 			ViewBag.slhd = slhd;
+			ViewBag.LuotView = ViewAll;
 			return View(hdsk);
 		}
 	}

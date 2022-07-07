@@ -11,6 +11,7 @@ namespace ClubPortalMS.Controllers
         // GET: Error
         public ActionResult AccessDenied()
         {
+
             return View();
         }
     }

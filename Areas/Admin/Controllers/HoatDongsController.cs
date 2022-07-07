@@ -114,6 +114,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 hoatDongs.HinhAnhBaiViet = hoatDong.HinhAnhBaiViet;
                 hoatDongs.HinhAnhChiTiet = hoatDong.HinhAnhChiTiet;
                 hoatDongs.NgayDang = DateTime.Now;
+                hoatDongs.LuotView = 0;
                 hoatDongs.TenNguoiDang = hoatDong.TenNguoiDang;
                 db.HoatDong.Add(hoatDongs);
                 db.SaveChanges();

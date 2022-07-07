@@ -5,6 +5,8 @@
     Layout = "~/Areas/Customer/Views/Shared/_Layout.cshtml";
     var ListHD = (List<ClubPortalMS.Models.HoatDong>)ViewBag.ListHD;
     var ListNews = (List<ClubPortalMS.Models.TinTuc>)ViewBag.ListNews;
+    double? Trieu = 0;
+    double? Nghin = 0;
 }
 
 <div class="page-section pt-4">
@@ -16,109 +18,108 @@
                 <li class="breadcrumb-item active" aria-current="page">@Html.DisplayFor(model => model.Ten)</li>
             </ol>
         </nav>
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="blog-single-wrap">
-                    <div class="post-thumbnail">
-                        <img src="@Html.DisplayFor(model => model.HinhAnhChiTiet)" alt="">
-                    </div>
-                    <h1 class="post-title">  @Html.DisplayFor(model => model.Ten)</h1>
-                    <div class="post-meta">
-                        <div class="post-author">
-                            <span class="text-grey">Được Đăng Bởi </span> <a href="#"> @Html.DisplayFor(model => model.TenNguoiDang)</a>
-                        </div>
-                        <span class="gap">|</span>
-                        <div class="post-date">
-                            <a href="#"> @Html.DisplayFor(model => model.NgayDang)</a>
-                        </div>
-                        <span class="gap">|</span>
-                        <div>
-                            <a href="#">StreetStyle</a>, <a href="#">Fashion</a>, <a href="#">Couple</a>
-                        </div>
-                        <span class="gap">|</span>
-                        <div class="post-comment-count">
-                            <a href="#">8 Comments</a>
-                        </div>
-                    </div>
-                    <div class="post-content">
-                        <p>@Html.DisplayFor(model => model.MoTa)</p>
-                        <p>@Html.DisplayFor(model => model.NoiDung)</p>
-              
-                    </div>
-                </div> <!-- .blog-single-wrap -->
-
-                <div class="comment-form-wrap pt-5">
-                    <h3 class="mb-5">Leave a comment</h3>
-                    <form action="#" class="">
-                        <div class="form-row form-group">
-                            <div class="col-md-6">
-                                <label for="name">Name *</label>
-                                <input type="text" class="form-control" id="name">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="email">Email *</label>
-                                <input type="email" class="form-control" id="email">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="website">Website</label>
-                            <input type="url" class="form-control" id="website">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea name="msg" id="message" cols="30" rows="8" class="form-control"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Post Comment" class="btn btn-primary">
-                        </div>
-
-                    </form>
-                </div> <!-- .comment-form-wrap -->
-            </div>
-
-            <div class="col-lg-4">
-                <div class="widget">
-                    <div class="widget-box">
-                        <h3 class="widget-title">Hoạt Động Khác</h3>
-                        <div class="divider"></div>
-                        @foreach (var item in ListHD)
-                        {
-                            <div class="blog-item">
-                                <div class="content">
-                                    <h5 class="recent-title">@item.Ten</h5>
-                                    <h6 class="post-content"><a href="@Url.Action("BaiViet","HoatDongs", new {id = item.ID})" class="gioi-han">@item.MoTa</a></h6>
-                                    <div class="meta">
-                                        <a href="#"><span class="mai-calendar"></span> @item.NgayDang</a>
-                                        <a href="#"><span class="mai-person"></span> @item.TenNguoiDang</a>
-                                        <a href="#"><span class="mai-chatbubbles"></span> 19</a>
-                                    </div>
-                                </div>
-                            </div>}
-                    </div>
-
-                    <div class="widget-box">
-                        <h3 class="widget-title">Tin Tức Gần Đây</h3>
-                        <div class="divider"></div>
-                        @foreach (var item in ListNews)
-                        {
-                            <div class="blog-item">
-                                <div class="content">
-                                    <h5 class="recent-title">@item.TieuDe</h5>
-                                    <h6 class="post-content"><a href="@Url.Action("BaiViet","TinTuc", new {id = item.ID})" class="gioi-han">@item.MoTa</a></h6>
-                                    <div class="meta">
-                                        <a href="#"><span class="mai-calendar"></span> @item.NgayDang</a>
-                                        <a href="#"><span class="mai-person"></span> @item.TenNguoiDang</a>
-                                        <a href="#"><span class="mai-chatbubbles"></span> 19</a>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </div>
 </div>
+
+<section id="blog">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 clearfix">
+                <ul class="blog-zone">
+                    <li>
+                        <div class="blog-icon">
+                            <i class="fa  fa-pencil"></i>
+                        </div>
+                        <div class="blog-box">
+                            <img src="@Html.DisplayFor(model => model.HinhAnhBaiViet)" alt="">
+
+                            <div class="blog-post-body clearfix">
+                                <a href="#">
+                                    <h5>@Html.DisplayFor(model => model.Ten)</h5>
+                                </a>
+                                <div class="blog-post-tag">
+                                    <div class="block">
+                                        <i class="fa fa-clock-o"></i>
+                                        <p>@Model.NgayDang.ToShortDateString()</p>
+                                    </div>
+                                    <div class="block">
+                                        <i class="fa fa-user"></i>
+                                        <p>@Model.TenNguoiDang</p>
+                                    </div>
+                                    <div class="block">
+                                        <i class="fa fa-eye"></i>
+                                        <p>
+                                            @{
+                                                Nghin = (double?)Model.LuotView / 1000;
+                                                Trieu = (int?)Model.LuotView / 1000000;
+                                                String Format_Trieu = string.Format("{0:0}", Trieu) + " Tr";
+                                                String Format_Nghin = string.Format("{0:0.0}", Nghin) + " N";
+                                            }
+                                            @if (Trieu >= 1)
+                                            {
+                                                @Format_Trieu
+                                            }
+                                            else if (Nghin >= 1)
+                                            {
+                                                @Format_Nghin
+                                            }
+                                            else
+                                            {
+                                                @Model.LuotView
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+                                <p>@Model.MoTa</p>
+                                <img src="@Html.DisplayFor(model => model.HinhAnhChiTiet)" alt="">
+
+                                <div class="blog-post-body clearfix">
+                                    <p>@Model.NoiDung</p>
+                                </div>
+                            </div>
+                        </div>	<!-- End of /.blog-box -->
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-3">
+                <div class="blog-sidebar">
+                    <div class="block">
+                        <h4>Hoạt động mới</h4>
+                        <div class="list-group">
+                                @foreach (var item in ListHD)
+                                {
+                                    <a href="@Url.Action("BaiViet","TinTuc", new {id = item.ID})" class="list-group-item">
+                                        <img src="@item.HinhAnhBaiViet" width="232" height="120" />
+                                        <h6>@item.Ten</h6>
+                                    </a>
+                                }
+                            </div>
+                    </div>	<!-- End of /.block -->
+                    <div class="block">
+                        <h4>Tin tức mới</h4>
+                        <ul class="media-list">
+                            @foreach (var item in ListNews)
+                            {
+                                <li class="media">
+                                    <a class="pull-left" href="@Url.Action("BaiViet","HoatDongs", new {id = item.ID})">
+                                        <img class="media-object" src="@item.HinhAnhBaiViet" alt="...">
+                                    </a>
+                                    <div class="media-body">
+                                        <a href="@Url.Action("BaiViet","HoatDongs", new {id = item.ID})" class="media-heading">
+                                            @item.TieuDe
+                                        </a>
+                                        <p>@item.NgayDang</p>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>	<!-- End of /.media-list -->
+                    </div>	<!-- End of /.block -->
+                </div>	<!-- End of /.blog-sidebar -->
+            </div>	<!-- End of /.col-md-3 -->
+        </div>	<!-- End of /.row -->
+    </div>	<!-- End of /.container -->
+</section>
+
 

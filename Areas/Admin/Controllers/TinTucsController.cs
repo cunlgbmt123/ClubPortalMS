@@ -115,6 +115,7 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 tintuc.HinhAnhBaiViet = data.HinhAnhBaiViet;
                 tintuc.HinhAnhChiTiet = data.HinhAnhChiTiet;
                 tintuc.NgayDang = DateTime.Now;
+                tintuc.LuotView = 0;
                 tintuc.TenNguoiDang = data.TenNguoiDang;
                 db.TinTucs.Add(tintuc);
                 db.SaveChanges();

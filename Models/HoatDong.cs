@@ -24,5 +24,7 @@ namespace ClubPortalMS.Models
         public string HinhAnhBaiViet { get; set; }
         public DateTime NgayDang { get; set; }
         public string TenNguoiDang { get; set; }
+        public int? LuotView { get; set; }
+
     }
 }

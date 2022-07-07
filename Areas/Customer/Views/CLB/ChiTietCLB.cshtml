@@ -7,7 +7,7 @@
 <div class="page-banner bg-img bg-img-parallax overlay-dark" style="height:150px">
     <div class="container h-100">
         <div class="row justify-content-center align-items-center h-100">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0">
                         <li class="breadcrumb-item"><a href="@Url.Action("Index","TrangChu")">Trang Chủ</a></li>
@@ -20,63 +20,58 @@
         </div>
     </div>
 </div>
-<main>
-    <div class="page-section">
-        <div class="container">
-            <div class="card" style="border-radius: 15px; background-color:gainsboro">
-                <div class="card-body overlay-dark" > 
-                    <div class="row align-items-center">
-                        <div class="col-lg-4 py-3 color-letter">
-                            <h2 class="title-section" style=" text-transform: uppercase;">@Model.TenCLB</h2>
-                            <p>Ngày thành lập: @Model.NgayThanhLap</p>
-                            <p>Loại Câu lạc bộ: @Model.LoaiCLB</p>
-                            <p>Hot Line: @Model.LienHe</p>
-                            <p>Email: @Model.Email</p>
-                            <p>Fanpage: @Model.FanPage</p>
-                        </div>
-                        <div class="col-lg-8 py-3">
-                            <figure class="figure">
-                                <img src="@Model.HinhCLB" max-width="821" max-height="383" class="figure-img img-fluid rounded" alt="">
-                            </figure>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            </div> <!-- .container -->
-        </div> <!-- .page-section -->
 
-</main>
-<section class="page-section">
+<section id="single-product">
     <div class="container">
-        <div class="row welcome_inner">
-            <div class="col-lg-12">
-                <div class="welcome_text">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="wel_item ">
-                                <i class="fa fa-users" aria-hidden="true"></i>
-                                <h4>@ViewBag.slTV</h4>
-                                <p>Thành viên</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="wel_item">
-                                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                <h4>@ViewBag.slSK</h4>
-                                <p>Sự kiện</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 ">
-                            <div class="wel_item" >
-                                <i class="fa fa-cubes" aria-hidden="true"></i>
-                                <h4>@ViewBag.slHD</h4>
-                                <p>Hoạt động</p>
-                            </div>
-                        </div>
+        <div class="row">
+            <div class="col-md-7">
+                <div class="single-product-img">
+                    <img src="@Model.HinhCLB" style="max-height:330px; max-width:652.5px" alt="">
+                </div>
+
+            </div> <!-- End of /.col-md-5 -->
+            <div class="col-md-5">
+                <div class="block">
+                    <div class="product-des">
+                        <h4>@Model.TenCLB</h4>
+                        <p class="price">@Model.NgayThanhLap</p>
+                        <p class="ngat-dong-7">@Model.Mota</p>
+                        <a class="view-link" href="mailto:@Model.Email"><i class="fa fa-plus-circle"></i>Liên hệ: @Model.Email</a>
+                    </div>	<!-- End of /.product-des -->
+                </div> <!-- End of /.block -->
+            </div>	<!-- End of /.col-md-4 -->
+        </div>	<!-- End of /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#home" data-toggle="tab">Thông tin</a></li>
+                    <li><a href="#profile" data-toggle="tab">Thống kê</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="home">
+                        <p<p>Loại Câu lạc bộ: @Model.LoaiCLB</p>
+                        <p>Hot Line: @Model.LienHe</p>
+                        <p>Email: @Model.Email</p>
+                        <p>Fanpage: @Model.FanPage</p>
+                    </div>
+                    <div class="tab-pane" id="profile">
+                        <p>Thành viên: @ViewBag.slTV</p>
+                        <p>Sự kiện: @ViewBag.slSK</p>
+                        <p>Hoạt động: @ViewBag.slHD</p>
                     </div>
                 </div>
-            </div>
-
-        </div>
-    </div>
+            </div>	<!-- End of /.col-md-9 -->
+            <div class="col-md-3">
+                <div class="blog-sidebar">
+                    <div class="block">
+                        <img src="images/food-ad.png" alt="">
+                    </div> <!-- End of /.block -->
+                </div>	<!-- End of /.blog-sidebar -->
+            </div>	<!-- End of /.col-md-3 -->
+        </div>	<!-- End of /.row -->
+    </div>	<!-- End of /.Container -->
 </section>
+

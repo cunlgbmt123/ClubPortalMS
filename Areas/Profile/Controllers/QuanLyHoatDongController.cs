@@ -100,9 +100,9 @@ namespace ClubPortalMS.Areas.Profile.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult TaoHD([Bind(Include = "ID,ChuDe,MoTa,NgayBatDau,NgayKetThuc,NoiDung,DiaDiem,File,IdCLB,IdLoaiHD")] QLDSHoatDong hoatDong, HttpPostedFileBase uploadfile)
         {
+            int IdTvien = Convert.ToInt32(Session["UserId"]);
             if (ModelState.IsValid)
-            {
-                int IdTvien = Convert.ToInt32(Session["UserId"]);
+            {             
                 if (uploadfile != null)
                 {
                     int filelength = uploadfile.ContentLength;
@@ -124,8 +124,22 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                   
                 }
                 return RedirectToAction("QLHoatDong_CLB", new { id = IdTvien });
-            }
+            }         
+            List<CLB> clb = db.CLB.ToList();
+            List<ThanhVien_CLB> thanhVien_clb = db.ThanhVien_CLB.ToList();
+            var Dsclbthamgia = from e in thanhVien_clb
+                               join i in clb on e.IDCLB equals i.ID into table
+                               from i in table.ToList()
+                               where e.IDtvien == IdTvien
+                               && e.IDRoles == 2
+                               select new PhanHoiCLBViewModel
+                               {
+                                   IdTvien = e.IDtvien,
+                                   TenCLB = i.TenCLB,
+                                   IdCLB = i.ID
+                               };
             ViewBag.IdLoaiHD = new SelectList(db.LoaiHD, "ID", "TenLoaiHD", hoatDong.IdLoaiHD);
+            ViewBag.DsCLB = new SelectList(Dsclbthamgia, "IdCLB", "TenCLB",hoatDong.IdCLB);
             return View(hoatDong);
         }
         [HttpGet]

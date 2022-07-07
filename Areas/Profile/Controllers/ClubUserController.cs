@@ -142,11 +142,10 @@ namespace ClubPortalMS.Areas.Profile.Controllers
       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DangKyCLB([Bind(Include = "ID,Ten,MSSV,Email,SDT,LyDoDkyCLB,IDCLB")] DangKy dangKy)
+        public ActionResult DangKyCLB([Bind(Include = "ID,LyDoDkyCLB,IDCLB")] DangKy dangKy)
         {
             int IdTvien = Convert.ToInt32(Session["UserId"]);
-            if (ModelState.IsValid)
-            {
+      
                 if (Session["UserId"] == null)
                 {
                     return HttpNotFound();
@@ -158,14 +157,19 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                     ViewBag.Messages = "Có lỗi xảy ra!!!";
                 }
                 else 
-                { 
+                {
+                    var thanhVien = db.ThanhVien.SingleOrDefault(n => n.ID == IdTvien);
+                    dangKy.SDT = thanhVien.SDT;
+                    dangKy.MSSV = thanhVien.MSSV;
+                    dangKy.Ten = thanhVien.Ten;
+                    dangKy.Email = thanhVien.Mail;
                     dangKy.IdTv = IdTvien;
                     dangKy.NgayDangKy = DateTime.Now;
                     db.DangKy.Add(dangKy);
                     db.SaveChanges();
                     ViewBag.Message = "Đăng ký thành công!!!";
                 }
-            }
+            
             List<CLB> clb = db.CLB.ToList();
             List<ThanhVien_CLB> thanhVien_clb = db.ThanhVien_CLB.ToList();
             var Dsclbthamgia = from e in thanhVien_clb

@@ -114,10 +114,9 @@ namespace ClubPortalMS.Controllers
         {
             bool statusRegistration = false;
             string messageRegistration = string.Empty;
-
+            ViewBag.IdKhoa = new SelectList(dbContext.Khoa, "ID", "TenKhoa", registrationView.IdKhoa);
             if (ModelState.IsValid)
             {
-                ViewBag.IdKhoa = new SelectList(dbContext.Khoa, "ID", "TenKhoa", registrationView.IdKhoa);
                 // Email Verification
                 string userName = Membership.GetUserNameByEmail(registrationView.Email);
                 if (!string.IsNullOrEmpty(userName))

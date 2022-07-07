@@ -18,7 +18,7 @@ namespace ClubPortalMS.Areas.Customer.Controllers
             var dsclb = from e in clb
                         where e.IdLoaiCLB == id
                         select e;
-            ViewBag.Dsclb = dsclb.OrderBy(x => x.ID).ToList().ToPagedList(page ?? 1, 3);
+            ViewBag.Dsclb = dsclb.OrderBy(x => x.ID).ToList().ToPagedList(page ?? 1, 6);
             ViewBag.IDloaiclb = id;
             return View();
         }

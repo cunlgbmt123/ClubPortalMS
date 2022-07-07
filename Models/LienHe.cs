@@ -23,5 +23,6 @@ namespace ClubPortalMS.Models
         public string Email { get; set; }
         public string Ten { get; set; }
         public string NoiDung { get; set; }
+        public bool? HoanThanh { get; set; }
     }
 }

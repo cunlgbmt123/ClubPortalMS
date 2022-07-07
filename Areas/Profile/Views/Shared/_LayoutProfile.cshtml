@@ -181,17 +181,33 @@
                                                         <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                                                     </a>
                                                     <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                        <li>
-                                                            <a href="@Url.Action("Index", "QLTaiKhoan", new { id = @Session["UserId"] })"><span class="edu-icon edu-home-admin author-log-ic"></span>Tài khoản</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="@Url.Action("HoSo", "ThongTinTV", new { id = @Session["UserId"] })"><span class="edu-icon edu-user-rounded author-log-ic"></span>Hồ sơ</a>
-                                                        </li>
+                                                        @using (var context = new ApplicationDbContext())
+                                                        {
+                                                            var dbrole = Session["Role"] as List<DBRoles>;
+                                                            if (dbrole != null)
+                                                            {
+                                                                foreach (var role in dbrole)
+                                                                {
+                                                                    if (role.Name == "Admin")
+                                                                    {
+                                                                        <li>
+                                                                            <a href="@Url.Action("Index", "TrangChu", new { area = "Admin" })"><span class="edu-icon edu-user-rounded author-log-ic"></span>Chuyển sang Admin</a>
+                                                                        </li>
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                                        <li>
+                                                                            <a href="@Url.Action("Index", "QLTaiKhoan", new { id = @Session["UserId"] })"><span class="edu-icon edu-home-admin author-log-ic"></span>Tài khoản</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="@Url.Action("HoSo", "ThongTinTV", new { id = @Session["UserId"] })"><span class="edu-icon edu-user-rounded author-log-ic"></span>Hồ sơ</a>
+                                                                        </li>
 
-                                                        <li>
-                                                            <a href="@Url.Action("SignOut","Account",new { area = "" })"><span class="edu-icon edu-locked author-log-ic"></span>Đăng xuất</a>
-                                                        </li>
-                                                    </ul>
+                                                                        <li>
+                                                                            <a href="@Url.Action("SignOut","Account",new { area = "" })"><span class="edu-icon edu-locked author-log-ic"></span>Đăng xuất</a>
+                                                                        </li>
+                                                                    </ul>
                                                 </li>
 
                                             </ul>

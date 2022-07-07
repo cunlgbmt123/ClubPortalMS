@@ -18,6 +18,10 @@ namespace ClubPortalMS.Areas.Customer.DAO
         {
             return db.HoatDong.OrderByDescending(x => x.ID).ToList().ToPagedList(page ?? 1, 3);
         }
+        public IPagedList<HoatDong> ListAllHDs(int? page)
+        {
+            return db.HoatDong.OrderByDescending(x => x.ID).ToList().ToPagedList(page ?? 1, 6);
+        }
         public List<HoatDong> listHD(int top)
         {
             return db.HoatDong.OrderByDescending(x => x.ID).Take(top).ToList();
@@ -25,6 +29,10 @@ namespace ClubPortalMS.Areas.Customer.DAO
         public IPagedList<TinTuc> ListAllNews(int? page)
         {
             return db.TinTucs.OrderByDescending(x => x.ID).ToList().ToPagedList(page ?? 1, 3);
+        }
+        public IPagedList<TinTuc> ListAllNew(int? page)
+        {
+            return db.TinTucs.OrderByDescending(x => x.ID).ToList().ToPagedList(page ?? 1, 6);
         }
         public List<TinTuc> ListNews(int top)
         {

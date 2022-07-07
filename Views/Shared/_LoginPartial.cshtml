@@ -6,9 +6,8 @@
         @Html.AntiForgeryToken()
 
         <div class="nav nav-link">
-            @*@Html.ActionLink("Chào " + User.Identity.GetUserName(), null)*@
-            <a href="#">Welcome : @Session["Ho"] @Session["Ten"]</a>
-
+            
+            <span><a href="#">Welcome : @Session["Ho"] @Session["Ten"]</a></span>
             <span><a href="@Url.Action("Logout","Account",new { area = "" })" class="btn btn-warning">Đăng Xuất</a></span>
         </div>
     }

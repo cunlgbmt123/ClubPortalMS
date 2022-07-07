@@ -14,7 +14,7 @@ namespace ClubPortalMS.Areas.Customer.Controllers
         public ActionResult Index(int? page)
         {
             var ListDAO = new ListDAO();
-            ViewBag.ListAllNews = ListDAO.ListAllNews(page);
+            ViewBag.ListAllNews = ListDAO.ListAllNew(page);
             return View(db.TinTucs.ToList());
         }
         public ActionResult BaiViet(int? id)
@@ -27,6 +27,9 @@ namespace ClubPortalMS.Areas.Customer.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             TinTuc tinTuc = db.TinTucs.Find(id);
+            tinTuc.LuotView = tinTuc.LuotView + 1;
+            db.Entry(tinTuc).State = EntityState.Modified;
+            db.SaveChanges();
             if (tinTuc == null)
             {
                 return HttpNotFound();

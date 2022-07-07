@@ -94,12 +94,12 @@ namespace ClubPortalMS.Areas.Profile.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult TaoLT([Bind(Include = "ID,TieuDe,NgayBatDau,NgayKetThuc,DiaDiem,IdCLB")] LichTap lichTap)
         {
+            int IdTvien = Convert.ToInt32(Session["UserId"]);
+            List<ThanhVien_CLB> thanhVien_clb = db.ThanhVien_CLB.ToList();
             if (ModelState.IsValid)
             {
-                    int IdTvien = Convert.ToInt32(Session["UserId"]);
                     db.LichTap.Add(lichTap);
                     db.SaveChanges();
-                    List<ThanhVien_CLB> thanhVien_clb = db.ThanhVien_CLB.ToList();
                     var thanhvien_CLB = from e in thanhVien_clb
                                         where e.IDCLB == lichTap.IdCLB
                                         && e.IDRoles == 1
@@ -118,6 +118,19 @@ namespace ClubPortalMS.Areas.Profile.Controllers
                     return RedirectToAction("QLLichTap_CLB");
             
             }
+            List<CLB> clb = db.CLB.ToList();
+            var Dsclbthamgia = from e in thanhVien_clb
+                               join i in clb on e.IDCLB equals i.ID into table
+                               from i in table.ToList()
+                               where e.IDtvien == IdTvien
+                               && e.IDRoles == 2
+                               select new PhanHoiCLBViewModel
+                               {
+                                   IdTvien = e.IDtvien,
+                                   TenCLB = i.TenCLB,
+                                   IdCLB = i.ID
+                               };
+            ViewBag.DsCLB = new SelectList(Dsclbthamgia, "IdCLB", "TenCLB");
             return View(lichTap);
         }
         public ActionResult SuaLT(int? id)

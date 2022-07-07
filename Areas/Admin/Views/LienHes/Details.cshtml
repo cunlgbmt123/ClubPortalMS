@@ -60,16 +60,36 @@
                                     <th>Email</th>
                                     <td> @Html.DisplayFor(model => model.Email)</td>
                                 </tr>
+                                <tr>
+                                    @if (Model.HoanThanh == false || Model.HoanThanh == null)
+                                    {
+                                        <th>Đã xử lý</th>
+                                        <td><i class="fa fa-window-close" aria-hidden="true"></i></td>
+                                    }
+                                    else if(Model.HoanThanh == true)
+                                    {
+                                        <th>Đã xử lý</th>
+                                        <td> <i class="fa fa-check-square" aria-hidden="true"></i></td>
+                                    }
+                                </tr>
                             </table>
                             <div class=" col-12">
                                 <a style="float:right" data-toggle="modal" data-target="#modal-danger" class="btn btn-app bg-danger">
                                     <i class="fa fa-trash" aria-hidden="true"></i> Xóa
                                 </a>@Html.ActionLink("Quay lại", "Index")
-                            </div>
+                                    @if (Model.HoanThanh == false || Model.HoanThanh == null)
+                                    {
+                                    <a style="float:right" class="btn btn-app bg-warning" data-toggle="modal" data-target="#modal-warning2">
+                                        <i class="fa fa-check-circle" aria-hidden="true"></i> Đã xử lý
+                                    </a>
+                                    }
+                                    else if (Model.HoanThanh == true)
+                                    { }
+                                </div>
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
     </section>
 </div>
@@ -93,4 +113,24 @@
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="modal-warning2">
+    <div class="modal-dialog">
+        <div class="modal-content bg-warning">
+            <div class="modal-header">
+                <h4 class="modal-title">Cẩn thận!!</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="background-color:white; color:black">
+                <p>NẾu đã xác nhận thì không thể thay đổi!!!&hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between" style="background-color:white">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy bỏ</button>
+                <a type="button" class="btn  btn-warning" href="@Url.Action( "DaXuLy", new { id = Model.ID })">Xác nhận</a>
+            </div>
+        </div>
+    </div>
 </div>  

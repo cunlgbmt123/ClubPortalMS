@@ -29,7 +29,6 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                               Name = e.Name,
                               MoTa = e.MoTa
                           };
-
             return View(dsRole);
         }
 

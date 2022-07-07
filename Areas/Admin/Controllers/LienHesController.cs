@@ -31,7 +31,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                               HotLine = e.HotLine,
                               Email = e.Email,
                               NoiDung = e.NoiDung,
-                              Ten=e.Ten
+                              Ten=e.Ten,
+                              HoanThanh=e.HoanThanh
                           };
 
             return View(dsLienhe);
@@ -57,7 +58,8 @@ namespace ClubPortalMS.Areas.Admin.Controllers
                 HotLine = data.HotLine,
                 Ten = data.Ten,
                 Email = data.Email,
-                NoiDung = data.NoiDung
+                NoiDung = data.NoiDung,
+                HoanThanh = data.HoanThanh
 
             };
             return View(viewModel);
@@ -93,61 +95,26 @@ namespace ClubPortalMS.Areas.Admin.Controllers
         //    return View(lienHeView);
         //}
 
-        //// GET: Admin/LienHes/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    var data = db.LienHe.SingleOrDefault(n => n.ID == id);
-        //    if (data == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    var viewModel = new LienHeViewModel
-        //    {
-        //        ID = data.ID,
-        //        TieuDe = data.TieuDe,
-        //        DiaChi = data.DiaChi,
-        //        HotLine = data.HotLine,
-        //        Ten = data.Ten,
-        //        Email = data.Email,
-        //        NoiDung = data.NoiDung
-
-        //    };
-        //    return View(viewModel);
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit( LienHeViewModel lienHeView,int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    var data = db.LienHe.SingleOrDefault(n => n.ID == id);
-        //    if (data == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    if (ModelState.IsValid)
-        //    {
-        //        data.ID = lienHeView.ID;
-        //        data.TieuDe = lienHeView.TieuDe;
-        //        data.DiaChi = lienHeView.DiaChi;
-        //        data.HotLine = lienHeView.HotLine;
-        //        data.Ten = lienHeView.Ten;
-        //        data.Email = lienHeView.Email;
-        //        data.NoiDung = lienHeView.Email;
-        //        db.Entry(data).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(lienHeView);
-        //}
-
+        public ActionResult DaXuLy(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var data = db.LienHe.SingleOrDefault(n => n.ID == id);
+            if (data == null)
+            {
+                return HttpNotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                data.HoanThanh = true;
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = id });
+            }
+            return View(data);
+        }
+   
         public ActionResult DeleteConfirmed( int id)
         {
             LienHe data = db.LienHe.Find(id);

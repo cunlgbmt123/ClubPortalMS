@@ -47,13 +47,19 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        @foreach (var item in ViewBag.Dsclbthamgia)
-                        {
-                            <strong><a href="@Url.Action("ChiTietCLB", new { id = item.CLB.ID})"> @item.CLB.TenCLB</a></strong>
-                            <p class="text-muted gioi-han">
-                                @item.CLB.Mota
-                            </p>
-                            <hr>
+                        @{
+                            if (Enumerable.Count(ViewBag.Dsclbthamgia) == 0)
+                            {
+                                <p>Bạn chưa tham gia câu lạc bộ nào</p>
+                            }
+                            foreach (var item in ViewBag.Dsclbthamgia)
+                            {
+                                <strong><a href="@Url.Action("ChiTietCLB", new { id = item.CLB.ID})"><i class="fa fa-bookmark" aria-hidden="true"></i> @item.CLB.TenCLB</a></strong>
+                                <p class="text-muted gioi-han">
+                                    @item.CLB.Mota
+                                </p>
+                                <hr>
+                            }
                         }
                     </div>
                 </div>
@@ -61,9 +67,9 @@
 
             @Html.AntiForgeryToken()
             <div class="col-md-9">
-                <div class="card" style="background-color:white;padding:20px 20px 20px 20px; height:600px">
+                <div class="card" style="background-color:white;padding:20px 20px 20px 20px; height:300px">
                     <div class="card-header p-2" >
-                        <div class="nav-item"><h4 class="nav-link">Đơn đăng ký tham gia Câu Lạc Bộ</h4></div>
+                        <div class="nav-item"><h4 class="nav-link">Đăng ký tham gia Câu Lạc Bộ</h4></div>
                     </div>
                     <div class="card-body">
                         @if (ViewBag.Message != null)
@@ -77,53 +83,26 @@
                                 <strong>@ViewBag.Messages</strong>
                             </div>
                         }
-
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Ten, htmlAttributes: new { @class = "control-label label-style col-md-4" })
-                            <div class="col-md-12">
-                                @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.MSSV, htmlAttributes: new { @class = "control-label label-style col-md-4" })
-                            <div class="col-md-12">
-                                @Html.EditorFor(model => model.MSSV, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.MSSV, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label label-style col-md-4" })
-                            <div class="col-md-12">
-                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.SDT, htmlAttributes: new { @class = "control-label label-style col-md-4" })
-                            <div class="col-md-12">
-                                @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-
                         <div class="form-group">
                             @Html.LabelFor(model => model.LyDoDkyCLB, htmlAttributes: new { @class = "control-label label-style col-md-4" })
                             <div class="col-md-12">
-                                @Html.EditorFor(model => model.LyDoDkyCLB, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.LyDoDkyCLB, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.LyDoDkyCLB, new { htmlAttributes = new { @class = "form-control",
+                               rows = 10,
+                               required = "required",
+                               oninvalid = "this.setCustomValidity('Xin vui lòng nhập lý do đăng ký CLB')",
+                               oninput = "this.setCustomValidity('')",
+
+                           } })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label label-style col-md-4">Danh sách câu lạc bộ</label>
                             <div class="col-md-12">
-                                @Html.DropDownList("IDCLB", ViewBag.Test as SelectList, "Chọn Câu lạc bộ", new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.IDCLB, "", new { @class = "text-danger" })
+                                @Html.DropDownList("IDCLB", ViewBag.Test as SelectList, "Chọn Câu lạc bộ", new { @class = "form-control",
+                               required = "required",
+                               oninvalid = "this.setCustomValidity('Xin vui lòng chọn câu lạc bộ')",
+                               oninput = "this.setCustomValidity('')"
+                           })
                             </div>
                         </div>
                         <div class="form-group">

@@ -29,69 +29,72 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Quản lý Hoạt động</h3>
-                        </div>
-
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <div class="col-2" style="position: absolute; z-index: 1; ">
-                                <a class="btn btn-info btn-block btn-flat" style="border-radius: 4px;" type="button" href="@Url.Action("Create")">
-                                    <i class="fa fa-plus-square" aria-hidden="true"></i> Thêm Hoạt động
-                                </a>
+                            <div class="row">
+                                <div class=" col-sm-9">
+                                    <h3 class="card-title">Quản lý Hoạt động</h3>
+                                </div>
+                                <div class=" col-sm-3">
+                                    <a class="btn btn-info btn-block btn-flat" style="border-radius: 4px;" type="button" href="@Url.Action("Create")">
+                                        <i class="fa fa-plus-square" aria-hidden="true"></i> Thêm Hoạt động
+                                    </a>
+                                </div>
                             </div>
-                            <table id="table1" class="table table-bordered table-striped">
-
-                                <thead>
-                                    <tr>
-                                        <th>Tiêu đề</th>
-                                        <th>Mô tả</th>
-                                        <th>Ngày đăng</th>
-                                        <th>Ảnh bài viết</th>
-                                        <th>Tác giả</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr>
-                                            <td>
-                                                <a href="@Url.Action("Details", new { id = item.ID })" class="gioi-han" style="width:200px">
-                                                    @item.Ten
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <a href="@Url.Action("Details", new { id = item.ID })" class="gioi-han" style="width:200px">
-                                                    @item.MoTa
-                                                </a>
-                                            </td>
-                                            <td>
-                                                @item.NgayDang
-                                            </td>
-                                            <td>
-                                                <a href="@Url.Action("Details", new { id = item.ID })">
-                                                    <img src="@Url.Content(item.HinhAnhBaiViet)" style="max-width: 400px; max-height: 200px;" />
-                                                </a>
-                                            </td>
-
-                                            <td>
-                                                @item.TenNguoiDang
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Tiêu đề</th>
-                                        <th>Mô tả</th>
-                                        <th>Ngày đăng</th>
-                                        <th>Ảnh bài viết</th>
-                                        <th>Tác giả</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
                         </div>
-                    </div>
-                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table id="table1" class="table table-bordered table-striped">
+
+                                        <thead>
+                                            <tr>
+                                                <th>Tiêu đề</th>
+                                                <th>Mô tả</th>
+                                                <th>Ngày đăng</th>
+                                                <th>Ảnh bài viết</th>
+                                                <th>Tác giả</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <a href="@Url.Action("Details", new { id = item.ID })" class="gioi-han" style="width:200px">
+                                                            @item.Ten
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="@Url.Action("Details", new { id = item.ID })" class="gioi-han" style="width:200px">
+                                                            @item.MoTa
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        @item.NgayDang
+                                                    </td>
+                                                    <td>
+                                                        <a href="@Url.Action("Details", new { id = item.ID })">
+                                                            <img src="@Url.Content(item.HinhAnhBaiViet)" style="max-width: 400px; max-height: 200px;" />
+                                                        </a>
+                                                    </td>
+
+                                                    <td>
+                                                        @item.TenNguoiDang
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Tiêu đề</th>
+                                                <th>Mô tả</th>
+                                                <th>Ngày đăng</th>
+                                                <th>Ảnh bài viết</th>
+                                                <th>Tác giả</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
             </div>
         </div>
     </section>

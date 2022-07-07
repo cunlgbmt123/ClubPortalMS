@@ -15,5 +15,7 @@ namespace ClubPortalMS.ViewModel.LienHe
         public string Ten { get; set; }
         [DisplayName("Nội Dung")]
         public string NoiDung { get; set; }
+        [DisplayName("Đã xử lý")]
+        public bool? HoanThanh { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace ClubPortalMS.ViewModel.ThongBao
         [DisplayName("CLB")]
         public string CLB { get; set; }
         [DisplayName("Ngày Thông Báo")]
+        [Required(ErrorMessage = "Bạn cần nhập ngày thông báo")]
         public DateTime NgayThongBao { get; set; }
         [Required(ErrorMessage = "Bạn chưa nhập nội dung")]
         [DisplayName("Nội Dung")]
